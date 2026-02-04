@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 ## Current Position
 
 Phase: 2 of 7 (League Tables & Navigation)
-Plan: 1 of 5 in current phase
+Plan: 2 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-04 -- Completed 02-01-PLAN.md
+Last activity: 2026-02-04 -- Completed 02-02-PLAN.md
 
-Progress: [████░░░░░░] 16% (4/25 plans)
+Progress: [████░░░░░░] 20% (5/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 4.8 min
-- Total execution time: 0.32 hours
+- Total execution time: 0.40 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
-| 02-league-tables | 1/5 | 3 min | 3 min |
+| 02-league-tables | 2/5 | 8 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6 min), 01-02 (5 min), 01-03 (5 min), 02-01 (3 min)
-- Trend: improving
+- Last 5 plans: 01-02 (5 min), 01-03 (5 min), 02-01 (3 min), 02-02 (5 min)
+- Trend: stable
 
 *Updated after each plan completion*
 
@@ -59,6 +59,9 @@ Recent decisions affecting current work:
 - 02-01: H2H totals calculated only among tied teams (correct for multi-way ties).
 - 02-01: Alphabetical fallback when all tiebreakers exhausted.
 - 02-01: Vitest configured with ESM (.mts extension) for Vite 7.x compatibility.
+- 02-02: Spread LEAGUES array for nuqs parseAsStringEnum to avoid readonly type issue.
+- 02-02: Suspense boundary required for useSearchParams in Next.js 15 static builds.
+- 02-02: Dual-layer opacity technique for gradient transitions (CSS cannot transition gradients directly).
 
 ### Pending Todos
 
@@ -74,6 +77,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-04T23:34:57Z
-Stopped at: Completed 02-01-PLAN.md (standings calculator with tiebreakers)
-Resume file: None (continue to 02-02-PLAN.md)
+Last session: 2026-02-04T23:37:00Z
+Stopped at: Completed 02-02-PLAN.md (league theming infrastructure)
+Resume file: None (continue to 02-03-PLAN.md)
