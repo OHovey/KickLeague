@@ -3,8 +3,28 @@
 import { Suspense } from 'react';
 import { LeagueTabs } from '@/components/league-nav/LeagueTabs';
 import { ThemeBackground } from '@/components/ThemeBackground';
+import { LeagueTableWrapper } from '@/components/league-table/LeagueTableWrapper';
 import { useLeague } from '@/lib/hooks/use-league';
 import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
+
+function TableSkeleton() {
+  return (
+    <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
+      <div className="border-b border-white/10 px-4 py-3">
+        <div className="h-4 w-24 animate-pulse rounded bg-white/10" />
+      </div>
+      <div className="p-4">
+        {Array.from({ length: 10 }).map((_, i) => (
+          <div key={i} className="flex items-center gap-4 py-3">
+            <div className="h-4 w-8 animate-pulse rounded bg-white/10" />
+            <div className="h-4 flex-1 animate-pulse rounded bg-white/10" />
+            <div className="h-4 w-16 animate-pulse rounded bg-white/10" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function HomeContent() {
   const { league } = useLeague();
@@ -19,15 +39,10 @@ function HomeContent() {
             <LeagueTabs />
           </div>
         </header>
-        <main className="mx-auto max-w-7xl px-4 py-12">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <h1 className="text-4xl font-bold text-white">
-              {currentTheme.name}
-            </h1>
-            <p className="text-lg text-white/70">
-              League Table Coming Soon
-            </p>
-          </div>
+        <main className="mx-auto max-w-7xl px-4 py-8">
+          <Suspense fallback={<TableSkeleton />}>
+            <LeagueTableWrapper />
+          </Suspense>
         </main>
       </div>
     </>
