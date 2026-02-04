@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 ## Current Position
 
 Phase: 2 of 7 (League Tables & Navigation)
-Plan: 4 of 5 in current phase
-Status: In progress
-Last activity: 2026-02-04 -- Completed 02-04-PLAN.md
+Plan: 5 of 5 in current phase
+Status: Phase complete
+Last activity: 2026-02-04 -- Completed 02-05-PLAN.md
 
-Progress: [████░░░░░░] 28% (7/25 plans)
+Progress: [████░░░░░░] 32% (8/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 4.6 min
-- Total execution time: 0.53 hours
+- Total execution time: 0.62 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
-| 02-league-tables | 4/5 | 16 min | 4 min |
+| 02-league-tables | 5/5 | 21 min | 4.2 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (3 min), 02-02 (5 min), 02-03 (4 min), 02-04 (4 min)
+- Last 5 plans: 02-02 (5 min), 02-03 (4 min), 02-04 (4 min), 02-05 (5 min)
 - Trend: stable
 
 *Updated after each plan completion*
@@ -68,6 +68,9 @@ Recent decisions affecting current work:
 - 02-04: Sparkline Y-axis inverted so line going UP = team improving toward 1st.
 - 02-04: Position change calculated as previousPosition - currentPosition (positive = moved up).
 - 02-04: Custom tooltip types defined locally to avoid recharts v3 typing issues.
+- 02-05: Mobile columns: #, Team, P, GD, Pts (essential info); W/D/L/GF/GA hidden until row expanded.
+- 02-05: Three table expand states (collapsed/default/expanded) with localStorage persistence.
+- 02-05: 44px minimum touch targets for accessibility compliance.
 
 ### Pending Todos
 
@@ -83,6 +86,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-04T23:50:50Z
-Stopped at: Completed 02-04-PLAN.md (visual enhancements)
-Resume file: None (continue to 02-05-PLAN.md)
+Last session: 2026-02-04T23:51:34Z
+Stopped at: Completed 02-05-PLAN.md (mobile responsive layout)
+Resume file: None (Phase 2 complete, ready for Phase 3)
