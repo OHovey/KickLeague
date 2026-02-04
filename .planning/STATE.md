@@ -10,28 +10,29 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 ## Current Position
 
 Phase: 2 of 7 (League Tables & Navigation)
-Plan: 0 of 5 in current phase
-Status: Ready to plan
-Last activity: 2026-02-04 -- Phase 1 verified and complete
+Plan: 1 of 5 in current phase
+Status: In progress
+Last activity: 2026-02-04 -- Completed 02-01-PLAN.md
 
-Progress: [███░░░░░░░] 12% (3/25 plans)
+Progress: [████░░░░░░] 16% (4/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 5.3 min
-- Total execution time: 0.27 hours
+- Total plans completed: 4
+- Average duration: 4.8 min
+- Total execution time: 0.32 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
+| 02-league-tables | 1/5 | 3 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6 min), 01-02 (5 min), 01-03 (5 min)
-- Trend: stable
+- Last 5 plans: 01-01 (6 min), 01-02 (5 min), 01-03 (5 min), 02-01 (3 min)
+- Trend: improving
 
 *Updated after each plan completion*
 
@@ -55,6 +56,9 @@ Recent decisions affecting current work:
 - 01-03: Fixture events use delete+insert per fixture for idempotent re-runs.
 - 01-03: Points deductions auto-detected by comparing actual vs expected points.
 - 01-03: Refresh mode re-fetches teams (for ID map) but skips players.
+- 02-01: H2H totals calculated only among tied teams (correct for multi-way ties).
+- 02-01: Alphabetical fallback when all tiebreakers exhausted.
+- 02-01: Vitest configured with ESM (.mts extension) for Vite 7.x compatibility.
 
 ### Pending Todos
 
@@ -70,6 +74,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-04T20:15:00Z
-Stopped at: Phase 1 verified (4/4 criteria passed). Phase 2 ready.
-Resume file: None (Phase 2 begins next)
+Last session: 2026-02-04T23:34:57Z
+Stopped at: Completed 02-01-PLAN.md (standings calculator with tiebreakers)
+Resume file: None (continue to 02-02-PLAN.md)
