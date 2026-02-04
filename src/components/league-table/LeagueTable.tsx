@@ -43,16 +43,21 @@ export async function LeagueTable({ league }: LeagueTableProps) {
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-white/50">
+              {/* Always visible columns */}
               <th className="py-3 pl-4 pr-2 text-center font-medium">#</th>
               <th className="py-3 px-2 text-left font-medium">Team</th>
               <th className="py-3 px-2 text-center font-medium">P</th>
-              <th className="py-3 px-2 text-center font-medium">W</th>
-              <th className="py-3 px-2 text-center font-medium">D</th>
-              <th className="py-3 px-2 text-center font-medium">L</th>
-              <th className="py-3 px-2 text-center font-medium">GF</th>
-              <th className="py-3 px-2 text-center font-medium">GA</th>
+              {/* Desktop-only columns */}
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">W</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">D</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">L</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GF</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GA</th>
+              {/* Always visible columns */}
               <th className="py-3 px-2 text-center font-medium">GD</th>
               <th className="py-3 pl-2 pr-4 text-center font-medium">Pts</th>
+              {/* Expand indicator for mobile */}
+              <th className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">Expand</span></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
