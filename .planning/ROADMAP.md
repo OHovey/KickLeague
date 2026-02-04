@@ -48,14 +48,14 @@ Plans:
   3. League-specific tiebreaker rules produce correct table ordering (H2H for La Liga and Serie A, GD for Premier League, Bundesliga, and Ligue 1) whenever teams are level on points
   4. On mobile, the table shows condensed columns (position, team, P, GD, Pts, sparkline) with full detail accessible by tapping a row to expand it
   5. Selected league persists across page reloads via URL parameter and localStorage
-**Plans**: TBD
+**Plans**: 5 plans
 
 Plans:
-- [ ] 02-01: League table component with all stat columns and zone colouring
-- [ ] 02-02: Standings calculator with configurable tiebreaker chains
-- [ ] 02-03: League navigation, full-page theming, and URL persistence
-- [ ] 02-04: Sparkline component and table visual enhancements (form dots, position indicators)
-- [ ] 02-05: Mobile responsive layout with condensed columns and expandable rows
+- [ ] 02-01-PLAN.md -- Standings calculator with configurable tiebreaker chains (TDD)
+- [ ] 02-02-PLAN.md -- League theming infrastructure, tab navigation, and URL persistence
+- [ ] 02-03-PLAN.md -- Core league table component with zone colouring
+- [ ] 02-04-PLAN.md -- Visual enhancements: form badges, position change, sparklines
+- [ ] 02-05-PLAN.md -- Mobile responsive layout with expandable rows
 
 ### Phase 3: Match & Fixture Pages
 **Goal**: Users can browse recent results and upcoming fixtures for any league, and drill into individual match pages for detailed stats, events, and head-to-head records
@@ -148,8 +148,8 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Data Foundation | 3/3 | ✓ Complete | 2026-02-04 |
-| 2. League Tables & Navigation | 0/5 | Not started | - |
+| 1. Data Foundation | 3/3 | Complete | 2026-02-04 |
+| 2. League Tables & Navigation | 0/5 | In Progress | - |
 | 3. Match & Fixture Pages | 0/3 | Not started | - |
 | 4. Team Detail Pages | 0/3 | Not started | - |
 | 5. Season Timeline | 0/3 | Not started | - |
