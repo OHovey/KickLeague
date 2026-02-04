@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 ## Current Position
 
 Phase: 1 of 7 (Data Foundation)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-02-04 -- Completed 01-01-PLAN.md
+Last activity: 2026-02-04 -- Completed 01-02-PLAN.md
 
-Progress: [█░░░░░░░░░] 4% (1/25 plans)
+Progress: [██░░░░░░░░] 8% (2/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: 6 min
-- Total execution time: 0.1 hours
+- Total plans completed: 2
+- Average duration: 5.5 min
+- Total execution time: 0.18 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-data-foundation | 1/3 | 6 min | 6 min |
+| 01-data-foundation | 2/3 | 11 min | 5.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6 min)
-- Trend: baseline
+- Last 5 plans: 01-01 (6 min), 01-02 (5 min)
+- Trend: stable
 
 *Updated after each plan completion*
 
@@ -48,10 +48,14 @@ Recent decisions affecting current work:
 - 01-01: Zone definitions modelled as position-range data rows in league_zones table (simplest for Phase 2 rendering).
 - 01-01: Tiebreaker order stored as comma-separated string in league_config for Drizzle compatibility.
 - 01-01: Home/away splits included directly in standings table to avoid JOIN overhead.
+- 01-02: Zod v4 used (backward compatible safeParse/passthrough APIs). z.record requires two args.
+- 01-02: Cache returns stale data on schema evolution rather than re-fetching (preserves API quota).
+- 01-02: All schemas use partial accept pattern: safeParse always, nullable/optional liberally, passthrough on all objects.
 
 ### Pending Todos
 
 - User must provision Neon database and set DATABASE_URL before Plan 01-03 (see 01-USER-SETUP.md).
+- User must obtain API-Football API key and set API_FOOTBALL_KEY before Plan 01-03 (see 01-USER-SETUP.md).
 
 ### Blockers/Concerns
 
@@ -61,6 +65,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-04T19:56:49Z
-Stopped at: Completed 01-01-PLAN.md (Project Scaffolding & Database Schema)
-Resume file: .planning/phases/01-data-foundation/01-02-PLAN.md
+Last session: 2026-02-04T19:58:05Z
+Stopped at: Completed 01-02-PLAN.md (API-Football Client)
+Resume file: .planning/phases/01-data-foundation/01-03-PLAN.md
