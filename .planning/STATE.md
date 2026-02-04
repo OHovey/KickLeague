@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 ## Current Position
 
 Phase: 2 of 7 (League Tables & Navigation)
-Plan: 3 of 5 in current phase
+Plan: 4 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-04 -- Completed 02-03-PLAN.md
+Last activity: 2026-02-04 -- Completed 02-04-PLAN.md
 
-Progress: [████░░░░░░] 24% (6/25 plans)
+Progress: [████░░░░░░] 28% (7/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
-- Average duration: 4.7 min
-- Total execution time: 0.47 hours
+- Total plans completed: 7
+- Average duration: 4.6 min
+- Total execution time: 0.53 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
-| 02-league-tables | 3/5 | 12 min | 4 min |
+| 02-league-tables | 4/5 | 16 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (5 min), 02-01 (3 min), 02-02 (5 min), 02-03 (4 min)
+- Last 5 plans: 02-01 (3 min), 02-02 (5 min), 02-03 (4 min), 02-04 (4 min)
 - Trend: stable
 
 *Updated after each plan completion*
@@ -65,6 +65,9 @@ Recent decisions affecting current work:
 - 02-03: Server action pattern used for data fetching in client component context.
 - 02-03: LeagueTableWrapper bridges client league state to server-fetched data.
 - 02-03: H2H matrix built from finished fixtures for tiebreaker calculations.
+- 02-04: Sparkline Y-axis inverted so line going UP = team improving toward 1st.
+- 02-04: Position change calculated as previousPosition - currentPosition (positive = moved up).
+- 02-04: Custom tooltip types defined locally to avoid recharts v3 typing issues.
 
 ### Pending Todos
 
@@ -80,6 +83,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-04T23:43:43Z
-Stopped at: Completed 02-03-PLAN.md (league table with zone colors)
-Resume file: None (continue to 02-04-PLAN.md)
+Last session: 2026-02-04T23:50:50Z
+Stopped at: Completed 02-04-PLAN.md (visual enhancements)
+Resume file: None (continue to 02-05-PLAN.md)
