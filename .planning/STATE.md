@@ -10,27 +10,27 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 ## Current Position
 
 Phase: 1 of 7 (Data Foundation)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-04 -- Completed 01-02-PLAN.md
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-04 -- Completed 01-03-PLAN.md
 
-Progress: [██░░░░░░░░] 8% (2/25 plans)
+Progress: [███░░░░░░░] 12% (3/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 5.5 min
-- Total execution time: 0.18 hours
+- Total plans completed: 3
+- Average duration: 5.3 min
+- Total execution time: 0.27 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-data-foundation | 2/3 | 11 min | 5.5 min |
+| 01-data-foundation | 3/3 | 16 min | 5.3 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6 min), 01-02 (5 min)
+- Last 5 plans: 01-01 (6 min), 01-02 (5 min), 01-03 (5 min)
 - Trend: stable
 
 *Updated after each plan completion*
@@ -51,11 +51,16 @@ Recent decisions affecting current work:
 - 01-02: Zod v4 used (backward compatible safeParse/passthrough APIs). z.record requires two args.
 - 01-02: Cache returns stale data on schema evolution rather than re-fetching (preserves API quota).
 - 01-02: All schemas use partial accept pattern: safeParse always, nullable/optional liberally, passthrough on all objects.
+- 01-03: League zones use delete+insert (no single-row unique constraint on zones).
+- 01-03: Fixture events use delete+insert per fixture for idempotent re-runs.
+- 01-03: Points deductions auto-detected by comparing actual vs expected points.
+- 01-03: Refresh mode re-fetches teams (for ID map) but skips players.
 
 ### Pending Todos
 
-- User must provision Neon database and set DATABASE_URL before Plan 01-03 (see 01-USER-SETUP.md).
-- User must obtain API-Football API key and set API_FOOTBALL_KEY before Plan 01-03 (see 01-USER-SETUP.md).
+- User must provision Neon database and set DATABASE_URL before running seed (see 01-USER-SETUP.md).
+- User must obtain API-Football API key and set API_FOOTBALL_KEY before running seed (see 01-USER-SETUP.md).
+- Run `npx drizzle-kit push` to apply schema before first `npm run seed -- --all`.
 
 ### Blockers/Concerns
 
@@ -65,6 +70,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-04T19:58:05Z
-Stopped at: Completed 01-02-PLAN.md (API-Football Client)
-Resume file: .planning/phases/01-data-foundation/01-03-PLAN.md
+Last session: 2026-02-04T20:08:00Z
+Stopped at: Completed 01-03-PLAN.md (Data Seeding Pipeline) -- Phase 1 complete
+Resume file: None (Phase 2 begins next)
