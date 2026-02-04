@@ -1,0 +1,157 @@
+# Roadmap: FootballPulse
+
+## Overview
+
+FootballPulse delivers a CoinMarketCap-inspired football statistics platform across 7 phases. The journey starts with data foundations (schema, API client, seeding), builds the core league table experience with sparklines and league theming, expands into match and team detail pages, adds the interactive season timeline, automates the data pipeline for live updates, layers betting odds for monetisation, and finishes with 5-language localisation. Each phase delivers a complete, verifiable capability that builds on what came before.
+
+## Phases
+
+**Phase Numbering:**
+- Integer phases (1, 2, 3): Planned milestone work
+- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+
+Decimal phases appear between their surrounding integers in numeric order.
+
+- [ ] **Phase 1: Data Foundation** - Database schema, API client, data seeding for all 5 leagues
+- [ ] **Phase 2: League Tables & Navigation** - Core product: information-dense league tables with sparklines, theming, and mobile layout
+- [ ] **Phase 3: Match & Fixture Pages** - Recent results, upcoming fixtures, and match detail pages
+- [ ] **Phase 4: Team Detail Pages** - Team pages with overview, performance, squad, and fixtures tabs
+- [ ] **Phase 5: Season Timeline** - Interactive historical timeline to scrub through past matchweeks
+- [ ] **Phase 6: Live Data Pipeline** - Automated polling, match detection, standings recalculation, and real-time client updates
+- [ ] **Phase 7: Betting, Odds & Localisation** - Multi-bookmaker odds comparison, affiliate links, geo-compliance, and 5-language i18n
+
+## Phase Details
+
+### Phase 1: Data Foundation
+**Goal**: All Big 5 league data is seeded and queryable -- the application has a working database with current-season fixtures, standings, and team data, plus a rate-limited API client that protects against budget exhaustion
+**Depends on**: Nothing (first phase)
+**Requirements**: DATA-01, DATA-02
+**Success Criteria** (what must be TRUE):
+  1. Developer can run a seed command and populate Postgres with current-season fixtures, standings, and team data for all 5 leagues
+  2. API-Football client enforces rate limiting and validates all responses with Zod schemas, preventing malformed data from entering the database
+  3. Local file-cache proxy transparently intercepts API calls during development so daily quota is not consumed on repeated runs
+  4. Database schema supports league-specific configurations (tiebreaker rules, zone definitions, team counts) as data, not hardcoded logic
+**Plans**: 3 plans
+
+Plans:
+- [x] 01-01-PLAN.md -- Project scaffolding and complete PostgreSQL database schema with Drizzle ORM
+- [ ] 01-02-PLAN.md -- API-Football client with rate limiting, Zod validation, and file-cache proxy
+- [ ] 01-03-PLAN.md -- Data seeding pipeline for all 5 leagues with CLI interface
+
+### Phase 2: League Tables & Navigation
+**Goal**: Users can view information-dense league tables with sparklines, form guides, zone colouring, position change indicators, and full-page league theming across all 5 leagues on any device
+**Depends on**: Phase 1
+**Requirements**: TABL-01, TABL-02, TABL-03, TABL-04, TABL-05, TABL-06, TABL-07, LEAG-01, LEAG-02, LEAG-03, LEAG-04, MOBI-01, MOBI-02, MOBI-03
+**Success Criteria** (what must be TRUE):
+  1. User can view a league table showing P, W, D, L, GF, GA, GD, Pts with correct zone colouring, form dots, position change arrows, and inline sparkline charts for any of the 5 leagues
+  2. User can switch leagues via tab navigation and the entire page theme (colours, gradients, backgrounds) transitions smoothly to match the selected league's branding
+  3. League-specific tiebreaker rules produce correct table ordering (H2H for La Liga and Serie A, GD for Premier League, Bundesliga, and Ligue 1) whenever teams are level on points
+  4. On mobile, the table shows condensed columns (position, team, P, GD, Pts, sparkline) with full detail accessible by tapping a row to expand it
+  5. Selected league persists across page reloads via URL parameter and localStorage
+**Plans**: TBD
+
+Plans:
+- [ ] 02-01: League table component with all stat columns and zone colouring
+- [ ] 02-02: Standings calculator with configurable tiebreaker chains
+- [ ] 02-03: League navigation, full-page theming, and URL persistence
+- [ ] 02-04: Sparkline component and table visual enhancements (form dots, position indicators)
+- [ ] 02-05: Mobile responsive layout with condensed columns and expandable rows
+
+### Phase 3: Match & Fixture Pages
+**Goal**: Users can browse recent results and upcoming fixtures for any league, and drill into individual match pages for detailed stats, events, and head-to-head records
+**Depends on**: Phase 2
+**Requirements**: MATL-01, MATL-02, MATL-03, MATL-04, MTCH-01, MTCH-02, MTCH-03
+**Success Criteria** (what must be TRUE):
+  1. User can view the last 10 completed matches for any league with scores, team names, and key match events
+  2. User can view the next 10 upcoming fixtures with kickoff times displayed in their local timezone
+  3. User can expand a match list row to see H2H summary and trend information without navigating away
+  4. User can open a completed match page showing score, events timeline, match stats comparison bars, and head-to-head history
+  5. User can open an upcoming match page showing odds comparison from multiple bookmakers, both teams' recent form, H2H last 5 meetings, and key comparative stats
+**Plans**: TBD
+
+Plans:
+- [ ] 03-01: Recent matches and upcoming fixtures list components
+- [ ] 03-02: Match detail page for completed matches (events timeline, stats, H2H)
+- [ ] 03-03: Match detail page for upcoming matches (form, H2H, comparative stats)
+
+### Phase 4: Team Detail Pages
+**Goal**: Users can explore any team's season in depth through a tabbed detail page covering overview stats, performance analytics, squad data, and fixture schedule
+**Depends on**: Phase 3
+**Requirements**: TEAM-01, TEAM-02, TEAM-03, TEAM-04, TEAM-05
+**Success Criteria** (what must be TRUE):
+  1. User can navigate to a team page and see a hero section with the team's logo, name, stadium, current position, points total, and recent form
+  2. User can view an overview tab with season summary, position chart over time, cumulative points chart, and current form run
+  3. User can view a performance tab with home/away splits, goals scored by 15-minute period, xG analysis (where data is available), clean sheets count, and scoring-first win/draw/loss record
+  4. User can view a squad tab showing top scorers, top assisters, cards received, and minutes distribution across the squad
+  5. User can view a fixtures tab with the next 5 upcoming matches including odds and fixture difficulty colouring, plus the last 10 results
+**Plans**: TBD
+
+Plans:
+- [ ] 04-01: Team page layout with hero section and tab navigation
+- [ ] 04-02: Overview and performance tabs with charts
+- [ ] 04-03: Squad tab and fixtures tab
+
+### Phase 5: Season Timeline
+**Goal**: Users can scrub through the season to see how the league table looked at any point in history, with smooth animated transitions as teams move up and down
+**Depends on**: Phase 2
+**Requirements**: TIME-01, TIME-02, TIME-03, DATA-05
+**Success Criteria** (what must be TRUE):
+  1. User can see a timeline bar showing all matchweeks as filled (completed) or empty (upcoming) circles
+  2. User can drag or tap to any completed matchweek and the league table updates to show the historical standings at that point
+  3. Table rows animate smoothly when the selected matchweek changes, with teams visibly sliding to their new positions
+**Plans**: TBD
+
+Plans:
+- [ ] 05-01: Table snapshot storage and historical standings API
+- [ ] 05-02: Timeline UI component with drag/tap interaction
+- [ ] 05-03: Animated table transitions with Framer Motion
+
+### Phase 6: Live Data Pipeline
+**Goal**: The platform stays current without manual intervention -- matches are polled automatically, standings recalculate on match completion, caches invalidate, and connected browsers receive updates in near real-time
+**Depends on**: Phase 1, Phase 2
+**Requirements**: DATA-03, DATA-04, DATA-06
+**Success Criteria** (what must be TRUE):
+  1. During match windows, the system automatically polls for match updates at 60-second intervals and detects match completions without human intervention
+  2. When a match completes, standings are recalculated, Redis cache is invalidated, and ISR pages are revalidated within 2 minutes
+  3. Connected browsers receive table updates without manual page refresh (via SSE or smart polling fallback)
+  4. Off-peak polling is throttled to conserve API budget, with a daily full resync at 04:00 UTC to catch any missed updates
+**Plans**: TBD
+
+Plans:
+- [ ] 06-01: QStash cron jobs for match polling and fixture syncing
+- [ ] 06-02: Match completion detection, standings recalculation chain, and cache invalidation
+- [ ] 06-03: Real-time client updates (SSE or polling fallback)
+
+### Phase 7: Betting, Odds & Localisation
+**Goal**: Users can compare betting odds across bookmakers with proper legal compliance per jurisdiction, and the entire platform is available in 5 languages with locale-aware formatting
+**Depends on**: Phase 3
+**Requirements**: ODDS-01, ODDS-02, ODDS-03, ODDS-04, I18N-01, I18N-02, I18N-03, I18N-04
+**Success Criteria** (what must be TRUE):
+  1. User can view odds from multiple bookmakers on upcoming match pages, displayed in their preferred format (decimal, fractional, or American)
+  2. Affiliate links track click-throughs and bookmaker display is geo-targeted to show only locally licensed operators
+  3. Users in restricted jurisdictions (Italy: complete ban) see no betting content whatsoever; other restricted countries see only compliant bookmakers
+  4. User can switch the UI between English, Spanish, German, Italian, and French with all labels, navigation, and team names translated
+  5. Dates, times, and numbers format correctly per locale (e.g., 1,000 in EN vs 1.000 in DE), and kickoff times display in the user's timezone
+**Plans**: TBD
+
+Plans:
+- [ ] 07-01: The Odds API client and odds data pipeline
+- [ ] 07-02: Multi-bookmaker odds display with format switching and affiliate tracking
+- [ ] 07-03: Geo-detection and per-jurisdiction compliance rules
+- [ ] 07-04: next-intl setup, translation files, and locale routing
+- [ ] 07-05: Database-driven team name localisation and locale-aware formatting
+
+## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 1. Data Foundation | 1/3 | In progress | - |
+| 2. League Tables & Navigation | 0/5 | Not started | - |
+| 3. Match & Fixture Pages | 0/3 | Not started | - |
+| 4. Team Detail Pages | 0/3 | Not started | - |
+| 5. Season Timeline | 0/3 | Not started | - |
+| 6. Live Data Pipeline | 0/3 | Not started | - |
+| 7. Betting, Odds & Localisation | 0/5 | Not started | - |
