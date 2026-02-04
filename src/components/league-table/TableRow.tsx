@@ -1,11 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import type { StandingsRow } from '@/lib/standings/calculate';
+import type { EnhancedStandingsRow } from '@/lib/standings/queries';
 import { ExpandedRowDetail } from './ExpandedRowDetail';
+import { FormBadges } from './FormBadges';
+import { PositionChange } from './PositionChange';
+import { Sparkline } from './Sparkline';
 
 interface TableRowProps {
-  row: StandingsRow;
+  row: EnhancedStandingsRow;
   zoneColor: string | null;
 }
 
@@ -89,8 +92,23 @@ export function TableRow({ row, zoneColor }: TableRowProps) {
         </td>
 
         {/* Points - Always visible */}
-        <td className="min-h-[44px] py-3 pl-2 pr-2 text-center text-sm font-bold text-white md:pr-4">
+        <td className="min-h-[44px] py-3 pl-2 pr-2 text-center text-sm font-bold text-white">
           {row.points}
+        </td>
+
+        {/* Form - Desktop only */}
+        <td className="hidden min-h-[44px] py-3 px-2 md:table-cell">
+          <FormBadges form={row.form} />
+        </td>
+
+        {/* Position Change - Desktop only */}
+        <td className="hidden min-h-[44px] py-3 px-2 text-center md:table-cell">
+          <PositionChange change={row.positionChange} />
+        </td>
+
+        {/* Sparkline Trend - Desktop only */}
+        <td className="hidden min-h-[44px] py-3 px-2 md:table-cell md:pr-4">
+          <Sparkline data={row.sparklineData} />
         </td>
 
         {/* Expand indicator - Mobile only */}

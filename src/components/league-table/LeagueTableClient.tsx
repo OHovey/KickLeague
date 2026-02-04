@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState, useTransition } from 'react';
-import type { StandingsRow } from '@/lib/standings/calculate';
+import { useEffect, useState, useTransition, useCallback } from 'react';
+import type { EnhancedStandingsRow } from '@/lib/standings/queries';
 import type { Zone } from '@/lib/zones';
 import { getZoneColor } from '@/lib/zones';
 import { TableRow } from './TableRow';
@@ -13,10 +13,28 @@ interface LeagueTableClientProps {
 }
 
 interface StandingsData {
-  standings: StandingsRow[];
+  standings: EnhancedStandingsRow[];
   zones: Zone[];
   matchweek: number | null;
   leagueName: string | null;
+}
+
+type ExpandState = 'collapsed' | 'default' | 'expanded';
+
+const STORAGE_KEY = 'table-expand-state';
+const ROW_COUNTS: Record<ExpandState, number> = {
+  collapsed: 5,
+  default: 10,
+  expanded: Infinity,
+};
+
+function getStoredExpandState(): ExpandState {
+  if (typeof window === 'undefined') return 'default';
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored === 'collapsed' || stored === 'default' || stored === 'expanded') {
+    return stored;
+  }
+  return 'default';
 }
 
 function TableSkeleton() {
@@ -42,6 +60,18 @@ export function LeagueTableClient({ league }: LeagueTableClientProps) {
   const [data, setData] = useState<StandingsData | null>(null);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [expandState, setExpandState] = useState<ExpandState>('default');
+
+  // Load expand state from localStorage on mount
+  useEffect(() => {
+    setExpandState(getStoredExpandState());
+  }, []);
+
+  // Persist expand state to localStorage
+  const handleExpandStateChange = useCallback((newState: ExpandState) => {
+    setExpandState(newState);
+    localStorage.setItem(STORAGE_KEY, newState);
+  }, []);
 
   useEffect(() => {
     startTransition(async () => {
@@ -86,6 +116,25 @@ export function LeagueTableClient({ league }: LeagueTableClientProps) {
     );
   }
 
+  // Slice standings based on expand state
+  const maxRows = ROW_COUNTS[expandState];
+  const displayedStandings = data.standings.slice(0, maxRows);
+  const totalRows = data.standings.length;
+  const isFullyExpanded = expandState === 'expanded' || displayedStandings.length >= totalRows;
+
+  // Determine next state and button text
+  const getNextState = (): { state: ExpandState; label: string } => {
+    switch (expandState) {
+      case 'collapsed':
+        return { state: 'default', label: 'Show 10 rows' };
+      case 'default':
+        return { state: 'expanded', label: 'Show full table' };
+      case 'expanded':
+        return { state: 'collapsed', label: 'Collapse' };
+    }
+  };
+  const { state: nextState, label: buttonLabel } = getNextState();
+
   return (
     <div className={`overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm ${isPending ? 'opacity-50' : ''}`}>
       {/* Matchweek indicator */}
@@ -95,38 +144,63 @@ export function LeagueTableClient({ league }: LeagueTableClientProps) {
         </div>
       )}
 
-      {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-white/50">
-              {/* Always visible columns */}
-              <th className="py-3 pl-4 pr-2 text-center font-medium">#</th>
-              <th className="py-3 px-2 text-left font-medium">Team</th>
-              <th className="py-3 px-2 text-center font-medium">P</th>
-              {/* Desktop-only columns */}
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">W</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">D</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">L</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GF</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GA</th>
-              {/* Always visible columns */}
-              <th className="py-3 px-2 text-center font-medium">GD</th>
-              <th className="py-3 pl-2 pr-4 text-center font-medium">Pts</th>
-              {/* Expand indicator for mobile */}
-              <th className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">Expand</span></th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-white/5">
-            {data.standings.map((row) => (
-              <TableRow
-                key={row.teamId}
-                row={row}
-                zoneColor={getZoneColor(data.zones, row.position)}
-              />
-            ))}
-          </tbody>
-        </table>
+      {/* Table with optional fade gradient when not fully expanded */}
+      <div className="relative">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-white/50">
+                {/* Always visible columns */}
+                <th className="py-3 pl-4 pr-2 text-center font-medium">#</th>
+                <th className="py-3 px-2 text-left font-medium">Team</th>
+                <th className="py-3 px-2 text-center font-medium">P</th>
+                {/* Desktop-only columns */}
+                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">W</th>
+                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">D</th>
+                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">L</th>
+                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GF</th>
+                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GA</th>
+                {/* Always visible columns */}
+                <th className="py-3 px-2 text-center font-medium">GD</th>
+                <th className="py-3 pl-2 pr-2 text-center font-medium">Pts</th>
+                {/* Desktop-only visual columns */}
+                <th className="hidden py-3 px-2 text-left font-medium md:table-cell">Form</th>
+                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">+/-</th>
+                <th className="hidden py-3 px-2 pr-4 text-left font-medium md:table-cell">Trend</th>
+                {/* Expand indicator for mobile */}
+                <th className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">Expand</span></th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {displayedStandings.map((row) => (
+                <TableRow
+                  key={row.teamId}
+                  row={row}
+                  zoneColor={getZoneColor(data.zones, row.position)}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Fade gradient when table is not fully expanded */}
+        {!isFullyExpanded && (
+          <div
+            className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent"
+            aria-hidden="true"
+          />
+        )}
+      </div>
+
+      {/* Expand/collapse button */}
+      <div className="border-t border-white/10 px-4 py-3 text-center">
+        <button
+          type="button"
+          onClick={() => handleExpandStateChange(nextState)}
+          className="min-h-[44px] px-4 py-2 text-sm text-primary underline underline-offset-2 transition-colors hover:text-primary/80"
+        >
+          {buttonLabel}
+        </button>
       </div>
 
       {/* Zone legend */}

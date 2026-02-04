@@ -1,9 +1,12 @@
 'use client';
 
-import type { StandingsRow } from '@/lib/standings/calculate';
+import type { EnhancedStandingsRow } from '@/lib/standings/queries';
+import { FormBadges } from './FormBadges';
+import { PositionChange } from './PositionChange';
+import { Sparkline } from './Sparkline';
 
 interface ExpandedRowDetailProps {
-  row: StandingsRow;
+  row: EnhancedStandingsRow;
 }
 
 /**
@@ -35,8 +38,22 @@ export function ExpandedRowDetail({ row }: ExpandedRowDetailProps) {
           <p className="font-medium text-white">{row.goalsAgainst}</p>
         </div>
         <div className="text-center">
-          <p className="text-white/50">Form</p>
-          <p className="font-medium text-white">{row.form || '-'}</p>
+          <p className="text-white/50">+/-</p>
+          <div className="flex justify-center">
+            <PositionChange change={row.positionChange} />
+          </div>
+        </div>
+      </div>
+
+      {/* Form and Trend row */}
+      <div className="mt-4 flex items-center justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs text-white/50">Form</p>
+          <FormBadges form={row.form} />
+        </div>
+        <div>
+          <p className="mb-1 text-xs text-white/50">Trend</p>
+          <Sparkline data={row.sparklineData} width={100} height={28} />
         </div>
       </div>
     </div>

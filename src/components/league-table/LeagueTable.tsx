@@ -55,7 +55,11 @@ export async function LeagueTable({ league }: LeagueTableProps) {
               <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GA</th>
               {/* Always visible columns */}
               <th className="py-3 px-2 text-center font-medium">GD</th>
-              <th className="py-3 pl-2 pr-4 text-center font-medium">Pts</th>
+              <th className="py-3 pl-2 pr-2 text-center font-medium">Pts</th>
+              {/* Desktop-only visual columns */}
+              <th className="hidden py-3 px-2 text-left font-medium md:table-cell">Form</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">+/-</th>
+              <th className="hidden py-3 px-2 pr-4 text-left font-medium md:table-cell">Trend</th>
               {/* Expand indicator for mobile */}
               <th className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">Expand</span></th>
             </tr>

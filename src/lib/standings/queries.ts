@@ -1,6 +1,6 @@
 // Standings database queries with zone and tiebreaker integration
 
-import { eq, and, desc, max } from 'drizzle-orm';
+import { eq, and, desc, max, gte, asc } from 'drizzle-orm';
 import { db } from '@/db/connection';
 import {
   leagues,
@@ -16,9 +16,15 @@ import {
   type H2HMatrix,
 } from './calculate';
 import type { Zone } from '@/lib/zones';
+import type { SparklineDataPoint } from '@/components/league-table/Sparkline';
+
+export interface EnhancedStandingsRow extends StandingsRow {
+  positionChange: number;
+  sparklineData: SparklineDataPoint[];
+}
 
 export interface StandingsWithZones {
-  standings: StandingsRow[];
+  standings: EnhancedStandingsRow[];
   zones: Zone[];
   config: {
     teamCount: number;
@@ -146,6 +152,97 @@ async function getLatestMatchweek(leagueId: number, season: string): Promise<num
 }
 
 /**
+ * Get sparkline data for a specific team - last 10 matchweeks of position data.
+ * Returns array of { matchweek, position } sorted by matchweek ascending.
+ */
+async function getSparklineData(
+  leagueId: number,
+  season: string,
+  teamId: number,
+  currentMatchweek: number
+): Promise<SparklineDataPoint[]> {
+  const startMatchweek = Math.max(1, currentMatchweek - 9);
+
+  const result = await db
+    .select({
+      matchweek: standings.matchweek,
+      position: standings.position,
+    })
+    .from(standings)
+    .where(
+      and(
+        eq(standings.leagueId, leagueId),
+        eq(standings.season, season),
+        eq(standings.teamId, teamId),
+        gte(standings.matchweek, startMatchweek)
+      )
+    )
+    .orderBy(asc(standings.matchweek));
+
+  return result;
+}
+
+/**
+ * Get position change for teams from previous matchweek.
+ * Returns a map of teamId -> position change (positive = moved up).
+ */
+async function getPositionChanges(
+  leagueId: number,
+  season: string,
+  currentMatchweek: number
+): Promise<Map<number, number>> {
+  const positionChanges = new Map<number, number>();
+
+  if (currentMatchweek <= 1) {
+    return positionChanges; // No previous matchweek
+  }
+
+  // Get current positions
+  const currentPositions = await db
+    .select({
+      teamId: standings.teamId,
+      position: standings.position,
+    })
+    .from(standings)
+    .where(
+      and(
+        eq(standings.leagueId, leagueId),
+        eq(standings.season, season),
+        eq(standings.matchweek, currentMatchweek)
+      )
+    );
+
+  // Get previous matchweek positions
+  const previousPositions = await db
+    .select({
+      teamId: standings.teamId,
+      position: standings.position,
+    })
+    .from(standings)
+    .where(
+      and(
+        eq(standings.leagueId, leagueId),
+        eq(standings.season, season),
+        eq(standings.matchweek, currentMatchweek - 1)
+      )
+    );
+
+  const prevPosMap = new Map(previousPositions.map(p => [p.teamId, p.position]));
+
+  for (const current of currentPositions) {
+    const prevPos = prevPosMap.get(current.teamId);
+    if (prevPos !== undefined) {
+      // Positive change = moved up (lower position number is better)
+      positionChanges.set(current.teamId, prevPos - current.position);
+    } else {
+      positionChanges.set(current.teamId, 0);
+    }
+  }
+
+  return positionChanges;
+}
+
+/**
  * Fetch standings with zones, applying tiebreakers for proper ordering.
  * This is the main query used by the LeagueTable component.
  */
@@ -233,8 +330,24 @@ export async function getStandingsWithZones(
     sortedStandings = calculateStandings(standingsRows, config, h2hMatrix);
   }
 
+  // 8. Fetch position changes
+  const positionChanges = await getPositionChanges(league.id, targetSeason, matchweek);
+
+  // 9. Fetch sparkline data for each team (in parallel)
+  const sparklinePromises = sortedStandings.map(row =>
+    getSparklineData(league.id, targetSeason, row.teamId, matchweek)
+  );
+  const sparklineResults = await Promise.all(sparklinePromises);
+
+  // 10. Enhance standings with position change and sparkline data
+  const enhancedStandings: EnhancedStandingsRow[] = sortedStandings.map((row, index) => ({
+    ...row,
+    positionChange: positionChanges.get(row.teamId) ?? 0,
+    sparklineData: sparklineResults[index],
+  }));
+
   return {
-    standings: sortedStandings,
+    standings: enhancedStandings,
     zones,
     config: config
       ? {

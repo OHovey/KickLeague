@@ -1,11 +1,10 @@
 'use server';
 
-import { getStandingsWithZones } from '@/lib/standings/queries';
-import type { StandingsRow } from '@/lib/standings/calculate';
+import { getStandingsWithZones, type EnhancedStandingsRow } from '@/lib/standings/queries';
 import type { Zone } from '@/lib/zones';
 
 export interface StandingsResult {
-  standings: StandingsRow[];
+  standings: EnhancedStandingsRow[];
   zones: Zone[];
   matchweek: number | null;
   leagueName: string | null;
