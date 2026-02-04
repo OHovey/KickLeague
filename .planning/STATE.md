@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 ## Current Position
 
 Phase: 2 of 7 (League Tables & Navigation)
-Plan: 2 of 5 in current phase
+Plan: 3 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-04 -- Completed 02-02-PLAN.md
+Last activity: 2026-02-04 -- Completed 02-03-PLAN.md
 
-Progress: [████░░░░░░] 20% (5/25 plans)
+Progress: [████░░░░░░] 24% (6/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 4.8 min
-- Total execution time: 0.40 hours
+- Total plans completed: 6
+- Average duration: 4.7 min
+- Total execution time: 0.47 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
-| 02-league-tables | 2/5 | 8 min | 4 min |
+| 02-league-tables | 3/5 | 12 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (5 min), 01-03 (5 min), 02-01 (3 min), 02-02 (5 min)
+- Last 5 plans: 01-03 (5 min), 02-01 (3 min), 02-02 (5 min), 02-03 (4 min)
 - Trend: stable
 
 *Updated after each plan completion*
@@ -62,6 +62,9 @@ Recent decisions affecting current work:
 - 02-02: Spread LEAGUES array for nuqs parseAsStringEnum to avoid readonly type issue.
 - 02-02: Suspense boundary required for useSearchParams in Next.js 15 static builds.
 - 02-02: Dual-layer opacity technique for gradient transitions (CSS cannot transition gradients directly).
+- 02-03: Server action pattern used for data fetching in client component context.
+- 02-03: LeagueTableWrapper bridges client league state to server-fetched data.
+- 02-03: H2H matrix built from finished fixtures for tiebreaker calculations.
 
 ### Pending Todos
 
@@ -77,6 +80,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-04T23:37:00Z
-Stopped at: Completed 02-02-PLAN.md (league theming infrastructure)
-Resume file: None (continue to 02-03-PLAN.md)
+Last session: 2026-02-04T23:43:43Z
+Stopped at: Completed 02-03-PLAN.md (league table with zone colors)
+Resume file: None (continue to 02-04-PLAN.md)
