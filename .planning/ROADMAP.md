@@ -12,7 +12,7 @@ FootballPulse delivers a CoinMarketCap-inspired football statistics platform acr
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Data Foundation** - Database schema, API client, data seeding for all 5 leagues
+- [x] **Phase 1: Data Foundation** - Database schema, API client, data seeding for all 5 leagues
 - [ ] **Phase 2: League Tables & Navigation** - Core product: information-dense league tables with sparklines, theming, and mobile layout
 - [ ] **Phase 3: Match & Fixture Pages** - Recent results, upcoming fixtures, and match detail pages
 - [ ] **Phase 4: Team Detail Pages** - Team pages with overview, performance, squad, and fixtures tabs
@@ -35,8 +35,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md -- Project scaffolding and complete PostgreSQL database schema with Drizzle ORM
-- [ ] 01-02-PLAN.md -- API-Football client with rate limiting, Zod validation, and file-cache proxy
-- [ ] 01-03-PLAN.md -- Data seeding pipeline for all 5 leagues with CLI interface
+- [x] 01-02-PLAN.md -- API-Football client with rate limiting, Zod validation, and file-cache proxy
+- [x] 01-03-PLAN.md -- Data seeding pipeline for all 5 leagues with CLI interface
 
 ### Phase 2: League Tables & Navigation
 **Goal**: Users can view information-dense league tables with sparklines, form guides, zone colouring, position change indicators, and full-page league theming across all 5 leagues on any device
@@ -148,7 +148,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Data Foundation | 1/3 | In progress | - |
+| 1. Data Foundation | 3/3 | ✓ Complete | 2026-02-04 |
 | 2. League Tables & Navigation | 0/5 | Not started | - |
 | 3. Match & Fixture Pages | 0/3 | Not started | - |
 | 4. Team Detail Pages | 0/3 | Not started | - |
