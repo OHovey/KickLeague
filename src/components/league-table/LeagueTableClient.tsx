@@ -1,15 +1,17 @@
 'use client';
 
 import { useEffect, useState, useTransition, useCallback } from 'react';
+import { LayoutGroup } from 'motion/react';
 import type { EnhancedStandingsRow } from '@/lib/standings/queries';
 import type { Zone } from '@/lib/zones';
 import { getZoneColor } from '@/lib/zones';
-import { TableRow } from './TableRow';
+import { AnimatedTableRow } from './AnimatedTableRow';
 import { ZoneLegend } from './ZoneLegend';
 import { fetchStandings } from './actions';
 
 interface LeagueTableClientProps {
   league: string;
+  matchweek?: number;
 }
 
 interface StandingsData {
@@ -57,7 +59,9 @@ function TableSkeleton() {
   );
 }
 
-export function LeagueTableClient({ league }: LeagueTableClientProps) {
+const GRID_COLS = 'grid-cols-[2.5rem_1fr_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_3rem_3rem_auto_auto_auto_2rem]';
+
+export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps) {
   const [data, setData] = useState<StandingsData | null>(null);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -77,14 +81,14 @@ export function LeagueTableClient({ league }: LeagueTableClientProps) {
   useEffect(() => {
     startTransition(async () => {
       try {
-        const result = await fetchStandings(league);
+        const result = await fetchStandings(league, matchweek);
         setData(result);
         setError(null);
       } catch (e) {
         setError(e instanceof Error ? e.message : 'Failed to load standings');
       }
     });
-  }, [league]);
+  }, [league, matchweek]);
 
   // Show skeleton during initial load or when switching leagues
   if (isPending) {
@@ -166,40 +170,47 @@ export function LeagueTableClient({ league }: LeagueTableClientProps) {
       {/* Table with optional fade gradient when not fully expanded */}
       <div className="relative">
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-white/50">
-                {/* Always visible columns */}
-                <th className="py-3 pl-4 pr-2 text-center font-medium">#</th>
-                <th className="py-3 px-2 text-left font-medium">Team</th>
-                <th className="py-3 px-2 text-center font-medium">P</th>
-                {/* Desktop-only columns */}
-                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">W</th>
-                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">D</th>
-                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">L</th>
-                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GF</th>
-                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GA</th>
-                {/* Always visible columns */}
-                <th className="py-3 px-2 text-center font-medium">GD</th>
-                <th className="py-3 pl-2 pr-2 text-center font-medium">Pts</th>
-                {/* Desktop-only visual columns */}
-                <th className="hidden py-3 px-2 text-left font-medium md:table-cell">Form</th>
-                <th className="hidden py-3 px-2 text-center font-medium md:table-cell">+/-</th>
-                <th className="hidden py-3 px-2 pr-4 text-left font-medium md:table-cell">Trend</th>
-                {/* Expand indicator for mobile */}
-                <th className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">Expand</span></th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/5">
-              {displayedStandings.map((row) => (
-                <TableRow
-                  key={row.teamId}
-                  row={row}
-                  zoneColor={getZoneColor(data.zones, row.position)}
-                />
-              ))}
-            </tbody>
-          </table>
+          <div role="table" className="w-full">
+            {/* Header row */}
+            <div
+              role="row"
+              className={`grid ${GRID_COLS} items-center border-b border-white/10 text-xs uppercase tracking-wider text-white/50`}
+            >
+              {/* Always visible columns */}
+              <div role="columnheader" className="py-3 pl-4 pr-2 text-center font-medium">#</div>
+              <div role="columnheader" className="py-3 px-2 text-left font-medium">Team</div>
+              <div role="columnheader" className="py-3 px-2 text-center font-medium">P</div>
+              {/* Desktop-only columns */}
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">W</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">D</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">L</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">GF</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">GA</div>
+              {/* Always visible columns */}
+              <div role="columnheader" className="py-3 px-2 text-center font-medium">GD</div>
+              <div role="columnheader" className="py-3 pl-2 pr-2 text-center font-medium">Pts</div>
+              {/* Desktop-only visual columns */}
+              <div role="columnheader" className="hidden py-3 px-2 text-left font-medium md:block">Form</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">+/-</div>
+              <div role="columnheader" className="hidden py-3 px-2 pr-4 text-left font-medium md:block">Trend</div>
+              {/* Expand indicator for mobile */}
+              <div role="columnheader" className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">Expand</span></div>
+            </div>
+
+            {/* Body */}
+            <LayoutGroup>
+              <div role="rowgroup">
+                {displayedStandings.map((row, index) => (
+                  <AnimatedTableRow
+                    key={row.teamId}
+                    row={row}
+                    index={index}
+                    zoneColor={getZoneColor(data.zones, row.position)}
+                  />
+                ))}
+              </div>
+            </LayoutGroup>
+          </div>
         </div>
 
         {/* Fade gradient when table is not fully expanded */}
