@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { TimelineCircle } from './TimelineCircle';
 
 interface TimelineStripProps {
@@ -11,22 +11,30 @@ interface TimelineStripProps {
   onSelectWeek: (week: number) => void;
 }
 
-function ScrollArrow({
+function NavArrow({
   direction,
   onClick,
-  visible,
+  disabled,
 }: {
   direction: 'left' | 'right';
   onClick: () => void;
-  visible: boolean;
+  disabled: boolean;
 }) {
-  if (!visible) return null;
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={`Scroll ${direction}`}
-      className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-white/70 transition-colors hover:bg-white/20 hover:text-white"
+      disabled={disabled}
+      aria-label={`Jump ${direction === 'left' ? 'back' : 'forward'} 5 matchweeks`}
+      className={`
+        flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full
+        transition-colors
+        ${
+          disabled
+            ? 'cursor-not-allowed bg-white/5 text-white/20'
+            : 'cursor-pointer bg-white/10 text-white/70 hover:bg-white/20 hover:text-white active:bg-white/25'
+        }
+      `}
     >
       <svg
         className="h-4 w-4"
@@ -39,9 +47,15 @@ function ScrollArrow({
         aria-hidden="true"
       >
         {direction === 'left' ? (
-          <path d="M15 18l-6-6 6-6" />
+          <>
+            <path d="M12 18l-6-6 6-6" />
+            <path d="M19 18l-6-6 6-6" />
+          </>
         ) : (
-          <path d="M9 18l6-6-6-6" />
+          <>
+            <path d="M5 18l6-6-6-6" />
+            <path d="M12 18l6-6-6-6" />
+          </>
         )}
       </svg>
     </button>
@@ -51,34 +65,20 @@ function ScrollArrow({
 export function TimelineStrip({
   matchweeks,
   selectedWeek,
+  latestCompleted,
   leagueColor,
   onSelectWeek,
 }: TimelineStripProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRefs = useRef<Map<number, HTMLButtonElement>>(new Map());
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
 
-  // Check scroll overflow state
-  const updateScrollState = useCallback(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
-  }, []);
+  // Find the earliest completed matchweek for clamping
+  const earliestCompleted = matchweeks
+    .filter((m) => m.completed)
+    .reduce((min, m) => Math.min(min, m.number), Infinity);
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    updateScrollState();
-    el.addEventListener('scroll', updateScrollState, { passive: true });
-    const resizeObserver = new ResizeObserver(updateScrollState);
-    resizeObserver.observe(el);
-    return () => {
-      el.removeEventListener('scroll', updateScrollState);
-      resizeObserver.disconnect();
-    };
-  }, [updateScrollState, matchweeks]);
+  const canNavLeft = selectedWeek > earliestCompleted;
+  const canNavRight = selectedWeek < latestCompleted;
 
   // Scroll selected circle into view
   useEffect(() => {
@@ -92,15 +92,17 @@ export function TimelineStrip({
     }
   }, [selectedWeek]);
 
-  const scrollBy = useCallback((direction: 'left' | 'right') => {
-    const el = containerRef.current;
-    if (!el) return;
-    const amount = el.clientWidth * 0.6;
-    el.scrollBy({
-      left: direction === 'left' ? -amount : amount,
-      behavior: 'smooth',
-    });
-  }, []);
+  const jumpWeek = useCallback(
+    (direction: 'left' | 'right') => {
+      const step = 5;
+      if (direction === 'left') {
+        onSelectWeek(Math.max(earliestCompleted, selectedWeek - step));
+      } else {
+        onSelectWeek(Math.min(latestCompleted, selectedWeek + step));
+      }
+    },
+    [earliestCompleted, latestCompleted, selectedWeek, onSelectWeek]
+  );
 
   // Keyboard navigation
   const handleKeyDown = useCallback(
@@ -135,10 +137,10 @@ export function TimelineStrip({
 
   return (
     <div className="flex items-center gap-1">
-      <ScrollArrow
+      <NavArrow
         direction="left"
-        onClick={() => scrollBy('left')}
-        visible={canScrollLeft}
+        onClick={() => jumpWeek('left')}
+        disabled={!canNavLeft}
       />
 
       <div
@@ -172,10 +174,10 @@ export function TimelineStrip({
         ))}
       </div>
 
-      <ScrollArrow
+      <NavArrow
         direction="right"
-        onClick={() => scrollBy('right')}
-        visible={canScrollRight}
+        onClick={() => jumpWeek('right')}
+        disabled={!canNavRight}
       />
     </div>
   );
