@@ -12,6 +12,7 @@ function createRow(overrides: Partial<StandingsRow>): StandingsRow {
   return {
     teamId: 1,
     teamName: 'Team A',
+    teamSlug: 'team-a',
     position: 1,
     played: 20,
     won: 10,

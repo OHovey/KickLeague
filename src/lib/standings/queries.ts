@@ -310,6 +310,7 @@ export async function getStandingsWithZones(
     .select({
       teamId: standings.teamId,
       teamName: teams.name,
+      teamSlug: teams.slug,
       position: standings.position,
       played: standings.played,
       won: standings.won,

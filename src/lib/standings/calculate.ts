@@ -5,6 +5,7 @@ export type TiebreakerMethod = 'goal_difference' | 'goals_for' | 'head_to_head';
 export interface StandingsRow {
   teamId: number;
   teamName: string;
+  teamSlug: string;
   position: number;
   played: number;
   won: number;

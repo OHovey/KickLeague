@@ -1,0 +1,150 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { fetchOverviewData, type OverviewData } from './actions';
+import { BumpChart } from './charts/BumpChart';
+import { CumulativePointsChart } from './charts/CumulativePointsChart';
+import { FormBadges } from '@/components/league-table/FormBadges';
+
+// ── Types ──────────────────────────────────────────────────────────────────
+
+interface OverviewTabProps {
+  teamId: number;
+  leagueId: number;
+  season: string;
+  teamName: string;
+}
+
+// ── Stat Card ──────────────────────────────────────────────────────────────
+
+function StatCard({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div className="rounded-lg bg-white/5 px-3 py-2.5">
+      <p className="text-xs text-white/40">{label}</p>
+      <p className="text-xl font-bold tabular-nums text-white">{value}</p>
+    </div>
+  );
+}
+
+// ── Skeleton ───────────────────────────────────────────────────────────────
+
+function OverviewSkeleton() {
+  return (
+    <div className="animate-pulse space-y-6">
+      {/* Summary grid skeleton */}
+      <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 md:grid-cols-9">
+        {Array.from({ length: 9 }).map((_, i) => (
+          <div key={i} className="h-16 rounded-lg bg-white/5" />
+        ))}
+      </div>
+      {/* Chart skeletons */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="h-[340px] rounded-xl bg-white/5" />
+        <div className="h-[290px] rounded-xl bg-white/5" />
+      </div>
+      <div className="h-12 rounded-lg bg-white/5" />
+    </div>
+  );
+}
+
+// ── Component ──────────────────────────────────────────────────────────────
+
+export function OverviewTab({
+  teamId,
+  leagueId,
+  season,
+  teamName,
+}: OverviewTabProps) {
+  const [data, setData] = useState<OverviewData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+
+    fetchOverviewData(teamId, leagueId, season, teamName).then((result) => {
+      if (!cancelled) {
+        setData(result);
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [teamId, leagueId, season, teamName]);
+
+  if (loading || !data) {
+    return <OverviewSkeleton />;
+  }
+
+  const { seasonSummary, positionHistory, cumulativePoints, focusTeamName, rivalTeamNames } =
+    data;
+
+  return (
+    <div className="space-y-6">
+      {/* Season Summary */}
+      {seasonSummary && (
+        <section>
+          <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
+            Season Summary
+          </h3>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 md:grid-cols-9">
+            <StatCard label="Pos" value={seasonSummary.position} />
+            <StatCard label="Pts" value={seasonSummary.points} />
+            <StatCard label="P" value={seasonSummary.played} />
+            <StatCard label="W" value={seasonSummary.won} />
+            <StatCard label="D" value={seasonSummary.drawn} />
+            <StatCard label="L" value={seasonSummary.lost} />
+            <StatCard label="GF" value={seasonSummary.goalsFor} />
+            <StatCard label="GA" value={seasonSummary.goalsAgainst} />
+            <StatCard
+              label="GD"
+              value={
+                seasonSummary.goalDifference > 0
+                  ? `+${seasonSummary.goalDifference}`
+                  : String(seasonSummary.goalDifference)
+              }
+            />
+          </div>
+        </section>
+      )}
+
+      {/* Charts */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Position Over Time (Bump Chart) */}
+        <section className="rounded-xl bg-white/5 p-4">
+          <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
+            Position Over Time
+          </h3>
+          <BumpChart
+            data={positionHistory}
+            focusTeam={focusTeamName}
+            rivalTeams={rivalTeamNames}
+          />
+        </section>
+
+        {/* Cumulative Points */}
+        <section className="rounded-xl bg-white/5 p-4">
+          <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
+            Cumulative Points
+          </h3>
+          <CumulativePointsChart data={cumulativePoints} />
+        </section>
+      </div>
+
+      {/* Current Form */}
+      {seasonSummary?.form && (
+        <section className="rounded-xl bg-white/5 p-4">
+          <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
+            Current Form
+          </h3>
+          <div className="flex items-center gap-3">
+            <FormBadges form={seasonSummary.form} />
+            <span className="text-xs text-white/30">Last {seasonSummary.form.length} matches</span>
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}

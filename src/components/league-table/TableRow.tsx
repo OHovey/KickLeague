@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import type { EnhancedStandingsRow } from '@/lib/standings/queries';
 import { ExpandedRowDetail } from './ExpandedRowDetail';
 import { FormBadges } from './FormBadges';
@@ -51,7 +52,13 @@ export function TableRow({ row, zoneColor }: TableRowProps) {
 
         {/* Team name - Always visible */}
         <td className="min-h-[44px] py-3 px-2 text-left text-sm font-medium text-white">
-          {row.teamName}
+          <Link
+            href={`/teams/${row.teamSlug}`}
+            className="hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {row.teamName}
+          </Link>
         </td>
 
         {/* Played - Always visible */}

@@ -13,6 +13,7 @@ export interface MatchTeam {
   name: string;
   shortName: string | null;
   logoUrl: string | null;
+  slug: string;
 }
 
 export interface MatchWithTeams {
@@ -68,10 +69,12 @@ export async function getRecentMatches(
       homeTeamName: homeTeam.name,
       homeTeamShortName: homeTeam.shortName,
       homeTeamLogoUrl: homeTeam.logoUrl,
+      homeTeamSlug: homeTeam.slug,
       awayTeamId: awayTeam.id,
       awayTeamName: awayTeam.name,
       awayTeamShortName: awayTeam.shortName,
       awayTeamLogoUrl: awayTeam.logoUrl,
+      awayTeamSlug: awayTeam.slug,
     })
     .from(fixtures)
     .innerJoin(homeTeam, eq(fixtures.homeTeamId, homeTeam.id))
@@ -99,12 +102,14 @@ export async function getRecentMatches(
       name: row.homeTeamName,
       shortName: row.homeTeamShortName,
       logoUrl: row.homeTeamLogoUrl,
+      slug: row.homeTeamSlug,
     },
     awayTeam: {
       id: row.awayTeamId,
       name: row.awayTeamName,
       shortName: row.awayTeamShortName,
       logoUrl: row.awayTeamLogoUrl,
+      slug: row.awayTeamSlug,
     },
   }));
 }
@@ -137,10 +142,12 @@ export async function getUpcomingFixtures(
       homeTeamName: homeTeam.name,
       homeTeamShortName: homeTeam.shortName,
       homeTeamLogoUrl: homeTeam.logoUrl,
+      homeTeamSlug: homeTeam.slug,
       awayTeamId: awayTeam.id,
       awayTeamName: awayTeam.name,
       awayTeamShortName: awayTeam.shortName,
       awayTeamLogoUrl: awayTeam.logoUrl,
+      awayTeamSlug: awayTeam.slug,
     })
     .from(fixtures)
     .innerJoin(homeTeam, eq(fixtures.homeTeamId, homeTeam.id))
@@ -168,12 +175,14 @@ export async function getUpcomingFixtures(
       name: row.homeTeamName,
       shortName: row.homeTeamShortName,
       logoUrl: row.homeTeamLogoUrl,
+      slug: row.homeTeamSlug,
     },
     awayTeam: {
       id: row.awayTeamId,
       name: row.awayTeamName,
       shortName: row.awayTeamShortName,
       logoUrl: row.awayTeamLogoUrl,
+      slug: row.awayTeamSlug,
     },
   }));
 }
