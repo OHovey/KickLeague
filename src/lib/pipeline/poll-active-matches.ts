@@ -27,6 +27,10 @@ import { buildConflictUpdateColumns } from '@/lib/seed/utils';
 import { getActiveLeagues } from './fixture-window';
 import { canMakePipelineCall, logApiCall } from './api-budget';
 import { withRetry } from './retry';
+import {
+  handleMatchCompletion,
+  type CompletionResult,
+} from './match-completion';
 
 export interface PollResult {
   polled: boolean;
@@ -34,6 +38,7 @@ export interface PollResult {
   leaguesChecked?: number;
   fixturesUpdated?: number;
   matchesCompleted?: number[];
+  completionResults?: CompletionResult[];
   errors?: string[];
   timestamp: string;
 }
@@ -84,6 +89,7 @@ export async function pollActiveMatches(): Promise<PollResult> {
 
   let totalFixturesUpdated = 0;
   const completedFixtureIds: number[] = [];
+  const allCompletedMatches: CompletedMatch[] = [];
   const errors: string[] = [];
 
   // 4. Poll each active league
@@ -101,6 +107,7 @@ export async function pollActiveMatches(): Promise<PollResult> {
       const leagueResult = await pollLeague(client, league);
       totalFixturesUpdated += leagueResult.fixturesUpdated;
       completedFixtureIds.push(...leagueResult.completedFixtureIds);
+      allCompletedMatches.push(...leagueResult.completedMatches);
     } catch (error) {
       const msg =
         error instanceof Error ? error.message : String(error);
@@ -108,10 +115,29 @@ export async function pollActiveMatches(): Promise<PollResult> {
     }
   }
 
-  // 5. Log completed matches (Plan 06-02 will implement handleMatchCompletion)
+  // 5. Handle match completions: recalculate standings + revalidate ISR
+  const completionResults: CompletionResult[] = [];
+  for (const match of allCompletedMatches) {
+    try {
+      const result = await handleMatchCompletion(
+        match.fixtureDbId,
+        match.leagueDbId,
+        match.season,
+        match.matchweek,
+      );
+      completionResults.push(result);
+    } catch (error) {
+      const msg =
+        error instanceof Error ? error.message : String(error);
+      errors.push(
+        `Failed to complete match ${match.fixtureApiId}: ${msg}`,
+      );
+    }
+  }
+
   if (completedFixtureIds.length > 0) {
     console.log(
-      `[poll-active-matches] ${completedFixtureIds.length} match(es) completed: ${completedFixtureIds.join(', ')}`,
+      `[poll-active-matches] ${completedFixtureIds.length} match(es) completed, ${completionResults.length} standings updated`,
     );
   }
 
@@ -120,6 +146,8 @@ export async function pollActiveMatches(): Promise<PollResult> {
     leaguesChecked: activeLeagues.length,
     fixturesUpdated: totalFixturesUpdated,
     matchesCompleted: completedFixtureIds,
+    completionResults:
+      completionResults.length > 0 ? completionResults : undefined,
     errors: errors.length > 0 ? errors : undefined,
     timestamp,
   };
@@ -129,9 +157,18 @@ export async function pollActiveMatches(): Promise<PollResult> {
 // Internal: Poll a single league
 // ---------------------------------------------------------------------------
 
+interface CompletedMatch {
+  fixtureDbId: number;
+  fixtureApiId: number;
+  leagueDbId: number;
+  season: string;
+  matchweek: number;
+}
+
 interface LeaguePollResult {
   fixturesUpdated: number;
   completedFixtureIds: number[];
+  completedMatches: CompletedMatch[];
 }
 
 async function pollLeague(
@@ -217,12 +254,14 @@ async function pollLeague(
   // Process fixture updates
   let fixturesUpdated = 0;
   const completedFixtureIds: number[] = [];
+  const completedMatches: CompletedMatch[] = [];
 
   for (const item of apiResponse.response) {
     const fixtureApiId = item.fixture.id;
     const newStatus = mapStatus(item.fixture.status.short);
     const homeTeamDbId = teamApiIdToDbId.get(item.teams.home.id);
     const awayTeamDbId = teamApiIdToDbId.get(item.teams.away.id);
+    const matchweek = extractMatchweek(item.league.round);
 
     if (!homeTeamDbId || !awayTeamDbId) continue;
 
@@ -235,13 +274,13 @@ async function pollLeague(
 
     if (!existingFixture) {
       // New fixture not in DB -- insert it
-      await db
+      const [inserted] = await db
         .insert(fixtures)
         .values({
           apiId: fixtureApiId,
           leagueId: league.leagueDbId,
           season: league.season,
-          matchweek: extractMatchweek(item.league.round),
+          matchweek,
           homeTeamId: homeTeamDbId,
           awayTeamId: awayTeamDbId,
           kickoff: new Date(item.fixture.date),
@@ -262,9 +301,22 @@ async function pollLeague(
             'referee',
             'venue',
           ]),
-        });
+        })
+        .returning({ id: fixtures.id });
 
       fixturesUpdated++;
+
+      // New fixture arriving already finished (rare but possible)
+      if (newStatus === 'finished' && matchweek !== null && inserted) {
+        completedFixtureIds.push(fixtureApiId);
+        completedMatches.push({
+          fixtureDbId: inserted.id,
+          fixtureApiId,
+          leagueDbId: league.leagueDbId,
+          season: league.season,
+          matchweek,
+        });
+      }
       continue;
     }
 
@@ -284,7 +336,7 @@ async function pollLeague(
         apiId: fixtureApiId,
         leagueId: league.leagueDbId,
         season: league.season,
-        matchweek: extractMatchweek(item.league.round),
+        matchweek,
         homeTeamId: homeTeamDbId,
         awayTeamId: awayTeamDbId,
         kickoff: new Date(item.fixture.date),
@@ -312,11 +364,19 @@ async function pollLeague(
     // Detect match completion: status transitioned TO finished
     if (
       oldStatus !== 'finished' &&
-      newStatus === 'finished'
+      newStatus === 'finished' &&
+      matchweek !== null
     ) {
       completedFixtureIds.push(fixtureApiId);
+      completedMatches.push({
+        fixtureDbId: existingFixture.id,
+        fixtureApiId,
+        leagueDbId: league.leagueDbId,
+        season: league.season,
+        matchweek,
+      });
     }
   }
 
-  return { fixturesUpdated, completedFixtureIds };
+  return { fixturesUpdated, completedFixtureIds, completedMatches };
 }
