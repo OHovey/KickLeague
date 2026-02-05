@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 2: League Tables & Navigation
+**Current focus:** Phase 3: Match & Fixture Pages
 
 ## Current Position
 
 Phase: 3 of 7 (Match & Fixture Pages)
-Plan: 0 of 3 in current phase
-Status: Ready to plan
-Last activity: 2026-02-05 -- Phase 2 verified and complete
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-02-05 -- Completed 03-01-PLAN.md
 
-Progress: [████░░░░░░] 32% (8/25 plans)
+Progress: [████░░░░░░] 36% (9/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 9
 - Average duration: 4.6 min
-- Total execution time: 0.62 hours
+- Total execution time: 0.68 hours
 
 **By Phase:**
 
@@ -29,9 +29,10 @@ Progress: [████░░░░░░] 32% (8/25 plans)
 |-------|-------|-------|----------|
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
 | 02-league-tables | 5/5 | 21 min | 4.2 min |
+| 03-match-fixture-pages | 1/3 | 4 min | 4.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (5 min), 02-03 (4 min), 02-04 (4 min), 02-05 (5 min)
+- Last 5 plans: 02-03 (4 min), 02-04 (4 min), 02-05 (5 min), 03-01 (4 min)
 - Trend: stable
 
 *Updated after each plan completion*
@@ -71,19 +72,21 @@ Recent decisions affecting current work:
 - 02-05: Mobile columns: #, Team, P, GD, Pts (essential info); W/D/L/GF/GA hidden until row expanded.
 - 02-05: Three table expand states (collapsed/default/expanded) with localStorage persistence.
 - 02-05: 44px minimum touch targets for accessibility compliance.
+- Bug fix: Historical standings computed from fixtures at seed time, not just API snapshot (enables sparklines/position change).
+- Bug fix: ThemeBackground uses radial edge/corner gradients fading to neutral dark center (more subtle/professional).
+- Bug fix: Zone color indicator moved inside position cell as absolute div (fixes column alignment).
+- Bug fix: Skeleton loading state shown during all pending states, not just initial load.
+- 03-01: drizzle-orm alias() for homeTeam/awayTeam double-join on fixtures table.
+- 03-01: Batch getTeamForm at max matchweek avoids N+1 per-card queries.
+- 03-01: Server actions serialize Map to Record for JSON transfer.
+- 03-01: "Odds coming soon" placeholder on upcoming fixture cards (MATL-04 structural prep).
 
 ### Pending Todos
 
 - User must provision Neon database and set DATABASE_URL before running seed (see 01-USER-SETUP.md).
 - User must obtain API-Football API key and set API_FOOTBALL_KEY before running seed (see 01-USER-SETUP.md).
 - Run `npx drizzle-kit push` to apply schema before first `npm run seed -- --all`.
-
-**Phase 2 styling/bug fixes (before Phase 3):**
-- Revise ThemeBackground to use edge/corner gradients that fade to a neutral dark center, rather than full-page top-to-bottom gradients. More subtle, professional look.
-- Fix sparkline charts not rendering in TREND column (shows dots instead of line charts) - likely empty sparklineData from query.
-- Fix position change (+/-) always showing "-" - positionChange calculation returning 0 for all teams.
-- Fix column alignment - # column offset between rows with/without zone borders.
-- Add skeleton loading states when switching leagues - replace table rows with animated placeholders while data loads (prevent stale data flash).
+- **Re-run `npm run seed -- --all` to populate historical standings data** (required for sparklines and position changes to display).
 
 ### Blockers/Concerns
 
@@ -93,6 +96,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-04T23:51:34Z
-Stopped at: Completed 02-05-PLAN.md (mobile responsive layout)
-Resume file: None (Phase 2 complete, ready for Phase 3)
+Last session: 2026-02-05
+Stopped at: Completed 03-01-PLAN.md (match query layer, cards, /matches page)
+Resume file: None (ready for 03-02)
