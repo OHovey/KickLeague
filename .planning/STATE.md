@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 4 complete and verified. Ready for Phase 5: Season Timeline.
+**Current focus:** Phase 5 in progress. Plan 01 complete (animated league table + matchweek queries). Ready for Plan 02 (timeline slider).
 
 ## Current Position
 
 Phase: 5 of 7 (Season Timeline)
-Plan: 0 of 3 in current phase
-Status: Ready to plan
-Last activity: 2026-02-05 -- Phase 4 verified and complete
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-02-05 -- Completed 05-01-PLAN.md
 
-Progress: [██████░░░░] 56% (14/25 plans)
+Progress: [██████░░░░] 60% (15/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 14
+- Total plans completed: 15
 - Average duration: 4.5 min
-- Total execution time: 1.09 hours
+- Total execution time: 1.16 hours
 
 **By Phase:**
 
@@ -31,10 +31,10 @@ Progress: [██████░░░░] 56% (14/25 plans)
 | 02-league-tables | 5/5 | 21 min | 4.2 min |
 | 03-match-fixture-pages | 3/3 | 14 min | 4.7 min |
 | 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
+| 05-season-timeline | 1/3 | 4 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-03 (6 min), 04-01 (2.5 min), 04-03 (8 min), 04-02 (8.3 min)
-- Note: 04-02 and 04-03 executed in parallel, 04-02 took slightly longer due to 5 chart components
+- Last 5 plans: 04-01 (2.5 min), 04-03 (8 min), 04-02 (8.3 min), 05-01 (4 min)
 
 *Updated after each plan completion*
 
@@ -99,6 +99,10 @@ Recent decisions affecting current work:
 - 04-03: useRouter + stopPropagation for team links inside MatchCard (avoids nested <a> tags).
 - 04-03: Fixture difficulty: position 1-6 hard (red), 7-14 medium (amber), 15+ easy (green).
 - 04-03: Top performer cards conditionally hidden when stat = 0 (early season edge case).
+- 05-01: Motion layout="position" chosen over layout={true} to prevent child element distortion during animation.
+- 05-01: NumberFlow trend={0} for shortest-path digit spin (no forced up/down direction).
+- 05-01: lte bound added to sparkline query so historical matchweek views don't show future data.
+- 05-01: CSS Grid 14-column template shared between header and AnimatedTableRow for consistent alignment.
 
 ### Pending Todos
 
@@ -117,5 +121,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Phase 4 verified and complete (team pages, all 4 tabs, cross-site team links)
-Resume file: None (Phase 4 complete, ready for Phase 5)
+Stopped at: Completed 05-01-PLAN.md (animated league table + matchweek queries)
+Resume file: None
