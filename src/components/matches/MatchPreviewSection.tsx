@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
+import { useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { formatKickoffTime } from '@/lib/dates/format';
 import type { MatchWithTeams } from '@/lib/matches/queries';
@@ -70,7 +71,7 @@ function CompactResultRow({ match }: { match: MatchWithTeams }) {
   );
 }
 
-function CompactFixtureRow({ match }: { match: MatchWithTeams }) {
+function CompactFixtureRow({ match, locale }: { match: MatchWithTeams; locale: string }) {
   return (
     <Link
       href={`/matches/${match.id}`}
@@ -92,7 +93,7 @@ function CompactFixtureRow({ match }: { match: MatchWithTeams }) {
         className="w-16 text-center text-xs font-medium text-white/60"
         suppressHydrationWarning
       >
-        {formatKickoffTime(match.kickoff)}
+        {formatKickoffTime(match.kickoff, locale)}
       </span>
 
       {/* Away team */}
@@ -171,6 +172,7 @@ interface MatchPreviewSectionProps {
 }
 
 export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
+  const locale = useLocale();
   const [recentMatches, setRecentMatches] = useState<MatchWithTeams[]>([]);
   const [upcomingMatches, setUpcomingMatches] = useState<MatchWithTeams[]>([]);
   const [isPending, startTransition] = useTransition();
@@ -250,7 +252,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
             ) : (
               <div className="space-y-0">
                 {upcomingMatches.map((match) => (
-                  <CompactFixtureRow key={match.id} match={match} />
+                  <CompactFixtureRow key={match.id} match={match} locale={locale} />
                 ))}
               </div>
             )}

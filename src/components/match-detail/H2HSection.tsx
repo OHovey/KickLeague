@@ -9,6 +9,7 @@ interface H2HSectionProps {
   team2Name: string;
   team1Id: number;
   team2Id: number;
+  locale?: string;
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
@@ -18,6 +19,7 @@ export function H2HSection({
   team1Name,
   team2Name,
   team1Id,
+  locale = 'en-GB',
 }: H2HSectionProps) {
   const total = h2hData.team1Wins + h2hData.team2Wins + h2hData.draws;
 
@@ -97,7 +99,7 @@ export function H2HSection({
                     className="w-28 shrink-0 text-white/40"
                     suppressHydrationWarning
                   >
-                    {formatMatchDate(meeting.kickoff)}
+                    {formatMatchDate(meeting.kickoff, locale)}
                   </span>
                   <span
                     className={`flex-1 text-right ${

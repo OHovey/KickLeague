@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
+import { useLocale } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { formatKickoffTime, formatMatchDateShort } from '@/lib/dates/format';
 import type { MatchWithTeams, MatchEvent } from '@/lib/matches/queries';
@@ -188,6 +189,7 @@ export function MatchCard({
   awayForm,
 }: MatchCardProps) {
   const router = useRouter();
+  const locale = useLocale();
   const isFinished = match.status === 'finished';
   const homeName = match.homeTeam.shortName ?? match.homeTeam.name;
   const awayName = match.awayTeam.shortName ?? match.awayTeam.name;
@@ -204,7 +206,7 @@ export function MatchCard({
             className="text-[11px] font-medium uppercase tracking-wider text-white/30"
             suppressHydrationWarning
           >
-            {formatMatchDateShort(match.kickoff)}
+            {formatMatchDateShort(match.kickoff, locale)}
           </span>
         </div>
 
@@ -240,7 +242,7 @@ export function MatchCard({
                 className="text-sm font-medium text-white/80"
                 suppressHydrationWarning
               >
-                {formatKickoffTime(match.kickoff)}
+                {formatKickoffTime(match.kickoff, locale)}
               </span>
             )}
           </div>

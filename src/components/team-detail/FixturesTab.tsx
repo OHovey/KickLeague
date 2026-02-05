@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
+import { useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { formatMatchDateShort, formatKickoffTime } from '@/lib/dates/format';
+import { formatKickoffTime } from '@/lib/dates/format';
 import { fetchFixturesData, type FixturesData } from './actions';
 import type { FixtureWithTeams } from '@/lib/teams/queries';
 
@@ -98,11 +99,13 @@ function FixtureRow({
   teamId,
   opponentPositions,
   isResult,
+  locale,
 }: {
   fixture: FixtureWithTeams;
   teamId: number;
   opponentPositions: Record<number, number>;
   isResult: boolean;
+  locale: string;
 }) {
   const result = isResult ? getResult(fixture, teamId) : null;
   const isHome = fixture.homeTeam.id === teamId;
@@ -141,7 +144,7 @@ function FixtureRow({
               className="text-xs text-white/50"
               suppressHydrationWarning
             >
-              {formatKickoffTime(fixture.kickoff)}
+              {formatKickoffTime(fixture.kickoff, locale)}
             </span>
           )}
         </div>
@@ -181,6 +184,7 @@ interface FixturesTabProps {
 }
 
 export function FixturesTab({ teamId, leagueId, season }: FixturesTabProps) {
+  const locale = useLocale();
   const [data, setData] = useState<FixturesData | null>(null);
   const [isPending, startTransition] = useTransition();
   const [loaded, setLoaded] = useState(false);
@@ -223,6 +227,7 @@ export function FixturesTab({ teamId, leagueId, season }: FixturesTabProps) {
                 teamId={teamId}
                 opponentPositions={data.opponentPositions}
                 isResult
+                locale={locale}
               />
             ))}
           </div>
@@ -243,6 +248,7 @@ export function FixturesTab({ teamId, leagueId, season }: FixturesTabProps) {
                 teamId={teamId}
                 opponentPositions={data.opponentPositions}
                 isResult={false}
+                locale={locale}
               />
             ))}
           </div>

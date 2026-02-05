@@ -34,6 +34,7 @@ interface ScoreHeroProps {
   venue: string | null;
   matchweek: number | null;
   status: string;
+  locale?: string;
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
@@ -47,6 +48,7 @@ export function ScoreHero({
   venue,
   matchweek,
   status,
+  locale = 'en-GB',
 }: ScoreHeroProps) {
   const isCompleted = status === 'finished';
 
@@ -84,7 +86,7 @@ export function ScoreHero({
                 className="text-lg font-semibold text-white/80"
                 suppressHydrationWarning
               >
-                {formatKickoffTime(kickoff)}
+                {formatKickoffTime(kickoff, locale)}
               </span>
             </div>
           )}
@@ -104,7 +106,7 @@ export function ScoreHero({
 
       {/* Bottom: match date */}
       <div className="mt-4 text-center text-xs text-white/40" suppressHydrationWarning>
-        {formatMatchDate(kickoff)}
+        {formatMatchDate(kickoff, locale)}
       </div>
     </section>
   );

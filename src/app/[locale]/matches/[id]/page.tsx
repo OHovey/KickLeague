@@ -127,6 +127,7 @@ export default async function MatchDetailPage({
               venue={match.venue}
               matchweek={match.matchweek}
               status={match.status}
+              locale={locale}
             />
 
             <StatsComparison
@@ -145,6 +146,7 @@ export default async function MatchDetailPage({
               team2Name={match.awayTeam.shortName ?? match.awayTeam.name}
               team1Id={match.homeTeam.id}
               team2Id={match.awayTeam.id}
+              locale={locale}
             />
           </div>
         </div>
@@ -181,6 +183,7 @@ export default async function MatchDetailPage({
             venue={match.venue}
             matchweek={match.matchweek}
             status={match.status}
+            locale={locale}
           />
 
           <FormGuide
@@ -196,6 +199,7 @@ export default async function MatchDetailPage({
             team2Name={match.awayTeam.shortName ?? match.awayTeam.name}
             team1Id={match.homeTeam.id}
             team2Id={match.awayTeam.id}
+            locale={locale}
           />
 
           <ComparativeStats

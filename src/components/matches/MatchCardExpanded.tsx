@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
+import { useLocale } from 'next-intl';
 import { formatMatchDate } from '@/lib/dates/format';
 import { fetchH2HSummary } from './actions';
 import type { H2HSummary } from '@/lib/matches/h2h';
@@ -42,6 +43,7 @@ export function MatchCardExpanded({
   homeForm,
   awayForm,
 }: MatchCardExpandedProps) {
+  const locale = useLocale();
   const [h2h, setH2h] = useState<H2HSummary | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -102,7 +104,7 @@ export function MatchCardExpanded({
                     className="flex items-center gap-3 text-xs text-white/60"
                   >
                     <span className="w-28 shrink-0" suppressHydrationWarning>
-                      {formatMatchDate(meeting.kickoff)}
+                      {formatMatchDate(meeting.kickoff, locale)}
                     </span>
                     <span className="tabular-nums font-medium text-white/80">
                       {t1Score} - {t2Score}
