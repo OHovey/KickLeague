@@ -16,9 +16,9 @@
 
 import { z } from "zod";
 import type { RateLimiter } from "limiter";
-import { CacheProxy, buildCacheKey } from "./cache-proxy.js";
-import { createRateLimiter, DailyQuotaTracker } from "./rate-limiter.js";
-import { API_FOOTBALL_BASE_URL } from "./endpoints.js";
+import { CacheProxy, buildCacheKey } from "./cache-proxy";
+import { createRateLimiter, DailyQuotaTracker } from "./rate-limiter";
+import { API_FOOTBALL_BASE_URL } from "./endpoints";
 
 export interface ApiFootballClientOptions {
   /** Directory to store cache files. Default: `.cache/api-football` */
