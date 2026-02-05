@@ -48,12 +48,13 @@ export async function LeagueTable({ league }: LeagueTableProps) {
 
   return (
     <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
-      {/* Matchweek indicator */}
-      {data.matchweek && (
-        <div className="border-b border-white/10 px-4 py-3">
-          <span className="text-sm text-white/50">Matchweek {data.matchweek}</span>
-        </div>
-      )}
+      {/* Table header */}
+      <div className="border-b border-white/10 px-4 py-3 flex items-baseline gap-2">
+        <h2 className="text-sm font-medium text-white/70">Standings</h2>
+        {data.matchweek && (
+          <span className="text-xs text-white/40">Matchweek {data.matchweek}</span>
+        )}
+      </div>
 
       {/* Table */}
       <div className="overflow-x-auto">

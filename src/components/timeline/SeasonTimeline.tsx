@@ -67,7 +67,12 @@ export function SeasonTimeline({
   }, [isAtEnd, isPlaying, onWeekChange, toggle]);
 
   return (
-    <div className="relative">
+    <div>
+      <div className="mb-1.5 flex items-baseline gap-2">
+        <h2 className="text-sm font-medium text-white/70">Season Timeline</h2>
+        <span className="text-xs text-white/40">Select a matchweek to view historical standings</span>
+      </div>
+      <div className="relative">
       {/* Play button + left arrow — positioned outside left edge */}
       <div className="absolute left-0 top-1/2 z-10 flex -translate-x-full -translate-y-1/2 items-center gap-1 pr-2">
         <TimelineControls
@@ -102,6 +107,7 @@ export function SeasonTimeline({
           disabled={matchweeks.length === 0}
         />
       </div>
+    </div>
     </div>
   );
 }
