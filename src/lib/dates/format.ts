@@ -62,6 +62,18 @@ export function formatRelativeTime(date: Date | string): string {
 }
 
 /**
+ * Format a match date as short "Sat 1 Feb" for compact card display.
+ */
+export function formatMatchDateShort(date: Date | string): string {
+  const d = toDate(date);
+  return new Intl.DateTimeFormat('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+  }).format(d);
+}
+
+/**
  * Combined date and time: "Saturday 1 February, 15:00 GMT".
  */
 export function formatMatchDateTime(date: Date | string): string {
