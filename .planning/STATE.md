@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 7 in progress. Plan 01 (Odds API client and schema) complete. Continuing with odds ingestion and UI.
+**Current focus:** Phase 7 in progress. Plans 01 and 04 complete. Continuing with odds pipeline and UI.
 
 ## Current Position
 
 Phase: 7 of 7 (Betting, Odds & Localisation)
-Plan: 1 of 5 complete in current phase
+Plan: 2 of 5 complete in current phase
 Status: In progress
-Last activity: 2026-02-05 -- Completed 07-01-PLAN.md
+Last activity: 2026-02-05 -- Completed 07-04-PLAN.md
 
-Progress: [████████░░] 84% (21/25 plans)
+Progress: [████████░░] 88% (22/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 21
+- Total plans completed: 22
 - Average duration: 4.1 min
-- Total execution time: 1.51 hours
+- Total execution time: 1.59 hours
 
 **By Phase:**
 
@@ -33,10 +33,10 @@ Progress: [████████░░] 84% (21/25 plans)
 | 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
 | 05-season-timeline | 3/3 | 8 min | 2.7 min |
 | 06-live-data-pipeline | 3/3 | 14 min | 4.7 min |
-| 07-betting-odds-localisation | 1/5 | 3 min | 3.0 min |
+| 07-betting-odds-localisation | 2/5 | 8 min | 4.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-03 (1 min), 06-03 (3 min), 06-01 (6 min), 06-02 (5 min), 07-01 (3 min)
+- Last 5 plans: 06-03 (3 min), 06-01 (6 min), 06-02 (5 min), 07-01 (3 min), 07-04 (5 min)
 
 *Updated after each plan completion*
 
@@ -131,6 +131,9 @@ Recent decisions affecting current work:
 - 07-01: Odds API client uses partial-accept Zod pattern matching api-football/client.ts conventions.
 - 07-01: Sport key map is static with runtime discovery available via fetchSportsKeys().
 - 07-01: fixture_odds table stores prev_*_odds for movement tracking (shortened/drifted indicators).
+- 07-04: Root layout.tsx simplified to pass-through shell; [locale]/layout.tsx owns html/body/providers.
+- 07-04: All component Link/useRouter imports migrated from next/link to @/i18n/navigation for locale-aware routing.
+- 07-04: proxy.ts uses NextRequest type for next-intl middleware compatibility.
 
 ### Pending Todos
 
@@ -153,5 +156,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 07-01-PLAN.md (Odds API client and schema)
+Stopped at: Completed 07-04-PLAN.md (next-intl i18n setup)
 Resume file: None
