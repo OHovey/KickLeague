@@ -132,14 +132,14 @@ Plans:
   3. Users in restricted jurisdictions (Italy: complete ban) see no betting content whatsoever; other restricted countries see only compliant bookmakers
   4. User can switch the UI between English, Spanish, German, Italian, and French with all labels, navigation, and team names translated
   5. Dates, times, and numbers format correctly per locale (e.g., 1,000 in EN vs 1.000 in DE), and kickoff times display in the user's timezone
-**Plans**: TBD
+**Plans**: 5 plans
 
 Plans:
-- [ ] 07-01: The Odds API client and odds data pipeline
-- [ ] 07-02: Multi-bookmaker odds display with format switching and affiliate tracking
-- [ ] 07-03: Geo-detection and per-jurisdiction compliance rules
-- [ ] 07-04: next-intl setup, translation files, and locale routing
-- [ ] 07-05: Database-driven team name localisation and locale-aware formatting
+- [ ] 07-01-PLAN.md -- Odds API client, database schema, Zod types, and format conversion (Wave 1)
+- [ ] 07-02-PLAN.md -- Multi-bookmaker odds display, affiliate click tracking, and page integration (Wave 3)
+- [ ] 07-03-PLAN.md -- Geo-detection, compliance config, and responsible gambling component (Wave 2)
+- [ ] 07-04-PLAN.md -- next-intl setup, locale routing, app restructure under [locale], language picker (Wave 1)
+- [ ] 07-05-PLAN.md -- Team name translations, locale-aware date/number formatting (Wave 2)
 
 ## Progress
 
