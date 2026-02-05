@@ -3,9 +3,11 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useLeague } from '@/lib/hooks/use-league';
 import { useMatchweek } from '@/lib/hooks/use-matchweek';
+import { usePolling } from '@/lib/hooks/use-polling';
 import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
 import type { League } from '@/lib/themes/league-themes';
 import { SeasonTimeline } from '@/components/timeline/SeasonTimeline';
+import { DataFreshness } from '@/components/DataFreshness';
 import { HistoricalBanner } from './HistoricalBanner';
 import { LeagueTableClient } from './LeagueTableClient';
 import { fetchMatchweekList } from './actions';
@@ -29,6 +31,16 @@ export function LeagueTableWrapper() {
   // The effective selected week for display (null means latest)
   const selectedWeek = week ?? latestCompleted;
   const isHistorical = week !== null && latestCompleted > 0 && week !== latestCompleted;
+
+  // Polling for live data updates
+  // TODO: derive season dynamically from league config instead of hardcoding
+  const [refreshKey, setRefreshKey] = useState(0);
+  const { lastUpdated } = usePolling({
+    leagueSlug: league,
+    season: '2025',
+    onUpdate: () => setRefreshKey((k) => k + 1),
+    enabled: !isHistorical,
+  });
 
   // Fetch matchweek list on mount and when league changes
   useEffect(() => {
@@ -100,9 +112,15 @@ export function LeagueTableWrapper() {
 
       {/* League Table */}
       <LeagueTableClient
+        key={`${league}-${refreshKey}`}
         league={league}
         matchweek={isHistorical ? selectedWeek : undefined}
       />
+
+      {/* Data Freshness Indicator */}
+      <div className="flex justify-end px-2">
+        <DataFreshness updatedAt={lastUpdated} />
+      </div>
     </div>
   );
 }
