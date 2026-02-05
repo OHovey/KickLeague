@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 5 complete. All 3 plans executed. Ready for Phase 6 planning.
+**Current focus:** Phase 6 in progress. Plan 03 complete (browser smart polling). Plans 01-02 pending execution.
 
 ## Current Position
 
-Phase: 5 of 7 (Season Timeline)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-02-05 -- Completed 05-03-PLAN.md
+Phase: 6 of 7 (Live Data Pipeline)
+Plan: 3 of 3 in current phase (executed out of order -- plan 03 wave 1, plans 01-02 pending)
+Status: In progress
+Last activity: 2026-02-05 -- Completed 06-03-PLAN.md
 
-Progress: [████████░░] 68% (17/25 plans)
+Progress: [████████░░] 72% (18/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 17
-- Average duration: 4.2 min
-- Total execution time: 1.23 hours
+- Total plans completed: 18
+- Average duration: 4.1 min
+- Total execution time: 1.28 hours
 
 **By Phase:**
 
@@ -32,9 +32,10 @@ Progress: [████████░░] 68% (17/25 plans)
 | 03-match-fixture-pages | 3/3 | 14 min | 4.7 min |
 | 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
 | 05-season-timeline | 3/3 | 8 min | 2.7 min |
+| 06-live-data-pipeline | 1/3 | 3 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-02 (8.3 min), 04-03 (8 min), 05-01 (4 min), 05-02 (3 min), 05-03 (1 min)
+- Last 5 plans: 04-03 (8 min), 05-01 (4 min), 05-02 (3 min), 05-03 (1 min), 06-03 (3 min)
 
 *Updated after each plan completion*
 
@@ -111,6 +112,11 @@ Recent decisions affecting current work:
 - 05-03: NavArrows always visible with disabled state (not hidden) for consistent layout.
 - 05-03: Double-chevron SVG distinguishes 5-week jump from single-step circle click.
 - 05-03: earliestCompleted computed inline from matchweeks array for left boundary clamping.
+- 06-03: League-specific match window check (not global) for precise adaptive polling intervals.
+- 06-03: React key remount strategy for silent data refresh (simplest approach since LeagueTableClient refetches on mount).
+- 06-03: Season hardcoded to '2025' with TODO to derive dynamically from league config.
+- 06-03: Polling disabled during historical matchweek viewing.
+- 06-03: Stale closure protection via useRef for onUpdate callback in usePolling hook.
 
 ### Pending Todos
 
@@ -123,11 +129,12 @@ Recent decisions affecting current work:
 ### Blockers/Concerns
 
 - Research flags SSE on Vercel serverless as medium confidence -- polling fallback likely needed (Phase 6).
+- Pre-existing build failure: src/lib/api-football/client.ts uses .js import extensions that Turbopack cannot resolve (affects cron route from Phase 6 Plan 01/02). TypeScript compilation passes; only Next.js build fails.
 - Gambling compliance for Phase 7 requires legal consultation before implementation.
 - API-Football xG data coverage may be incomplete for Ligue 1 and some Serie A matches -- handle gracefully.
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 05-03-PLAN.md (Phase 5 complete)
+Stopped at: Completed 06-03-PLAN.md (browser smart polling)
 Resume file: None
