@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 6 in progress. Plan 03 complete (browser smart polling). Plans 01-02 pending execution.
+**Current focus:** Phase 6 in progress. Plans 01 and 03 complete. Plan 02 pending execution.
 
 ## Current Position
 
 Phase: 6 of 7 (Live Data Pipeline)
-Plan: 3 of 3 in current phase (executed out of order -- plan 03 wave 1, plans 01-02 pending)
+Plan: 2 of 3 complete in current phase (01 and 03 done, 02 pending)
 Status: In progress
-Last activity: 2026-02-05 -- Completed 06-03-PLAN.md
+Last activity: 2026-02-05 -- Completed 06-01-PLAN.md
 
-Progress: [████████░░] 72% (18/25 plans)
+Progress: [█████████░] 76% (19/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 18
-- Average duration: 4.1 min
-- Total execution time: 1.28 hours
+- Total plans completed: 19
+- Average duration: 4.2 min
+- Total execution time: 1.38 hours
 
 **By Phase:**
 
@@ -32,10 +32,10 @@ Progress: [████████░░] 72% (18/25 plans)
 | 03-match-fixture-pages | 3/3 | 14 min | 4.7 min |
 | 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
 | 05-season-timeline | 3/3 | 8 min | 2.7 min |
-| 06-live-data-pipeline | 1/3 | 3 min | 3 min |
+| 06-live-data-pipeline | 2/3 | 9 min | 4.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-03 (8 min), 05-01 (4 min), 05-02 (3 min), 05-03 (1 min), 06-03 (3 min)
+- Last 5 plans: 05-01 (4 min), 05-02 (3 min), 05-03 (1 min), 06-03 (3 min), 06-01 (6 min)
 
 *Updated after each plan completion*
 
@@ -112,6 +112,11 @@ Recent decisions affecting current work:
 - 05-03: NavArrows always visible with disabled state (not hidden) for consistent layout.
 - 05-03: Double-chevron SVG distinguishes 5-week jump from single-step circle click.
 - 05-03: earliestCompleted computed inline from matchweeks array for left boundary clamping.
+- 06-01: Runtime QStash verification via lazy Receiver import (avoids build-time env var requirement).
+- 06-01: Fixed .js extension imports in client.ts for Next.js bundler compatibility.
+- 06-01: Pipeline budget default 80 calls/day (reserves 20 for manual use from 100/day free tier).
+- 06-01: Active fixture window: 3 hours before/after kickoff, excluding terminal statuses.
+- 06-01: Match completion detection: compare old DB status vs new API status, collect for downstream chain.
 - 06-03: League-specific match window check (not global) for precise adaptive polling intervals.
 - 06-03: React key remount strategy for silent data refresh (simplest approach since LeagueTableClient refetches on mount).
 - 06-03: Season hardcoded to '2025' with TODO to derive dynamically from league config.
@@ -123,18 +128,18 @@ Recent decisions affecting current work:
 - User must provision Neon database and set DATABASE_URL before running seed (see 01-USER-SETUP.md).
 - User must obtain API-Football API key and set API_FOOTBALL_KEY before running seed (see 01-USER-SETUP.md).
 - Run `npx drizzle-kit push` to apply schema before first `npm run seed -- --all`.
+- Run `npx drizzle-kit push` to create api_call_log table (new in 06-01).
 - **API upgrade milestone**: Upgrade API-Football subscription to populate fixture_events and fixture_stats. The batch `ids` parameter returns empty on the free tier. Once upgraded, re-run seed to populate events/stats — UI sections auto-show when data exists (goals by period, xG, scoring first record, player appearances/goals/assists/cards, top performer cards).
 - **Re-run `npm run seed -- --all` to populate historical standings data** (required for sparklines and position changes to display).
+- Set QStash env vars (QSTASH_TOKEN, QSTASH_CURRENT_SIGNING_KEY, QSTASH_NEXT_SIGNING_KEY) and run `npm run setup-qstash` after deployment.
 
 ### Blockers/Concerns
 
-- Research flags SSE on Vercel serverless as medium confidence -- polling fallback likely needed (Phase 6).
-- Pre-existing build failure: src/lib/api-football/client.ts uses .js import extensions that Turbopack cannot resolve (affects cron route from Phase 6 Plan 01/02). TypeScript compilation passes; only Next.js build fails.
 - Gambling compliance for Phase 7 requires legal consultation before implementation.
 - API-Football xG data coverage may be incomplete for Ligue 1 and some Serie A matches -- handle gracefully.
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 06-03-PLAN.md (browser smart polling)
+Stopped at: Completed 06-01-PLAN.md (server-side match polling pipeline)
 Resume file: None
