@@ -1,7 +1,8 @@
 'use client';
 
-import { useCallback } from 'react';
-import { TimelineStrip } from './TimelineStrip';
+import { useCallback, useRef } from 'react';
+import { TimelineStrip, NavArrow } from './TimelineStrip';
+import type { TimelineStripHandle } from './TimelineStrip';
 import { TimelineControls } from './TimelineControls';
 import { useAutoPlay } from './useAutoPlay';
 
@@ -21,6 +22,8 @@ export function SeasonTimeline({
   selectedWeek,
   onWeekChange,
 }: SeasonTimelineProps) {
+  const stripRef = useRef<TimelineStripHandle>(null);
+
   // Find the latest completed matchweek
   const latestCompleted = matchweeks
     .filter((m) => m.completed)
@@ -64,18 +67,31 @@ export function SeasonTimeline({
   }, [isAtEnd, isPlaying, onWeekChange, toggle]);
 
   return (
-    <div className="flex items-center gap-3 border-b border-white/10 px-1 py-1">
+    <div className="flex items-center gap-2">
       <TimelineControls
         isPlaying={isPlaying}
         onToggle={handleToggle}
         isAtEnd={isAtEnd && !isPlaying}
       />
-      <TimelineStrip
-        matchweeks={matchweeks}
-        selectedWeek={selectedWeek}
-        latestCompleted={latestCompleted}
-        leagueColor={leagueColor}
-        onSelectWeek={handleWeekSelect}
+      <NavArrow
+        direction="left"
+        onClick={() => stripRef.current?.scrollByCircles('left')}
+        disabled={matchweeks.length === 0}
+      />
+      <div className="min-w-0 flex-1 overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
+        <TimelineStrip
+          ref={stripRef}
+          matchweeks={matchweeks}
+          selectedWeek={selectedWeek}
+          latestCompleted={latestCompleted}
+          leagueColor={leagueColor}
+          onSelectWeek={handleWeekSelect}
+        />
+      </div>
+      <NavArrow
+        direction="right"
+        onClick={() => stripRef.current?.scrollByCircles('right')}
+        disabled={matchweeks.length === 0}
       />
     </div>
   );

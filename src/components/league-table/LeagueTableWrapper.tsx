@@ -81,16 +81,14 @@ export function LeagueTableWrapper() {
     <div className="space-y-3">
       {/* Season Timeline - only show when matchweek data is loaded */}
       {!isLoadingMatchweeks && matchweekInfo && matchweekInfo.matchweeks.length > 0 && (
-        <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
-          <SeasonTimeline
-            league={league}
-            latestMatchweek={latestCompleted}
-            matchweeks={matchweekInfo.matchweeks}
-            leagueColor={leagueColor}
-            selectedWeek={selectedWeek}
-            onWeekChange={handleWeekChange}
-          />
-        </div>
+        <SeasonTimeline
+          league={league}
+          latestMatchweek={latestCompleted}
+          matchweeks={matchweekInfo.matchweeks}
+          leagueColor={leagueColor}
+          selectedWeek={selectedWeek}
+          onWeekChange={handleWeekChange}
+        />
       )}
 
       {/* Historical Banner */}
