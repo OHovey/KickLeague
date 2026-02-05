@@ -140,53 +140,60 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
 
   const { playerStats, totalFixtures } = data;
 
-  // Find top performers
-  const topScorer = playerStats.reduce((best, p) =>
-    p.goals > (best?.goals ?? 0) ? p : best,
-    null as PlayerStat | null
+  // Check if detailed event stats are available (requires upgraded API tier)
+  const hasDetailedStats = playerStats.some(
+    (p) => p.appearances > 0 || p.goals > 0 || p.assists > 0 || p.yellowCards > 0 || p.redCards > 0
   );
-  const topAssister = playerStats.reduce((best, p) =>
-    p.assists > (best?.assists ?? 0) ? p : best,
-    null as PlayerStat | null
-  );
-  const mostBooked = playerStats.reduce((best, p) => {
-    const cards = p.yellowCards + p.redCards;
-    const bestCards = (best?.yellowCards ?? 0) + (best?.redCards ?? 0);
-    return cards > bestCards ? p : best;
-  }, null as PlayerStat | null);
+
+  // Find top performers (only when stats are available)
+  const topScorer = hasDetailedStats
+    ? playerStats.reduce((best, p) => (p.goals > (best?.goals ?? 0) ? p : best), null as PlayerStat | null)
+    : null;
+  const topAssister = hasDetailedStats
+    ? playerStats.reduce((best, p) => (p.assists > (best?.assists ?? 0) ? p : best), null as PlayerStat | null)
+    : null;
+  const mostBooked = hasDetailedStats
+    ? playerStats.reduce((best, p) => {
+        const cards = p.yellowCards + p.redCards;
+        const bestCards = (best?.yellowCards ?? 0) + (best?.redCards ?? 0);
+        return cards > bestCards ? p : best;
+      }, null as PlayerStat | null)
+    : null;
 
   const groups = groupByPosition(playerStats);
 
   return (
     <div className="space-y-6">
-      {/* Top Performer Callout Cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {topScorer && topScorer.goals > 0 && (
-          <TopPerformerCard
-            label="Top Scorer"
-            player={topScorer}
-            stat={topScorer.goals}
-            statLabel="Goals"
-          />
-        )}
-        {topAssister && topAssister.assists > 0 && (
-          <TopPerformerCard
-            label="Top Assister"
-            player={topAssister}
-            stat={topAssister.assists}
-            statLabel="Assists"
-          />
-        )}
-        {mostBooked &&
-          mostBooked.yellowCards + mostBooked.redCards > 0 && (
+      {/* Top Performer Callout Cards — only when stats exist */}
+      {hasDetailedStats && (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {topScorer && topScorer.goals > 0 && (
             <TopPerformerCard
-              label="Most Booked"
-              player={mostBooked}
-              stat={mostBooked.yellowCards + mostBooked.redCards}
-              statLabel="Cards"
+              label="Top Scorer"
+              player={topScorer}
+              stat={topScorer.goals}
+              statLabel="Goals"
             />
           )}
-      </div>
+          {topAssister && topAssister.assists > 0 && (
+            <TopPerformerCard
+              label="Top Assister"
+              player={topAssister}
+              stat={topAssister.assists}
+              statLabel="Assists"
+            />
+          )}
+          {mostBooked &&
+            mostBooked.yellowCards + mostBooked.redCards > 0 && (
+              <TopPerformerCard
+                label="Most Booked"
+                player={mostBooked}
+                stat={mostBooked.yellowCards + mostBooked.redCards}
+                statLabel="Cards"
+              />
+            )}
+        </div>
+      )}
 
       {/* Position-Grouped Roster */}
       {POSITION_ORDER.map((pos) => {
@@ -204,11 +211,15 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
                   <tr className="border-b border-white/10 text-[11px] uppercase tracking-wider text-white/40">
                     <th className="py-2 pr-2 text-left w-10">#</th>
                     <th className="py-2 px-2 text-left">Player</th>
-                    <th className="py-2 px-2 text-center w-16">Apps</th>
-                    <th className="py-2 px-2 text-left min-w-[100px]"></th>
-                    <th className="py-2 px-2 text-center w-12">G</th>
-                    <th className="py-2 px-2 text-center w-12">A</th>
-                    <th className="py-2 px-2 text-center w-16">Cards</th>
+                    {hasDetailedStats && (
+                      <>
+                        <th className="py-2 px-2 text-center w-16">Apps</th>
+                        <th className="py-2 px-2 text-left min-w-[100px]"></th>
+                        <th className="py-2 px-2 text-center w-12">G</th>
+                        <th className="py-2 px-2 text-center w-12">A</th>
+                        <th className="py-2 px-2 text-center w-16">Cards</th>
+                      </>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
@@ -228,42 +239,46 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
                         <td className="py-2.5 px-2 font-medium text-white/90">
                           {p.name}
                         </td>
-                        <td className="py-2.5 px-2 text-center tabular-nums text-white/70">
-                          {p.appearances}
-                        </td>
-                        <td className="py-2.5 px-2">
-                          <div className="flex items-center gap-2">
-                            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
-                              <div
-                                className="h-full rounded-full bg-white/30"
-                                style={{ width: `${appsPct}%` }}
-                              />
-                            </div>
-                            <span className="text-[10px] tabular-nums text-white/30 w-8 text-right">
-                              {appsPct}%
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-2.5 px-2 text-center tabular-nums text-white/70">
-                          {p.goals || '-'}
-                        </td>
-                        <td className="py-2.5 px-2 text-center tabular-nums text-white/70">
-                          {p.assists || '-'}
-                        </td>
-                        <td className="py-2.5 px-2 text-center">
-                          {(p.yellowCards > 0 || p.redCards > 0) ? (
-                            <span className="inline-flex gap-1 text-xs tabular-nums">
-                              {p.yellowCards > 0 && (
-                                <span className="text-yellow-400">{p.yellowCards}</span>
+                        {hasDetailedStats && (
+                          <>
+                            <td className="py-2.5 px-2 text-center tabular-nums text-white/70">
+                              {p.appearances}
+                            </td>
+                            <td className="py-2.5 px-2">
+                              <div className="flex items-center gap-2">
+                                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
+                                  <div
+                                    className="h-full rounded-full bg-white/30"
+                                    style={{ width: `${appsPct}%` }}
+                                  />
+                                </div>
+                                <span className="text-[10px] tabular-nums text-white/30 w-8 text-right">
+                                  {appsPct}%
+                                </span>
+                              </div>
+                            </td>
+                            <td className="py-2.5 px-2 text-center tabular-nums text-white/70">
+                              {p.goals || '-'}
+                            </td>
+                            <td className="py-2.5 px-2 text-center tabular-nums text-white/70">
+                              {p.assists || '-'}
+                            </td>
+                            <td className="py-2.5 px-2 text-center">
+                              {(p.yellowCards > 0 || p.redCards > 0) ? (
+                                <span className="inline-flex gap-1 text-xs tabular-nums">
+                                  {p.yellowCards > 0 && (
+                                    <span className="text-yellow-400">{p.yellowCards}</span>
+                                  )}
+                                  {p.redCards > 0 && (
+                                    <span className="text-red-400">{p.redCards}</span>
+                                  )}
+                                </span>
+                              ) : (
+                                <span className="text-white/30">-</span>
                               )}
-                              {p.redCards > 0 && (
-                                <span className="text-red-400">{p.redCards}</span>
-                              )}
-                            </span>
-                          ) : (
-                            <span className="text-white/30">-</span>
-                          )}
-                        </td>
+                            </td>
+                          </>
+                        )}
                       </tr>
                     );
                   })}

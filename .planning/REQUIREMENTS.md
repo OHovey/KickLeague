@@ -87,6 +87,12 @@
 - **SOCL-03**: Posting queue with rate limiting and timing rules
 - **SOCL-04**: Match result image card generation
 
+### API Upgrade & Detailed Stats (v1.1)
+
+- **UPGR-01**: Upgrade API-Football subscription tier (free tier batch `ids` endpoint returns empty)
+- **UPGR-02**: Re-seed fixture events and stats via batch `ids` calls (seed-fixtures.ts Phase B already implemented)
+- **UPGR-03**: UI auto-reveals: goals by period, xG analysis, scoring first record, player apps/goals/assists/cards, top performer cards
+
 ### Future Enhancements
 
 - **FUTR-01**: Scenario modelling / "what if" calculator

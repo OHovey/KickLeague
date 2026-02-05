@@ -105,6 +105,7 @@ Recent decisions affecting current work:
 - User must provision Neon database and set DATABASE_URL before running seed (see 01-USER-SETUP.md).
 - User must obtain API-Football API key and set API_FOOTBALL_KEY before running seed (see 01-USER-SETUP.md).
 - Run `npx drizzle-kit push` to apply schema before first `npm run seed -- --all`.
+- **API upgrade milestone**: Upgrade API-Football subscription to populate fixture_events and fixture_stats. The batch `ids` parameter returns empty on the free tier. Once upgraded, re-run seed to populate events/stats — UI sections auto-show when data exists (goals by period, xG, scoring first record, player appearances/goals/assists/cards, top performer cards).
 - **Re-run `npm run seed -- --all` to populate historical standings data** (required for sparklines and position changes to display).
 
 ### Blockers/Concerns

@@ -29,6 +29,17 @@ interface CustomTooltipProps {
   payload?: TooltipPayload[];
 }
 
+// ── Constants ─────────────────────────────────────────────────────────────
+
+const RIVAL_COLORS = [
+  '#60a5fa', // blue-400
+  '#f472b6', // pink-400
+  '#a78bfa', // violet-400
+  '#fb923c', // orange-400
+  '#2dd4bf', // teal-400
+  '#facc15', // yellow-400
+];
+
 // ── Helpers ────────────────────────────────────────────────────────────────
 
 function ordinal(n: number): string {
@@ -93,18 +104,22 @@ export function BumpChart({ data, focusTeam, rivalTeams }: BumpChartProps) {
           width={30}
         />
         <Tooltip content={<BumpTooltip />} />
-        {/* Rival team lines: thin, low opacity */}
-        {rivalTeams.map((team) => (
-          <Line
-            key={team}
-            type="monotone"
-            dataKey={team}
-            stroke="rgba(255,255,255,0.2)"
-            strokeWidth={1}
-            dot={false}
-            activeDot={{ r: 3, fill: 'rgba(255,255,255,0.4)' }}
-          />
-        ))}
+        {/* Rival team lines: distinct colors, semi-transparent */}
+        {rivalTeams.map((team, i) => {
+          const color = RIVAL_COLORS[i % RIVAL_COLORS.length];
+          return (
+            <Line
+              key={team}
+              type="monotone"
+              dataKey={team}
+              stroke={color}
+              strokeWidth={1.5}
+              strokeOpacity={0.45}
+              dot={false}
+              activeDot={{ r: 3, fill: color }}
+            />
+          );
+        })}
         {/* Focus team: thick green line with dots */}
         <Line
           type="monotone"

@@ -17,11 +17,33 @@ interface OverviewTabProps {
 
 // ── Stat Card ──────────────────────────────────────────────────────────────
 
-function StatCard({ label, value }: { label: string; value: string | number }) {
+function StatCard({
+  label,
+  value,
+  color,
+}: {
+  label: string;
+  value: string | number;
+  color?: 'green' | 'red' | 'amber' | 'neutral';
+}) {
+  const colorClasses = {
+    green: 'text-emerald-400',
+    red: 'text-red-400',
+    amber: 'text-amber-400',
+    neutral: 'text-white',
+  };
+  const borderClasses = {
+    green: 'border-emerald-500/20',
+    red: 'border-red-500/20',
+    amber: 'border-amber-500/20',
+    neutral: 'border-white/5',
+  };
+  const c = color ?? 'neutral';
+
   return (
-    <div className="rounded-lg bg-white/5 px-3 py-2.5">
+    <div className={`rounded-lg border bg-white/5 px-3 py-2.5 ${borderClasses[c]}`}>
       <p className="text-xs text-white/40">{label}</p>
-      <p className="text-xl font-bold tabular-nums text-white">{value}</p>
+      <p className={`text-xl font-bold tabular-nums ${colorClasses[c]}`}>{value}</p>
     </div>
   );
 }
@@ -90,14 +112,14 @@ export function OverviewTab({
             Season Summary
           </h3>
           <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 md:grid-cols-9">
-            <StatCard label="Pos" value={seasonSummary.position} />
-            <StatCard label="Pts" value={seasonSummary.points} />
+            <StatCard label="Pos" value={seasonSummary.position} color={seasonSummary.position <= 4 ? 'green' : seasonSummary.position >= 18 ? 'red' : 'neutral'} />
+            <StatCard label="Pts" value={seasonSummary.points} color="green" />
             <StatCard label="P" value={seasonSummary.played} />
-            <StatCard label="W" value={seasonSummary.won} />
-            <StatCard label="D" value={seasonSummary.drawn} />
-            <StatCard label="L" value={seasonSummary.lost} />
-            <StatCard label="GF" value={seasonSummary.goalsFor} />
-            <StatCard label="GA" value={seasonSummary.goalsAgainst} />
+            <StatCard label="W" value={seasonSummary.won} color="green" />
+            <StatCard label="D" value={seasonSummary.drawn} color="amber" />
+            <StatCard label="L" value={seasonSummary.lost} color="red" />
+            <StatCard label="GF" value={seasonSummary.goalsFor} color="green" />
+            <StatCard label="GA" value={seasonSummary.goalsAgainst} color="red" />
             <StatCard
               label="GD"
               value={
@@ -105,6 +127,7 @@ export function OverviewTab({
                   ? `+${seasonSummary.goalDifference}`
                   : String(seasonSummary.goalDifference)
               }
+              color={seasonSummary.goalDifference > 0 ? 'green' : seasonSummary.goalDifference < 0 ? 'red' : 'amber'}
             />
           </div>
         </section>
