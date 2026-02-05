@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 6 complete. All 3 plans (01, 02, 03) done. Ready for Phase 7.
+**Current focus:** Phase 7 in progress. Plan 01 (Odds API client and schema) complete. Continuing with odds ingestion and UI.
 
 ## Current Position
 
-Phase: 6 of 7 (Live Data Pipeline)
-Plan: 3 of 3 complete in current phase
-Status: Phase complete
-Last activity: 2026-02-05 -- Completed 06-02-PLAN.md
+Phase: 7 of 7 (Betting, Odds & Localisation)
+Plan: 1 of 5 complete in current phase
+Status: In progress
+Last activity: 2026-02-05 -- Completed 07-01-PLAN.md
 
-Progress: [████████░░] 80% (20/25 plans)
+Progress: [████████░░] 84% (21/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 20
-- Average duration: 4.2 min
-- Total execution time: 1.46 hours
+- Total plans completed: 21
+- Average duration: 4.1 min
+- Total execution time: 1.51 hours
 
 **By Phase:**
 
@@ -33,9 +33,10 @@ Progress: [████████░░] 80% (20/25 plans)
 | 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
 | 05-season-timeline | 3/3 | 8 min | 2.7 min |
 | 06-live-data-pipeline | 3/3 | 14 min | 4.7 min |
+| 07-betting-odds-localisation | 1/5 | 3 min | 3.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-02 (3 min), 05-03 (1 min), 06-03 (3 min), 06-01 (6 min), 06-02 (5 min)
+- Last 5 plans: 05-03 (1 min), 06-03 (3 min), 06-01 (6 min), 06-02 (5 min), 07-01 (3 min)
 
 *Updated after each plan completion*
 
@@ -126,6 +127,10 @@ Recent decisions affecting current work:
 - 06-02: Drift detection checks latest fully-completed matchweek only (all fixtures finished).
 - 06-02: Daily resync processes leagues sequentially to stay within API rate limits.
 - 06-02: revalidatePath wrapped in try/catch for test/non-request context safety.
+- 07-01: Odds format conversion uses common fractions lookup table with GCD fallback (no external dependency).
+- 07-01: Odds API client uses partial-accept Zod pattern matching api-football/client.ts conventions.
+- 07-01: Sport key map is static with runtime discovery available via fetchSportsKeys().
+- 07-01: fixture_odds table stores prev_*_odds for movement tracking (shortened/drifted indicators).
 
 ### Pending Todos
 
@@ -137,6 +142,8 @@ Recent decisions affecting current work:
 - **Re-run `npm run seed -- --all` to populate historical standings data** (required for sparklines and position changes to display).
 - Set QStash env vars (QSTASH_TOKEN, QSTASH_CURRENT_SIGNING_KEY, QSTASH_NEXT_SIGNING_KEY) and run `npm run setup-qstash` after deployment.
 - Set CRON_SECRET in Vercel environment variables for daily resync cron route protection.
+- Set ODDS_API_KEY environment variable (get from https://the-odds-api.com/).
+- Run `npx drizzle-kit push` to create fixture_odds and affiliate_clicks tables.
 
 ### Blockers/Concerns
 
@@ -146,5 +153,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Phase 6 complete. All 3 plans executed and verified (14/14 must-haves passed).
+Stopped at: Completed 07-01-PLAN.md (Odds API client and schema)
 Resume file: None
