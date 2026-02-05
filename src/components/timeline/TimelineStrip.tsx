@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { TimelineCircle } from './TimelineCircle';
 
 interface TimelineStripProps {
@@ -25,7 +25,7 @@ function NavArrow({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      aria-label={`Jump ${direction === 'left' ? 'back' : 'forward'} 5 matchweeks`}
+      aria-label={`Scroll ${direction} 5 matchweeks`}
       className={`
         flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full
         transition-colors
@@ -71,14 +71,29 @@ export function TimelineStrip({
 }: TimelineStripProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRefs = useRef<Map<number, HTMLButtonElement>>(new Map());
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
-  // Find the earliest completed matchweek for clamping
-  const earliestCompleted = matchweeks
-    .filter((m) => m.completed)
-    .reduce((min, m) => Math.min(min, m.number), Infinity);
+  // Check scroll overflow state
+  const updateScrollState = useCallback(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  }, []);
 
-  const canNavLeft = selectedWeek > earliestCompleted;
-  const canNavRight = selectedWeek < latestCompleted;
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    updateScrollState();
+    el.addEventListener('scroll', updateScrollState, { passive: true });
+    const resizeObserver = new ResizeObserver(updateScrollState);
+    resizeObserver.observe(el);
+    return () => {
+      el.removeEventListener('scroll', updateScrollState);
+      resizeObserver.disconnect();
+    };
+  }, [updateScrollState, matchweeks]);
 
   // Scroll selected circle into view
   useEffect(() => {
@@ -92,17 +107,19 @@ export function TimelineStrip({
     }
   }, [selectedWeek]);
 
-  const jumpWeek = useCallback(
-    (direction: 'left' | 'right') => {
-      const step = 5;
-      if (direction === 'left') {
-        onSelectWeek(Math.max(earliestCompleted, selectedWeek - step));
-      } else {
-        onSelectWeek(Math.min(latestCompleted, selectedWeek + step));
-      }
-    },
-    [earliestCompleted, latestCompleted, selectedWeek, onSelectWeek]
-  );
+  // Scroll the strip by ~5 circles worth of distance
+  const scrollByCircles = useCallback((direction: 'left' | 'right') => {
+    const el = containerRef.current;
+    if (!el) return;
+    // Estimate width of ~5 circles (circle width + gap)
+    const firstCircle = circleRefs.current.values().next().value;
+    const circleWidth = firstCircle ? firstCircle.offsetWidth + 6 : 42;
+    const amount = circleWidth * 5;
+    el.scrollBy({
+      left: direction === 'left' ? -amount : amount,
+      behavior: 'smooth',
+    });
+  }, []);
 
   // Keyboard navigation
   const handleKeyDown = useCallback(
@@ -139,8 +156,8 @@ export function TimelineStrip({
     <div className="flex items-center gap-1">
       <NavArrow
         direction="left"
-        onClick={() => jumpWeek('left')}
-        disabled={!canNavLeft}
+        onClick={() => scrollByCircles('left')}
+        disabled={!canScrollLeft}
       />
 
       <div
@@ -176,8 +193,8 @@ export function TimelineStrip({
 
       <NavArrow
         direction="right"
-        onClick={() => jumpWeek('right')}
-        disabled={!canNavRight}
+        onClick={() => scrollByCircles('right')}
+        disabled={!canScrollRight}
       />
     </div>
   );
