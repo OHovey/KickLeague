@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 7 in progress. Plans 01, 03, and 04 complete. Continuing with odds display and integration.
+**Current focus:** Phase 7 in progress. Plans 01, 03, 04, and 05 complete. Continuing with odds pipeline and UI.
 
 ## Current Position
 
 Phase: 7 of 7 (Betting, Odds & Localisation)
-Plan: 3 of 5 complete in current phase
+Plan: 4 of 5 complete in current phase
 Status: In progress
-Last activity: 2026-02-05 -- Completed 07-03-PLAN.md
+Last activity: 2026-02-05 -- Completed 07-05-PLAN.md
 
-Progress: [█████████░] 92% (23/25 plans)
+Progress: [█████████░] 96% (24/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 23
+- Total plans completed: 24
 - Average duration: 3.9 min
-- Total execution time: 1.60 hours
+- Total execution time: 1.68 hours
 
 **By Phase:**
 
@@ -33,10 +33,10 @@ Progress: [█████████░] 92% (23/25 plans)
 | 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
 | 05-season-timeline | 3/3 | 8 min | 2.7 min |
 | 06-live-data-pipeline | 3/3 | 14 min | 4.7 min |
-| 07-betting-odds-localisation | 3/5 | 9 min | 3.0 min |
+| 07-betting-odds-localisation | 4/5 | 14 min | 3.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 06-01 (6 min), 06-02 (5 min), 07-01 (3 min), 07-04 (5 min), 07-03 (1 min)
+- Last 5 plans: 06-02 (5 min), 07-01 (3 min), 07-04 (5 min), 07-03 (1 min), 07-05 (5 min)
 
 *Updated after each plan completion*
 
@@ -138,6 +138,10 @@ Recent decisions affecting current work:
 - 07-03: OVERRIDE_COUNTRY env var takes priority over Vercel headers for local dev testing.
 - 07-03: Default country code 'XX' maps to Tier 2 (blocked) -- fail-safe for unknown geo.
 - 07-03: ResponsibleGambling links to begambleaware.org as standard responsible gambling resource.
+- 07-05: Date format functions keep en-GB default for backward compatibility rather than requiring locale everywhere.
+- 07-05: Client components use useLocale() from next-intl; server components accept locale as optional prop.
+- 07-05: team_translations table starts empty; English name from teams table is the fallback.
+- 07-05: getLocalizedTeamNames skips DB query entirely for locale='en' (optimization).
 
 ### Pending Todos
 
@@ -150,7 +154,7 @@ Recent decisions affecting current work:
 - Set QStash env vars (QSTASH_TOKEN, QSTASH_CURRENT_SIGNING_KEY, QSTASH_NEXT_SIGNING_KEY) and run `npm run setup-qstash` after deployment.
 - Set CRON_SECRET in Vercel environment variables for daily resync cron route protection.
 - Set ODDS_API_KEY environment variable (get from https://the-odds-api.com/).
-- Run `npx drizzle-kit push` to create fixture_odds and affiliate_clicks tables.
+- Run `npx drizzle-kit push` to create fixture_odds, affiliate_clicks, and team_translations tables.
 
 ### Blockers/Concerns
 
@@ -160,5 +164,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 07-03-PLAN.md (geo-detection and compliance)
+Stopped at: Completed 07-05-PLAN.md (team translations and locale-aware formatting)
 Resume file: None
