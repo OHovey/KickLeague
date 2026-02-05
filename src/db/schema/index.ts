@@ -6,4 +6,5 @@ export * from './players';
 export * from './fixtures';
 export * from './standings';
 export * from './api-call-log';
+export * from './odds';
 export * from './relations';
