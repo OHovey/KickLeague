@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 5 in progress. Plan 01 complete (animated league table + matchweek queries). Ready for Plan 02 (timeline slider).
+**Current focus:** Phase 5 in progress. Plan 02 awaiting user verification (timeline UI + integration). Task 3 checkpoint pending.
 
 ## Current Position
 
 Phase: 5 of 7 (Season Timeline)
-Plan: 1 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-05 -- Completed 05-01-PLAN.md
+Plan: 2 of 3 in current phase
+Status: Checkpoint pending (human-verify)
+Last activity: 2026-02-05 -- Completed 05-02-PLAN.md Tasks 1-2, awaiting checkpoint
 
-Progress: [██████░░░░] 60% (15/25 plans)
+Progress: [████████░░] 64% (16/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
-- Average duration: 4.5 min
-- Total execution time: 1.16 hours
+- Total plans completed: 16
+- Average duration: 4.4 min
+- Total execution time: 1.21 hours
 
 **By Phase:**
 
@@ -31,10 +31,10 @@ Progress: [██████░░░░] 60% (15/25 plans)
 | 02-league-tables | 5/5 | 21 min | 4.2 min |
 | 03-match-fixture-pages | 3/3 | 14 min | 4.7 min |
 | 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
-| 05-season-timeline | 1/3 | 4 min | 4 min |
+| 05-season-timeline | 2/3 | 7 min | 3.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-01 (2.5 min), 04-03 (8 min), 04-02 (8.3 min), 05-01 (4 min)
+- Last 5 plans: 04-03 (8 min), 04-02 (8.3 min), 05-01 (4 min), 05-02 (3 min)
 
 *Updated after each plan completion*
 
@@ -103,6 +103,11 @@ Recent decisions affecting current work:
 - 05-01: NumberFlow trend={0} for shortest-path digit spin (no forced up/down direction).
 - 05-01: lte bound added to sparkline query so historical matchweek views don't show future data.
 - 05-01: CSS Grid 14-column template shared between header and AnimatedTableRow for consistent alignment.
+- 05-02: useMatchweek default value from latestCompleted -- null URL param shows current standings.
+- 05-02: Drag threshold 5px to distinguish click from drag on timeline strip.
+- 05-02: Auto-play replay restarts from matchweek 1 when at end.
+- 05-02: LeagueTableWrapper is integration point managing matchweek state, timeline, and historical banner.
+- 05-02: League change resets matchweek to null (current) via prevLeagueRef tracking.
 
 ### Pending Todos
 
@@ -121,5 +126,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 05-01-PLAN.md (animated league table + matchweek queries)
+Stopped at: 05-02-PLAN.md Task 3 checkpoint (human-verify)
 Resume file: None
