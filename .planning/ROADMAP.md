@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: League Tables & Navigation** - Core product: information-dense league tables with sparklines, theming, and mobile layout
 - [x] **Phase 3: Match & Fixture Pages** - Recent results, upcoming fixtures, and match detail pages
 - [x] **Phase 4: Team Detail Pages** - Team pages with overview, performance, squad, and fixtures tabs
-- [ ] **Phase 5: Season Timeline** - Interactive historical timeline to scrub through past matchweeks
+- [x] **Phase 5: Season Timeline** - Interactive historical timeline to scrub through past matchweeks
 - [ ] **Phase 6: Live Data Pipeline** - Automated polling, match detection, standings recalculation, and real-time client updates
 - [ ] **Phase 7: Betting, Odds & Localisation** - Multi-bookmaker odds comparison, affiliate links, geo-compliance, and 5-language i18n
 
@@ -104,7 +104,7 @@ Plans:
 Plans:
 - [x] 05-01-PLAN.md -- Historical standings data layer + animated div-based CSS Grid table with Motion and NumberFlow
 - [x] 05-02-PLAN.md -- Timeline UI with drag/tap/auto-play, historical banner, and full page integration
-- [ ] 05-03-PLAN.md -- Navigation arrows for ~5 week jumps on the timeline strip
+- [x] 05-03-PLAN.md -- Navigation arrows for ~5 week jumps on the timeline strip
 
 ### Phase 6: Live Data Pipeline
 **Goal**: The platform stays current without manual intervention -- matches are polled automatically, standings recalculate on match completion, caches invalidate, and connected browsers receive updates in near real-time
@@ -152,6 +152,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 2. League Tables & Navigation | 5/5 | Complete | 2026-02-05 |
 | 3. Match & Fixture Pages | 3/3 | Complete | 2026-02-05 |
 | 4. Team Detail Pages | 3/3 | Complete | 2026-02-05 |
-| 5. Season Timeline | 2/3 | In progress | - |
+| 5. Season Timeline | 3/3 | Complete | 2026-02-05 |
 | 6. Live Data Pipeline | 0/3 | Not started | - |
 | 7. Betting, Odds & Localisation | 0/5 | Not started | - |
