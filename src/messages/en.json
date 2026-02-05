@@ -1,0 +1,104 @@
+{
+  "Common": {
+    "appName": "KickData",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "backToMatches": "Back to matches",
+    "backToHome": "Back to home",
+    "viewAll": "View all",
+    "notFound": "Not found",
+    "unableToLoad": "Unable to load",
+    "checkConfiguration": "Could not connect to the database. Please check your configuration."
+  },
+  "Navigation": {
+    "home": "Home",
+    "matches": "Matches",
+    "teams": "Teams",
+    "language": "Language"
+  },
+  "LeagueTable": {
+    "position": "Pos",
+    "team": "Team",
+    "played": "P",
+    "won": "W",
+    "drawn": "D",
+    "lost": "L",
+    "goalsFor": "GF",
+    "goalsAgainst": "GA",
+    "goalDifference": "GD",
+    "points": "Pts",
+    "form": "Form",
+    "trend": "Trend",
+    "standings": "Standings",
+    "championLeague": "Champions League",
+    "europaLeague": "Europa League",
+    "conferenceLeague": "Conference League",
+    "relegation": "Relegation",
+    "relegationPlayoff": "Relegation Playoff",
+    "promotion": "Promotion"
+  },
+  "Matches": {
+    "recentResults": "Recent Results",
+    "upcomingFixtures": "Upcoming Fixtures",
+    "matchDetail": "Match Detail",
+    "fullTime": "Full Time",
+    "kickoff": "Kick-off",
+    "referee": "Referee",
+    "venue": "Venue",
+    "h2h": "Head to Head",
+    "lastMeetings": "Last Meetings",
+    "noMatches": "No matches found",
+    "results": "Results",
+    "fixtures": "Fixtures",
+    "matchweek": "Matchweek",
+    "score": "Score",
+    "vs": "vs"
+  },
+  "Teams": {
+    "overview": "Overview",
+    "performance": "Performance",
+    "squad": "Squad",
+    "fixtures": "Fixtures",
+    "position": "Position",
+    "points": "Points",
+    "stadium": "Stadium",
+    "currentForm": "Current Form",
+    "teamNotFound": "Team Not Found",
+    "unableToLoadTeam": "Unable to Load Team"
+  },
+  "Timeline": {
+    "matchweek": "Matchweek {week}",
+    "viewingMatchweek": "Viewing Matchweek {week}",
+    "returnToCurrent": "Return to current",
+    "autoPlay": "Auto-play",
+    "pause": "Pause",
+    "seasonTimeline": "Season Timeline"
+  },
+  "Odds": {
+    "comparisonTitle": "Odds Comparison",
+    "bestOdds": "Best odds",
+    "fromBookmakers": "from {count} bookmakers",
+    "home": "Home",
+    "draw": "Draw",
+    "away": "Away",
+    "noOdds": "Odds not available",
+    "comingSoon": "Odds comparison coming soon",
+    "lastUpdated": "Last updated {time}",
+    "movement": {
+      "shortened": "Shortened",
+      "drifted": "Drifted"
+    }
+  },
+  "Formats": {
+    "decimal": "Decimal",
+    "fractional": "Fractional",
+    "american": "American"
+  },
+  "ResponsibleGambling": {
+    "message": "18+ | Please gamble responsibly",
+    "helpLink": "Get help"
+  },
+  "Footer": {
+    "responsibleGambling": "Please gamble responsibly. 18+ only."
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "Common": {
+    "appName": "KickData",
+    "loading": "Wird geladen...",
+    "error": "Etwas ist schiefgelaufen",
+    "backToMatches": "Zurueck zu den Spielen",
+    "backToHome": "Zurueck zur Startseite",
+    "viewAll": "Alle anzeigen",
+    "notFound": "Nicht gefunden",
+    "unableToLoad": "Laden nicht moeglich",
+    "checkConfiguration": "Verbindung zur Datenbank fehlgeschlagen. Bitte Konfiguration pruefen."
+  },
+  "Navigation": {
+    "home": "Startseite",
+    "matches": "Spiele",
+    "teams": "Mannschaften",
+    "language": "Sprache"
+  },
+  "LeagueTable": {
+    "position": "Pos",
+    "team": "Mannschaft",
+    "played": "Sp",
+    "won": "S",
+    "drawn": "U",
+    "lost": "N",
+    "goalsFor": "T",
+    "goalsAgainst": "GT",
+    "goalDifference": "TD",
+    "points": "Pkt",
+    "form": "Form",
+    "trend": "Trend",
+    "standings": "Tabelle",
+    "championLeague": "Champions League",
+    "europaLeague": "Europa League",
+    "conferenceLeague": "Conference League",
+    "relegation": "Abstieg",
+    "relegationPlayoff": "Relegation",
+    "promotion": "Aufstieg"
+  },
+  "Matches": {
+    "recentResults": "Aktuelle Ergebnisse",
+    "upcomingFixtures": "Kommende Spiele",
+    "matchDetail": "Spieldetail",
+    "fullTime": "Endstand",
+    "kickoff": "Anstoss",
+    "referee": "Schiedsrichter",
+    "venue": "Stadion",
+    "h2h": "Direktvergleich",
+    "lastMeetings": "Letzte Begegnungen",
+    "noMatches": "Keine Spiele gefunden",
+    "results": "Ergebnisse",
+    "fixtures": "Spielplan",
+    "matchweek": "Spieltag",
+    "score": "Ergebnis",
+    "vs": "gegen"
+  },
+  "Teams": {
+    "overview": "Uebersicht",
+    "performance": "Leistung",
+    "squad": "Kader",
+    "fixtures": "Spielplan",
+    "position": "Position",
+    "points": "Punkte",
+    "stadium": "Stadion",
+    "currentForm": "Aktuelle Form",
+    "teamNotFound": "Mannschaft nicht gefunden",
+    "unableToLoadTeam": "Mannschaft konnte nicht geladen werden"
+  },
+  "Timeline": {
+    "matchweek": "Spieltag {week}",
+    "viewingMatchweek": "Spieltag {week} wird angezeigt",
+    "returnToCurrent": "Zurueck zum aktuellen",
+    "autoPlay": "Automatische Wiedergabe",
+    "pause": "Pause",
+    "seasonTimeline": "Saisonverlauf"
+  },
+  "Odds": {
+    "comparisonTitle": "Quotenvergleich",
+    "bestOdds": "Beste Quoten",
+    "fromBookmakers": "von {count} Wettanbietern",
+    "home": "Heim",
+    "draw": "Unentschieden",
+    "away": "Auswaerts",
+    "noOdds": "Quoten nicht verfuegbar",
+    "comingSoon": "Quotenvergleich kommt bald",
+    "lastUpdated": "Zuletzt aktualisiert {time}",
+    "movement": {
+      "shortened": "Gefallen",
+      "drifted": "Gestiegen"
+    }
+  },
+  "Formats": {
+    "decimal": "Dezimal",
+    "fractional": "Bruch",
+    "american": "Amerikanisch"
+  },
+  "ResponsibleGambling": {
+    "message": "18+ | Bitte spielen Sie verantwortungsvoll",
+    "helpLink": "Hilfe erhalten"
+  },
+  "Footer": {
+    "responsibleGambling": "Bitte spielen Sie verantwortungsvoll. Nur ab 18 Jahren."
+  }
+}

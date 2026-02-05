@@ -1,0 +1,104 @@
+{
+  "Common": {
+    "appName": "KickData",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "backToMatches": "Retour aux matchs",
+    "backToHome": "Retour a l'accueil",
+    "viewAll": "Voir tout",
+    "notFound": "Non trouve",
+    "unableToLoad": "Impossible de charger",
+    "checkConfiguration": "Impossible de se connecter a la base de donnees. Veuillez verifier la configuration."
+  },
+  "Navigation": {
+    "home": "Accueil",
+    "matches": "Matchs",
+    "teams": "Equipes",
+    "language": "Langue"
+  },
+  "LeagueTable": {
+    "position": "Pos",
+    "team": "Equipe",
+    "played": "MJ",
+    "won": "V",
+    "drawn": "N",
+    "lost": "D",
+    "goalsFor": "BP",
+    "goalsAgainst": "BC",
+    "goalDifference": "DB",
+    "points": "Pts",
+    "form": "Forme",
+    "trend": "Tendance",
+    "standings": "Classement",
+    "championLeague": "Ligue des Champions",
+    "europaLeague": "Ligue Europa",
+    "conferenceLeague": "Conference League",
+    "relegation": "Relegation",
+    "relegationPlayoff": "Barrage de relegation",
+    "promotion": "Promotion"
+  },
+  "Matches": {
+    "recentResults": "Resultats recents",
+    "upcomingFixtures": "Prochains matchs",
+    "matchDetail": "Detail du match",
+    "fullTime": "Temps reglementaire",
+    "kickoff": "Coup d'envoi",
+    "referee": "Arbitre",
+    "venue": "Stade",
+    "h2h": "Confrontations directes",
+    "lastMeetings": "Dernieres rencontres",
+    "noMatches": "Aucun match trouve",
+    "results": "Resultats",
+    "fixtures": "Calendrier",
+    "matchweek": "Journee",
+    "score": "Score",
+    "vs": "contre"
+  },
+  "Teams": {
+    "overview": "Apercu",
+    "performance": "Performance",
+    "squad": "Effectif",
+    "fixtures": "Calendrier",
+    "position": "Position",
+    "points": "Points",
+    "stadium": "Stade",
+    "currentForm": "Forme actuelle",
+    "teamNotFound": "Equipe non trouvee",
+    "unableToLoadTeam": "Impossible de charger l'equipe"
+  },
+  "Timeline": {
+    "matchweek": "Journee {week}",
+    "viewingMatchweek": "Affichage de la journee {week}",
+    "returnToCurrent": "Retour a la journee actuelle",
+    "autoPlay": "Lecture automatique",
+    "pause": "Pause",
+    "seasonTimeline": "Chronologie de la saison"
+  },
+  "Odds": {
+    "comparisonTitle": "Comparaison des cotes",
+    "bestOdds": "Meilleures cotes",
+    "fromBookmakers": "de {count} bookmakers",
+    "home": "Domicile",
+    "draw": "Nul",
+    "away": "Exterieur",
+    "noOdds": "Cotes non disponibles",
+    "comingSoon": "Comparaison des cotes bientot disponible",
+    "lastUpdated": "Derniere mise a jour {time}",
+    "movement": {
+      "shortened": "En baisse",
+      "drifted": "En hausse"
+    }
+  },
+  "Formats": {
+    "decimal": "Decimal",
+    "fractional": "Fractionnaire",
+    "american": "Americain"
+  },
+  "ResponsibleGambling": {
+    "message": "18+ | Jouez de maniere responsable",
+    "helpLink": "Obtenir de l'aide"
+  },
+  "Footer": {
+    "responsibleGambling": "Jouez de maniere responsable. 18+ uniquement."
+  }
+}
