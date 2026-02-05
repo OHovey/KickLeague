@@ -59,7 +59,9 @@ function TableSkeleton() {
   );
 }
 
-const GRID_COLS = 'grid-cols-[2.5rem_1fr_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_3rem_3rem_auto_auto_auto_2rem]';
+// Mobile: #, Team, P, GD, Pts, Expand (6 visible items)
+// Desktop: #, Team, P, W, D, L, GF, GA, GD, Pts, Form, +/-, Trend (13 visible items, expand hidden)
+const GRID_COLS = 'grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] md:grid-cols-[2.5rem_1fr_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_3rem_3rem_auto_auto_auto]';
 
 export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps) {
   const [data, setData] = useState<StandingsData | null>(null);

@@ -6,7 +6,6 @@ interface TimelineCircleProps {
   weekNumber: number;
   completed: boolean;
   isSelected: boolean;
-  isScrubHighlighted: boolean;
   leagueColor: string;
   totalWeeks: number;
   onClick: () => void;
@@ -18,7 +17,6 @@ export const TimelineCircle = forwardRef<HTMLButtonElement, TimelineCircleProps>
       weekNumber,
       completed,
       isSelected,
-      isScrubHighlighted,
       leagueColor,
       totalWeeks,
       onClick,
@@ -32,35 +30,30 @@ export const TimelineCircle = forwardRef<HTMLButtonElement, TimelineCircleProps>
     // Determine circle styles based on state
     let bgStyle: React.CSSProperties = {};
     let textClass = '';
+    let ringClass = '';
 
     if (!completed) {
-      // Upcoming: hollow circle
+      // Upcoming: hollow circle with subtle dashed border
       bgStyle = {
-        border: `2px solid ${leagueColor}`,
+        border: `1.5px dashed rgba(255,255,255,0.2)`,
         backgroundColor: 'transparent',
-        opacity: 0.4,
       };
-      textClass = 'text-white/30';
+      textClass = 'text-white/25';
     } else if (isSelected) {
-      // Selected completed: solid fill, full opacity, scale up
+      // Selected completed: bright solid fill, ring glow, scale up
       bgStyle = {
         backgroundColor: leagueColor,
+        boxShadow: `0 0 8px ${leagueColor}80`,
       };
-      textClass = 'text-white';
-    } else if (isScrubHighlighted) {
-      // Scrub highlighted: solid fill at 80% opacity
+      textClass = 'text-white font-semibold';
+      ringClass = 'ring-2 ring-white/30';
+    } else {
+      // Completed not selected: solid fill, good contrast
       bgStyle = {
         backgroundColor: leagueColor,
-        opacity: 0.8,
+        opacity: 0.75,
       };
       textClass = 'text-white/90';
-    } else {
-      // Completed not selected: solid fill at 60% opacity
-      bgStyle = {
-        backgroundColor: leagueColor,
-        opacity: 0.6,
-      };
-      textClass = 'text-white/70';
     }
 
     return (
@@ -74,19 +67,20 @@ export const TimelineCircle = forwardRef<HTMLButtonElement, TimelineCircleProps>
           disabled={!completed}
           onClick={onClick}
           className={`
-            flex min-h-[28px] min-w-[28px] items-center justify-center
-            rounded-full text-[10px] font-medium
-            transition-transform duration-150
+            flex min-h-[32px] min-w-[32px] items-center justify-center
+            rounded-full text-xs leading-none
+            transition-all duration-150
             ${isSelected ? 'scale-110' : ''}
-            ${completed ? 'cursor-pointer hover:scale-105' : 'cursor-default'}
+            ${completed ? 'cursor-pointer hover:scale-105 hover:brightness-110' : 'cursor-default'}
             ${textClass}
+            ${ringClass}
           `}
           style={bgStyle}
         >
           {weekNumber}
         </button>
         {showLabel && (
-          <span className="mt-1 text-[9px] text-white/40">{weekNumber}</span>
+          <span className="mt-1 text-[10px] text-white/50">{weekNumber}</span>
         )}
       </div>
     );

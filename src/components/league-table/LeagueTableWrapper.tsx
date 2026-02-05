@@ -21,10 +21,14 @@ export function LeagueTableWrapper() {
   const [isLoadingMatchweeks, setIsLoadingMatchweeks] = useState(true);
   const prevLeagueRef = useRef(league);
 
-  // Determine the latest completed matchweek to use as default for useMatchweek
-  const latestCompleted = matchweekInfo?.latestCompleted ?? 1;
+  // week is null = "show current/latest", number = specific historical matchweek
+  const { week, setWeek } = useMatchweek();
 
-  const { week, setWeek, isHistorical } = useMatchweek(latestCompleted);
+  const latestCompleted = matchweekInfo?.latestCompleted ?? 0;
+
+  // The effective selected week for display (null means latest)
+  const selectedWeek = week ?? latestCompleted;
+  const isHistorical = week !== null && latestCompleted > 0 && week !== latestCompleted;
 
   // Fetch matchweek list on mount and when league changes
   useEffect(() => {
@@ -55,9 +59,14 @@ export function LeagueTableWrapper() {
 
   const handleWeekChange = useCallback(
     (newWeek: number) => {
-      setWeek(newWeek);
+      // If selecting the latest matchweek, clear the URL param (null = current)
+      if (newWeek === latestCompleted) {
+        setWeek(null);
+      } else {
+        setWeek(newWeek);
+      }
     },
-    [setWeek]
+    [setWeek, latestCompleted]
   );
 
   const handleReturnToCurrent = useCallback(() => {
@@ -78,7 +87,7 @@ export function LeagueTableWrapper() {
             latestMatchweek={latestCompleted}
             matchweeks={matchweekInfo.matchweeks}
             leagueColor={leagueColor}
-            selectedWeek={week}
+            selectedWeek={selectedWeek}
             onWeekChange={handleWeekChange}
           />
         </div>
@@ -86,7 +95,7 @@ export function LeagueTableWrapper() {
 
       {/* Historical Banner */}
       <HistoricalBanner
-        matchweek={week}
+        matchweek={selectedWeek}
         isHistorical={isHistorical}
         onReturnToCurrent={handleReturnToCurrent}
       />
@@ -94,7 +103,7 @@ export function LeagueTableWrapper() {
       {/* League Table */}
       <LeagueTableClient
         league={league}
-        matchweek={isHistorical ? week : undefined}
+        matchweek={isHistorical ? selectedWeek : undefined}
       />
     </div>
   );

@@ -48,7 +48,7 @@ export const AnimatedTableRow = memo(function AnimatedTableRow({
           },
         }}
         role="row"
-        className="group relative grid cursor-pointer grid-cols-[2.5rem_1fr_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_3rem_3rem_auto_auto_auto_2rem] items-center border-b border-white/5 transition-colors hover:bg-white/5 md:cursor-default"
+        className="group relative grid cursor-pointer grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] items-center border-b border-white/5 transition-colors hover:bg-white/5 md:cursor-default md:grid-cols-[2.5rem_1fr_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_3rem_3rem_auto_auto_auto]"
         onClick={handleRowClick}
         tabIndex={0}
         onKeyDown={(e) => {

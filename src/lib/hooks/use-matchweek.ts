@@ -2,13 +2,13 @@
 
 import { parseAsInteger, useQueryState } from 'nuqs';
 
-export function useMatchweek(latestMatchweek: number) {
-  const [week, setWeek] = useQueryState(
-    'week',
-    parseAsInteger.withDefault(latestMatchweek)
-  );
+/**
+ * Hook for managing the ?week= URL parameter.
+ * Returns null when no week is selected (meaning "show current/latest").
+ * Returns a number when a specific historical matchweek is selected.
+ */
+export function useMatchweek() {
+  const [week, setWeek] = useQueryState('week', parseAsInteger);
 
-  const isHistorical = week !== latestMatchweek;
-
-  return { week, setWeek, isHistorical };
+  return { week, setWeek };
 }
