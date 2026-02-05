@@ -17,6 +17,7 @@ interface StandingsData {
   zones: Zone[];
   matchweek: number | null;
   leagueName: string | null;
+  error?: 'database_not_configured' | 'league_not_found';
 }
 
 type ExpandState = 'collapsed' | 'default' | 'expanded';
@@ -93,6 +94,23 @@ export function LeagueTableClient({ league }: LeagueTableClientProps) {
     return (
       <div className="rounded-lg bg-white/5 p-8 text-center">
         <p className="text-red-400">{error}</p>
+      </div>
+    );
+  }
+
+  if (data?.error === 'database_not_configured') {
+    return (
+      <div className="rounded-lg bg-white/5 p-8 text-center">
+        <p className="text-lg font-medium text-white/90">Database Not Configured</p>
+        <p className="mt-2 text-white/70">
+          Set up your database to see league standings
+        </p>
+        <div className="mt-4 rounded bg-black/30 p-4 text-left">
+          <p className="text-xs font-mono text-white/50">1. Create a Neon database at neon.tech</p>
+          <p className="text-xs font-mono text-white/50 mt-1">2. Copy DATABASE_URL to .env.local</p>
+          <p className="text-xs font-mono text-white/50 mt-1">3. Run: npx drizzle-kit push</p>
+          <p className="text-xs font-mono text-white/50 mt-1">4. Run: npm run seed -- --all</p>
+        </div>
       </div>
     );
   }

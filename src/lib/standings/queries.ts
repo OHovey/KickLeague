@@ -1,7 +1,7 @@
 // Standings database queries with zone and tiebreaker integration
 
 import { eq, and, desc, max, gte, asc } from 'drizzle-orm';
-import { db } from '@/db/connection';
+import { getDb, isDatabaseConfigured } from '@/db/connection';
 import {
   leagues,
   leagueConfig,
@@ -39,13 +39,14 @@ export interface StandingsWithZones {
     currentSeason: string;
   } | null;
   matchweek: number | null;
+  error?: 'database_not_configured' | 'league_not_found';
 }
 
 /**
  * Fetch league by slug
  */
 export async function getLeagueBySlug(slug: string) {
-  const result = await db
+  const result = await getDb()
     .select()
     .from(leagues)
     .where(eq(leagues.slug, slug))
@@ -57,7 +58,7 @@ export async function getLeagueBySlug(slug: string) {
  * Fetch league config for a given league and season
  */
 export async function getLeagueConfig(leagueId: number, season: string) {
-  const result = await db
+  const result = await getDb()
     .select()
     .from(leagueConfig)
     .where(and(eq(leagueConfig.leagueId, leagueId), eq(leagueConfig.season, season)))
@@ -69,7 +70,7 @@ export async function getLeagueConfig(leagueId: number, season: string) {
  * Fetch all zones for a league and season
  */
 export async function getLeagueZones(leagueId: number, season: string): Promise<Zone[]> {
-  const result = await db
+  const result = await getDb()
     .select({
       zoneType: leagueZones.zoneType,
       startPosition: leagueZones.startPosition,
@@ -88,7 +89,7 @@ export async function getLeagueZones(leagueId: number, season: string): Promise<
  */
 async function buildH2HMatrix(leagueId: number, season: string): Promise<H2HMatrix> {
   // Fetch all finished fixtures for the season
-  const fixtureRows = await db
+  const fixtureRows = await getDb()
     .select({
       homeTeamId: fixtures.homeTeamId,
       awayTeamId: fixtures.awayTeamId,
@@ -144,7 +145,7 @@ async function buildH2HMatrix(leagueId: number, season: string): Promise<H2HMatr
  * Get the latest matchweek for a league and season
  */
 async function getLatestMatchweek(leagueId: number, season: string): Promise<number | null> {
-  const result = await db
+  const result = await getDb()
     .select({ maxWeek: max(standings.matchweek) })
     .from(standings)
     .where(and(eq(standings.leagueId, leagueId), eq(standings.season, season)));
@@ -163,7 +164,7 @@ async function getSparklineData(
 ): Promise<SparklineDataPoint[]> {
   const startMatchweek = Math.max(1, currentMatchweek - 9);
 
-  const result = await db
+  const result = await getDb()
     .select({
       matchweek: standings.matchweek,
       position: standings.position,
@@ -198,7 +199,7 @@ async function getPositionChanges(
   }
 
   // Get current positions
-  const currentPositions = await db
+  const currentPositions = await getDb()
     .select({
       teamId: standings.teamId,
       position: standings.position,
@@ -213,7 +214,7 @@ async function getPositionChanges(
     );
 
   // Get previous matchweek positions
-  const previousPositions = await db
+  const previousPositions = await getDb()
     .select({
       teamId: standings.teamId,
       position: standings.position,
@@ -250,6 +251,18 @@ export async function getStandingsWithZones(
   leagueSlug: string,
   season?: string
 ): Promise<StandingsWithZones> {
+  // 0. Check if database is configured
+  if (!isDatabaseConfigured()) {
+    return {
+      standings: [],
+      zones: [],
+      config: null,
+      league: null,
+      matchweek: null,
+      error: 'database_not_configured',
+    };
+  }
+
   // 1. Fetch league by slug
   const league = await getLeagueBySlug(leagueSlug);
   if (!league) {
@@ -293,7 +306,7 @@ export async function getStandingsWithZones(
   }
 
   // 5. Fetch raw standings rows joined with team names
-  const standingsRows = await db
+  const standingsRows = await getDb()
     .select({
       teamId: standings.teamId,
       teamName: teams.name,

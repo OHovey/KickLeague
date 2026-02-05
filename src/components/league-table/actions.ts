@@ -8,6 +8,7 @@ export interface StandingsResult {
   zones: Zone[];
   matchweek: number | null;
   leagueName: string | null;
+  error?: 'database_not_configured' | 'league_not_found';
 }
 
 export async function fetchStandings(league: string): Promise<StandingsResult> {
@@ -18,5 +19,6 @@ export async function fetchStandings(league: string): Promise<StandingsResult> {
     zones: data.zones,
     matchweek: data.matchweek,
     leagueName: data.league?.name ?? null,
+    error: data.error,
   };
 }
