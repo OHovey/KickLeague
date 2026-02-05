@@ -4,6 +4,8 @@ import { Suspense } from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import { parseAsStringEnum, useQueryState } from 'nuqs';
 import { clsx } from 'clsx';
+import { SquadTab } from './SquadTab';
+import { FixturesTab } from './FixturesTab';
 
 const TAB_VALUES = ['overview', 'performance', 'squad', 'fixtures'] as const;
 type TabValue = (typeof TAB_VALUES)[number];
@@ -72,15 +74,11 @@ function TeamTabsInner({
       </Tabs.Content>
 
       <Tabs.Content value="squad" className="mt-6">
-        <div className="rounded-xl bg-white/5 p-6 text-center">
-          <p className="text-white/50">Squad data coming soon</p>
-        </div>
+        <SquadTab teamId={teamId} leagueId={leagueId} season={season} />
       </Tabs.Content>
 
       <Tabs.Content value="fixtures" className="mt-6">
-        <div className="rounded-xl bg-white/5 p-6 text-center">
-          <p className="text-white/50">Fixtures schedule coming soon</p>
-        </div>
+        <FixturesTab teamId={teamId} leagueId={leagueId} season={season} />
       </Tabs.Content>
     </Tabs.Root>
   );
