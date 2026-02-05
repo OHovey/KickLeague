@@ -36,18 +36,16 @@ export function TableRow({ row, zoneColor }: TableRowProps) {
           }
         }}
       >
-        {/* Zone color indicator - absolute positioned left border */}
-        {zoneColor && (
-          <td className="absolute left-0 top-0 h-full w-1" aria-hidden="true">
+        {/* Position - Always visible, with zone color indicator */}
+        <td className="relative min-h-[44px] py-3 pl-4 pr-2 text-center text-sm font-medium text-white/90">
+          {/* Zone color indicator - left border */}
+          {zoneColor && (
             <div
-              className="h-full w-full"
+              className="absolute left-0 top-0 h-full w-1"
               style={{ backgroundColor: zoneColor }}
+              aria-hidden="true"
             />
-          </td>
-        )}
-
-        {/* Position - Always visible */}
-        <td className="min-h-[44px] py-3 pl-4 pr-2 text-center text-sm font-medium text-white/90">
+          )}
           {row.position}
         </td>
 

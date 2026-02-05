@@ -32,6 +32,7 @@ import { seedTeams } from "./seed-teams.js";
 import { seedPlayers } from "./seed-players.js";
 import { seedFixtures } from "./seed-fixtures.js";
 import { seedStandings } from "./seed-standings.js";
+import { computeHistoricalStandings } from "./compute-historical-standings.js";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -46,6 +47,7 @@ interface SeedResult {
   events: number;
   stats: number;
   standings: number;
+  historicalStandings: number;
 }
 
 // ---------------------------------------------------------------------------
@@ -187,6 +189,7 @@ program
           events: 0,
           stats: 0,
           standings: 0,
+          historicalStandings: 0,
         };
 
         try {
@@ -226,7 +229,7 @@ program
             result.events = fixtureCounts.events;
             result.stats = fixtureCounts.stats;
 
-            // Step 5: Standings
+            // Step 5: Standings (current snapshot from API)
             console.log(chalk.bold("Step 5: Seeding standings..."));
             result.standings = await seedStandings(
               db,
@@ -235,6 +238,14 @@ program
               leagueApiId,
               season,
               teamMap,
+            );
+
+            // Step 5b: Compute historical standings from fixtures
+            console.log(chalk.bold("Step 5b: Computing historical standings from fixtures..."));
+            result.historicalStandings = await computeHistoricalStandings(
+              db,
+              leagueDbId,
+              String(season),
             );
           } else {
             // Refresh mode: re-fetch teams to get the map, then only fixtures + standings
@@ -270,6 +281,14 @@ program
               season,
               teamMap,
             );
+
+            // Recompute historical standings from fixtures
+            console.log(chalk.bold("Refresh: Recomputing historical standings..."));
+            result.historicalStandings = await computeHistoricalStandings(
+              db,
+              leagueDbId,
+              String(season),
+            );
           }
 
           results.push(result);
@@ -284,6 +303,11 @@ program
           console.log(
             chalk.green(
               `    Events: ${result.events}, Stats: ${result.stats}, Standings: ${result.standings}`,
+            ),
+          );
+          console.log(
+            chalk.green(
+              `    Historical standings: ${result.historicalStandings}`,
             ),
           );
           console.log(
@@ -344,8 +368,9 @@ function printSummary(results: SeedResult[], startTime: number): void {
       events: acc.events + r.events,
       stats: acc.stats + r.stats,
       standings: acc.standings + r.standings,
+      historicalStandings: acc.historicalStandings + r.historicalStandings,
     }),
-    { teams: 0, players: 0, fixtures: 0, events: 0, stats: 0, standings: 0 },
+    { teams: 0, players: 0, fixtures: 0, events: 0, stats: 0, standings: 0, historicalStandings: 0 },
   );
 
   console.log(
@@ -358,13 +383,18 @@ function printSummary(results: SeedResult[], startTime: number): void {
       `        ${totals.events} events, ${totals.stats} stat rows, ${totals.standings} standings`,
     ),
   );
+  console.log(
+    chalk.green(
+      `        ${totals.historicalStandings} historical standings`,
+    ),
+  );
 
   // Per league-season breakdown
   console.log(chalk.gray("\nPer league-season:"));
   for (const r of results) {
     console.log(
       chalk.gray(
-        `  ${r.league} ${r.season}: ${r.teams}T ${r.players}P ${r.fixtures}F ${r.events}E ${r.stats}S ${r.standings}St`,
+        `  ${r.league} ${r.season}: ${r.teams}T ${r.players}P ${r.fixtures}F ${r.events}E ${r.stats}S ${r.standings}St ${r.historicalStandings}H`,
       ),
     );
   }

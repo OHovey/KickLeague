@@ -86,7 +86,8 @@ export function LeagueTableClient({ league }: LeagueTableClientProps) {
     });
   }, [league]);
 
-  if (isPending && !data) {
+  // Show skeleton during initial load or when switching leagues
+  if (isPending) {
     return <TableSkeleton />;
   }
 
@@ -154,7 +155,7 @@ export function LeagueTableClient({ league }: LeagueTableClientProps) {
   const { state: nextState, label: buttonLabel } = getNextState();
 
   return (
-    <div className={`overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm ${isPending ? 'opacity-50' : ''}`}>
+    <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
       {/* Matchweek indicator */}
       {data.matchweek && (
         <div className="border-b border-white/10 px-4 py-3">
