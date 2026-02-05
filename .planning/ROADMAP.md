@@ -67,12 +67,12 @@ Plans:
   3. User can expand a match list row to see H2H summary and trend information without navigating away
   4. User can open a completed match page showing score, events timeline, match stats comparison bars, and head-to-head history
   5. User can open an upcoming match page showing odds comparison from multiple bookmakers, both teams' recent form, H2H last 5 meetings, and key comparative stats
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Recent matches and upcoming fixtures list components
-- [ ] 03-02: Match detail page for completed matches (events timeline, stats, H2H)
-- [ ] 03-03: Match detail page for upcoming matches (form, H2H, comparative stats)
+- [ ] 03-01-PLAN.md -- Match query layer, date utilities, and match list page with Results/Fixtures tabs
+- [ ] 03-02-PLAN.md -- Match detail page for completed and upcoming matches (score hero, stats, events, H2H, form, comparative stats)
+- [ ] 03-03-PLAN.md -- Home page match preview section and header navigation
 
 ### Phase 4: Team Detail Pages
 **Goal**: Users can explore any team's season in depth through a tabbed detail page covering overview stats, performance analytics, squad data, and fixture schedule
