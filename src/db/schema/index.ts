@@ -5,4 +5,5 @@ export * from './teams';
 export * from './players';
 export * from './fixtures';
 export * from './standings';
+export * from './api-call-log';
 export * from './relations';

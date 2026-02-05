@@ -8,6 +8,13 @@
       "when": 1770234961543,
       "tag": "0000_worthless_matthew_murdock",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1770329080176,
+      "tag": "0001_loose_namorita",
+      "breakpoints": true
     }
   ]
 }
