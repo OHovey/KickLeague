@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 ## Current Position
 
 Phase: 3 of 7 (Match & Fixture Pages)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-02-05 -- Completed 03-01-PLAN.md
+Last activity: 2026-02-05 -- Completed 03-02-PLAN.md
 
-Progress: [████░░░░░░] 36% (9/25 plans)
+Progress: [████░░░░░░] 40% (10/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
-- Average duration: 4.6 min
-- Total execution time: 0.68 hours
+- Total plans completed: 10
+- Average duration: 4.5 min
+- Total execution time: 0.75 hours
 
 **By Phase:**
 
@@ -29,10 +29,10 @@ Progress: [████░░░░░░] 36% (9/25 plans)
 |-------|-------|-------|----------|
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
 | 02-league-tables | 5/5 | 21 min | 4.2 min |
-| 03-match-fixture-pages | 1/3 | 4 min | 4.0 min |
+| 03-match-fixture-pages | 2/3 | 8 min | 4.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (4 min), 02-04 (4 min), 02-05 (5 min), 03-01 (4 min)
+- Last 5 plans: 02-04 (4 min), 02-05 (5 min), 03-01 (4 min), 03-02 (4 min)
 - Trend: stable
 
 *Updated after each plan completion*
@@ -80,6 +80,9 @@ Recent decisions affecting current work:
 - 03-01: Batch getTeamForm at max matchweek avoids N+1 per-card queries.
 - 03-01: Server actions serialize Map to Record for JSON transfer.
 - 03-01: "Odds coming soon" placeholder on upcoming fixture cards (MATL-04 structural prep).
+- 03-02: getLeagueSlugById helper in actions.ts resolves fixture leagueId to slug for ThemeBackground on detail page (avoids nuqs dependency).
+- 03-02: lowerIsBetter flag in ComparativeStats inverts bar widths for league position and goals conceded comparisons.
+- 03-02: Substitution events show assistPlayerName as "for {player}" rather than "Assist" for correct semantic meaning.
 
 ### Pending Todos
 
@@ -97,5 +100,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 03-01-PLAN.md (match query layer, cards, /matches page)
-Resume file: None (ready for 03-02)
+Stopped at: Completed 03-02-PLAN.md (match detail page at /matches/[id])
+Resume file: None (ready for 03-03)
