@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 3 complete. Ready for Phase 4: Team Detail Pages
+**Current focus:** Phase 4 in progress. Team detail page foundation complete (plan 01). Next: Performance tab (plan 02).
 
 ## Current Position
 
 Phase: 4 of 7 (Team Detail Pages)
-Plan: 0 of 3 in current phase
-Status: Ready to plan
-Last activity: 2026-02-05 -- Phase 3 verified and complete
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-02-05 -- Completed 04-01-PLAN.md
 
-Progress: [████░░░░░░] 44% (11/25 plans)
+Progress: [█████░░░░░] 48% (12/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
-- Average duration: 4.5 min
-- Total execution time: 0.85 hours
+- Total plans completed: 12
+- Average duration: 4.3 min
+- Total execution time: 0.89 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [████░░░░░░] 44% (11/25 plans)
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
 | 02-league-tables | 5/5 | 21 min | 4.2 min |
 | 03-match-fixture-pages | 3/3 | 14 min | 4.7 min |
+| 04-team-detail-pages | 1/3 | 2.5 min | 2.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-05 (5 min), 03-01 (4 min), 03-02 (4 min), 03-03 (6 min)
-- Trend: stable (03-03 slightly longer due to checkpoint iteration)
+- Last 5 plans: 03-01 (4 min), 03-02 (4 min), 03-03 (6 min), 04-01 (2.5 min)
+- Trend: improving (04-01 fastest plan yet -- straightforward query + component creation)
 
 *Updated after each plan completion*
 
@@ -86,6 +87,9 @@ Recent decisions affecting current work:
 - 03-03: H2H data lazy-loaded inline per card on mount (not batch) to avoid N+1 upfront queries.
 - 03-03: Expand/collapse removed from match cards -- all info visible by default for better UX.
 - 03-03: formatMatchDateShort added for compact "Sat 1 Feb" display on cards.
+- 04-01: TeamPageData bundles team info + current standings + hasXg flag in single server action call.
+- 04-01: fetchOverviewData takes teamName as parameter for pivot extraction rather than re-querying.
+- 04-01: Tab content placeholders for plans 04-02 and 04-03 to fill with real components.
 
 ### Pending Todos
 
@@ -103,5 +107,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Phase 3 verified and complete (match pages, detail views, home previews, header nav)
-Resume file: None (Phase 3 complete, ready for Phase 4)
+Stopped at: Completed 04-01-PLAN.md (team detail page foundation)
+Resume file: None
