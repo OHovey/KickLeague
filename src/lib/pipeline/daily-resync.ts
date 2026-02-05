@@ -185,7 +185,7 @@ async function resyncLeague(
   db: ReturnType<typeof getDb>,
   leagueDbId: number,
   leagueApiId: number,
-  leagueSlug: string,
+  _leagueSlug: string,
   season: string,
 ): Promise<LeagueResyncResult> {
   const result: LeagueResyncResult = {
