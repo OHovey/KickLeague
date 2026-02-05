@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 4 in progress. Team detail page foundation complete (plan 01). Next: Performance tab (plan 02).
+**Current focus:** Phase 4 nearing completion. Plans 01 and 03 done. Plan 02 executing in parallel (performance tab).
 
 ## Current Position
 
 Phase: 4 of 7 (Team Detail Pages)
-Plan: 1 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-05 -- Completed 04-01-PLAN.md
+Plan: 3 of 3 in current phase (plan 02 completing in parallel)
+Status: In progress (awaiting 04-02 completion)
+Last activity: 2026-02-05 -- Completed 04-03-PLAN.md
 
-Progress: [█████░░░░░] 48% (12/25 plans)
+Progress: [██████░░░░] 52% (13/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
-- Average duration: 4.3 min
-- Total execution time: 0.89 hours
+- Total plans completed: 13
+- Average duration: 4.2 min
+- Total execution time: 0.95 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [█████░░░░░] 48% (12/25 plans)
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
 | 02-league-tables | 5/5 | 21 min | 4.2 min |
 | 03-match-fixture-pages | 3/3 | 14 min | 4.7 min |
-| 04-team-detail-pages | 1/3 | 2.5 min | 2.5 min |
+| 04-team-detail-pages | 2/3 | 10.5 min | 5.3 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (4 min), 03-02 (4 min), 03-03 (6 min), 04-01 (2.5 min)
-- Trend: improving (04-01 fastest plan yet -- straightforward query + component creation)
+- Last 5 plans: 03-02 (4 min), 03-03 (6 min), 04-01 (2.5 min), 04-03 (8 min)
+- Note: 04-03 executed in parallel with 04-02, coordinating shared file access
 
 *Updated after each plan completion*
 
@@ -90,6 +90,10 @@ Recent decisions affecting current work:
 - 04-01: TeamPageData bundles team info + current standings + hasXg flag in single server action call.
 - 04-01: fetchOverviewData takes teamName as parameter for pivot extraction rather than re-querying.
 - 04-01: Tab content placeholders for plans 04-02 and 04-03 to fill with real components.
+- 04-03: Appearances used as proxy for minutes distribution (minutes data not available).
+- 04-03: useRouter + stopPropagation for team links inside MatchCard (avoids nested <a> tags).
+- 04-03: Fixture difficulty: position 1-6 hard (red), 7-14 medium (amber), 15+ easy (green).
+- 04-03: Top performer cards conditionally hidden when stat = 0 (early season edge case).
 
 ### Pending Todos
 
@@ -107,5 +111,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 04-01-PLAN.md (team detail page foundation)
+Stopped at: Completed 04-03-PLAN.md (squad tab, fixtures tab, team page links)
 Resume file: None
