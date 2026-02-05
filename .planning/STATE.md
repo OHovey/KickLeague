@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 3: Match & Fixture Pages
+**Current focus:** Phase 3 complete. Ready for Phase 4: Player Profiles
 
 ## Current Position
 
-Phase: 3 of 7 (Match & Fixture Pages)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-05 -- Completed 03-02-PLAN.md
+Phase: 3 of 7 (Match & Fixture Pages) -- COMPLETE
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-05 -- Completed 03-03-PLAN.md
 
-Progress: [████░░░░░░] 40% (10/25 plans)
+Progress: [████░░░░░░] 44% (11/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
+- Total plans completed: 11
 - Average duration: 4.5 min
-- Total execution time: 0.75 hours
+- Total execution time: 0.85 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [████░░░░░░] 40% (10/25 plans)
 |-------|-------|-------|----------|
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
 | 02-league-tables | 5/5 | 21 min | 4.2 min |
-| 03-match-fixture-pages | 2/3 | 8 min | 4.0 min |
+| 03-match-fixture-pages | 3/3 | 14 min | 4.7 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-04 (4 min), 02-05 (5 min), 03-01 (4 min), 03-02 (4 min)
-- Trend: stable
+- Last 5 plans: 02-05 (5 min), 03-01 (4 min), 03-02 (4 min), 03-03 (6 min)
+- Trend: stable (03-03 slightly longer due to checkpoint iteration)
 
 *Updated after each plan completion*
 
@@ -83,6 +83,9 @@ Recent decisions affecting current work:
 - 03-02: getLeagueSlugById helper in actions.ts resolves fixture leagueId to slug for ThemeBackground on detail page (avoids nuqs dependency).
 - 03-02: lowerIsBetter flag in ComparativeStats inverts bar widths for league position and goals conceded comparisons.
 - 03-02: Substitution events show assistPlayerName as "for {player}" rather than "Assist" for correct semantic meaning.
+- 03-03: H2H data lazy-loaded inline per card on mount (not batch) to avoid N+1 upfront queries.
+- 03-03: Expand/collapse removed from match cards -- all info visible by default for better UX.
+- 03-03: formatMatchDateShort added for compact "Sat 1 Feb" display on cards.
 
 ### Pending Todos
 
@@ -100,5 +103,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 03-02-PLAN.md (match detail page at /matches/[id])
-Resume file: None (ready for 03-03)
+Stopped at: Completed 03-03-PLAN.md (home page previews + match card UI refinement)
+Resume file: None (Phase 3 complete, ready for Phase 4)
