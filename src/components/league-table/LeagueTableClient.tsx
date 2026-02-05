@@ -60,8 +60,9 @@ function TableSkeleton() {
 }
 
 // Mobile: #, Team, P, GD, Pts, Expand (6 visible items)
-// Desktop: #, Team, P, W, D, L, GF, GA, GD, Pts, Form, +/-, Trend (13 visible items, expand hidden)
-const GRID_COLS = 'grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] md:grid-cols-[2.5rem_1fr_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_3rem_3rem_auto_auto_auto]';
+// Desktop: #, Team, P, W, D, L, GF, GA, GD, Pts, Form(7.5rem=120px), +/-(2.5rem), Trend(7.5rem=120px)
+// Fixed widths on Form/+/-/Trend prevent header-vs-body misalignment (auto resolves differently per row)
+const GRID_COLS = 'grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] md:grid-cols-[2.5rem_1fr_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_3rem_3rem_7.5rem_2.5rem_7.5rem]';
 
 export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps) {
   const [data, setData] = useState<StandingsData | null>(null);
