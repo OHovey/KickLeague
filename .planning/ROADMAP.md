@@ -13,7 +13,7 @@ FootballPulse delivers a CoinMarketCap-inspired football statistics platform acr
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Data Foundation** - Database schema, API client, data seeding for all 5 leagues
-- [ ] **Phase 2: League Tables & Navigation** - Core product: information-dense league tables with sparklines, theming, and mobile layout
+- [x] **Phase 2: League Tables & Navigation** - Core product: information-dense league tables with sparklines, theming, and mobile layout
 - [ ] **Phase 3: Match & Fixture Pages** - Recent results, upcoming fixtures, and match detail pages
 - [ ] **Phase 4: Team Detail Pages** - Team pages with overview, performance, squad, and fixtures tabs
 - [ ] **Phase 5: Season Timeline** - Interactive historical timeline to scrub through past matchweeks
@@ -51,11 +51,11 @@ Plans:
 **Plans**: 5 plans
 
 Plans:
-- [ ] 02-01-PLAN.md -- Standings calculator with configurable tiebreaker chains (TDD)
-- [ ] 02-02-PLAN.md -- League theming infrastructure, tab navigation, and URL persistence
-- [ ] 02-03-PLAN.md -- Core league table component with zone colouring
-- [ ] 02-04-PLAN.md -- Visual enhancements: form badges, position change, sparklines
-- [ ] 02-05-PLAN.md -- Mobile responsive layout with expandable rows
+- [x] 02-01-PLAN.md -- Standings calculator with configurable tiebreaker chains (TDD)
+- [x] 02-02-PLAN.md -- League theming infrastructure, tab navigation, and URL persistence
+- [x] 02-03-PLAN.md -- Core league table component with zone colouring
+- [x] 02-04-PLAN.md -- Visual enhancements: form badges, position change, sparklines
+- [x] 02-05-PLAN.md -- Mobile responsive layout with expandable rows
 
 ### Phase 3: Match & Fixture Pages
 **Goal**: Users can browse recent results and upcoming fixtures for any league, and drill into individual match pages for detailed stats, events, and head-to-head records
@@ -149,7 +149,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Data Foundation | 3/3 | Complete | 2026-02-04 |
-| 2. League Tables & Navigation | 0/5 | In Progress | - |
+| 2. League Tables & Navigation | 5/5 | Complete | 2026-02-05 |
 | 3. Match & Fixture Pages | 0/3 | Not started | - |
 | 4. Team Detail Pages | 0/3 | Not started | - |
 | 5. Season Timeline | 0/3 | Not started | - |

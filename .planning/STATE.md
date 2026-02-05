@@ -9,10 +9,10 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 
 ## Current Position
 
-Phase: 2 of 7 (League Tables & Navigation)
-Plan: 5 of 5 in current phase
-Status: Phase complete
-Last activity: 2026-02-04 -- Completed 02-05-PLAN.md
+Phase: 3 of 7 (Match & Fixture Pages)
+Plan: 0 of 3 in current phase
+Status: Ready to plan
+Last activity: 2026-02-05 -- Phase 2 verified and complete
 
 Progress: [████░░░░░░] 32% (8/25 plans)
 
@@ -77,6 +77,13 @@ Recent decisions affecting current work:
 - User must provision Neon database and set DATABASE_URL before running seed (see 01-USER-SETUP.md).
 - User must obtain API-Football API key and set API_FOOTBALL_KEY before running seed (see 01-USER-SETUP.md).
 - Run `npx drizzle-kit push` to apply schema before first `npm run seed -- --all`.
+
+**Phase 2 styling/bug fixes (before Phase 3):**
+- Revise ThemeBackground to use edge/corner gradients that fade to a neutral dark center, rather than full-page top-to-bottom gradients. More subtle, professional look.
+- Fix sparkline charts not rendering in TREND column (shows dots instead of line charts) - likely empty sparklineData from query.
+- Fix position change (+/-) always showing "-" - positionChange calculation returning 0 for all teams.
+- Fix column alignment - # column offset between rows with/without zone borders.
+- Add skeleton loading states when switching leagues - replace table rows with animated placeholders while data loads (prevent stale data flash).
 
 ### Blockers/Concerns
 
