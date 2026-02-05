@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 4 nearing completion. Plans 01 and 03 done. Plan 02 executing in parallel (performance tab).
+**Current focus:** Phase 4 complete. All three team detail page plans finished. Overview, Performance, Squad, and Fixtures tabs fully functional. Ready for Phase 5.
 
 ## Current Position
 
 Phase: 4 of 7 (Team Detail Pages)
-Plan: 3 of 3 in current phase (plan 02 completing in parallel)
-Status: In progress (awaiting 04-02 completion)
-Last activity: 2026-02-05 -- Completed 04-03-PLAN.md
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-05 -- Completed 04-02-PLAN.md
 
-Progress: [██████░░░░] 52% (13/25 plans)
+Progress: [██████░░░░] 56% (14/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
-- Average duration: 4.2 min
-- Total execution time: 0.95 hours
+- Total plans completed: 14
+- Average duration: 4.5 min
+- Total execution time: 1.09 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [██████░░░░] 52% (13/25 plans)
 | 01-data-foundation | 3/3 | 16 min | 5.3 min |
 | 02-league-tables | 5/5 | 21 min | 4.2 min |
 | 03-match-fixture-pages | 3/3 | 14 min | 4.7 min |
-| 04-team-detail-pages | 2/3 | 10.5 min | 5.3 min |
+| 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-02 (4 min), 03-03 (6 min), 04-01 (2.5 min), 04-03 (8 min)
-- Note: 04-03 executed in parallel with 04-02, coordinating shared file access
+- Last 5 plans: 03-03 (6 min), 04-01 (2.5 min), 04-03 (8 min), 04-02 (8.3 min)
+- Note: 04-02 and 04-03 executed in parallel, 04-02 took slightly longer due to 5 chart components
 
 *Updated after each plan completion*
 
@@ -90,6 +90,11 @@ Recent decisions affecting current work:
 - 04-01: TeamPageData bundles team info + current standings + hasXg flag in single server action call.
 - 04-01: fetchOverviewData takes teamName as parameter for pivot extraction rather than re-querying.
 - 04-01: Tab content placeholders for plans 04-02 and 04-03 to fill with real components.
+- 04-02: HomeAwayBars uses CSS percentage-width bars (not Recharts) -- consistent with ComparativeStats pattern.
+- 04-02: xG section omitted entirely when hasXg is false -- avoids empty chart state.
+- 04-02: Own goals in scoring-first analysis correctly invert teamId check.
+- 04-02: Goals bucketed with Math.min(Math.floor((minute-1)/15), 5) -- 90+ goals merge to last bucket.
+- 04-02: BumpChart shows focus team as thick green line, rivals as thin low-opacity lines.
 - 04-03: Appearances used as proxy for minutes distribution (minutes data not available).
 - 04-03: useRouter + stopPropagation for team links inside MatchCard (avoids nested <a> tags).
 - 04-03: Fixture difficulty: position 1-6 hard (red), 7-14 medium (amber), 15+ easy (green).
@@ -111,5 +116,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 04-03-PLAN.md (squad tab, fixtures tab, team page links)
+Stopped at: Completed 04-02-PLAN.md (overview tab, performance tab, all charts)
 Resume file: None
