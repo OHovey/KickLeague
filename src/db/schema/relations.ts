@@ -4,6 +4,7 @@ import { teams } from './teams';
 import { players } from './players';
 import { fixtures, fixtureEvents, fixtureStats } from './fixtures';
 import { standings } from './standings';
+import { teamTranslations } from './translations';
 
 // -- League relations --
 
@@ -40,7 +41,18 @@ export const teamsRelations = relations(teams, ({ one, many }) => ({
   homeFixtures: many(fixtures, { relationName: 'homeTeam' }),
   awayFixtures: many(fixtures, { relationName: 'awayTeam' }),
   standings: many(standings),
+  translations: many(teamTranslations),
 }));
+
+export const teamTranslationsRelations = relations(
+  teamTranslations,
+  ({ one }) => ({
+    team: one(teams, {
+      fields: [teamTranslations.teamId],
+      references: [teams.id],
+    }),
+  })
+);
 
 // -- Player relations --
 
