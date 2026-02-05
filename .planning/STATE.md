@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 5 in progress. Plan 02 awaiting user verification (timeline UI + integration). Task 3 checkpoint pending.
+**Current focus:** Phase 5 complete. All 3 plans executed. Ready for Phase 6 planning.
 
 ## Current Position
 
 Phase: 5 of 7 (Season Timeline)
-Plan: 2 of 3 in current phase
-Status: Checkpoint pending (human-verify)
-Last activity: 2026-02-05 -- Completed 05-02-PLAN.md Tasks 1-2, awaiting checkpoint
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-05 -- Completed 05-03-PLAN.md
 
-Progress: [████████░░] 64% (16/25 plans)
+Progress: [████████░░] 68% (17/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 16
-- Average duration: 4.4 min
-- Total execution time: 1.21 hours
+- Total plans completed: 17
+- Average duration: 4.2 min
+- Total execution time: 1.23 hours
 
 **By Phase:**
 
@@ -31,10 +31,10 @@ Progress: [████████░░] 64% (16/25 plans)
 | 02-league-tables | 5/5 | 21 min | 4.2 min |
 | 03-match-fixture-pages | 3/3 | 14 min | 4.7 min |
 | 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
-| 05-season-timeline | 2/3 | 7 min | 3.5 min |
+| 05-season-timeline | 3/3 | 8 min | 2.7 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-03 (8 min), 04-02 (8.3 min), 05-01 (4 min), 05-02 (3 min)
+- Last 5 plans: 04-02 (8.3 min), 04-03 (8 min), 05-01 (4 min), 05-02 (3 min), 05-03 (1 min)
 
 *Updated after each plan completion*
 
@@ -108,6 +108,9 @@ Recent decisions affecting current work:
 - 05-02: Auto-play replay restarts from matchweek 1 when at end.
 - 05-02: LeagueTableWrapper is integration point managing matchweek state, timeline, and historical banner.
 - 05-02: League change resets matchweek to null (current) via prevLeagueRef tracking.
+- 05-03: NavArrows always visible with disabled state (not hidden) for consistent layout.
+- 05-03: Double-chevron SVG distinguishes 5-week jump from single-step circle click.
+- 05-03: earliestCompleted computed inline from matchweeks array for left boundary clamping.
 
 ### Pending Todos
 
@@ -126,5 +129,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: 05-02-PLAN.md Task 3 checkpoint (human-verify)
+Stopped at: Completed 05-03-PLAN.md (Phase 5 complete)
 Resume file: None
