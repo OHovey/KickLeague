@@ -3,6 +3,7 @@
 import { Suspense } from 'react';
 import { LeagueTabs } from '@/components/league-nav/LeagueTabs';
 import { ThemeBackground } from '@/components/ThemeBackground';
+import { Header } from '@/components/header/Header';
 import { ResultsFixturesTabs } from '@/components/matches/ResultsFixturesTabs';
 import { useLeague } from '@/lib/hooks/use-league';
 
@@ -13,11 +14,12 @@ function MatchesContent() {
     <>
       <ThemeBackground theme={league} />
       <div className="min-h-screen">
-        <header className="sticky top-0 z-10 border-b border-white/10 bg-black/20 backdrop-blur-md">
+        <Header />
+        <div className="sticky top-[49px] z-10 border-b border-white/10 bg-black/20 backdrop-blur-md">
           <div className="mx-auto max-w-7xl px-4 py-4">
             <LeagueTabs />
           </div>
-        </header>
+        </div>
         <main className="mx-auto max-w-7xl px-4 py-8">
           <h1 className="mb-6 text-2xl font-bold text-white">Matches</h1>
           <ResultsFixturesTabs league={league} />

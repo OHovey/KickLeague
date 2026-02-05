@@ -4,6 +4,8 @@ import { Suspense } from 'react';
 import { LeagueTabs } from '@/components/league-nav/LeagueTabs';
 import { ThemeBackground } from '@/components/ThemeBackground';
 import { LeagueTableWrapper } from '@/components/league-table/LeagueTableWrapper';
+import { Header } from '@/components/header/Header';
+import { MatchPreviewSection } from '@/components/matches/MatchPreviewSection';
 import { useLeague } from '@/lib/hooks/use-league';
 import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
 
@@ -34,15 +36,17 @@ function HomeContent() {
     <>
       <ThemeBackground theme={league} />
       <div className="min-h-screen">
-        <header className="sticky top-0 z-10 border-b border-white/10 bg-black/20 backdrop-blur-md">
+        <Header />
+        <div className="sticky top-[49px] z-10 border-b border-white/10 bg-black/20 backdrop-blur-md">
           <div className="mx-auto max-w-7xl px-4 py-4">
             <LeagueTabs />
           </div>
-        </header>
-        <main className="mx-auto max-w-7xl px-4 py-8">
+        </div>
+        <main className="mx-auto max-w-7xl px-4 py-8 space-y-8">
           <Suspense fallback={<TableSkeleton />}>
             <LeagueTableWrapper />
           </Suspense>
+          <MatchPreviewSection league={league} />
         </main>
       </div>
     </>
