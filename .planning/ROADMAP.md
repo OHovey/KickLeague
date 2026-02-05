@@ -84,12 +84,12 @@ Plans:
   3. User can view a performance tab with home/away splits, goals scored by 15-minute period, xG analysis (where data is available), clean sheets count, and scoring-first win/draw/loss record
   4. User can view a squad tab showing top scorers, top assisters, cards received, and minutes distribution across the squad
   5. User can view a fixtures tab with the next 5 upcoming matches including odds and fixture difficulty colouring, plus the last 10 results
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: Team page layout with hero section and tab navigation
-- [ ] 04-02: Overview and performance tabs with charts
-- [ ] 04-03: Squad tab and fixtures tab
+- [ ] 04-01-PLAN.md -- Team query layer, page route, hero section, and tab navigation
+- [ ] 04-02-PLAN.md -- Overview and performance tabs with charts (bump chart, cumulative points, goals by period, xG, home/away splits)
+- [ ] 04-03-PLAN.md -- Squad tab, fixtures tab, and team page link integration across existing components
 
 ### Phase 5: Season Timeline
 **Goal**: Users can scrub through the season to see how the league table looked at any point in history, with smooth animated transitions as teams move up and down
