@@ -99,11 +99,12 @@ Plans:
   1. User can see a timeline bar showing all matchweeks as filled (completed) or empty (upcoming) circles
   2. User can drag or tap to any completed matchweek and the league table updates to show the historical standings at that point
   3. Table rows animate smoothly when the selected matchweek changes, with teams visibly sliding to their new positions
-**Plans**: 2 plans
+**Plans**: 3 plans
 
 Plans:
-- [ ] 05-01-PLAN.md -- Historical standings data layer + animated div-based CSS Grid table with Motion and NumberFlow
-- [ ] 05-02-PLAN.md -- Timeline UI with drag/tap/auto-play, historical banner, and full page integration
+- [x] 05-01-PLAN.md -- Historical standings data layer + animated div-based CSS Grid table with Motion and NumberFlow
+- [x] 05-02-PLAN.md -- Timeline UI with drag/tap/auto-play, historical banner, and full page integration
+- [ ] 05-03-PLAN.md -- Navigation arrows for ~5 week jumps on the timeline strip
 
 ### Phase 6: Live Data Pipeline
 **Goal**: The platform stays current without manual intervention -- matches are polled automatically, standings recalculate on match completion, caches invalidate, and connected browsers receive updates in near real-time
@@ -151,6 +152,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 2. League Tables & Navigation | 5/5 | Complete | 2026-02-05 |
 | 3. Match & Fixture Pages | 3/3 | Complete | 2026-02-05 |
 | 4. Team Detail Pages | 3/3 | Complete | 2026-02-05 |
-| 5. Season Timeline | 0/2 | Not started | - |
+| 5. Season Timeline | 2/3 | In progress | - |
 | 6. Live Data Pipeline | 0/3 | Not started | - |
 | 7. Betting, Odds & Localisation | 0/5 | Not started | - |
