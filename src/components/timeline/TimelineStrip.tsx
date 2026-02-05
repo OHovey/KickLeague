@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { TimelineCircle } from './TimelineCircle';
 
 interface TimelineStripProps {
@@ -71,30 +71,6 @@ export function TimelineStrip({
 }: TimelineStripProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRefs = useRef<Map<number, HTMLButtonElement>>(new Map());
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
-  // Check scroll overflow state
-  const updateScrollState = useCallback(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
-  }, []);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    updateScrollState();
-    el.addEventListener('scroll', updateScrollState, { passive: true });
-    const resizeObserver = new ResizeObserver(updateScrollState);
-    resizeObserver.observe(el);
-    return () => {
-      el.removeEventListener('scroll', updateScrollState);
-      resizeObserver.disconnect();
-    };
-  }, [updateScrollState, matchweeks]);
-
   // Scroll selected circle into view
   useEffect(() => {
     const circleEl = circleRefs.current.get(selectedWeek);
@@ -152,12 +128,15 @@ export function TimelineStrip({
     []
   );
 
+  // Total circles determines if strip overflows at all
+  const hasOverflow = matchweeks.length > 0;
+
   return (
     <div className="flex items-center gap-1">
       <NavArrow
         direction="left"
         onClick={() => scrollByCircles('left')}
-        disabled={!canScrollLeft}
+        disabled={!hasOverflow}
       />
 
       <div
@@ -194,7 +173,7 @@ export function TimelineStrip({
       <NavArrow
         direction="right"
         onClick={() => scrollByCircles('right')}
-        disabled={!canScrollRight}
+        disabled={!hasOverflow}
       />
     </div>
   );
