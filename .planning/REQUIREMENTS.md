@@ -53,10 +53,10 @@
 
 - [ ] **DATA-01**: API-Football client with rate limiting, Zod validation, and local file-cache proxy
 - [ ] **DATA-02**: Initial data seeding (current season fixtures, standings, team data for all 5 leagues)
-- [ ] **DATA-03**: Automated match polling via QStash cron (60s during match windows, smart polling off-peak)
-- [ ] **DATA-04**: Match completion detection triggers standings recalculation, cache invalidation, ISR revalidation
+- [x] **DATA-03**: Automated match polling via QStash cron (60s during match windows, smart polling off-peak)
+- [x] **DATA-04**: Match completion detection triggers standings recalculation, cache invalidation, ISR revalidation
 - [ ] **DATA-05**: Table snapshots stored per matchweek for timeline feature
-- [ ] **DATA-06**: Real-time updates push table changes to connected browsers (smart polling or SSE)
+- [x] **DATA-06**: Real-time updates push table changes to connected browsers (smart polling or SSE)
 
 ### Betting & Monetisation
 

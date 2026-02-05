@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Match & Fixture Pages** - Recent results, upcoming fixtures, and match detail pages
 - [x] **Phase 4: Team Detail Pages** - Team pages with overview, performance, squad, and fixtures tabs
 - [x] **Phase 5: Season Timeline** - Interactive historical timeline to scrub through past matchweeks
-- [ ] **Phase 6: Live Data Pipeline** - Automated polling, match detection, standings recalculation, and real-time client updates
+- [x] **Phase 6: Live Data Pipeline** - Automated polling, match detection, standings recalculation, and real-time client updates
 - [ ] **Phase 7: Betting, Odds & Localisation** - Multi-bookmaker odds comparison, affiliate links, geo-compliance, and 5-language i18n
 
 ## Phase Details
@@ -118,9 +118,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 06-01-PLAN.md -- Server-side pipeline: api_call_log schema, shared status-map, fixture-window detection, match polling, QStash cron route
-- [ ] 06-02-PLAN.md -- Match completion chain, standings recalculation, daily resync with drift detection, Vercel cron route
-- [ ] 06-03-PLAN.md -- Browser smart polling: usePolling hook, /api/updates/check route, DataFreshness indicator, LeagueTableWrapper integration
+- [x] 06-01-PLAN.md -- Server-side pipeline: api_call_log schema, shared status-map, fixture-window detection, match polling, QStash cron route
+- [x] 06-02-PLAN.md -- Match completion chain, standings recalculation, daily resync with drift detection, Vercel cron route
+- [x] 06-03-PLAN.md -- Browser smart polling: usePolling hook, /api/updates/check route, DataFreshness indicator, LeagueTableWrapper integration
 
 ### Phase 7: Betting, Odds & Localisation
 **Goal**: Users can compare betting odds across bookmakers with proper legal compliance per jurisdiction, and the entire platform is available in 5 languages with locale-aware formatting
@@ -153,5 +153,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 3. Match & Fixture Pages | 3/3 | Complete | 2026-02-05 |
 | 4. Team Detail Pages | 3/3 | Complete | 2026-02-05 |
 | 5. Season Timeline | 3/3 | Complete | 2026-02-05 |
-| 6. Live Data Pipeline | 0/3 | Planned | - |
+| 6. Live Data Pipeline | 3/3 | Complete | 2026-02-05 |
 | 7. Betting, Odds & Localisation | 0/5 | Not started | - |
