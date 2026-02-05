@@ -115,12 +115,12 @@ Plans:
   2. When a match completes, standings are recalculated, Redis cache is invalidated, and ISR pages are revalidated within 2 minutes
   3. Connected browsers receive table updates without manual page refresh (via SSE or smart polling fallback)
   4. Off-peak polling is throttled to conserve API budget, with a daily full resync at 04:00 UTC to catch any missed updates
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 06-01: QStash cron jobs for match polling and fixture syncing
-- [ ] 06-02: Match completion detection, standings recalculation chain, and cache invalidation
-- [ ] 06-03: Real-time client updates (SSE or polling fallback)
+- [ ] 06-01-PLAN.md -- Server-side pipeline: api_call_log schema, shared status-map, fixture-window detection, match polling, QStash cron route
+- [ ] 06-02-PLAN.md -- Match completion chain, standings recalculation, daily resync with drift detection, Vercel cron route
+- [ ] 06-03-PLAN.md -- Browser smart polling: usePolling hook, /api/updates/check route, DataFreshness indicator, LeagueTableWrapper integration
 
 ### Phase 7: Betting, Odds & Localisation
 **Goal**: Users can compare betting odds across bookmakers with proper legal compliance per jurisdiction, and the entire platform is available in 5 languages with locale-aware formatting
@@ -153,5 +153,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 3. Match & Fixture Pages | 3/3 | Complete | 2026-02-05 |
 | 4. Team Detail Pages | 3/3 | Complete | 2026-02-05 |
 | 5. Season Timeline | 3/3 | Complete | 2026-02-05 |
-| 6. Live Data Pipeline | 0/3 | Not started | - |
+| 6. Live Data Pipeline | 0/3 | Planned | - |
 | 7. Betting, Odds & Localisation | 0/5 | Not started | - |
