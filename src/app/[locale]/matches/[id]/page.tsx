@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
+import { setRequestLocale } from 'next-intl/server';
 import { ThemeBackground } from '@/components/ThemeBackground';
 import { ScoreHero } from '@/components/match-detail/ScoreHero';
 import { StatsComparison } from '@/components/match-detail/StatsComparison';
@@ -16,12 +17,12 @@ import {
   getLeagueSlugById,
 } from '@/components/match-detail/actions';
 
-// ── Metadata ───────────────────────────────────────────────────────────────
+// -- Metadata ----------------------------------------------------------------
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ locale: string; id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
   const fixtureId = parseInt(id, 10);
@@ -46,14 +47,16 @@ export async function generateMetadata({
   }
 }
 
-// ── Page ───────────────────────────────────────────────────────────────────
+// -- Page --------------------------------------------------------------------
 
 export default async function MatchDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ locale: string; id: string }>;
 }) {
-  const { id } = await params;
+  const { locale, id } = await params;
+  setRequestLocale(locale);
+
   const fixtureId = parseInt(id, 10);
   if (isNaN(fixtureId)) return notFound();
 

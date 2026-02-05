@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { formatMatchDateShort, formatKickoffTime } from '@/lib/dates/format';
 import { fetchFixturesData, type FixturesData } from './actions';
 import type { FixtureWithTeams } from '@/lib/teams/queries';

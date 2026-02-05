@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
+import { LanguagePicker } from '@/components/i18n/LanguagePicker';
 
 export function Header() {
   const pathname = usePathname();
@@ -30,7 +30,7 @@ export function Header() {
           >
             Matches
           </Link>
-          <span className="text-xs text-white/30">EN</span>
+          <LanguagePicker />
         </nav>
       </div>
     </header>

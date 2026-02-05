@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { formatKickoffTime } from '@/lib/dates/format';
 import type { MatchWithTeams } from '@/lib/matches/queries';
 import { fetchRecentMatches, fetchUpcomingFixtures } from './actions';

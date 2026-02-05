@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { formatKickoffTime, formatMatchDateShort } from '@/lib/dates/format';
 import type { MatchWithTeams, MatchEvent } from '@/lib/matches/queries';
 import type { H2HSummary } from '@/lib/matches/h2h';

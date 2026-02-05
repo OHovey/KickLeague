@@ -1,35 +1,11 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
-import "./globals.css";
+import type { ReactNode } from 'react';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "KickData",
-  description: "Football league standings with rich visual context",
+type Props = {
+  children: ReactNode;
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <NuqsAdapter>{children}</NuqsAdapter>
-      </body>
-    </html>
-  );
+// Root layout is a minimal shell. The real layout with providers, fonts,
+// and metadata lives in src/app/[locale]/layout.tsx (managed by next-intl).
+export default function RootLayout({ children }: Props) {
+  return children;
 }

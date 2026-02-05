@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useState } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { motion } from 'motion/react';
 import type { EnhancedStandingsRow } from '@/lib/standings/queries';
 import { AnimatedStatCell } from './AnimatedStatCell';
