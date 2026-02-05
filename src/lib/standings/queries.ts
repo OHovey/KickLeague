@@ -1,6 +1,6 @@
 // Standings database queries with zone and tiebreaker integration
 
-import { eq, and, desc, max, gte, asc } from 'drizzle-orm';
+import { eq, and, desc, max, gte, asc, lte } from 'drizzle-orm';
 import { getDb, isDatabaseConfigured } from '@/db/connection';
 import {
   leagues,
@@ -175,7 +175,8 @@ async function getSparklineData(
         eq(standings.leagueId, leagueId),
         eq(standings.season, season),
         eq(standings.teamId, teamId),
-        gte(standings.matchweek, startMatchweek)
+        gte(standings.matchweek, startMatchweek),
+        lte(standings.matchweek, currentMatchweek)
       )
     )
     .orderBy(asc(standings.matchweek));
@@ -243,13 +244,72 @@ async function getPositionChanges(
   return positionChanges;
 }
 
+export interface MatchweekListResult {
+  matchweeks: Array<{ number: number; completed: boolean }>;
+  latestCompleted: number;
+  config: { matchweeksTotal: number } | null;
+}
+
+/**
+ * Get list of matchweeks for a league with completed/upcoming status.
+ * Returns an array of matchweeks with their completion status and the latest completed matchweek number.
+ */
+export async function getMatchweekList(
+  leagueSlug: string,
+  season?: string
+): Promise<MatchweekListResult> {
+  if (!isDatabaseConfigured()) {
+    return { matchweeks: [], latestCompleted: 0, config: null };
+  }
+
+  const league = await getLeagueBySlug(leagueSlug);
+  if (!league) {
+    return { matchweeks: [], latestCompleted: 0, config: null };
+  }
+
+  const targetSeason = season ?? league.currentSeason;
+  const config = await getLeagueConfig(league.id, targetSeason);
+
+  // Query distinct matchweeks that have standings data
+  const completedRows = await getDb()
+    .selectDistinct({ matchweek: standings.matchweek })
+    .from(standings)
+    .where(
+      and(
+        eq(standings.leagueId, league.id),
+        eq(standings.season, targetSeason)
+      )
+    )
+    .orderBy(asc(standings.matchweek));
+
+  const completedSet = new Set(completedRows.map(r => r.matchweek));
+  const matchweeksTotal = config?.matchweeksTotal ?? 38;
+  const latestCompleted = completedRows.length > 0
+    ? completedRows[completedRows.length - 1].matchweek
+    : 0;
+
+  const matchweeks: Array<{ number: number; completed: boolean }> = [];
+  for (let i = 1; i <= matchweeksTotal; i++) {
+    matchweeks.push({ number: i, completed: completedSet.has(i) });
+  }
+
+  return {
+    matchweeks,
+    latestCompleted,
+    config: config ? { matchweeksTotal: config.matchweeksTotal } : null,
+  };
+}
+
 /**
  * Fetch standings with zones, applying tiebreakers for proper ordering.
  * This is the main query used by the LeagueTable component.
+ * When matchweek is provided, returns standings for that specific matchweek.
+ * When not provided, uses the latest matchweek with data.
  */
 export async function getStandingsWithZones(
   leagueSlug: string,
-  season?: string
+  season?: string,
+  matchweek?: number
 ): Promise<StandingsWithZones> {
   // 0. Check if database is configured
   if (!isDatabaseConfigured()) {
@@ -281,9 +341,9 @@ export async function getStandingsWithZones(
   // 3. Fetch league config
   const config = await getLeagueConfig(league.id, targetSeason);
 
-  // 4. Get the latest matchweek with data
-  const matchweek = await getLatestMatchweek(league.id, targetSeason);
-  if (matchweek === null) {
+  // 4. Determine matchweek: use provided value or fall back to latest
+  const resolvedMatchweek = matchweek ?? await getLatestMatchweek(league.id, targetSeason);
+  if (resolvedMatchweek === null) {
     return {
       standings: [],
       zones: await getLeagueZones(league.id, targetSeason),
@@ -328,7 +388,7 @@ export async function getStandingsWithZones(
       and(
         eq(standings.leagueId, league.id),
         eq(standings.season, targetSeason),
-        eq(standings.matchweek, matchweek)
+        eq(standings.matchweek, resolvedMatchweek)
       )
     )
     .orderBy(desc(standings.points), standings.position);
@@ -345,11 +405,11 @@ export async function getStandingsWithZones(
   }
 
   // 8. Fetch position changes
-  const positionChanges = await getPositionChanges(league.id, targetSeason, matchweek);
+  const positionChanges = await getPositionChanges(league.id, targetSeason, resolvedMatchweek);
 
   // 9. Fetch sparkline data for each team (in parallel)
   const sparklinePromises = sortedStandings.map(row =>
-    getSparklineData(league.id, targetSeason, row.teamId, matchweek)
+    getSparklineData(league.id, targetSeason, row.teamId, resolvedMatchweek)
   );
   const sparklineResults = await Promise.all(sparklinePromises);
 
@@ -377,6 +437,6 @@ export async function getStandingsWithZones(
       slug: league.slug,
       currentSeason: league.currentSeason,
     },
-    matchweek,
+    matchweek: resolvedMatchweek,
   };
 }
