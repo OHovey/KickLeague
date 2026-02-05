@@ -5,6 +5,7 @@ import * as Tabs from '@radix-ui/react-tabs';
 import { parseAsStringEnum, useQueryState } from 'nuqs';
 import { clsx } from 'clsx';
 import { OverviewTab } from './OverviewTab';
+import { PerformanceTab } from './PerformanceTab';
 import { SquadTab } from './SquadTab';
 import { FixturesTab } from './FixturesTab';
 
@@ -72,9 +73,12 @@ function TeamTabsInner({
       </Tabs.Content>
 
       <Tabs.Content value="performance" className="mt-6">
-        <div className="rounded-xl bg-white/5 p-6 text-center">
-          <p className="text-white/50">Performance analytics coming soon</p>
-        </div>
+        <PerformanceTab
+          teamId={teamId}
+          leagueId={leagueId}
+          season={season}
+          hasXg={hasXg}
+        />
       </Tabs.Content>
 
       <Tabs.Content value="squad" className="mt-6">
