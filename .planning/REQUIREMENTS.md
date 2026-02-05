@@ -138,11 +138,11 @@
 | MTCH-01 | Phase 3 | Complete |
 | MTCH-02 | Phase 3 | Complete |
 | MTCH-03 | Phase 3 | Partial (placeholder, odds data in Phase 7) |
-| TEAM-01 | Phase 4 | Pending |
-| TEAM-02 | Phase 4 | Pending |
-| TEAM-03 | Phase 4 | Pending |
-| TEAM-04 | Phase 4 | Pending |
-| TEAM-05 | Phase 4 | Pending |
+| TEAM-01 | Phase 4 | Complete |
+| TEAM-02 | Phase 4 | Complete |
+| TEAM-03 | Phase 4 | Complete |
+| TEAM-04 | Phase 4 | Complete |
+| TEAM-05 | Phase 4 | Partial (placeholder, odds data in Phase 7) |
 | TIME-01 | Phase 5 | Pending |
 | TIME-02 | Phase 5 | Pending |
 | TIME-03 | Phase 5 | Pending |
@@ -166,4 +166,4 @@
 
 ---
 *Requirements defined: 2026-02-04*
-*Last updated: 2026-02-05 after Phase 3 completion*
+*Last updated: 2026-02-05 after Phase 4 completion*

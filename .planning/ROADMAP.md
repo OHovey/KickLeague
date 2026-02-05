@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Data Foundation** - Database schema, API client, data seeding for all 5 leagues
 - [x] **Phase 2: League Tables & Navigation** - Core product: information-dense league tables with sparklines, theming, and mobile layout
 - [x] **Phase 3: Match & Fixture Pages** - Recent results, upcoming fixtures, and match detail pages
-- [ ] **Phase 4: Team Detail Pages** - Team pages with overview, performance, squad, and fixtures tabs
+- [x] **Phase 4: Team Detail Pages** - Team pages with overview, performance, squad, and fixtures tabs
 - [ ] **Phase 5: Season Timeline** - Interactive historical timeline to scrub through past matchweeks
 - [ ] **Phase 6: Live Data Pipeline** - Automated polling, match detection, standings recalculation, and real-time client updates
 - [ ] **Phase 7: Betting, Odds & Localisation** - Multi-bookmaker odds comparison, affiliate links, geo-compliance, and 5-language i18n
@@ -87,9 +87,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md -- Team query layer, page route, hero section, and tab navigation
-- [ ] 04-02-PLAN.md -- Overview and performance tabs with charts (bump chart, cumulative points, goals by period, xG, home/away splits)
-- [ ] 04-03-PLAN.md -- Squad tab, fixtures tab, and team page link integration across existing components
+- [x] 04-01-PLAN.md -- Team query layer, page route, hero section, and tab navigation
+- [x] 04-02-PLAN.md -- Overview and performance tabs with charts (bump chart, cumulative points, goals by period, xG, home/away splits)
+- [x] 04-03-PLAN.md -- Squad tab, fixtures tab, and team page link integration across existing components
 
 ### Phase 5: Season Timeline
 **Goal**: Users can scrub through the season to see how the league table looked at any point in history, with smooth animated transitions as teams move up and down
@@ -151,7 +151,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 1. Data Foundation | 3/3 | Complete | 2026-02-04 |
 | 2. League Tables & Navigation | 5/5 | Complete | 2026-02-05 |
 | 3. Match & Fixture Pages | 3/3 | Complete | 2026-02-05 |
-| 4. Team Detail Pages | 0/3 | Not started | - |
+| 4. Team Detail Pages | 3/3 | Complete | 2026-02-05 |
 | 5. Season Timeline | 0/3 | Not started | - |
 | 6. Live Data Pipeline | 0/3 | Not started | - |
 | 7. Betting, Odds & Localisation | 0/5 | Not started | - |
