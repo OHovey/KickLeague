@@ -67,18 +67,23 @@ export function SeasonTimeline({
   }, [isAtEnd, isPlaying, onWeekChange, toggle]);
 
   return (
-    <div className="flex items-center gap-2">
-      <TimelineControls
-        isPlaying={isPlaying}
-        onToggle={handleToggle}
-        isAtEnd={isAtEnd && !isPlaying}
-      />
-      <NavArrow
-        direction="left"
-        onClick={() => stripRef.current?.scrollByCircles('left')}
-        disabled={matchweeks.length === 0}
-      />
-      <div className="min-w-0 flex-1 overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
+    <div className="relative">
+      {/* Play button + left arrow — positioned outside left edge */}
+      <div className="absolute left-0 top-1/2 z-10 flex -translate-x-full -translate-y-1/2 items-center gap-1 pr-2">
+        <TimelineControls
+          isPlaying={isPlaying}
+          onToggle={handleToggle}
+          isAtEnd={isAtEnd && !isPlaying}
+        />
+        <NavArrow
+          direction="left"
+          onClick={() => stripRef.current?.scrollByCircles('left')}
+          disabled={matchweeks.length === 0}
+        />
+      </div>
+
+      {/* Circle strip — full width, matches table column */}
+      <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
         <TimelineStrip
           ref={stripRef}
           matchweeks={matchweeks}
@@ -88,11 +93,15 @@ export function SeasonTimeline({
           onSelectWeek={handleWeekSelect}
         />
       </div>
-      <NavArrow
-        direction="right"
-        onClick={() => stripRef.current?.scrollByCircles('right')}
-        disabled={matchweeks.length === 0}
-      />
+
+      {/* Right arrow — positioned outside right edge */}
+      <div className="absolute right-0 top-1/2 z-10 -translate-y-1/2 translate-x-full pl-2">
+        <NavArrow
+          direction="right"
+          onClick={() => stripRef.current?.scrollByCircles('right')}
+          disabled={matchweeks.length === 0}
+        />
+      </div>
     </div>
   );
 }
