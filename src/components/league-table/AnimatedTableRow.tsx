@@ -48,7 +48,7 @@ export const AnimatedTableRow = memo(function AnimatedTableRow({
           },
         }}
         role="row"
-        className="group relative grid cursor-pointer grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] items-center border-b border-white/5 transition-colors hover:bg-white/5 md:cursor-default md:grid-cols-[2.5rem_1fr_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_3rem_3rem_7.5rem_2.5rem_7.5rem]"
+        className="group relative grid cursor-pointer grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] items-center border-b border-white/5 transition-colors hover:bg-white/5 md:cursor-default md:grid-cols-[2rem_8fr_2fr_2fr_2fr_2fr_2fr_2fr_2.5fr_2.5fr_minmax(7rem,5fr)_2fr_minmax(6rem,5fr)]"
         onClick={handleRowClick}
         tabIndex={0}
         onKeyDown={(e) => {
@@ -122,7 +122,7 @@ export const AnimatedTableRow = memo(function AnimatedTableRow({
         </div>
 
         {/* Form - Desktop only */}
-        <div role="cell" className="hidden min-h-[44px] py-3 px-2 md:block">
+        <div role="cell" className="hidden min-h-[44px] py-3 px-2 md:flex md:items-center md:justify-center">
           <FormBadges form={row.form} />
         </div>
 
@@ -132,8 +132,8 @@ export const AnimatedTableRow = memo(function AnimatedTableRow({
         </div>
 
         {/* Sparkline Trend - Desktop only */}
-        <div role="cell" className="hidden min-h-[44px] py-3 px-2 md:block md:pr-4">
-          <Sparkline data={row.sparklineData} />
+        <div role="cell" className="hidden min-h-[44px] py-3 px-2 md:flex md:items-center md:justify-center">
+          <Sparkline data={row.sparklineData} width={100} height={28} />
         </div>
 
         {/* Expand indicator - Mobile only */}

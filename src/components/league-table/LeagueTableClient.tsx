@@ -59,10 +59,10 @@ function TableSkeleton() {
   );
 }
 
-// Mobile: #, Team, P, GD, Pts, Expand (6 visible items)
-// Desktop: #, Team, P, W, D, L, GF, GA, GD, Pts, Form(7.5rem=120px), +/-(2.5rem), Trend(7.5rem=120px)
-// Fixed widths on Form/+/-/Trend prevent header-vs-body misalignment (auto resolves differently per row)
-const GRID_COLS = 'grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] md:grid-cols-[2.5rem_1fr_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_2.5rem_3rem_3rem_7.5rem_2.5rem_7.5rem]';
+// Mobile: #, Team, P, GD, Pts, Expand (6 columns)
+// Desktop: fractional units distribute space proportionally so columns spread evenly
+// #=fixed, Team=8fr, stats=2fr, GD/Pts=2.5fr, Form=minmax(7rem,5fr), +/-=2fr, Trend=minmax(6rem,5fr)
+const GRID_COLS = 'grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] md:grid-cols-[2rem_8fr_2fr_2fr_2fr_2fr_2fr_2fr_2.5fr_2.5fr_minmax(7rem,5fr)_2fr_minmax(6rem,5fr)]';
 
 export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps) {
   const [data, setData] = useState<StandingsData | null>(null);
@@ -193,9 +193,9 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
               <div role="columnheader" className="py-3 px-2 text-center font-medium">GD</div>
               <div role="columnheader" className="py-3 pl-2 pr-2 text-center font-medium">Pts</div>
               {/* Desktop-only visual columns */}
-              <div role="columnheader" className="hidden py-3 px-2 text-left font-medium md:block">Form</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">Form</div>
               <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">+/-</div>
-              <div role="columnheader" className="hidden py-3 px-2 pr-4 text-left font-medium md:block">Trend</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">Trend</div>
               {/* Expand indicator for mobile */}
               <div role="columnheader" className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">Expand</span></div>
             </div>
