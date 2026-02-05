@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { formatMatchDate, formatKickoffTime } from '@/lib/dates/format';
 
 // ── Team Logo ──────────────────────────────────────────────────────────────
@@ -25,8 +26,8 @@ function TeamLogo({ logoUrl, name }: { logoUrl: string | null; name: string }) {
 // ── Props ──────────────────────────────────────────────────────────────────
 
 interface ScoreHeroProps {
-  homeTeam: { name: string; shortName: string | null; logoUrl: string | null };
-  awayTeam: { name: string; shortName: string | null; logoUrl: string | null };
+  homeTeam: { name: string; shortName: string | null; logoUrl: string | null; slug: string };
+  awayTeam: { name: string; shortName: string | null; logoUrl: string | null; slug: string };
   homeScore: number | null;
   awayScore: number | null;
   kickoff: Date | string;
@@ -63,9 +64,12 @@ export function ScoreHero({
         {/* Home team */}
         <div className="flex flex-1 flex-col items-end gap-2">
           <TeamLogo logoUrl={homeTeam.logoUrl} name={homeTeam.name} />
-          <span className="text-sm font-medium text-white/90 text-right">
+          <Link
+            href={`/teams/${homeTeam.slug}`}
+            className="text-sm font-medium text-white/90 text-right hover:underline"
+          >
             {homeTeam.shortName ?? homeTeam.name}
-          </span>
+          </Link>
         </div>
 
         {/* Score or kickoff */}
@@ -89,9 +93,12 @@ export function ScoreHero({
         {/* Away team */}
         <div className="flex flex-1 flex-col items-start gap-2">
           <TeamLogo logoUrl={awayTeam.logoUrl} name={awayTeam.name} />
-          <span className="text-sm font-medium text-white/90">
+          <Link
+            href={`/teams/${awayTeam.slug}`}
+            className="text-sm font-medium text-white/90 hover:underline"
+          >
             {awayTeam.shortName ?? awayTeam.name}
-          </span>
+          </Link>
         </div>
       </div>
 

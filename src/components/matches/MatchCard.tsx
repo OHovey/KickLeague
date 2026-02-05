@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useTransition } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { formatKickoffTime, formatMatchDateShort } from '@/lib/dates/format';
 import type { MatchWithTeams, MatchEvent } from '@/lib/matches/queries';
 import type { H2HSummary } from '@/lib/matches/h2h';
@@ -187,6 +188,7 @@ export function MatchCard({
   homeForm,
   awayForm,
 }: MatchCardProps) {
+  const router = useRouter();
   const isFinished = match.status === 'finished';
   const homeName = match.homeTeam.shortName ?? match.homeTeam.name;
   const awayName = match.awayTeam.shortName ?? match.awayTeam.name;
@@ -211,7 +213,15 @@ export function MatchCard({
         <div className="flex items-center gap-3">
           {/* Home team */}
           <div className="flex flex-1 items-center justify-end gap-2">
-            <span className="text-sm font-medium text-white/90 text-right">
+            <span
+              className="text-sm font-medium text-white/90 text-right hover:underline cursor-pointer"
+              role="link"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                router.push(`/teams/${match.homeTeam.slug}`);
+              }}
+            >
               {homeName}
             </span>
             <TeamLogo
@@ -242,7 +252,15 @@ export function MatchCard({
               logoUrl={match.awayTeam.logoUrl}
               name={match.awayTeam.name}
             />
-            <span className="text-sm font-medium text-white/90">
+            <span
+              className="text-sm font-medium text-white/90 hover:underline cursor-pointer"
+              role="link"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                router.push(`/teams/${match.awayTeam.slug}`);
+              }}
+            >
               {awayName}
             </span>
           </div>
