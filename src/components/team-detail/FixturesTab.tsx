@@ -184,9 +184,10 @@ interface FixturesTabProps {
   leagueId: number;
   season: string;
   showBetting?: boolean;
+  countryCode?: string | null;
 }
 
-export function FixturesTab({ teamId, leagueId, season, showBetting = false }: FixturesTabProps) {
+export function FixturesTab({ teamId, leagueId, season, showBetting = false, countryCode = null }: FixturesTabProps) {
   const locale = useLocale();
   const [data, setData] = useState<FixturesData | null>(null);
   const [oddsMap, setOddsMap] = useState<Record<number, CompactOddsData>>({});
@@ -202,7 +203,7 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false }: F
         // Batch-fetch compact odds for upcoming fixtures
         if (showBetting && result.upcoming.length > 0) {
           const upcomingIds = result.upcoming.map((f) => f.id);
-          const odds = await fetchCompactOdds(upcomingIds);
+          const odds = await fetchCompactOdds(upcomingIds, countryCode ?? null);
           setOddsMap(odds);
         }
       } catch {
@@ -211,7 +212,7 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false }: F
         setLoaded(true);
       }
     });
-  }, [teamId, leagueId, season, showBetting]);
+  }, [teamId, leagueId, season, showBetting, countryCode]);
 
   if (!loaded || isPending) return <FixturesSkeleton />;
   if (!data || (data.recent.length === 0 && data.upcoming.length === 0)) {

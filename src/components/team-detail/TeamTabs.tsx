@@ -8,7 +8,7 @@ import { OverviewTab } from './OverviewTab';
 import { PerformanceTab } from './PerformanceTab';
 import { SquadTab } from './SquadTab';
 import { FixturesTab } from './FixturesTab';
-import { getShowBetting } from '@/components/matches/actions';
+import { getGeoContext } from '@/components/matches/actions';
 
 const TAB_VALUES = ['overview', 'performance', 'squad', 'fixtures'] as const;
 type TabValue = (typeof TAB_VALUES)[number];
@@ -40,10 +40,14 @@ function TeamTabsInner({
     parseAsStringEnum([...TAB_VALUES]).withDefault('overview')
   );
 
-  const [showBetting, setShowBetting] = useState(false);
+  const [geoContext, setGeoContext] = useState<{
+    showBetting: boolean;
+    countryCode: string | null;
+    isMapped: boolean;
+  }>({ showBetting: false, countryCode: null, isMapped: false });
 
   useEffect(() => {
-    getShowBetting().then(setShowBetting);
+    getGeoContext().then(setGeoContext);
   }, []);
 
   return (
@@ -93,7 +97,7 @@ function TeamTabsInner({
       </Tabs.Content>
 
       <Tabs.Content value="fixtures" className="mt-6">
-        <FixturesTab teamId={teamId} leagueId={leagueId} season={season} showBetting={showBetting} />
+        <FixturesTab teamId={teamId} leagueId={leagueId} season={season} showBetting={geoContext.showBetting} countryCode={geoContext.countryCode} />
       </Tabs.Content>
     </Tabs.Root>
   );

@@ -15,6 +15,7 @@ interface OddsComparisonTableProps {
   homeTeam: string;
   awayTeam: string;
   showBetting: boolean;
+  countryCode: string | null;
 }
 
 // ── Skeleton ───────────────────────────────────────────────────────────────
@@ -67,6 +68,7 @@ export function OddsComparisonTable({
   homeTeam,
   awayTeam,
   showBetting,
+  countryCode,
 }: OddsComparisonTableProps) {
   const t = useTranslations('Odds');
   const [data, setData] = useState<FixtureOddsResult | null>(null);
@@ -77,7 +79,7 @@ export function OddsComparisonTable({
     if (!showBetting) return;
     startTransition(async () => {
       try {
-        const result = await fetchOddsForFixture(fixtureId);
+        const result = await fetchOddsForFixture(fixtureId, countryCode);
         setData(result);
       } catch {
         // Silently fail - odds are supplementary
@@ -85,7 +87,7 @@ export function OddsComparisonTable({
         setLoaded(true);
       }
     });
-  }, [fixtureId, showBetting]);
+  }, [fixtureId, showBetting, countryCode]);
 
   // Geo-blocked: render nothing
   if (!showBetting) return null;

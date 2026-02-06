@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useTransition, useCallback } from 'react';
 import type { MatchWithTeams, MatchEvent } from '@/lib/matches/queries';
-import { fetchRecentMatches, fetchUpcomingFixtures, getShowBetting } from './actions';
+import { fetchRecentMatches, fetchUpcomingFixtures, getGeoContext } from './actions';
+import { fetchCompactOdds, type CompactOddsData } from '@/components/odds/actions';
 import { MatchList } from './MatchList';
 
 // ─── Skeleton ───────────────────────────────────────────────────────────────
@@ -44,6 +45,7 @@ interface MatchData {
   matches: MatchWithTeams[];
   events: Record<number, MatchEvent[]>;
   teamForms: Record<number, string>;
+  oddsMap: Record<number, CompactOddsData>;
 }
 
 // ─── Component ──────────────────────────────────────────────────────────────
@@ -54,7 +56,11 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [dbError, setDbError] = useState<string | null>(null);
-  const [showBetting, setShowBetting] = useState(false);
+  const [geoContext, setGeoContext] = useState<{
+    showBetting: boolean;
+    countryCode: string | null;
+    isMapped: boolean;
+  }>({ showBetting: false, countryCode: null, isMapped: false });
 
   const fetchData = useCallback(
     (limit: number) => {
@@ -64,7 +70,7 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
             const result = await fetchRecentMatches(league, limit);
             if (result.error === 'database_not_configured') {
               setDbError('database_not_configured');
-              setData({ matches: [], events: {}, teamForms: {} });
+              setData({ matches: [], events: {}, teamForms: {}, oddsMap: {} });
               return;
             }
             setDbError(null);
@@ -72,19 +78,29 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
               matches: result.matches,
               events: result.events,
               teamForms: result.teamForms,
+              oddsMap: {},
             });
           } else {
             const result = await fetchUpcomingFixtures(league, limit);
             if (result.error === 'database_not_configured') {
               setDbError('database_not_configured');
-              setData({ matches: [], events: {}, teamForms: {} });
+              setData({ matches: [], events: {}, teamForms: {}, oddsMap: {} });
               return;
             }
             setDbError(null);
+
+            // Fetch compact odds for upcoming fixtures
+            let oddsMap: Record<number, CompactOddsData> = {};
+            if (geoContext.showBetting && result.matches.length > 0) {
+              const fixtureIds = result.matches.map((m) => m.id);
+              oddsMap = await fetchCompactOdds(fixtureIds, geoContext.countryCode);
+            }
+
             setData({
               matches: result.matches,
               events: {},
               teamForms: result.teamForms,
+              oddsMap,
             });
           }
           setError(null);
@@ -93,12 +109,12 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
         }
       });
     },
-    [league, tab]
+    [league, tab, geoContext]
   );
 
-  // Fetch showBetting flag on mount
+  // Fetch geo context on mount
   useEffect(() => {
-    getShowBetting().then(setShowBetting);
+    getGeoContext().then(setGeoContext);
   }, []);
 
   // Fetch on mount and when league/tab changes
@@ -153,8 +169,9 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
         matches={data.matches}
         events={data.events}
         teamForms={data.teamForms}
+        oddsMap={data.oddsMap}
         type={tab}
-        showBetting={showBetting}
+        showBetting={geoContext.showBetting}
         onShowMore={!showAll ? handleShowMore : undefined}
         hasMore={!showAll && data.matches.length >= 10}
       />

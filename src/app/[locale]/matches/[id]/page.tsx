@@ -59,9 +59,10 @@ export default async function MatchDetailPage({
   const { locale, id } = await params;
   setRequestLocale(locale);
 
-  // Read geo-compliance flag from proxy headers
+  // Read geo-compliance flags from proxy headers
   const headerStore = await headers();
   const showBetting = headerStore.get('x-show-betting') === '1';
+  const countryCode = headerStore.get('x-user-country')?.toUpperCase() ?? null;
 
   const fixtureId = parseInt(id, 10);
   if (isNaN(fixtureId)) return notFound();
@@ -221,6 +222,7 @@ export default async function MatchDetailPage({
             homeTeam={match.homeTeam.shortName ?? match.homeTeam.name}
             awayTeam={match.awayTeam.shortName ?? match.awayTeam.name}
             showBetting={showBetting}
+            countryCode={countryCode}
           />
         </div>
       </div>

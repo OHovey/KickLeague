@@ -1,6 +1,7 @@
 'use client';
 
 import type { MatchWithTeams, MatchEvent } from '@/lib/matches/queries';
+import type { CompactOddsData } from '@/components/odds/actions';
 import { MatchCard } from './MatchCard';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -9,6 +10,7 @@ interface MatchListProps {
   matches: MatchWithTeams[];
   events: Record<number, MatchEvent[]>;
   teamForms: Record<number, string>;
+  oddsMap?: Record<number, CompactOddsData>;
   type: 'results' | 'fixtures';
   showBetting?: boolean;
   onShowMore?: () => void;
@@ -41,6 +43,7 @@ export function MatchList({
   matches,
   events,
   teamForms,
+  oddsMap = {},
   type,
   showBetting = false,
   onShowMore,
@@ -78,6 +81,7 @@ export function MatchList({
                 events={events[match.id] ?? []}
                 homeForm={teamForms[match.homeTeam.id] ?? null}
                 awayForm={teamForms[match.awayTeam.id] ?? null}
+                compactOdds={oddsMap[match.id] ?? null}
                 showBetting={showBetting}
               />
             ))}
