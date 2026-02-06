@@ -66,6 +66,7 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 - Collect affiliate IDs/btags from each dashboard after approval
 - Apply migration 0003_young_network.sql to production database
 - Add Header to all pages via layout (todo: 2026-02-06)
+- Add three-card hero row to homepage (todo: 2026-02-06)
 
 ### Tech Debt (from v1 audit)
 
