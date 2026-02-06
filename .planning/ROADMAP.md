@@ -19,7 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Season Timeline** - Interactive historical timeline to scrub through past matchweeks
 - [x] **Phase 6: Live Data Pipeline** - Automated polling, match detection, standings recalculation, and real-time client updates
 - [x] **Phase 7: Betting, Odds & Localisation** - Multi-bookmaker odds comparison, affiliate links, geo-compliance, and 5-language i18n
-- [ ] **Phase 8: Team Fixtures Odds Fix** - Thread showBetting through TeamTabs to FixturesTab (audit gap closure)
+- [x] **Phase 8: Team Fixtures Odds Fix** - Thread showBetting through TeamTabs to FixturesTab (audit gap closure)
 
 ## Phase Details
 
@@ -154,7 +154,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 08-01-PLAN.md -- Thread showBetting through TeamTabs to FixturesTab
+- [x] 08-01-PLAN.md -- Thread showBetting through TeamTabs to FixturesTab
 
 ## Progress
 
@@ -170,4 +170,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 5. Season Timeline | 3/3 | Complete | 2026-02-05 |
 | 6. Live Data Pipeline | 3/3 | Complete | 2026-02-05 |
 | 7. Betting, Odds & Localisation | 5/5 | Complete | 2026-02-06 |
-| 8. Team Fixtures Odds Fix | 0/1 | Pending | -- |
+| 8. Team Fixtures Odds Fix | 1/1 | Complete | 2026-02-06 |
