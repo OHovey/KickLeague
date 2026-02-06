@@ -1,7 +1,7 @@
 'use client';
 
 import { formatOdds } from '@/lib/odds-api/odds-format';
-import { useOddsFormat, type OddsFormat } from './OddsFormatSwitcher';
+import { useOddsFormat } from './OddsFormatSwitcher';
 
 interface OddsCellProps {
   value: number;
@@ -10,6 +10,7 @@ interface OddsCellProps {
   fixtureId: number;
   bookmakerKey: string;
   outcome: 'home' | 'draw' | 'away';
+  affiliateProgram: string | null;
   isBest?: boolean;
 }
 
@@ -27,6 +28,7 @@ export function OddsCell({
   fixtureId,
   bookmakerKey,
   outcome,
+  affiliateProgram,
   isBest = false,
 }: OddsCellProps) {
   const { format } = useOddsFormat();
@@ -41,7 +43,7 @@ export function OddsCell({
     fetch('/api/clicks', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fixtureId, bookmakerKey, outcome, odds: value }),
+      body: JSON.stringify({ fixtureId, bookmakerKey, outcome, odds: value, affiliateProgram }),
     }).catch(() => {
       // Never block the user's click
     });

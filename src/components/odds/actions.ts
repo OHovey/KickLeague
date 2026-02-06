@@ -3,6 +3,7 @@
 import { eq, inArray } from 'drizzle-orm';
 import { getDb, isDatabaseConfigured } from '@/db/connection';
 import { fixtureOdds } from '@/db/schema';
+import { getAffiliateConfig } from '@/lib/affiliate/config';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -18,6 +19,7 @@ export interface OddsRow {
   prevHomeOdds: number | null;
   prevDrawOdds: number | null;
   prevAwayOdds: number | null;
+  affiliateProgram: string | null;
   lastUpdated: string;
 }
 
@@ -57,20 +59,24 @@ export async function fetchOddsForFixture(
     // Sort by best home odds descending (highest = best for bettors)
     const sorted = rows.sort((a, b) => b.homeOdds - a.homeOdds);
 
-    const oddsRows: OddsRow[] = sorted.map((r) => ({
-      bookmakerKey: r.bookmakerKey,
-      bookmakerTitle: r.bookmakerTitle,
-      homeOdds: r.homeOdds,
-      drawOdds: r.drawOdds,
-      awayOdds: r.awayOdds,
-      homeLink: r.homeLink,
-      drawLink: r.drawLink,
-      awayLink: r.awayLink,
-      prevHomeOdds: r.prevHomeOdds,
-      prevDrawOdds: r.prevDrawOdds,
-      prevAwayOdds: r.prevAwayOdds,
-      lastUpdated: r.lastUpdated.toISOString(),
-    }));
+    const oddsRows: OddsRow[] = sorted.map((r) => {
+      const affiliateCfg = getAffiliateConfig(r.bookmakerKey);
+      return {
+        bookmakerKey: r.bookmakerKey,
+        bookmakerTitle: r.bookmakerTitle,
+        homeOdds: r.homeOdds,
+        drawOdds: r.drawOdds,
+        awayOdds: r.awayOdds,
+        homeLink: r.homeLink,
+        drawLink: r.drawLink,
+        awayLink: r.awayLink,
+        prevHomeOdds: r.prevHomeOdds,
+        prevDrawOdds: r.prevDrawOdds,
+        prevAwayOdds: r.prevAwayOdds,
+        affiliateProgram: affiliateCfg?.programName ?? null,
+        lastUpdated: r.lastUpdated.toISOString(),
+      };
+    });
 
     // Use the most recent fetchedAt across all rows
     const latestFetchedAt = rows.reduce(

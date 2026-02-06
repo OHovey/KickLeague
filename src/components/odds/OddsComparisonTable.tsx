@@ -153,6 +153,7 @@ export function OddsComparisonTable({
                 fixtureId={fixtureId}
                 bookmakerKey={row.bookmakerKey}
                 outcome="home"
+                affiliateProgram={row.affiliateProgram}
                 isBest={row.homeOdds === bestHome}
               />
               <OddsCell
@@ -162,6 +163,7 @@ export function OddsComparisonTable({
                 fixtureId={fixtureId}
                 bookmakerKey={row.bookmakerKey}
                 outcome="draw"
+                affiliateProgram={row.affiliateProgram}
                 isBest={row.drawOdds === bestDraw}
               />
               <OddsCell
@@ -171,6 +173,7 @@ export function OddsComparisonTable({
                 fixtureId={fixtureId}
                 bookmakerKey={row.bookmakerKey}
                 outcome="away"
+                affiliateProgram={row.affiliateProgram}
                 isBest={row.awayOdds === bestAway}
               />
             </div>

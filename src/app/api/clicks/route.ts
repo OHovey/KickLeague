@@ -10,7 +10,7 @@ const VALID_OUTCOMES = new Set(['home', 'draw', 'away']);
  * Records an affiliate click event for analytics and reconciliation.
  * Fire-and-forget from the client -- must never block the user's navigation.
  *
- * Body: { fixtureId: number, bookmakerKey: string, outcome: string, odds: number }
+ * Body: { fixtureId: number, bookmakerKey: string, outcome: string, odds: number, affiliateProgram?: string }
  */
 export async function POST(request: NextRequest) {
   try {
@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
       outcome,
       odds,
       country: country?.toUpperCase() ?? null,
+      affiliateProgram: body.affiliateProgram ?? null,
     });
 
     return NextResponse.json({ ok: true });

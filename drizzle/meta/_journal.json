@@ -15,6 +15,20 @@
       "when": 1770329080176,
       "tag": "0001_loose_namorita",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1770346584827,
+      "tag": "0002_ambitious_mole_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1770355555265,
+      "tag": "0003_young_network",
+      "breakpoints": true
     }
   ]
 }

@@ -63,6 +63,7 @@ export const affiliateClicks = pgTable(
     outcome: varchar('outcome', { length: 10 }).notNull(), // 'home', 'draw', 'away'
     odds: real('odds').notNull(),
     country: varchar('country', { length: 2 }),
+    affiliateProgram: varchar('affiliate_program', { length: 50 }),
     clickedAt: timestamp('clicked_at', { withTimezone: true })
       .notNull()
       .defaultNow(),
