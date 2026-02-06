@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-06)
 ## Current Position
 
 Phase: 9 of 10 (Affiliate Link Builder & Pipeline Integration)
-Plan: -- (awaiting plan-phase)
-Status: Ready to plan
-Last activity: 2026-02-06 -- Roadmap created for v1.1 milestone
+Plan: 1 of 3 complete
+Status: In progress
+Last activity: 2026-02-06 -- Completed 09-01-PLAN.md (Affiliate Config & Link Builder)
 
-Progress: [░░░░░░░░░░] 0% (v1.1: 0/2 phases)
+Progress: [███░░░░░░░] 17% (v1.1: 1/6 plans)
 
 ## Performance Metrics
 
@@ -25,15 +25,22 @@ Progress: [░░░░░░░░░░] 0% (v1.1: 0/2 phases)
 - Timeline: 2 days (2026-02-04 to 2026-02-06)
 
 **v1.1 Velocity:**
-- Total plans completed: 0
-- Average duration: --
-- Total execution time: --
+- Total plans completed: 1
+- Average duration: 2 min
+- Total execution time: 2 min
 
 ## Accumulated Context
 
 ### Decisions
 
 All v1 decisions logged in PROJECT.md Key Decisions table.
+
+| Decision | Plan | Rationale |
+|----------|------|-----------|
+| No sidTemplate in initial config | 09-01 | Bookmaker sid URL templates not available until affiliate program approval |
+| env vars for affiliate IDs | 09-01 | IDs change per deployment, never committed to code or DB |
+| encodeURIComponent on tracking values | 09-01 | Prevents URL injection from special chars in affiliate IDs |
+| Shared Entain program for coral + ladbrokes_uk | 09-01 | Both brands use Entain Partners, same btag tracking |
 
 ### Pending Todos
 
@@ -53,10 +60,10 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
-None -- affiliate research complete, roadmap created, ready to plan Phase 9.
+None -- 09-01 complete, ready for 09-02 (schema migration, click analytics, seed script integration).
 
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Roadmap created for v1.1 milestone
+Stopped at: Completed 09-01-PLAN.md
 Resume file: None
