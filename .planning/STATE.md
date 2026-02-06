@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-02-04)
 
 ## Current Position
 
-Phase: 7 of 7 (Betting, Odds & Localisation)
-Plan: 5 of 5 complete in current phase
-Status: ALL PHASES COMPLETE
-Last activity: 2026-02-06 -- Completed 07-02-PLAN.md
+Phase: 8 of 8 (Team Fixtures Odds Fix - Gap Closure)
+Plan: 1 of 1 complete in current phase
+Status: ALL PHASES COMPLETE (including gap closure)
+Last activity: 2026-02-06 -- Completed 08-01-PLAN.md
 
-Progress: [██████████] 100% (25/25 plans)
+Progress: [██████████] 100% (26/26 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 25
-- Average duration: 3.9 min
-- Total execution time: ~1.76 hours
+- Total plans completed: 26
+- Average duration: 3.8 min
+- Total execution time: ~1.77 hours
 
 **By Phase:**
 
@@ -34,9 +34,10 @@ Progress: [██████████] 100% (25/25 plans)
 | 05-season-timeline | 3/3 | 8 min | 2.7 min |
 | 06-live-data-pipeline | 3/3 | 14 min | 4.7 min |
 | 07-betting-odds-localisation | 5/5 | 19 min | 3.8 min |
+| 08-team-fixtures-odds-fix | 1/1 | 1 min | 1.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 07-01 (3 min), 07-04 (5 min), 07-03 (1 min), 07-05 (5 min), 07-02 (5 min)
+- Last 5 plans: 07-04 (5 min), 07-03 (1 min), 07-05 (5 min), 07-02 (5 min), 08-01 (1 min)
 
 *Updated after each plan completion*
 
@@ -147,6 +148,7 @@ Recent decisions affecting current work:
 - 07-02: OddsFormatSwitcher persists preference in localStorage key 'odds-format' (default: decimal).
 - 07-02: Best odds per outcome highlighted in comparison table for quick visual scanning.
 - 07-02: CompactOdds shows best odds across all bookmakers as a horizontal badge on fixture cards.
+- 08-01: Reused MatchListClient showBetting fetch-on-mount pattern in TeamTabs for consistent geo-compliance.
 
 ### Pending Todos
 
@@ -161,6 +163,7 @@ Recent decisions affecting current work:
 - Set ODDS_API_KEY environment variable (get from https://the-odds-api.com/).
 - Run `npx drizzle-kit push` to create fixture_odds, affiliate_clicks, and team_translations tables.
 - **Seed sample upcoming fixtures with odds data** — create a script or manual seed to insert a small number of upcoming fixtures and fixture_odds rows so betting UI (OddsComparisonTable, CompactOdds, format switcher, click tracking) can be visually verified without consuming real API quota.
+- **BUG: UI text not translating when switching locales** — Changing locale via LanguagePicker updates the URL but UI labels/text remain in English. Components need to use `useTranslations()` (client) or `getTranslations()` (server) from next-intl to read from message files instead of hardcoded strings. Currently message files exist with translations but components still render hardcoded English text.
 
 ### Blockers/Concerns
 
@@ -170,5 +173,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 07-02-PLAN.md (odds display components and click tracking) -- ALL PLANS COMPLETE
+Stopped at: Completed 08-01-PLAN.md (thread showBetting through TeamTabs) -- ALL PLANS COMPLETE (including gap closure)
 Resume file: None
