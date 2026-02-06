@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-06)
 ## Current Position
 
 Phase: 9 of 10 (Affiliate Link Builder & Pipeline Integration)
-Plan: 1 of 3 complete
+Plan: 2 of 3 complete
 Status: In progress
-Last activity: 2026-02-06 -- Completed 09-01-PLAN.md (Affiliate Config & Link Builder)
+Last activity: 2026-02-06 -- Completed 09-02-PLAN.md (Schema Migration, Click Analytics & Seed Script)
 
-Progress: [███░░░░░░░] 17% (v1.1: 1/6 plans)
+Progress: [█████░░░░░] 33% (v1.1: 2/6 plans)
 
 ## Performance Metrics
 
@@ -25,9 +25,9 @@ Progress: [███░░░░░░░] 17% (v1.1: 1/6 plans)
 - Timeline: 2 days (2026-02-04 to 2026-02-06)
 
 **v1.1 Velocity:**
-- Total plans completed: 1
-- Average duration: 2 min
-- Total execution time: 2 min
+- Total plans completed: 2
+- Average duration: 2.5 min
+- Total execution time: 5 min
 
 ## Accumulated Context
 
@@ -41,6 +41,9 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 | env vars for affiliate IDs | 09-01 | IDs change per deployment, never committed to code or DB |
 | encodeURIComponent on tracking values | 09-01 | Prevents URL injection from special chars in affiliate IDs |
 | Shared Entain program for coral + ladbrokes_uk | 09-01 | Both brands use Entain Partners, same btag tracking |
+| affiliateProgram column nullable | 09-02 | Existing click rows keep null, no backfill needed |
+| Server-side affiliate config lookup | 09-02 | getAffiliateConfig runs in server action, keeps config out of client bundle |
+| Link enrichment at write time | 09-02 | buildAffiliateLink called at ingestion (seed/cron), enriched URLs pre-stored in DB |
 
 ### Pending Todos
 
@@ -50,6 +53,7 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 - Set environment variables for cron routes and APIs
 - Sign up for 5 affiliate programs (Paddy Power, Entain, Kindred, 888, William Hill)
 - Collect affiliate IDs/btags from each dashboard after approval
+- Apply migration 0003_young_network.sql to production database
 
 ### Tech Debt (from v1 audit)
 
@@ -60,10 +64,10 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
-None -- 09-01 complete, ready for 09-02 (schema migration, click analytics, seed script integration).
+None -- 09-02 complete, ready for 09-03 (odds cron integration with buildAffiliateLink).
 
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 09-01-PLAN.md
+Stopped at: Completed 09-02-PLAN.md
 Resume file: None
