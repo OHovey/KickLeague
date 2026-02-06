@@ -23,9 +23,9 @@ Requirements for affiliate monetisation milestone. Each maps to roadmap phases.
 
 ### Geo Filtering
 
-- [ ] **GEO-01**: Regional availability config defines which bookmakers are available in which countries
-- [ ] **GEO-02**: Odds display filters out bookmakers not available in the user's detected country
-- [ ] **GEO-03**: Available bookmakers are sorted with regionally prioritised bookmakers first
+- [x] **GEO-01**: Regional availability config defines which bookmakers are available in which countries
+- [x] **GEO-02**: Odds display filters out bookmakers not available in the user's detected country
+- [x] **GEO-03**: Available bookmakers are sorted with regionally prioritised bookmakers first
 
 ### Analytics
 
@@ -63,9 +63,9 @@ Deferred to future milestones.
 | LINK-02 | Phase 9 | Complete |
 | LINK-03 | Phase 9 | Complete |
 | LINK-04 | Phase 9 | Complete |
-| GEO-01 | Phase 10 | Pending |
-| GEO-02 | Phase 10 | Pending |
-| GEO-03 | Phase 10 | Pending |
+| GEO-01 | Phase 10 | Complete |
+| GEO-02 | Phase 10 | Complete |
+| GEO-03 | Phase 10 | Complete |
 | ANLYT-01 | Phase 9 | Complete |
 
 **Coverage:**
@@ -75,4 +75,4 @@ Deferred to future milestones.
 
 ---
 *Requirements defined: 2026-02-06*
-*Last updated: 2026-02-06 after Phase 9 execution*
+*Last updated: 2026-02-06 after Phase 10 execution*

@@ -3,7 +3,7 @@
 ## Milestones
 
 - **v1.0 MVP** - Phases 1-8 (shipped 2026-02-06)
-- **v1.1 Affiliate Monetisation** - Phases 9-10 (in progress)
+- **v1.1 Affiliate Monetisation** - Phases 9-10 (shipped 2026-02-06)
 
 ## Phases
 
@@ -86,7 +86,7 @@ Plans:
 
 </details>
 
-### v1.1 Affiliate Monetisation (In Progress)
+### v1.1 Affiliate Monetisation (SHIPPED 2026-02-06)
 
 **Milestone Goal:** Odds links generate affiliate revenue with tracked deep links, graceful degradation before IDs are collected, and geo-aware bookmaker filtering per user country.
 
@@ -119,9 +119,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 10-01-PLAN.md — Bookmaker availability config & filtering logic (TDD)
-- [ ] 10-02-PLAN.md — Server action integration & geo context threading
-- [ ] 10-03-PLAN.md — UX indicators & i18n translations
+- [x] 10-01-PLAN.md — Bookmaker availability config & filtering logic (TDD)
+- [x] 10-02-PLAN.md — Server action integration & geo context threading
+- [x] 10-03-PLAN.md — UX indicators & i18n translations
 
 ## Progress
 
@@ -139,8 +139,8 @@ Phases execute in numeric order: 9 -> 10
 | 7. Betting & i18n | v1.0 | 4/4 | Complete | 2026-02-05 |
 | 8. Polish | v1.0 | 2/2 | Complete | 2026-02-06 |
 | 9. Affiliate Links | v1.1 | 3/3 | Complete | 2026-02-06 |
-| 10. Geo Filtering | v1.1 | 0/3 | Not started | - |
+| 10. Geo Filtering | v1.1 | 3/3 | Complete | 2026-02-06 |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-06 after Phase 10 planning*
+*Last updated: 2026-02-06 after Phase 10 execution*
