@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.1 Affiliate Monetisation -- Phase 9: Affiliate Link Builder & Pipeline Integration
+**Current focus:** v1.1 Affiliate Monetisation -- Phase 9 complete, ready for Phase 10
 
 ## Current Position
 
 Phase: 9 of 10 (Affiliate Link Builder & Pipeline Integration)
-Plan: 2 of 3 complete
-Status: In progress
-Last activity: 2026-02-06 -- Completed 09-02-PLAN.md (Schema Migration, Click Analytics & Seed Script)
+Plan: 3 of 3 complete
+Status: Phase complete
+Last activity: 2026-02-06 -- Completed 09-03-PLAN.md (Odds Cron Route)
 
-Progress: [█████░░░░░] 33% (v1.1: 2/6 plans)
+Progress: [█████████░] 50% (v1.1: 3/6 plans)
 
 ## Performance Metrics
 
@@ -25,9 +25,9 @@ Progress: [█████░░░░░] 33% (v1.1: 2/6 plans)
 - Timeline: 2 days (2026-02-04 to 2026-02-06)
 
 **v1.1 Velocity:**
-- Total plans completed: 2
-- Average duration: 2.5 min
-- Total execution time: 5 min
+- Total plans completed: 3
+- Average duration: 2.3 min
+- Total execution time: 7 min
 
 ## Accumulated Context
 
@@ -44,6 +44,9 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 | affiliateProgram column nullable | 09-02 | Existing click rows keep null, no backfill needed |
 | Server-side affiliate config lookup | 09-02 | getAffiliateConfig runs in server action, keeps config out of client bundle |
 | Link enrichment at write time | 09-02 | buildAffiliateLink called at ingestion (seed/cron), enriched URLs pre-stored in DB |
+| Duplicate ODDS_TO_DB_NAME in refresh module | 09-03 | Seed script is standalone, mapping is small, avoids coupling |
+| Cron only updates existing fixtures | 09-03 | No fixture creation in odds cron -- that is API-Football polling's job |
+| Quota threshold 50 for early stop | 09-03 | Prevents quota exhaustion when polling 5 leagues sequentially |
 
 ### Pending Todos
 
@@ -64,10 +67,10 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
-None -- 09-02 complete, ready for 09-03 (odds cron integration with buildAffiliateLink).
+None -- Phase 09 complete (all 3 plans). Ready for Phase 10 (production deployment).
 
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 09-02-PLAN.md
+Stopped at: Completed 09-03-PLAN.md (Phase 09 complete)
 Resume file: None
