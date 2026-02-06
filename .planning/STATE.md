@@ -68,6 +68,7 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 - Add Header to all pages via layout (todo: 2026-02-06)
 - Add three-card hero row to homepage (todo: 2026-02-06)
 - Rebrand KickData to KickLeague (todo: 2026-02-06)
+- Install and use frontend-design Claude skill (todo: 2026-02-06)
 
 ### Tech Debt (from v1 audit)
 
