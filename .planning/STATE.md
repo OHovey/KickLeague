@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-04)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 7 in progress. Plans 01, 03, 04, and 05 complete. Continuing with odds pipeline and UI.
+**Current focus:** All 7 phases complete. Full product delivered: data foundation, league tables, match/fixture pages, team detail pages, season timeline, live data pipeline, betting odds, and localisation.
 
 ## Current Position
 
 Phase: 7 of 7 (Betting, Odds & Localisation)
-Plan: 4 of 5 complete in current phase
-Status: In progress
-Last activity: 2026-02-05 -- Completed 07-05-PLAN.md
+Plan: 5 of 5 complete in current phase
+Status: ALL PHASES COMPLETE
+Last activity: 2026-02-06 -- Completed 07-02-PLAN.md
 
-Progress: [█████████░] 96% (24/25 plans)
+Progress: [██████████] 100% (25/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 24
+- Total plans completed: 25
 - Average duration: 3.9 min
-- Total execution time: 1.68 hours
+- Total execution time: ~1.76 hours
 
 **By Phase:**
 
@@ -33,10 +33,10 @@ Progress: [█████████░] 96% (24/25 plans)
 | 04-team-detail-pages | 3/3 | 18.8 min | 6.3 min |
 | 05-season-timeline | 3/3 | 8 min | 2.7 min |
 | 06-live-data-pipeline | 3/3 | 14 min | 4.7 min |
-| 07-betting-odds-localisation | 4/5 | 14 min | 3.5 min |
+| 07-betting-odds-localisation | 5/5 | 19 min | 3.8 min |
 
 **Recent Trend:**
-- Last 5 plans: 06-02 (5 min), 07-01 (3 min), 07-04 (5 min), 07-03 (1 min), 07-05 (5 min)
+- Last 5 plans: 07-01 (3 min), 07-04 (5 min), 07-03 (1 min), 07-05 (5 min), 07-02 (5 min)
 
 *Updated after each plan completion*
 
@@ -142,6 +142,11 @@ Recent decisions affecting current work:
 - 07-05: Client components use useLocale() from next-intl; server components accept locale as optional prop.
 - 07-05: team_translations table starts empty; English name from teams table is the fallback.
 - 07-05: getLocalizedTeamNames skips DB query entirely for locale='en' (optimization).
+- 07-02: OddsComparisonTable renders null when showBetting=false (geo-compliance enforced at component level).
+- 07-02: Click tracking is fire-and-forget: POST to /api/clicks never blocks user navigation.
+- 07-02: OddsFormatSwitcher persists preference in localStorage key 'odds-format' (default: decimal).
+- 07-02: Best odds per outcome highlighted in comparison table for quick visual scanning.
+- 07-02: CompactOdds shows best odds across all bookmakers as a horizontal badge on fixture cards.
 
 ### Pending Todos
 
@@ -155,6 +160,7 @@ Recent decisions affecting current work:
 - Set CRON_SECRET in Vercel environment variables for daily resync cron route protection.
 - Set ODDS_API_KEY environment variable (get from https://the-odds-api.com/).
 - Run `npx drizzle-kit push` to create fixture_odds, affiliate_clicks, and team_translations tables.
+- **Seed sample upcoming fixtures with odds data** — create a script or manual seed to insert a small number of upcoming fixtures and fixture_odds rows so betting UI (OddsComparisonTable, CompactOdds, format switcher, click tracking) can be visually verified without consuming real API quota.
 
 ### Blockers/Concerns
 
@@ -163,6 +169,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-05
-Stopped at: Completed 07-05-PLAN.md (team translations and locale-aware formatting)
+Last session: 2026-02-06
+Stopped at: Completed 07-02-PLAN.md (odds display components and click tracking) -- ALL PLANS COMPLETE
 Resume file: None
