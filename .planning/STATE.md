@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.1 Affiliate Monetisation -- Phase 10 in progress (Geo-Aware Bookmaker Filtering)
+**Current focus:** v1.1 Affiliate Monetisation -- COMPLETE (all 3 phases, 6 plans)
 
 ## Current Position
 
 Phase: 10 of 10 (Geo-Aware Bookmaker Filtering)
-Plan: 2 of 3 complete
-Status: In progress
-Last activity: 2026-02-06 -- Completed 10-02-PLAN.md (Country Code Threading & Odds Filtering)
+Plan: 3 of 3 complete
+Status: Phase complete -- v1.1 complete
+Last activity: 2026-02-06 -- Completed 10-03-PLAN.md (Region UX Indicators & i18n)
 
-Progress: [███████████░] 83% (v1.1: 5/6 plans)
+Progress: [████████████] 100% (v1.1: 6/6 plans)
 
 ## Performance Metrics
 
@@ -25,9 +25,9 @@ Progress: [███████████░] 83% (v1.1: 5/6 plans)
 - Timeline: 2 days (2026-02-04 to 2026-02-06)
 
 **v1.1 Velocity:**
-- Total plans completed: 5
-- Average duration: 2.4 min
-- Total execution time: 12 min
+- Total plans completed: 6
+- Average duration: 2.5 min
+- Total execution time: 15 min
 
 ## Accumulated Context
 
@@ -53,6 +53,8 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 | getGeoContext replaces getShowBetting entirely | 10-02 | No deprecated alias -- all callers updated in same plan |
 | Filter-then-sort in server actions | 10-02 | Best-odds highlighting uses only available bookmakers automatically |
 | totalBookmakers in FixtureOddsResult | 10-02 | Pre-filter count stored for future region UX indicators |
+| RegionNote renders null for full-set mapped users | 10-03 | No unnecessary UI noise when user sees all bookmakers |
+| Three-state empty odds distinction | 10-03 | null/no-data -> noOdds, filtered-out -> noOddsRegion, genuinely empty -> noOdds |
 
 ### Pending Todos
 
@@ -73,10 +75,10 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
-None -- Plan 10-02 complete. Ready for Plan 10-03 (Region UX indicators).
+None -- v1.1 complete. All 10 phases done.
 
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 10-02-PLAN.md
+Stopped at: Completed 10-03-PLAN.md -- v1.1 complete
 Resume file: None
