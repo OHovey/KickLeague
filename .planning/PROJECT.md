@@ -2,7 +2,7 @@
 
 ## What This Is
 
-FootballPulse is a CoinMarketCap-inspired football league table and statistics platform covering Europe's Big 5 leagues (Premier League, La Liga, Bundesliga, Serie A, Ligue 1). It provides information-dense dashboards with real-time standings, match data, historical trends via an interactive season timeline, betting odds comparison, and automated AI-powered social media content generation for organic growth.
+FootballPulse is a CoinMarketCap-inspired football league table and statistics platform covering Europe's Big 5 leagues (Premier League, La Liga, Bundesliga, Serie A, Ligue 1). It provides information-dense dashboards with real-time standings, match data, team analytics, historical trends via an interactive season timeline, betting odds comparison with geo-compliance, and 5-language localisation.
 
 ## Core Value
 
@@ -12,39 +12,46 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ League table with full stats, position change indicators, form column, and sparkline trends for all Big 5 leagues — v1
+- ✓ League switching with full-page theming (colours, branding per league) — v1
+- ✓ Recent matches and upcoming fixtures tables with inline H2H and form display — v1
+- ✓ Team detail pages with tabbed stats (overview, performance, squad, fixtures) — v1
+- ✓ Match detail pages for completed and upcoming matches — v1
+- ✓ Interactive season timeline — drag/tap to view historical table states at any matchweek — v1
+- ✓ Mobile-first responsive design with condensed mobile columns and expandable rows — v1
+- ✓ Betting odds display with multi-bookmaker comparison, affiliate links, and geo-compliance — v1
+- ✓ Localisation for 5 languages (EN, ES, DE, IT, FR) with locale-aware formatting — v1
+- ✓ Data pipeline with polling, match completion detection, table recalculation, and cache invalidation — v1
+- ✓ Real-time push updates to connected clients (smart polling) — v1
 
 ### Active
 
-- [ ] League table with full stats, position change indicators, form column, and sparkline trends for all Big 5 leagues
-- [ ] League switching with full-page theming (colours, branding per league)
-- [ ] Recent matches and upcoming fixtures tables with expandable detail rows
-- [ ] Team detail pages with tabbed stats (overview, performance, squad, fixtures, H2H)
-- [ ] Match detail pages for completed and upcoming matches
-- [ ] Interactive season timeline — drag/tap to view historical table states at any matchweek
-- [ ] Mobile-first responsive design with condensed mobile columns and expandable rows
-- [ ] Betting odds display with multi-bookmaker comparison and affiliate links
-- [ ] Automated social media posting (X, Instagram) triggered by newsworthy match events
-- [ ] Localisation for 5 languages (EN, ES, DE, IT, FR)
-- [ ] Data pipeline with polling, match completion detection, table recalculation, and cache invalidation
-- [ ] Real-time push updates to connected clients (SSE)
+(None — next milestone not yet planned)
 
 ### Out of Scope
 
 - Real-time live match tracking (live scores updating second-by-second) — high complexity, not core to league table value
-- User accounts and authentication — not needed for v1 information consumption
+- User accounts and authentication — not needed for information consumption
 - Scenario modelling / "what if" calculator — deferred to post-launch
 - Push notifications — requires user accounts
-- Additional leagues beyond Big 5 — focus on quality over breadth for v1
+- Additional leagues beyond Big 5 — focus on quality over breadth
 - Mobile native app — web-first, responsive design covers mobile
 - Video content — storage/bandwidth costs, not core value
-- Live odds updating during matches — deferred, pre-match odds sufficient for v1
+- Live odds updating during matches — pre-match odds sufficient
+- Automated social media posting — deferred to v2 (complexity, requires API upgrade first)
 
 ## Context
 
 **Domain:** Football statistics and league standings for the European Big 5 leagues. The target audience is football fans who want more data density than typical sports sites provide — think CoinMarketCap but for football.
 
 **Inspiration:** CoinMarketCap's dashboard aesthetic — sparklines in tables, trend indicators, information density, clean dark themes.
+
+**Current state (v1 shipped):**
+- 122 TypeScript source files, 16,526 LOC
+- 9 database tables + 4 enums (Drizzle ORM, PostgreSQL/Neon)
+- 5 locale message files with next-intl routing
+- Automated polling pipeline with QStash cron + Vercel cron
+- Geo-compliance system for betting content (8 Tier 1 countries, Italy banned)
 
 **Data sources:**
 - Primary: API-Football (via RapidAPI) — free tier for development (100 req/day), Pro tier ($49.99/month) for production
@@ -55,13 +62,16 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 **Monetisation strategy:** Betting affiliate links (primary, ~70% projected revenue), display advertising (secondary), premium tier (tertiary, post-launch). Projected ~$100-150/month infrastructure cost, revenue target of $5,900/month by month 10-12.
 
-**Existing spec:** A detailed product specification exists at `football-league-mvp-spec.md` covering page layouts, data models, SQL schema, API endpoints, caching strategy, social media automation logic, and monetisation projections.
+**Known tech debt (from v1 audit):**
+- Timeline navigation arrows only scroll strip visually (regression from 2b5c055)
+- Team name translation helper (getTeamName) exists but never called — team names always English
+- Hardcoded season '2025' in LeagueTableWrapper
+- UI text still hardcoded English in many components despite message files existing
 
 ## Constraints
 
-- **Tech stack**: Next.js 15 (App Router), TypeScript, Tailwind CSS, Zustand, TanStack Query, Recharts, Framer Motion, next-intl for i18n
-- **Database**: PostgreSQL (Neon or Supabase — serverless, modern alternative to Planetscale)
-- **Cache**: Upstash Redis (serverless, Vercel integration)
+- **Tech stack**: Next.js 16 (App Router), TypeScript, Tailwind CSS, Recharts, Framer Motion (motion), NumberFlow, next-intl, nuqs, Drizzle ORM
+- **Database**: PostgreSQL (Neon — serverless)
 - **Queue**: Upstash QStash (serverless job queue)
 - **Hosting**: Vercel
 - **API budget**: Free tier during development; ~$100-150/month total infrastructure at production
@@ -72,10 +82,19 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Modernize stack from spec (Next.js 15, Postgres over MySQL) | Spec referenced Next.js 14 and Planetscale; both have moved on. Postgres is more flexible and Neon/Supabase offer better free tiers | -- Pending |
-| API-Football free tier for development | Real data from day one; 100 req/day sufficient for development with proper caching | -- Pending |
-| Phased delivery: core tables first, then enhancements, then monetisation | Validates core value (information-dense tables) before investing in affiliate/social complexity | -- Pending |
-| Dark theme as default | Matches CoinMarketCap aesthetic and league branding works better on dark backgrounds | -- Pending |
+| Next.js 16 + Postgres over spec's Next.js 14 + MySQL | Spec referenced Next.js 14 and Planetscale; both have moved on. Postgres is more flexible and Neon offers better free tier | ✓ Good — no issues |
+| API-Football free tier for development | Real data from day one; 100 req/day sufficient for development with proper caching | ✓ Good — cache proxy eliminates repeated API calls |
+| Phased delivery: core tables first, then enhancements, then monetisation | Validates core value (information-dense tables) before investing in affiliate/social complexity | ✓ Good — 8 phases delivered in 2 days |
+| Dark theme as default | Matches CoinMarketCap aesthetic and league branding works better on dark backgrounds | ✓ Good — league gradient theming works well on dark |
+| Drizzle ORM over Prisma | Lighter, SQL-closer, better for complex queries (aggregations, window functions) | ✓ Good — no ORM limitations hit |
+| Server actions for client-server data fetching | Simpler than API routes for same-origin data, works with Next.js 16 patterns | ✓ Good — clean pattern throughout |
+| nuqs for URL state management | Type-safe URL params for league, tab, matchweek selection; persists state across navigation | ✓ Good — works with Suspense boundaries |
+| proxy.ts for middleware (Next.js 16 pattern) | Next.js 16 uses proxy.ts instead of middleware.ts | ✓ Good — handles i18n + geo-detection |
+| Motion layout="position" for table animations | Prevents child element distortion during FLIP animations (vs layout={true}) | ✓ Good — smooth row reordering |
+| Partial-accept Zod pattern | safeParse always, passthrough on objects, log warnings but return data on schema mismatch | ✓ Good — resilient to API schema changes |
+| Smart polling over SSE | Browser polls /api/updates/check at adaptive intervals; simpler than SSE, works on all platforms | ✓ Good — no WebSocket server needed |
+| Geo-compliance via proxy headers | proxy.ts sets x-show-betting header; components gate on showBetting prop | ✓ Good — single enforcement point |
+| Combined betting + i18n in Phase 7 | Both are cross-cutting enhancements independent of core product | ✓ Good — natural pairing |
 
 ---
-*Last updated: 2026-02-04 after initialization*
+*Last updated: 2026-02-06 after v1 milestone*
