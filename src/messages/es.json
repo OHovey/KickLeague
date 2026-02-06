@@ -84,6 +84,9 @@
     "noOdds": "Cuotas no disponibles",
     "comingSoon": "Comparacion de cuotas proximamente",
     "lastUpdated": "Actualizado {time}",
+    "regionBookmakers": "{shown} de {total} casas de apuestas para tu regi\u00f3n",
+    "fallbackRegion": "Mostrando casas de apuestas para tu regi\u00f3n",
+    "noOddsRegion": "No hay cuotas disponibles en tu regi\u00f3n",
     "movement": {
       "shortened": "Bajaron",
       "drifted": "Subieron"

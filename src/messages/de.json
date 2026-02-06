@@ -84,6 +84,9 @@
     "noOdds": "Quoten nicht verfuegbar",
     "comingSoon": "Quotenvergleich kommt bald",
     "lastUpdated": "Zuletzt aktualisiert {time}",
+    "regionBookmakers": "{shown} von {total} Buchmachern f\u00fcr Ihre Region angezeigt",
+    "fallbackRegion": "Buchmacher f\u00fcr Ihre Region angezeigt",
+    "noOddsRegion": "Keine Quoten in Ihrer Region verf\u00fcgbar",
     "movement": {
       "shortened": "Gefallen",
       "drifted": "Gestiegen"

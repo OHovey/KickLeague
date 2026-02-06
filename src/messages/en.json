@@ -84,6 +84,9 @@
     "noOdds": "Odds not available",
     "comingSoon": "Odds comparison coming soon",
     "lastUpdated": "Last updated {time}",
+    "regionBookmakers": "{shown} of {total} bookmakers shown for your region",
+    "fallbackRegion": "Showing bookmakers for your region",
+    "noOddsRegion": "No odds available in your region",
     "movement": {
       "shortened": "Shortened",
       "drifted": "Drifted"

@@ -84,6 +84,9 @@
     "noOdds": "Cotes non disponibles",
     "comingSoon": "Comparaison des cotes bientot disponible",
     "lastUpdated": "Derniere mise a jour {time}",
+    "regionBookmakers": "{shown} sur {total} bookmakers affich\u00e9s pour votre r\u00e9gion",
+    "fallbackRegion": "Bookmakers affich\u00e9s pour votre r\u00e9gion",
+    "noOddsRegion": "Aucune cote disponible dans votre r\u00e9gion",
     "movement": {
       "shortened": "En baisse",
       "drifted": "En hausse"

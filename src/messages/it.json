@@ -84,6 +84,9 @@
     "noOdds": "Quote non disponibili",
     "comingSoon": "Confronto quote in arrivo",
     "lastUpdated": "Ultimo aggiornamento {time}",
+    "regionBookmakers": "{shown} di {total} bookmaker mostrati per la tua regione",
+    "fallbackRegion": "Bookmaker mostrati per la tua regione",
+    "noOddsRegion": "Nessuna quota disponibile nella tua regione",
     "movement": {
       "shortened": "In calo",
       "drifted": "In aumento"
