@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.1 Affiliate Monetisation -- wire up betting affiliate programs for revenue.
+**Current focus:** v1.1 Affiliate Monetisation -- Phase 9: Affiliate Link Builder & Pipeline Integration
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: --
-Status: Defining requirements
-Last activity: 2026-02-06 -- Milestone v1.1 started
+Phase: 9 of 10 (Affiliate Link Builder & Pipeline Integration)
+Plan: -- (awaiting plan-phase)
+Status: Ready to plan
+Last activity: 2026-02-06 -- Roadmap created for v1.1 milestone
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [░░░░░░░░░░] 0% (v1.1: 0/2 phases)
 
 ## Performance Metrics
 
@@ -23,6 +23,11 @@ Progress: [░░░░░░░░░░] 0%
 - Average duration: 3.8 min
 - Total execution time: ~1.77 hours
 - Timeline: 2 days (2026-02-04 to 2026-02-06)
+
+**v1.1 Velocity:**
+- Total plans completed: 0
+- Average duration: --
+- Total execution time: --
 
 ## Accumulated Context
 
@@ -48,10 +53,10 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
-None -- affiliate research complete, ready to define requirements.
+None -- affiliate research complete, roadmap created, ready to plan Phase 9.
 
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Milestone v1.1 started, defining requirements
+Stopped at: Roadmap created for v1.1 milestone
 Resume file: None

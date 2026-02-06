@@ -55,24 +55,24 @@ Deferred to future milestones.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AFCFG-01 | Pending | Pending |
-| AFCFG-02 | Pending | Pending |
-| AFCFG-03 | Pending | Pending |
-| AFCFG-04 | Pending | Pending |
-| LINK-01 | Pending | Pending |
-| LINK-02 | Pending | Pending |
-| LINK-03 | Pending | Pending |
-| LINK-04 | Pending | Pending |
-| GEO-01 | Pending | Pending |
-| GEO-02 | Pending | Pending |
-| GEO-03 | Pending | Pending |
-| ANLYT-01 | Pending | Pending |
+| AFCFG-01 | Phase 9 | Pending |
+| AFCFG-02 | Phase 9 | Pending |
+| AFCFG-03 | Phase 9 | Pending |
+| AFCFG-04 | Phase 9 | Pending |
+| LINK-01 | Phase 9 | Pending |
+| LINK-02 | Phase 9 | Pending |
+| LINK-03 | Phase 9 | Pending |
+| LINK-04 | Phase 9 | Pending |
+| GEO-01 | Phase 10 | Pending |
+| GEO-02 | Phase 10 | Pending |
+| GEO-03 | Phase 10 | Pending |
+| ANLYT-01 | Phase 9 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 12 total
-- Mapped to phases: 0
-- Unmapped: 12 (awaiting roadmap)
+- Mapped to phases: 12
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-06*
-*Last updated: 2026-02-06 after initial definition*
+*Last updated: 2026-02-06 after roadmap creation*
