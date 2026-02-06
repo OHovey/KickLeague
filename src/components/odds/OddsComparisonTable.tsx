@@ -9,6 +9,7 @@ import {
   OddsFormatProvider,
 } from './OddsFormatSwitcher';
 import { ResponsibleGambling } from './ResponsibleGambling';
+import { RegionNote } from './RegionNote';
 
 interface OddsComparisonTableProps {
   fixtureId: number;
@@ -16,6 +17,7 @@ interface OddsComparisonTableProps {
   awayTeam: string;
   showBetting: boolean;
   countryCode: string | null;
+  isMapped?: boolean;
 }
 
 // ── Skeleton ───────────────────────────────────────────────────────────────
@@ -69,6 +71,7 @@ export function OddsComparisonTable({
   awayTeam,
   showBetting,
   countryCode,
+  isMapped = true,
 }: OddsComparisonTableProps) {
   const t = useTranslations('Odds');
   const [data, setData] = useState<FixtureOddsResult | null>(null);
@@ -106,9 +109,13 @@ export function OddsComparisonTable({
 
   // No odds available
   if (!data || data.odds.length === 0) {
+    // Odds exist in DB but all filtered out by region
+    const allFilteredOut = data !== null && data.odds.length === 0 && data.totalBookmakers > 0;
     return (
       <div className="mt-6 rounded-xl bg-white/5 p-6 text-center">
-        <p className="text-white/50">{t('noOdds')}</p>
+        <p className="text-white/50">
+          {allFilteredOut ? t('noOddsRegion') : t('noOdds')}
+        </p>
       </div>
     );
   }
@@ -186,6 +193,13 @@ export function OddsComparisonTable({
         <p className="text-center text-[11px] text-white/30">
           {t('lastUpdated', { time: getRelativeTime(data.fetchedAt) })}
         </p>
+
+        {/* Region note */}
+        <RegionNote
+          filteredCount={data.odds.length}
+          totalCount={data.totalBookmakers}
+          isFallback={!isMapped}
+        />
 
         {/* Responsible gambling */}
         <ResponsibleGambling show={true} />

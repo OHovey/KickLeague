@@ -18,6 +18,7 @@ import {
   fetchUpcomingMatchContext,
   getLeagueSlugById,
 } from '@/components/match-detail/actions';
+import { isCountryMapped } from '@/lib/geo/bookmaker-availability';
 
 // -- Metadata ----------------------------------------------------------------
 
@@ -223,6 +224,7 @@ export default async function MatchDetailPage({
             awayTeam={match.awayTeam.shortName ?? match.awayTeam.name}
             showBetting={showBetting}
             countryCode={countryCode}
+            isMapped={isCountryMapped(countryCode)}
           />
         </div>
       </div>
