@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { headers } from 'next/headers';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
@@ -9,6 +10,7 @@ import { EventsTimeline } from '@/components/match-detail/EventsTimeline';
 import { H2HSection } from '@/components/match-detail/H2HSection';
 import { FormGuide } from '@/components/match-detail/FormGuide';
 import { ComparativeStats } from '@/components/match-detail/ComparativeStats';
+import { OddsComparisonTable } from '@/components/odds/OddsComparisonTable';
 import {
   fetchMatchDetail,
   fetchMatchStats,
@@ -56,6 +58,10 @@ export default async function MatchDetailPage({
 }) {
   const { locale, id } = await params;
   setRequestLocale(locale);
+
+  // Read geo-compliance flag from proxy headers
+  const headerStore = await headers();
+  const showBetting = headerStore.get('x-show-betting') === '1';
 
   const fixtureId = parseInt(id, 10);
   if (isNaN(fixtureId)) return notFound();
@@ -209,10 +215,13 @@ export default async function MatchDetailPage({
             awayTeamName={match.awayTeam.shortName ?? match.awayTeam.name}
           />
 
-          {/* Odds placeholder -- structural prep for Phase 7 */}
-          <div className="mt-6 rounded-xl bg-white/5 p-6 text-center">
-            <p className="text-white/50">Odds comparison coming soon</p>
-          </div>
+          {/* Odds comparison table (upcoming matches only) */}
+          <OddsComparisonTable
+            fixtureId={fixtureId}
+            homeTeam={match.homeTeam.shortName ?? match.homeTeam.name}
+            awayTeam={match.awayTeam.shortName ?? match.awayTeam.name}
+            showBetting={showBetting}
+          />
         </div>
       </div>
     </>

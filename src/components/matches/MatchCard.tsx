@@ -7,6 +7,8 @@ import { formatKickoffTime, formatMatchDateShort } from '@/lib/dates/format';
 import type { MatchWithTeams, MatchEvent } from '@/lib/matches/queries';
 import type { H2HSummary } from '@/lib/matches/h2h';
 import { FormBadges } from '@/components/league-table/FormBadges';
+import { CompactOdds } from '@/components/odds/CompactOdds';
+import type { CompactOddsData } from '@/components/odds/actions';
 import { fetchH2HSummary } from './actions';
 
 // ─── Team Logo ──────────────────────────────────────────────────────────────
@@ -180,6 +182,8 @@ interface MatchCardProps {
   homeForm: string | null;
   awayForm: string | null;
   h2hSummary?: { team1Wins: number; team2Wins: number; draws: number } | null;
+  compactOdds?: CompactOddsData | null;
+  showBetting?: boolean;
 }
 
 export function MatchCard({
@@ -187,6 +191,8 @@ export function MatchCard({
   events,
   homeForm,
   awayForm,
+  compactOdds,
+  showBetting = false,
 }: MatchCardProps) {
   const router = useRouter();
   const locale = useLocale();
@@ -295,6 +301,18 @@ export function MatchCard({
           team1Name={homeName}
           team2Name={awayName}
         />
+
+        {/* Compact odds (upcoming fixtures only) */}
+        {!isFinished && compactOdds && (
+          <CompactOdds
+            fixtureId={match.id}
+            bestHome={compactOdds.bestHome}
+            bestDraw={compactOdds.bestDraw}
+            bestAway={compactOdds.bestAway}
+            bookmakerCount={compactOdds.bookmakerCount}
+            showBetting={showBetting}
+          />
+        )}
       </div>
     </Link>
   );

@@ -6,6 +6,8 @@ import { Link } from '@/i18n/navigation';
 import { formatKickoffTime } from '@/lib/dates/format';
 import { fetchFixturesData, type FixturesData } from './actions';
 import type { FixtureWithTeams } from '@/lib/teams/queries';
+import { CompactOdds } from '@/components/odds/CompactOdds';
+import { fetchCompactOdds, type CompactOddsData } from '@/components/odds/actions';
 
 // ── Result indicator ────────────────────────────────────────────────────────
 
@@ -181,11 +183,13 @@ interface FixturesTabProps {
   teamId: number;
   leagueId: number;
   season: string;
+  showBetting?: boolean;
 }
 
-export function FixturesTab({ teamId, leagueId, season }: FixturesTabProps) {
+export function FixturesTab({ teamId, leagueId, season, showBetting = false }: FixturesTabProps) {
   const locale = useLocale();
   const [data, setData] = useState<FixturesData | null>(null);
+  const [oddsMap, setOddsMap] = useState<Record<number, CompactOddsData>>({});
   const [isPending, startTransition] = useTransition();
   const [loaded, setLoaded] = useState(false);
 
@@ -194,13 +198,20 @@ export function FixturesTab({ teamId, leagueId, season }: FixturesTabProps) {
       try {
         const result = await fetchFixturesData(teamId, leagueId, season);
         setData(result);
+
+        // Batch-fetch compact odds for upcoming fixtures
+        if (showBetting && result.upcoming.length > 0) {
+          const upcomingIds = result.upcoming.map((f) => f.id);
+          const odds = await fetchCompactOdds(upcomingIds);
+          setOddsMap(odds);
+        }
       } catch {
         // Silently fail
       } finally {
         setLoaded(true);
       }
     });
-  }, [teamId, leagueId, season]);
+  }, [teamId, leagueId, season, showBetting]);
 
   if (!loaded || isPending) return <FixturesSkeleton />;
   if (!data || (data.recent.length === 0 && data.upcoming.length === 0)) {
@@ -242,20 +253,29 @@ export function FixturesTab({ teamId, leagueId, season }: FixturesTabProps) {
           </h3>
           <div className="space-y-1">
             {data.upcoming.map((fixture) => (
-              <FixtureRow
-                key={fixture.id}
-                fixture={fixture}
-                teamId={teamId}
-                opponentPositions={data.opponentPositions}
-                isResult={false}
-                locale={locale}
-              />
+              <div key={fixture.id}>
+                <FixtureRow
+                  fixture={fixture}
+                  teamId={teamId}
+                  opponentPositions={data.opponentPositions}
+                  isResult={false}
+                  locale={locale}
+                />
+                {oddsMap[fixture.id] && (
+                  <div className="ml-12 mr-8 -mt-1 mb-1">
+                    <CompactOdds
+                      fixtureId={fixture.id}
+                      bestHome={oddsMap[fixture.id].bestHome}
+                      bestDraw={oddsMap[fixture.id].bestDraw}
+                      bestAway={oddsMap[fixture.id].bestAway}
+                      bookmakerCount={oddsMap[fixture.id].bookmakerCount}
+                      showBetting={showBetting}
+                    />
+                  </div>
+                )}
+              </div>
             ))}
           </div>
-          {/* Odds placeholder */}
-          <p className="mt-4 text-center text-xs text-white/30">
-            Odds coming soon
-          </p>
         </div>
       )}
     </div>
