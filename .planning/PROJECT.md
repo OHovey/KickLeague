@@ -21,16 +21,19 @@ Football fans can see league standings with rich visual context — sparklines, 
 - ✓ Mobile-first responsive design with condensed mobile columns and expandable rows — v1
 - ✓ Betting odds display with multi-bookmaker comparison, affiliate links, and geo-compliance — v1
 - ✓ Localisation for 5 languages (EN, ES, DE, IT, FR) with locale-aware formatting — v1
+- ✓ Affiliate link config, link builder, pipeline enrichment, geo-aware filtering — v1.1
 - ✓ Data pipeline with polling, match completion detection, table recalculation, and cache invalidation — v1
 - ✓ Real-time push updates to connected clients (smart polling) — v1
 
 ### Active
 
-- [ ] Affiliate link config system mapping bookmaker keys to program tracking parameters — v1.1
-- [ ] Link builder constructing affiliate-tracked URLs from API links, sids, or homepage fallbacks — v1.1
-- [ ] Seed/poll pipeline enrichment injecting affiliate links at data ingestion time — v1.1
-- [ ] Geo-aware bookmaker filtering showing only regionally available bookmakers per user country — v1.1
-- [ ] Graceful degradation showing bookmaker links without tracking when affiliate ID not yet configured — v1.1
+- [ ] Full rebrand from KickData/FootballPulse to KickLeague (code, UI, package.json, repo, metadata) — v1.2
+- [ ] Site header with logo/wordmark and locale switcher on all pages via layout — v1.2
+- [ ] Homepage three-card hero row with key stat highlights (Top Scorer, Biggest Upset, Form Team) — v1.2
+- [ ] Full i18n wiring: audit all components, wire every user-visible string to message files — v1.2
+- [ ] Tech debt: timeline arrow navigation regression, orphaned getTeamName, hardcoded season '2025' — v1.2
+- [ ] Full SEO: meta tags, Open Graph, sitemap.xml, robots.txt, JSON-LD, hreflang, canonicals, semantic HTML, page speed — v1.2
+- [ ] Google AdSense integration with responsive ad slots on key pages — v1.2
 
 ### Out of Scope
 
@@ -66,7 +69,7 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 **Monetisation strategy:** Betting affiliate links (primary, ~70% projected revenue), display advertising (secondary), premium tier (tertiary, post-launch). Projected ~$100-150/month infrastructure cost, revenue target of $5,900/month by month 10-12.
 
-**Known tech debt (from v1 audit):**
+**Known tech debt (from v1 audit — targeted for v1.2):**
 - Timeline navigation arrows only scroll strip visually (regression from 2b5c055)
 - Team name translation helper (getTeamName) exists but never called — team names always English
 - Hardcoded season '2025' in LeagueTableWrapper
@@ -100,18 +103,18 @@ Football fans can see league standings with rich visual context — sparklines, 
 | Geo-compliance via proxy headers | proxy.ts sets x-show-betting header; components gate on showBetting prop | ✓ Good — single enforcement point |
 | Combined betting + i18n in Phase 7 | Both are cross-cutting enhancements independent of core product | ✓ Good — natural pairing |
 
-## Current Milestone: v1.1 Affiliate Monetisation
+## Current Milestone: v1.2 Polish, SEO & Launch Readiness
 
-**Goal:** Wire up betting affiliate programs so odds links generate revenue, with geo-aware bookmaker filtering per user region.
+**Goal:** Make KickLeague launch-ready with full rebrand, site header, homepage hero, complete i18n wiring, SEO foundations, display ads, and tech debt cleanup.
 
 **Target features:**
-- Affiliate config mapping 5 programs (Paddy Power, Entain, Kindred, 888, William Hill) to tracking parameters
-- Link builder: API deep link > sid-constructed link > homepage fallback, all with affiliate params
-- Geo-aware filtering using regional availability matrix (8 Tier 1 countries)
-- Graceful operation before all affiliate IDs collected (links work, just no revenue)
-- Integration into existing seed/poll pipeline for automatic link enrichment
-
-**Joint effort:** User signs up for 5 affiliate programs and collects IDs; code integrates them.
+- Full rebrand from FootballPulse/KickData to KickLeague (code, UI, package.json, repo, all metadata)
+- Site header component with KickLeague wordmark and locale switcher on every page
+- Homepage hero row with three stat-highlight cards (Top Scorer, Biggest Upset, Form Team)
+- Full i18n pass: wire every user-visible hardcoded English string to next-intl message files
+- Tech debt fixes: timeline arrow navigation, getTeamName wiring, dynamic season year
+- Full SEO suite: meta tags, Open Graph, sitemap.xml, robots.txt, JSON-LD structured data, hreflang, canonical URLs, semantic HTML audit, page speed optimization
+- Google AdSense integration with responsive ad units on key pages
 
 ---
-*Last updated: 2026-02-06 after v1.1 milestone start*
+*Last updated: 2026-02-06 after v1.2 milestone start*
