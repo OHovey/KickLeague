@@ -26,7 +26,11 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 ### Active
 
-(None — next milestone not yet planned)
+- [ ] Affiliate link config system mapping bookmaker keys to program tracking parameters — v1.1
+- [ ] Link builder constructing affiliate-tracked URLs from API links, sids, or homepage fallbacks — v1.1
+- [ ] Seed/poll pipeline enrichment injecting affiliate links at data ingestion time — v1.1
+- [ ] Geo-aware bookmaker filtering showing only regionally available bookmakers per user country — v1.1
+- [ ] Graceful degradation showing bookmaker links without tracking when affiliate ID not yet configured — v1.1
 
 ### Out of Scope
 
@@ -96,5 +100,18 @@ Football fans can see league standings with rich visual context — sparklines, 
 | Geo-compliance via proxy headers | proxy.ts sets x-show-betting header; components gate on showBetting prop | ✓ Good — single enforcement point |
 | Combined betting + i18n in Phase 7 | Both are cross-cutting enhancements independent of core product | ✓ Good — natural pairing |
 
+## Current Milestone: v1.1 Affiliate Monetisation
+
+**Goal:** Wire up betting affiliate programs so odds links generate revenue, with geo-aware bookmaker filtering per user region.
+
+**Target features:**
+- Affiliate config mapping 5 programs (Paddy Power, Entain, Kindred, 888, William Hill) to tracking parameters
+- Link builder: API deep link > sid-constructed link > homepage fallback, all with affiliate params
+- Geo-aware filtering using regional availability matrix (8 Tier 1 countries)
+- Graceful operation before all affiliate IDs collected (links work, just no revenue)
+- Integration into existing seed/poll pipeline for automatic link enrichment
+
+**Joint effort:** User signs up for 5 affiliate programs and collects IDs; code integrates them.
+
 ---
-*Last updated: 2026-02-06 after v1 milestone*
+*Last updated: 2026-02-06 after v1.1 milestone start*
