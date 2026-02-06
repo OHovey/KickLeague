@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import { parseAsStringEnum, useQueryState } from 'nuqs';
 import { clsx } from 'clsx';
@@ -8,6 +8,7 @@ import { OverviewTab } from './OverviewTab';
 import { PerformanceTab } from './PerformanceTab';
 import { SquadTab } from './SquadTab';
 import { FixturesTab } from './FixturesTab';
+import { getShowBetting } from '@/components/matches/actions';
 
 const TAB_VALUES = ['overview', 'performance', 'squad', 'fixtures'] as const;
 type TabValue = (typeof TAB_VALUES)[number];
@@ -38,6 +39,12 @@ function TeamTabsInner({
     'tab',
     parseAsStringEnum([...TAB_VALUES]).withDefault('overview')
   );
+
+  const [showBetting, setShowBetting] = useState(false);
+
+  useEffect(() => {
+    getShowBetting().then(setShowBetting);
+  }, []);
 
   return (
     <Tabs.Root
@@ -86,7 +93,7 @@ function TeamTabsInner({
       </Tabs.Content>
 
       <Tabs.Content value="fixtures" className="mt-6">
-        <FixturesTab teamId={teamId} leagueId={leagueId} season={season} />
+        <FixturesTab teamId={teamId} leagueId={leagueId} season={season} showBetting={showBetting} />
       </Tabs.Content>
     </Tabs.Root>
   );
