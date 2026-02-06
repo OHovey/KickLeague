@@ -60,17 +60,17 @@
 
 ### Betting & Monetisation
 
-- [ ] **ODDS-01**: Multi-bookmaker odds comparison table on upcoming match pages
-- [ ] **ODDS-02**: Affiliate links with click tracking and geo-targeted bookmaker display
-- [ ] **ODDS-03**: Odds displayed in user's preferred format (decimal/fractional/American)
-- [ ] **ODDS-04**: Geo-detection hides odds in restricted jurisdictions (Italy: complete ban)
+- [x] **ODDS-01**: Multi-bookmaker odds comparison table on upcoming match pages
+- [x] **ODDS-02**: Affiliate links with click tracking and geo-targeted bookmaker display
+- [x] **ODDS-03**: Odds displayed in user's preferred format (decimal/fractional/American)
+- [x] **ODDS-04**: Geo-detection hides odds in restricted jurisdictions (Italy: complete ban)
 
 ### Localisation
 
-- [ ] **I18N-01**: UI available in 5 languages (EN, ES, DE, IT, FR)
-- [ ] **I18N-02**: Locale-aware date, time, and number formatting via Intl API
-- [ ] **I18N-03**: Database-driven team name localisation per language
-- [ ] **I18N-04**: Language detection (user pref > browser lang > geo > English default)
+- [x] **I18N-01**: UI available in 5 languages (EN, ES, DE, IT, FR)
+- [x] **I18N-02**: Locale-aware date, time, and number formatting via Intl API
+- [x] **I18N-03**: Database-driven team name localisation per language
+- [x] **I18N-04**: Language detection (user pref > browser lang > geo > English default)
 
 ### Mobile
 
@@ -156,14 +156,14 @@
 | DATA-03 | Phase 6 | Pending |
 | DATA-04 | Phase 6 | Pending |
 | DATA-06 | Phase 6 | Pending |
-| ODDS-01 | Phase 7 | Pending |
-| ODDS-02 | Phase 7 | Pending |
-| ODDS-03 | Phase 7 | Pending |
-| ODDS-04 | Phase 7 | Pending |
-| I18N-01 | Phase 7 | Pending |
-| I18N-02 | Phase 7 | Pending |
-| I18N-03 | Phase 7 | Pending |
-| I18N-04 | Phase 7 | Pending |
+| ODDS-01 | Phase 7 | Complete |
+| ODDS-02 | Phase 7 | Complete |
+| ODDS-03 | Phase 7 | Complete |
+| ODDS-04 | Phase 7 | Complete |
+| I18N-01 | Phase 7 | Complete |
+| I18N-02 | Phase 7 | Complete |
+| I18N-03 | Phase 7 | Complete |
+| I18N-04 | Phase 7 | Complete |
 
 **Coverage:**
 - v1 requirements: 43 total
