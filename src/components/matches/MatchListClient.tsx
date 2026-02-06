@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition, useCallback } from 'react';
 import type { MatchWithTeams, MatchEvent } from '@/lib/matches/queries';
-import { fetchRecentMatches, fetchUpcomingFixtures } from './actions';
+import { fetchRecentMatches, fetchUpcomingFixtures, getShowBetting } from './actions';
 import { MatchList } from './MatchList';
 
 // ─── Skeleton ───────────────────────────────────────────────────────────────
@@ -54,6 +54,7 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [dbError, setDbError] = useState<string | null>(null);
+  const [showBetting, setShowBetting] = useState(false);
 
   const fetchData = useCallback(
     (limit: number) => {
@@ -94,6 +95,11 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
     },
     [league, tab]
   );
+
+  // Fetch showBetting flag on mount
+  useEffect(() => {
+    getShowBetting().then(setShowBetting);
+  }, []);
 
   // Fetch on mount and when league/tab changes
   useEffect(() => {
@@ -148,6 +154,7 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
         events={data.events}
         teamForms={data.teamForms}
         type={tab}
+        showBetting={showBetting}
         onShowMore={!showAll ? handleShowMore : undefined}
         hasMore={!showAll && data.matches.length >= 10}
       />

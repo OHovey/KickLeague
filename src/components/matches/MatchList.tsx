@@ -10,6 +10,7 @@ interface MatchListProps {
   events: Record<number, MatchEvent[]>;
   teamForms: Record<number, string>;
   type: 'results' | 'fixtures';
+  showBetting?: boolean;
   onShowMore?: () => void;
   hasMore?: boolean;
 }
@@ -41,6 +42,7 @@ export function MatchList({
   events,
   teamForms,
   type,
+  showBetting = false,
   onShowMore,
   hasMore,
 }: MatchListProps) {
@@ -76,6 +78,7 @@ export function MatchList({
                 events={events[match.id] ?? []}
                 homeForm={teamForms[match.homeTeam.id] ?? null}
                 awayForm={teamForms[match.awayTeam.id] ?? null}
+                showBetting={showBetting}
               />
             ))}
           </div>

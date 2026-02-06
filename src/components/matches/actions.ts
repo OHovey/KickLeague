@@ -11,6 +11,7 @@ import {
 import { getH2HSummary, type H2HSummary } from '@/lib/matches/h2h';
 import { getLeagueBySlug } from '@/lib/standings/queries';
 import { isDatabaseConfigured } from '@/db/connection';
+import { headers } from 'next/headers';
 
 export interface RecentMatchesResult {
   matches: MatchWithTeams[];
@@ -104,4 +105,13 @@ export async function fetchH2HSummary(
   team2Id: number
 ): Promise<H2HSummary> {
   return getH2HSummary(team1Id, team2Id);
+}
+
+/**
+ * Read showBetting flag from proxy response headers.
+ * Server actions have access to the request context.
+ */
+export async function getShowBetting(): Promise<boolean> {
+  const headerStore = await headers();
+  return headerStore.get('x-show-betting') === '1';
 }
