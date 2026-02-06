@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-06)
 ## Current Position
 
 Phase: 10 of 10 (Geo-Aware Bookmaker Filtering)
-Plan: 1 of 3 complete
+Plan: 2 of 3 complete
 Status: In progress
-Last activity: 2026-02-06 -- Completed 10-01-PLAN.md (Bookmaker Availability Config)
+Last activity: 2026-02-06 -- Completed 10-02-PLAN.md (Country Code Threading & Odds Filtering)
 
-Progress: [██████████░░] 67% (v1.1: 4/6 plans)
+Progress: [███████████░] 83% (v1.1: 5/6 plans)
 
 ## Performance Metrics
 
@@ -25,9 +25,9 @@ Progress: [██████████░░] 67% (v1.1: 4/6 plans)
 - Timeline: 2 days (2026-02-04 to 2026-02-06)
 
 **v1.1 Velocity:**
-- Total plans completed: 4
-- Average duration: 2.3 min
-- Total execution time: 9 min
+- Total plans completed: 5
+- Average duration: 2.4 min
+- Total execution time: 12 min
 
 ## Accumulated Context
 
@@ -50,6 +50,9 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 | Static TS config over DB table for bookmaker availability | 10-01 | 8 bookmakers, 8 countries, infrequent changes, config+deploy workflow |
 | Pre-sorted config with runtime sort safety net | 10-01 | Entries stored in priority order, runtime sort guarantees correctness |
 | Array copy on return from getAvailableBookmakers | 10-01 | Prevents callers from mutating internal state |
+| getGeoContext replaces getShowBetting entirely | 10-02 | No deprecated alias -- all callers updated in same plan |
+| Filter-then-sort in server actions | 10-02 | Best-odds highlighting uses only available bookmakers automatically |
+| totalBookmakers in FixtureOddsResult | 10-02 | Pre-filter count stored for future region UX indicators |
 
 ### Pending Todos
 
@@ -70,10 +73,10 @@ All v1 decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
-None -- Plan 10-01 complete. Ready for Plan 10-02 (server action filtering integration).
+None -- Plan 10-02 complete. Ready for Plan 10-03 (Region UX indicators).
 
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 10-01-PLAN.md
+Stopped at: Completed 10-02-PLAN.md
 Resume file: None
