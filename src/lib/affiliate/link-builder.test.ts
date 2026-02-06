@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { buildAffiliateLink } from './link-builder';
-import { getAffiliateConfig, getAffiliateId, AFFILIATE_CONFIG } from './config';
+import { getAffiliateConfig, getAffiliateId } from './config';
 
 // ---------------------------------------------------------------------------
 // Config tests
