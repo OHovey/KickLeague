@@ -5,22 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.2 Polish, SEO & Launch Readiness
+**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 11 (Rebrand to KickLeague)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-06 — Milestone v1.2 started
+Phase: 11 of 15 (Rebrand to KickLeague)
+Plan: --
+Status: Ready to plan
+Last activity: 2026-02-06 -- v1.2 roadmap created (5 phases, 18 requirements)
+
+Progress: [####################..........] 66% (32/32 v1.0+v1.1 plans complete; v1.2 TBD)
 
 ## Performance Metrics
 
-**v1 Velocity:**
+**v1.0 Velocity:**
 - Total plans completed: 26
 - Average duration: 3.8 min
 - Total execution time: ~1.77 hours
-- Timeline: 2 days (2026-02-04 to 2026-02-06)
 
 **v1.1 Velocity:**
 - Total plans completed: 6
@@ -33,7 +34,7 @@ Last activity: 2026-02-06 — Milestone v1.2 started
 
 All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 
-### Pending Todos (manual/infrastructure — not in v1.2 scope)
+### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
 - Provision production infrastructure (Neon, Vercel, QStash, Odds API)
 - API-Football subscription upgrade for fixture events/stats data
@@ -46,16 +47,16 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 
 ### Tech Debt (targeted in v1.2)
 
-- Team name translation helper orphaned (getTeamName never called)
-- Hardcoded season '2025' in LeagueTableWrapper
-- UI text hardcoded English despite message files existing
+- Team name translation helper orphaned (getTeamName never called) -- Phase 13
+- Hardcoded season '2025' in LeagueTableWrapper -- Phase 12
+- UI text hardcoded English despite message files existing -- Phase 13
 
 ### Blockers/Concerns
 
-None — defining v1.2 scope.
+None.
 
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Starting milestone v1.2
+Stopped at: v1.2 roadmap created, Phase 11 ready to plan
 Resume file: None

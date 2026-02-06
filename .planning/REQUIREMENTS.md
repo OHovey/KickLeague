@@ -1,7 +1,7 @@
 # Requirements: KickLeague
 
 **Defined:** 2026-02-06
-**Core Value:** Football fans can see league standings with rich visual context — sparklines, trend indicators, form runs, position history — presented with the information density of a financial dashboard.
+**Core Value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
 
 ## v1.2 Requirements
 
@@ -46,7 +46,7 @@ Requirements for Polish, SEO & Launch Readiness milestone. Each maps to roadmap 
 ## v1.1 Requirements (Complete)
 
 <details>
-<summary>Affiliate monetisation — all 12 requirements complete</summary>
+<summary>Affiliate monetisation -- all 12 requirements complete</summary>
 
 ### Affiliate Config
 
@@ -107,30 +107,30 @@ Deferred to future milestones.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BRAND-01 | — | Pending |
-| BRAND-02 | — | Pending |
-| BRAND-03 | — | Pending |
-| BRAND-04 | — | Pending |
-| LAYOUT-01 | — | Pending |
-| LAYOUT-02 | — | Pending |
-| I18N-01 | — | Pending |
-| I18N-02 | — | Pending |
-| I18N-03 | — | Pending |
-| DEBT-01 | — | Pending |
-| SEO-01 | — | Pending |
-| SEO-02 | — | Pending |
-| SEO-03 | — | Pending |
-| SEO-04 | — | Pending |
-| SEO-05 | — | Pending |
-| ADS-01 | — | Pending |
-| ADS-02 | — | Pending |
-| ADS-03 | — | Pending |
+| BRAND-01 | Phase 11 | Pending |
+| BRAND-02 | Phase 11 | Pending |
+| BRAND-03 | Phase 11 | Pending |
+| BRAND-04 | Phase 11 | Pending |
+| LAYOUT-01 | Phase 12 | Pending |
+| LAYOUT-02 | Phase 12 | Pending |
+| DEBT-01 | Phase 12 | Pending |
+| I18N-01 | Phase 13 | Pending |
+| I18N-02 | Phase 13 | Pending |
+| I18N-03 | Phase 13 | Pending |
+| SEO-01 | Phase 14 | Pending |
+| SEO-02 | Phase 14 | Pending |
+| SEO-03 | Phase 14 | Pending |
+| SEO-04 | Phase 14 | Pending |
+| SEO-05 | Phase 14 | Pending |
+| ADS-01 | Phase 15 | Pending |
+| ADS-02 | Phase 15 | Pending |
+| ADS-03 | Phase 15 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 18 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 18
+- Mapped to phases: 18/18
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-06*
-*Last updated: 2026-02-06 after initial definition*
+*Last updated: 2026-02-06 after v1.2 roadmap creation*
