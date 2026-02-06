@@ -1,0 +1,190 @@
+'use client';
+
+import { useEffect, useState, useTransition } from 'react';
+import { useTranslations } from 'next-intl';
+import { fetchOddsForFixture, type FixtureOddsResult } from './actions';
+import { OddsCell } from './OddsCell';
+import {
+  OddsFormatSwitcher,
+  OddsFormatProvider,
+} from './OddsFormatSwitcher';
+import { ResponsibleGambling } from './ResponsibleGambling';
+
+interface OddsComparisonTableProps {
+  fixtureId: number;
+  homeTeam: string;
+  awayTeam: string;
+  showBetting: boolean;
+}
+
+// ── Skeleton ───────────────────────────────────────────────────────────────
+
+function OddsTableSkeleton() {
+  return (
+    <div className="space-y-2">
+      {[1, 2, 3].map((i) => (
+        <div
+          key={i}
+          className="flex items-center gap-3 rounded-lg px-3 py-3"
+        >
+          <div className="h-4 w-24 animate-pulse rounded bg-white/10" />
+          <div className="flex flex-1 justify-around">
+            <div className="h-6 w-14 animate-pulse rounded bg-white/10" />
+            <div className="h-6 w-14 animate-pulse rounded bg-white/10" />
+            <div className="h-6 w-14 animate-pulse rounded bg-white/10" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Relative time helper ───────────────────────────────────────────────────
+
+function getRelativeTime(isoString: string): string {
+  const diff = Date.now() - new Date(isoString).getTime();
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 1) return 'just now';
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+}
+
+// ── Main Component ─────────────────────────────────────────────────────────
+
+/**
+ * Oddschecker-style comparison table showing odds from multiple bookmakers.
+ * Highlights the best odds per outcome column.
+ *
+ * - Respects geo-compliance: renders null when showBetting=false
+ * - Fetches odds via server action on mount
+ * - Includes format switcher and responsible gambling footer
+ */
+export function OddsComparisonTable({
+  fixtureId,
+  homeTeam,
+  awayTeam,
+  showBetting,
+}: OddsComparisonTableProps) {
+  const t = useTranslations('Odds');
+  const [data, setData] = useState<FixtureOddsResult | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!showBetting) return;
+    startTransition(async () => {
+      try {
+        const result = await fetchOddsForFixture(fixtureId);
+        setData(result);
+      } catch {
+        // Silently fail - odds are supplementary
+      } finally {
+        setLoaded(true);
+      }
+    });
+  }, [fixtureId, showBetting]);
+
+  // Geo-blocked: render nothing
+  if (!showBetting) return null;
+
+  // Loading state
+  if (!loaded || isPending) {
+    return (
+      <div className="mt-6 rounded-xl bg-white/5 p-4">
+        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/60">
+          {t('comparisonTitle')}
+        </h3>
+        <OddsTableSkeleton />
+      </div>
+    );
+  }
+
+  // No odds available
+  if (!data || data.odds.length === 0) {
+    return (
+      <div className="mt-6 rounded-xl bg-white/5 p-6 text-center">
+        <p className="text-white/50">{t('noOdds')}</p>
+      </div>
+    );
+  }
+
+  // Find best odds per column for highlighting
+  const bestHome = Math.max(...data.odds.map((r) => r.homeOdds));
+  const bestDraw = Math.max(...data.odds.map((r) => r.drawOdds));
+  const bestAway = Math.max(...data.odds.map((r) => r.awayOdds));
+
+  return (
+    <OddsFormatProvider>
+      <div className="mt-6 space-y-3">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-white/60">
+            {t('comparisonTitle')}
+          </h3>
+          <OddsFormatSwitcher />
+        </div>
+
+        {/* Table */}
+        <div className="overflow-hidden rounded-xl bg-white/5">
+          {/* Column headers */}
+          <div className="grid grid-cols-[1fr_repeat(3,80px)] items-center gap-1 border-b border-white/10 px-3 py-2 text-xs font-medium uppercase tracking-wider text-white/40">
+            <span>Bookmaker</span>
+            <span className="text-center">{homeTeam}</span>
+            <span className="text-center">{t('draw')}</span>
+            <span className="text-center">{awayTeam}</span>
+          </div>
+
+          {/* Bookmaker rows */}
+          {data.odds.map((row) => (
+            <div
+              key={row.bookmakerKey}
+              className="grid grid-cols-[1fr_repeat(3,80px)] items-center gap-1 border-b border-white/5 px-3 py-1"
+            >
+              <span className="truncate text-sm text-white/70">
+                {row.bookmakerTitle}
+              </span>
+              <OddsCell
+                value={row.homeOdds}
+                link={row.homeLink}
+                prevValue={row.prevHomeOdds}
+                fixtureId={fixtureId}
+                bookmakerKey={row.bookmakerKey}
+                outcome="home"
+                isBest={row.homeOdds === bestHome}
+              />
+              <OddsCell
+                value={row.drawOdds}
+                link={row.drawLink}
+                prevValue={row.prevDrawOdds}
+                fixtureId={fixtureId}
+                bookmakerKey={row.bookmakerKey}
+                outcome="draw"
+                isBest={row.drawOdds === bestDraw}
+              />
+              <OddsCell
+                value={row.awayOdds}
+                link={row.awayLink}
+                prevValue={row.prevAwayOdds}
+                fixtureId={fixtureId}
+                bookmakerKey={row.bookmakerKey}
+                outcome="away"
+                isBest={row.awayOdds === bestAway}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Last updated */}
+        <p className="text-center text-[11px] text-white/30">
+          {t('lastUpdated', { time: getRelativeTime(data.fetchedAt) })}
+        </p>
+
+        {/* Responsible gambling */}
+        <ResponsibleGambling show={true} />
+      </div>
+    </OddsFormatProvider>
+  );
+}
