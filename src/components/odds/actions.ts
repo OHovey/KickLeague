@@ -30,11 +30,19 @@ export interface FixtureOddsResult {
   totalBookmakers: number;
 }
 
+export interface TopBookmaker {
+  bookmakerKey: string;
+  bookmakerTitle: string;
+  link: string;
+  affiliateProgram: string | null;
+}
+
 export interface CompactOddsData {
   bestHome: number;
   bestDraw: number;
   bestAway: number;
   bookmakerCount: number;
+  topBookmakers: TopBookmaker[];
 }
 
 // ── Server Actions ─────────────────────────────────────────────────────────
@@ -126,9 +134,10 @@ export async function fetchCompactOdds(
       .from(fixtureOdds)
       .where(inArray(fixtureOdds.fixtureId, fixtureIds));
 
-    // Get allowed bookmakers for this country
+    // Get allowed bookmakers for this country (sorted by priority)
     const available = getAvailableBookmakers(countryCode);
     const allowedKeys = new Set(available.map((b) => b.bookmakerKey));
+    const priorityMap = new Map(available.map((b) => [b.bookmakerKey, b.priority]));
 
     // Group by fixtureId, filter to allowed bookmakers, then find best odds
     const grouped = new Map<number, typeof rows>();
@@ -144,11 +153,35 @@ export async function fetchCompactOdds(
 
     const result: Record<number, CompactOddsData> = {};
     for (const [fId, fRows] of grouped) {
+      // Sort by priority (lower = higher priority) for top bookmaker selection
+      const sorted = [...fRows].sort((a, b) => {
+        const pA = priorityMap.get(a.bookmakerKey) ?? 999;
+        const pB = priorityMap.get(b.bookmakerKey) ?? 999;
+        return pA - pB;
+      });
+
+      // Extract top 3 bookmakers with links
+      const topBookmakers: TopBookmaker[] = sorted
+        .slice(0, 3)
+        .map((r) => {
+          const affiliateCfg = getAffiliateConfig(r.bookmakerKey);
+          const link = r.homeLink ?? r.drawLink ?? r.awayLink ?? affiliateCfg?.homepage ?? null;
+          if (!link) return null;
+          return {
+            bookmakerKey: r.bookmakerKey,
+            bookmakerTitle: r.bookmakerTitle,
+            link,
+            affiliateProgram: affiliateCfg?.programName ?? null,
+          };
+        })
+        .filter((b): b is TopBookmaker => b !== null);
+
       result[fId] = {
         bestHome: Math.max(...fRows.map((r) => r.homeOdds)),
         bestDraw: Math.max(...fRows.map((r) => r.drawOdds)),
         bestAway: Math.max(...fRows.map((r) => r.awayOdds)),
         bookmakerCount: fRows.length,
+        topBookmakers,
       };
     }
 

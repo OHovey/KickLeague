@@ -86,6 +86,13 @@ export function OddsCell({
       >
         {formatOdds(value, format)}
       </span>
+
+      {/* Link indicator */}
+      {link && (
+        <span className="text-[8px] text-white/20 group-hover:text-white/50 transition-colors">
+          &#x2197;
+        </span>
+      )}
     </button>
   );
 }

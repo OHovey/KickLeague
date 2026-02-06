@@ -271,6 +271,7 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false, cou
                       bestAway={oddsMap[fixture.id].bestAway}
                       bookmakerCount={oddsMap[fixture.id].bookmakerCount}
                       showBetting={showBetting}
+                      topBookmakers={oddsMap[fixture.id].topBookmakers}
                     />
                   </div>
                 )}

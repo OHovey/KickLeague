@@ -78,7 +78,7 @@ export const AFFILIATE_CONFIG: Record<string, AffiliateProgram> = {
   },
 
   // 888
-  '888sport': {
+  sport888: {
     programName: '888',
     trackingParam: 'a_aid',
     envVar: '888_AFF_ID',

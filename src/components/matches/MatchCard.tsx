@@ -311,6 +311,7 @@ export function MatchCard({
             bestAway={compactOdds.bestAway}
             bookmakerCount={compactOdds.bookmakerCount}
             showBetting={showBetting}
+            topBookmakers={compactOdds.topBookmakers}
           />
         )}
       </div>

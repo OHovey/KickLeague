@@ -147,14 +147,47 @@ export function OddsComparisonTable({
           </div>
 
           {/* Bookmaker rows */}
-          {data.odds.map((row) => (
+          {data.odds.map((row) => {
+            const bookmakerLink = row.homeLink ?? row.drawLink ?? row.awayLink;
+
+            const handleBookmakerClick = () => {
+              if (!bookmakerLink) return;
+
+              // Fire-and-forget click tracking
+              fetch('/api/clicks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  fixtureId,
+                  bookmakerKey: row.bookmakerKey,
+                  outcome: 'name',
+                  affiliateProgram: row.affiliateProgram,
+                }),
+              }).catch(() => {});
+
+              window.open(bookmakerLink, '_blank', 'noopener');
+            };
+
+            return (
             <div
               key={row.bookmakerKey}
               className="grid grid-cols-[1fr_repeat(3,80px)] items-center gap-1 border-b border-white/5 px-3 py-1"
             >
-              <span className="truncate text-sm text-white/70">
-                {row.bookmakerTitle}
-              </span>
+              {bookmakerLink ? (
+                <button
+                  onClick={handleBookmakerClick}
+                  className="group flex items-center gap-1 truncate text-left text-sm text-white/70 transition-colors hover:text-white"
+                >
+                  <span className="truncate">{row.bookmakerTitle}</span>
+                  <span className="shrink-0 text-[8px] text-white/20 group-hover:text-white/50 transition-colors">
+                    &#x2197;
+                  </span>
+                </button>
+              ) : (
+                <span className="truncate text-sm text-white/70">
+                  {row.bookmakerTitle}
+                </span>
+              )}
               <OddsCell
                 value={row.homeOdds}
                 link={row.homeLink}
@@ -186,7 +219,8 @@ export function OddsComparisonTable({
                 isBest={row.awayOdds === bestAway}
               />
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Last updated */}
