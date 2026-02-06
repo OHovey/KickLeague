@@ -19,6 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Season Timeline** - Interactive historical timeline to scrub through past matchweeks
 - [x] **Phase 6: Live Data Pipeline** - Automated polling, match detection, standings recalculation, and real-time client updates
 - [x] **Phase 7: Betting, Odds & Localisation** - Multi-bookmaker odds comparison, affiliate links, geo-compliance, and 5-language i18n
+- [ ] **Phase 8: Team Fixtures Odds Fix** - Thread showBetting through TeamTabs to FixturesTab (audit gap closure)
 
 ## Phase Details
 
@@ -141,10 +142,24 @@ Plans:
 - [x] 07-04-PLAN.md -- next-intl setup, locale routing, app restructure under [locale], language picker (Wave 1)
 - [x] 07-05-PLAN.md -- Team name translations, locale-aware date/number formatting (Wave 2)
 
+### Phase 8: Team Fixtures Odds Fix
+**Goal**: Betting odds display correctly on team fixture pages for users in non-restricted countries, completing the geo-compliance flow end-to-end
+**Depends on**: Phase 7
+**Requirements**: MATL-04 (partial), MTCH-03 (partial)
+**Gap Closure**: Closes integration gap (TeamTabs → FixturesTab showBetting) and E2E flow gap (geo-compliance on team pages) from v1 audit
+**Success Criteria** (what must be TRUE):
+  1. Users in non-restricted countries see betting odds on team fixture pages (CompactOdds on upcoming fixtures)
+  2. Users in restricted jurisdictions (Italy) continue to see no betting content on team fixture pages
+  3. The showBetting prop flows from TeamTabs through to FixturesTab following the same pattern used in MatchListClient
+**Plans**: 1 plan
+
+Plans:
+- [ ] 08-01-PLAN.md -- Thread showBetting through TeamTabs to FixturesTab
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -155,3 +170,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 5. Season Timeline | 3/3 | Complete | 2026-02-05 |
 | 6. Live Data Pipeline | 3/3 | Complete | 2026-02-05 |
 | 7. Betting, Odds & Localisation | 5/5 | Complete | 2026-02-06 |
+| 8. Team Fixtures Odds Fix | 0/1 | Pending | -- |
