@@ -103,9 +103,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 09-01-PLAN.md — Affiliate config & link builder (TDD)
-- [ ] 09-02-PLAN.md — Schema migration, click analytics wiring & seed script integration
-- [ ] 09-03-PLAN.md — Odds cron route with QStash auth
+- [x] 09-01-PLAN.md — Affiliate config & link builder (TDD)
+- [x] 09-02-PLAN.md — Schema migration, click analytics wiring & seed script integration
+- [x] 09-03-PLAN.md — Odds cron route with QStash auth
 
 #### Phase 10: Geo-Aware Bookmaker Filtering
 **Goal**: Users only see bookmakers that operate in their country, with locally popular bookmakers shown first
@@ -136,9 +136,9 @@ Phases execute in numeric order: 9 -> 10
 | 6. Pipeline | v1.0 | 4/4 | Complete | 2026-02-05 |
 | 7. Betting & i18n | v1.0 | 4/4 | Complete | 2026-02-05 |
 | 8. Polish | v1.0 | 2/2 | Complete | 2026-02-06 |
-| 9. Affiliate Links | v1.1 | 0/3 | Not started | - |
+| 9. Affiliate Links | v1.1 | 3/3 | Complete | 2026-02-06 |
 | 10. Geo Filtering | v1.1 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-06 after Phase 9 planning*
+*Last updated: 2026-02-06 after Phase 9 execution*

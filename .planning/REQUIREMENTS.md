@@ -9,17 +9,17 @@ Requirements for affiliate monetisation milestone. Each maps to roadmap phases.
 
 ### Affiliate Config
 
-- [ ] **AFCFG-01**: System maps each bookmaker key to its affiliate program's tracking parameter name, URL template, and affiliate ID reference
-- [ ] **AFCFG-02**: Affiliate IDs are loaded from environment variables per program (one env var per program)
-- [ ] **AFCFG-03**: Bookmaker links work for users even when affiliate ID is not yet configured (link without tracking param)
-- [ ] **AFCFG-04**: System constructs per-outcome deep links using API `sid` field when available
+- [x] **AFCFG-01**: System maps each bookmaker key to its affiliate program's tracking parameter name, URL template, and affiliate ID reference
+- [x] **AFCFG-02**: Affiliate IDs are loaded from environment variables per program (one env var per program)
+- [x] **AFCFG-03**: Bookmaker links work for users even when affiliate ID is not yet configured (link without tracking param)
+- [x] **AFCFG-04**: System constructs per-outcome deep links using API `sid` field when available
 
 ### Link Construction
 
-- [ ] **LINK-01**: Link builder applies priority chain: API-provided deep link > sid-constructed deep link > bookmaker homepage fallback
-- [ ] **LINK-02**: Affiliate tracking parameter is appended to all constructed links when affiliate ID is configured
-- [ ] **LINK-03**: Seed script uses link builder to enrich odds rows with affiliate links at ingestion time
-- [ ] **LINK-04**: Cron poll route uses link builder to enrich odds rows with affiliate links on each refresh
+- [x] **LINK-01**: Link builder applies priority chain: API-provided deep link > sid-constructed deep link > bookmaker homepage fallback
+- [x] **LINK-02**: Affiliate tracking parameter is appended to all constructed links when affiliate ID is configured
+- [x] **LINK-03**: Seed script uses link builder to enrich odds rows with affiliate links at ingestion time
+- [x] **LINK-04**: Cron poll route uses link builder to enrich odds rows with affiliate links on each refresh
 
 ### Geo Filtering
 
@@ -29,7 +29,7 @@ Requirements for affiliate monetisation milestone. Each maps to roadmap phases.
 
 ### Analytics
 
-- [ ] **ANLYT-01**: Click tracking records which affiliate program was used (not just bookmaker key)
+- [x] **ANLYT-01**: Click tracking records which affiliate program was used (not just bookmaker key)
 
 ## v2 Requirements
 
@@ -55,18 +55,18 @@ Deferred to future milestones.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AFCFG-01 | Phase 9 | Pending |
-| AFCFG-02 | Phase 9 | Pending |
-| AFCFG-03 | Phase 9 | Pending |
-| AFCFG-04 | Phase 9 | Pending |
-| LINK-01 | Phase 9 | Pending |
-| LINK-02 | Phase 9 | Pending |
-| LINK-03 | Phase 9 | Pending |
-| LINK-04 | Phase 9 | Pending |
+| AFCFG-01 | Phase 9 | Complete |
+| AFCFG-02 | Phase 9 | Complete |
+| AFCFG-03 | Phase 9 | Complete |
+| AFCFG-04 | Phase 9 | Complete |
+| LINK-01 | Phase 9 | Complete |
+| LINK-02 | Phase 9 | Complete |
+| LINK-03 | Phase 9 | Complete |
+| LINK-04 | Phase 9 | Complete |
 | GEO-01 | Phase 10 | Pending |
 | GEO-02 | Phase 10 | Pending |
 | GEO-03 | Phase 10 | Pending |
-| ANLYT-01 | Phase 9 | Pending |
+| ANLYT-01 | Phase 9 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 12 total
@@ -75,4 +75,4 @@ Deferred to future milestones.
 
 ---
 *Requirements defined: 2026-02-06*
-*Last updated: 2026-02-06 after roadmap creation*
+*Last updated: 2026-02-06 after Phase 9 execution*
