@@ -46,7 +46,6 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 
 ### Tech Debt (targeted in v1.2)
 
-- Timeline navigation arrows scroll-only (regression 2b5c055)
 - Team name translation helper orphaned (getTeamName never called)
 - Hardcoded season '2025' in LeagueTableWrapper
 - UI text hardcoded English despite message files existing

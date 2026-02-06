@@ -31,7 +31,7 @@ Football fans can see league standings with rich visual context — sparklines, 
 - [ ] Site header with logo/wordmark and locale switcher on all pages via layout — v1.2
 - [ ] Homepage three-card hero row with key stat highlights (Top Scorer, Biggest Upset, Form Team) — v1.2
 - [ ] Full i18n wiring: audit all components, wire every user-visible string to message files — v1.2
-- [ ] Tech debt: timeline arrow navigation regression, orphaned getTeamName, hardcoded season '2025' — v1.2
+- [ ] Tech debt: orphaned getTeamName wiring, hardcoded season '2025' — v1.2
 - [ ] Full SEO: meta tags, Open Graph, sitemap.xml, robots.txt, JSON-LD, hreflang, canonicals, semantic HTML, page speed — v1.2
 - [ ] Google AdSense integration with responsive ad slots on key pages — v1.2
 
@@ -70,7 +70,6 @@ Football fans can see league standings with rich visual context — sparklines, 
 **Monetisation strategy:** Betting affiliate links (primary, ~70% projected revenue), display advertising (secondary), premium tier (tertiary, post-launch). Projected ~$100-150/month infrastructure cost, revenue target of $5,900/month by month 10-12.
 
 **Known tech debt (from v1 audit — targeted for v1.2):**
-- Timeline navigation arrows only scroll strip visually (regression from 2b5c055)
 - Team name translation helper (getTeamName) exists but never called — team names always English
 - Hardcoded season '2025' in LeagueTableWrapper
 - UI text still hardcoded English in many components despite message files existing
