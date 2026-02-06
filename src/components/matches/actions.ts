@@ -12,6 +12,7 @@ import { getH2HSummary, type H2HSummary } from '@/lib/matches/h2h';
 import { getLeagueBySlug } from '@/lib/standings/queries';
 import { isDatabaseConfigured } from '@/db/connection';
 import { headers } from 'next/headers';
+import { isCountryMapped } from '@/lib/geo/bookmaker-availability';
 
 export interface RecentMatchesResult {
   matches: MatchWithTeams[];
@@ -108,10 +109,21 @@ export async function fetchH2HSummary(
 }
 
 /**
- * Read showBetting flag from proxy response headers.
- * Server actions have access to the request context.
+ * Read geo context from proxy response headers.
+ * Returns showBetting flag, country code, and whether the country has a
+ * dedicated bookmaker availability entry (vs GB fallback).
  */
-export async function getShowBetting(): Promise<boolean> {
+export async function getGeoContext(): Promise<{
+  showBetting: boolean;
+  countryCode: string | null;
+  isMapped: boolean;
+}> {
   const headerStore = await headers();
-  return headerStore.get('x-show-betting') === '1';
+  const countryCode = headerStore.get('x-user-country') ?? null;
+  const showBetting = headerStore.get('x-show-betting') === '1';
+  return {
+    showBetting,
+    countryCode: countryCode?.toUpperCase() ?? null,
+    isMapped: isCountryMapped(countryCode),
+  };
 }
