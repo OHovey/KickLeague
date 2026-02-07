@@ -56,7 +56,7 @@ interface SeedResult {
 
 program
   .name("seed")
-  .description("Seed KickData database from API-Football")
+  .description("Seed KickLeague database from API-Football")
   .option(
     "--league <slug>",
     "Seed specific league: premier-league, la-liga, bundesliga, serie-a, ligue-1",
@@ -133,7 +133,7 @@ program
 
     const isRefresh = !!opts.refresh;
 
-    console.log(chalk.bold.cyan("\n--- KickData Seed ---"));
+    console.log(chalk.bold.cyan("\n--- KickLeague Seed ---"));
     console.log(
       chalk.cyan(
         `Leagues: ${leagueSlugs.join(", ")}\n` +

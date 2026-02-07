@@ -15,7 +15,7 @@ export function Header() {
           href="/"
           className="text-lg font-bold text-white transition-colors hover:text-white/90"
         >
-          KickData
+          KickLeague
         </Link>
 
         {/* Navigation */}

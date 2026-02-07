@@ -18,10 +18,10 @@ export async function generateMetadata({
 
   try {
     const team = await fetchTeamBySlug(slug);
-    if (!team) return { title: 'Team Not Found | KickData' };
-    return { title: `${team.name} | KickData` };
+    if (!team) return { title: 'Team Not Found' };
+    return { title: team.name };
   } catch {
-    return { title: 'Team | KickData' };
+    return { title: 'Team' };
   }
 }
 

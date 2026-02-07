@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { routing } from '@/i18n/routing';
+import type { Metadata } from 'next';
 import '../globals.css';
 
 const geistSans = Geist({
@@ -20,9 +21,12 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const metadata = {
-  title: 'KickData',
-  description: 'Football league standings with rich visual context',
+export const metadata: Metadata = {
+  title: {
+    template: '%s | KickLeague',
+    default: 'KickLeague',
+  },
+  description: 'Football intelligence, visualized',
 };
 
 type Props = {

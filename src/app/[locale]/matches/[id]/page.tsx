@@ -29,24 +29,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const fixtureId = parseInt(id, 10);
-  if (isNaN(fixtureId)) return { title: 'Match Not Found | KickData' };
+  if (isNaN(fixtureId)) return { title: 'Match Not Found' };
 
   try {
     const match = await fetchMatchDetail(fixtureId);
-    if (!match) return { title: 'Match Not Found | KickData' };
+    if (!match) return { title: 'Match Not Found' };
 
     const homeName = match.homeTeam.shortName ?? match.homeTeam.name;
     const awayName = match.awayTeam.shortName ?? match.awayTeam.name;
 
     if (match.status === 'finished') {
       return {
-        title: `${homeName} ${match.homeScore}-${match.awayScore} ${awayName} | KickData`,
+        title: `${homeName} ${match.homeScore}-${match.awayScore} ${awayName}`,
       };
     }
 
-    return { title: `${homeName} vs ${awayName} | KickData` };
+    return { title: `${homeName} vs ${awayName}` };
   } catch {
-    return { title: 'Match | KickData' };
+    return { title: 'Match' };
   }
 }
 
