@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 11 (Rebrand to KickLeague)
+**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 11 complete, ready for Phase 12
 
 ## Current Position
 
-Phase: 11 of 15 (Rebrand to KickLeague)
-Plan: 03 of 4 complete
-Status: In progress
-Last activity: 2026-02-07 -- Completed 11-03-PLAN.md (brand asset wiring)
+Phase: 11 of 15 (Rebrand to KickLeague) -- COMPLETE
+Plan: 04 of 4 complete
+Status: Phase complete
+Last activity: 2026-02-07 -- Completed 11-04-PLAN.md (infrastructure renames)
 
-Progress: [######################........] 73% (33/33 v1.0+v1.1 + 3/4 phase 11 plans complete)
+Progress: [########################......] 76% (33/33 v1.0+v1.1 + 4/4 phase 11 plans complete, 36/36 through phase 11)
 
 ## Performance Metrics
 
@@ -38,6 +38,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 - 11-01: title.template pattern for automatic brand suffix (child pages return bare titles)
 - 11-02: Football icon uses pentagon-with-seams pattern; sharp script generates all icon variants from SVG source
 - 11-03: Inline SVG icon + styled HTML text for wordmark (avoids font-embedding); OG image uses Satori/ImageResponse with inline SVG
+- 11-04: GitHub repo already renamed to KickLeague (pre-completed); Neon project rename skipped (never branded as KickData, uses default "neondb")
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
@@ -63,5 +64,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-07
-Stopped at: Completed 11-03-PLAN.md
+Stopped at: Completed 11-04-PLAN.md (Phase 11 fully complete)
 Resume file: None
