@@ -247,6 +247,7 @@ async function getPositionChanges(
 export interface MatchweekListResult {
   matchweeks: Array<{ number: number; completed: boolean }>;
   latestCompleted: number;
+  season: string;
   config: { matchweeksTotal: number } | null;
 }
 
@@ -259,12 +260,12 @@ export async function getMatchweekList(
   season?: string
 ): Promise<MatchweekListResult> {
   if (!isDatabaseConfigured()) {
-    return { matchweeks: [], latestCompleted: 0, config: null };
+    return { matchweeks: [], latestCompleted: 0, season: season ?? new Date().getFullYear().toString(), config: null };
   }
 
   const league = await getLeagueBySlug(leagueSlug);
   if (!league) {
-    return { matchweeks: [], latestCompleted: 0, config: null };
+    return { matchweeks: [], latestCompleted: 0, season: season ?? new Date().getFullYear().toString(), config: null };
   }
 
   const targetSeason = season ?? league.currentSeason;
@@ -296,6 +297,7 @@ export async function getMatchweekList(
   return {
     matchweeks,
     latestCompleted,
+    season: targetSeason,
     config: config ? { matchweeksTotal: config.matchweeksTotal } : null,
   };
 }

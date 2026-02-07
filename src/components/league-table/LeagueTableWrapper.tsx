@@ -15,6 +15,7 @@ import { fetchMatchweekList } from './actions';
 interface MatchweekInfo {
   matchweeks: Array<{ number: number; completed: boolean }>;
   latestCompleted: number;
+  season: string;
 }
 
 export function LeagueTableWrapper() {
@@ -32,12 +33,12 @@ export function LeagueTableWrapper() {
   const selectedWeek = week ?? latestCompleted;
   const isHistorical = week !== null && latestCompleted > 0 && week !== latestCompleted;
 
-  // Polling for live data updates
-  // TODO: derive season dynamically from league config instead of hardcoding
+  // Polling for live data updates (season derived from league config)
   const [refreshKey, setRefreshKey] = useState(0);
+  const season = matchweekInfo?.season ?? new Date().getFullYear().toString();
   const { lastUpdated } = usePolling({
     leagueSlug: league,
-    season: '2025',
+    season,
     onUpdate: () => setRefreshKey((k) => k + 1),
     enabled: !isHistorical,
   });
@@ -52,6 +53,7 @@ export function LeagueTableWrapper() {
       setMatchweekInfo({
         matchweeks: result.matchweeks,
         latestCompleted: result.latestCompleted,
+        season: result.season,
       });
       setIsLoadingMatchweeks(false);
     });
