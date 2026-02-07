@@ -119,21 +119,21 @@ Plans:
 **Milestone Goal:** The site presents itself as KickLeague with complete branding, full i18n coverage, search engine discoverability, and display ad monetisation -- ready for public launch.
 
 #### Phase 11: Rebrand to KickLeague
-**Goal**: Every user-facing and developer-facing reference identifies the site as KickLeague, not KickLeague or KickLeague
+**Goal**: Every user-facing and developer-facing reference identifies the site as KickLeague, not FootballPulse or KickData
 **Depends on**: Phase 10 (v1.1 shipped)
 **Requirements**: BRAND-01, BRAND-02, BRAND-03, BRAND-04
 **Success Criteria** (what must be TRUE):
-  1. Searching the codebase for "KickLeague" or "KickLeague" returns zero hits in source files (comments, strings, config)
+  1. Searching the codebase for "FootballPulse" or "KickData" returns zero hits in source files (comments, strings, config)
   2. Running `npm pkg get name` returns "kickleague"
-  3. Every page's browser tab shows "KickLeague" in the title (not KickLeague or KickLeague)
+  3. Every page's browser tab shows "KickLeague" in the title (not FootballPulse or KickData)
   4. A KickLeague wordmark/logo SVG asset exists and renders correctly at multiple sizes
 **Plans**: 4 plans
 
 Plans:
-- [ ] 11-01-PLAN.md -- Codebase rename (source files, package.json, planning docs) + title.template migration
-- [ ] 11-02-PLAN.md -- Brand assets (SVG wordmark, favicons, PWA icons)
-- [ ] 11-03-PLAN.md -- PWA manifest, OG image generator, Header wordmark wiring
-- [ ] 11-04-PLAN.md -- Infrastructure renames (GitHub repo, Neon project)
+- [x] 11-01-PLAN.md -- Codebase rename (source files, package.json, planning docs) + title.template migration
+- [x] 11-02-PLAN.md -- Brand assets (SVG wordmark, favicons, PWA icons)
+- [x] 11-03-PLAN.md -- PWA manifest, OG image generator, Header wordmark wiring
+- [x] 11-04-PLAN.md -- Infrastructure renames (GitHub repo, Neon project)
 
 #### Phase 12: Site Chrome & Homepage
 **Goal**: Users see a consistent site header on every page and an engaging homepage with real-time stat highlights
@@ -195,7 +195,7 @@ Phases execute in numeric order: 11 -> 12 -> 13 -> 14 -> 15
 | 8. Polish | v1.0 | 2/2 | Complete | 2026-02-06 |
 | 9. Affiliate Links | v1.1 | 3/3 | Complete | 2026-02-06 |
 | 10. Geo Filtering | v1.1 | 3/3 | Complete | 2026-02-06 |
-| 11. Rebrand | v1.2 | 0/4 | Planned | - |
+| 11. Rebrand | v1.2 | 4/4 | Complete | 2026-02-07 |
 | 12. Site Chrome | v1.2 | 0/TBD | Not started | - |
 | 13. i18n Complete | v1.2 | 0/TBD | Not started | - |
 | 14. SEO | v1.2 | 0/TBD | Not started | - |

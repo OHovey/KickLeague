@@ -9,10 +9,10 @@ Requirements for Polish, SEO & Launch Readiness milestone. Each maps to roadmap 
 
 ### Rebrand
 
-- [ ] **BRAND-01**: All source code references to KickLeague/KickLeague are renamed to KickLeague
-- [ ] **BRAND-02**: package.json name field updated to kickleague
-- [ ] **BRAND-03**: Page titles and metadata display KickLeague across all pages
-- [ ] **BRAND-04**: Logo/wordmark asset created or updated for KickLeague branding
+- [x] **BRAND-01**: All source code references to FootballPulse/KickData are renamed to KickLeague
+- [x] **BRAND-02**: package.json name field updated to kickleague
+- [x] **BRAND-03**: Page titles and metadata display KickLeague across all pages
+- [x] **BRAND-04**: Logo/wordmark asset created or updated for KickLeague branding
 
 ### Header & Homepage
 
@@ -107,10 +107,10 @@ Deferred to future milestones.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BRAND-01 | Phase 11 | Pending |
-| BRAND-02 | Phase 11 | Pending |
-| BRAND-03 | Phase 11 | Pending |
-| BRAND-04 | Phase 11 | Pending |
+| BRAND-01 | Phase 11 | Complete |
+| BRAND-02 | Phase 11 | Complete |
+| BRAND-03 | Phase 11 | Complete |
+| BRAND-04 | Phase 11 | Complete |
 | LAYOUT-01 | Phase 12 | Pending |
 | LAYOUT-02 | Phase 12 | Pending |
 | DEBT-01 | Phase 12 | Pending |
