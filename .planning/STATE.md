@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-06)
 ## Current Position
 
 Phase: 11 of 15 (Rebrand to KickLeague)
-Plan: 01 of 4 complete
+Plan: 02 of 4 complete
 Status: In progress
-Last activity: 2026-02-07 -- Completed 11-01-PLAN.md (text rename + title.template)
+Last activity: 2026-02-07 -- Completed 11-02-PLAN.md (brand visual assets)
 
-Progress: [####################.#........] 68% (33/33 v1.0+v1.1 + 1/4 phase 11 plans complete)
+Progress: [#####################.........] 70% (33/33 v1.0+v1.1 + 2/4 phase 11 plans complete)
 
 ## Performance Metrics
 
@@ -36,6 +36,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 
 **v1.2 Phase 11:**
 - 11-01: title.template pattern for automatic brand suffix (child pages return bare titles)
+- 11-02: Football icon uses pentagon-with-seams pattern; sharp script generates all icon variants from SVG source
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
@@ -61,5 +62,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-07
-Stopped at: Completed 11-01-PLAN.md
+Stopped at: Completed 11-02-PLAN.md
 Resume file: None
