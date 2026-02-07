@@ -127,7 +127,13 @@ Plans:
   2. Running `npm pkg get name` returns "kickleague"
   3. Every page's browser tab shows "KickLeague" in the title (not FootballPulse or KickData)
   4. A KickLeague wordmark/logo SVG asset exists and renders correctly at multiple sizes
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 11-01-PLAN.md -- Codebase rename (source files, package.json, planning docs) + title.template migration
+- [ ] 11-02-PLAN.md -- Brand assets (SVG wordmark, favicons, PWA icons)
+- [ ] 11-03-PLAN.md -- PWA manifest, OG image generator, Header wordmark wiring
+- [ ] 11-04-PLAN.md -- Infrastructure renames (GitHub repo, Neon project)
 
 #### Phase 12: Site Chrome & Homepage
 **Goal**: Users see a consistent site header on every page and an engaging homepage with real-time stat highlights
@@ -189,7 +195,7 @@ Phases execute in numeric order: 11 -> 12 -> 13 -> 14 -> 15
 | 8. Polish | v1.0 | 2/2 | Complete | 2026-02-06 |
 | 9. Affiliate Links | v1.1 | 3/3 | Complete | 2026-02-06 |
 | 10. Geo Filtering | v1.1 | 3/3 | Complete | 2026-02-06 |
-| 11. Rebrand | v1.2 | 0/TBD | Not started | - |
+| 11. Rebrand | v1.2 | 0/4 | Planned | - |
 | 12. Site Chrome | v1.2 | 0/TBD | Not started | - |
 | 13. i18n Complete | v1.2 | 0/TBD | Not started | - |
 | 14. SEO | v1.2 | 0/TBD | Not started | - |
