@@ -1,8 +1,8 @@
-# FootballPulse
+# KickLeague
 
 ## What This Is
 
-FootballPulse is a CoinMarketCap-inspired football league table and statistics platform covering Europe's Big 5 leagues (Premier League, La Liga, Bundesliga, Serie A, Ligue 1). It provides information-dense dashboards with real-time standings, match data, team analytics, historical trends via an interactive season timeline, betting odds comparison with geo-compliance, and 5-language localisation.
+KickLeague is a CoinMarketCap-inspired football league table and statistics platform covering Europe's Big 5 leagues (Premier League, La Liga, Bundesliga, Serie A, Ligue 1). It provides information-dense dashboards with real-time standings, match data, team analytics, historical trends via an interactive season timeline, betting odds comparison with geo-compliance, and 5-language localisation.
 
 ## Core Value
 
@@ -27,7 +27,7 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 ### Active
 
-- [ ] Full rebrand from KickData/FootballPulse to KickLeague (code, UI, package.json, repo, metadata) — v1.2
+- [ ] Full rebrand from KickLeague/KickLeague to KickLeague (code, UI, package.json, repo, metadata) — v1.2
 - [ ] Site header with logo/wordmark and locale switcher on all pages via layout — v1.2
 - [ ] Homepage three-card hero row with key stat highlights (Top Scorer, Biggest Upset, Form Team) — v1.2
 - [ ] Full i18n wiring: audit all components, wire every user-visible string to message files — v1.2
@@ -107,7 +107,7 @@ Football fans can see league standings with rich visual context — sparklines, 
 **Goal:** Make KickLeague launch-ready with full rebrand, site header, homepage hero, complete i18n wiring, SEO foundations, display ads, and tech debt cleanup.
 
 **Target features:**
-- Full rebrand from FootballPulse/KickData to KickLeague (code, UI, package.json, repo, all metadata)
+- Full rebrand from KickLeague/KickLeague to KickLeague (code, UI, package.json, repo, all metadata)
 - Site header component with KickLeague wordmark and locale switcher on every page
 - Homepage hero row with three stat-highlight cards (Top Scorer, Biggest Upset, Form Team)
 - Full i18n pass: wire every user-visible hardcoded English string to next-intl message files

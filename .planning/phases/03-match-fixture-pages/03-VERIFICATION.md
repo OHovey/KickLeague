@@ -49,7 +49,7 @@ score: 5/5 must-haves verified
 | `src/components/match-detail/actions.ts` | Server actions for match detail | ✓ VERIFIED | 268 lines (estimated from structure). Exports fetchMatchDetail (fixture + teams), fetchMatchStats (home/away stats), fetchMatchEvents (events + player names), fetchUpcomingMatchContext (H2H + team stats), getLeagueSlugById (theme resolution). |
 | `src/app/matches/[id]/page.tsx` | Dynamic match detail route | ✓ VERIFIED | 214 lines. Async server component. Branches on status. Completed: stats, events, H2H. Upcoming: form, H2H, comparative stats, odds placeholder. generateMetadata for title. |
 | `src/components/matches/MatchPreviewSection.tsx` | Home page preview (5 recent + 5 upcoming) | ✓ VERIFIED | 267 lines. Fetches 5 recent + 5 upcoming. Desktop: two-column grid. Mobile: hidden (hidden md:block). "View all" links to /matches?tab=results|fixtures. |
-| `src/components/header/Header.tsx` | Site header with navigation | ✓ VERIFIED | 39 lines. Sticky header with "KickData" title (links to /), "Matches" link (active state detection), "EN" placeholder. |
+| `src/components/header/Header.tsx` | Site header with navigation | ✓ VERIFIED | 39 lines. Sticky header with "KickLeague" title (links to /), "Matches" link (active state detection), "EN" placeholder. |
 | `src/app/page.tsx` (modified) | Home page with header + preview | ✓ VERIFIED | 88 lines. Integrates Header, LeagueTabs, LeagueTableWrapper, MatchPreviewSection. All wired correctly. |
 
 ### Key Link Verification

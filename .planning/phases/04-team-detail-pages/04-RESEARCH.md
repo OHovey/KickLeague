@@ -98,8 +98,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const team = await fetchTeamBySlug(slug);
-  if (!team) return { title: 'Team Not Found | KickData' };
-  return { title: `${team.name} | KickData` };
+  if (!team) return { title: 'Team Not Found | KickLeague' };
+  return { title: `${team.name} | KickLeague` };
 }
 
 export default async function TeamPage({

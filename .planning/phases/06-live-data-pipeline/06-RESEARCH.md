@@ -6,7 +6,7 @@
 
 ## Summary
 
-This phase transforms the KickData platform from a manually-seeded system into a self-updating pipeline. The work divides into four domains: (1) scheduled server-side polling of API-Football to detect match updates, (2) a match completion chain that recalculates standings, invalidates caches, and triggers ISR revalidation, (3) browser-side smart polling to silently refresh data without page reloads, and (4) API usage tracking for budget monitoring.
+This phase transforms the KickLeague platform from a manually-seeded system into a self-updating pipeline. The work divides into four domains: (1) scheduled server-side polling of API-Football to detect match updates, (2) a match completion chain that recalculates standings, invalidates caches, and triggers ISR revalidation, (3) browser-side smart polling to silently refresh data without page reloads, and (4) API usage tracking for budget monitoring.
 
 The critical constraint is that the Vercel Hobby plan limits cron jobs to once per day. For match-window polling at 30-minute intervals, the project needs Upstash QStash (free tier: 1,000 messages/day, 10 active schedules). QStash pushes HTTP requests to Next.js Route Handlers on a cron schedule, solving the Hobby plan limitation. The daily 04:00 UTC resync can use either Vercel's native cron (1/day fits Hobby) or QStash. The existing `ApiFootballClient`, `mapStatus()`, and `computeHistoricalStandings()` code from Phase 1 provides reusable infrastructure for the polling pipeline.
 

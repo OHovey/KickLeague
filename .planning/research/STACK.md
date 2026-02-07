@@ -1,6 +1,6 @@
 # Technology Stack
 
-**Project:** FootballPulse
+**Project:** KickLeague
 **Researched:** 2026-02-04
 **Research mode:** Ecosystem (Stack dimension)
 **Overall confidence:** MEDIUM — Web search and npm registry verification were unavailable during this session. Versions are based on training data (cutoff ~May 2025) and should be verified with `npm view <package> version` before `npm install`. Recommendations are architecturally sound regardless of minor version drift.
@@ -62,7 +62,7 @@ External verification tools (WebSearch, WebFetch, npm CLI) were unavailable duri
 | Odds data | TanStack Query | Server state with frequent refetching |
 
 **Why Zustand over alternatives:**
-- **Redux Toolkit:** Overkill. FootballPulse has very little client-only state. Redux's boilerplate is unjustified here.
+- **Redux Toolkit:** Overkill. KickLeague has very little client-only state. Redux's boilerplate is unjustified here.
 - **Jotai:** Atomic model is powerful but Zustand's store model maps better to the "global preferences" pattern needed here.
 - **React Context:** Fine for theme/language, but Zustand avoids the re-render cascade problem when league selection changes.
 - **No state library:** Tempting given how little client state exists, but Zustand's persistence middleware (for localStorage sync) and devtools justify its tiny footprint.
@@ -73,7 +73,7 @@ External verification tools (WebSearch, WebFetch, npm CLI) were unavailable duri
 |------------|---------|---------|-----|------------|
 | **TanStack Query** | `5.x` | Server state management | Handles caching, background refetching, stale-while-revalidate, optimistic updates. Critical for a data-heavy dashboard where standings/matches/odds each have different TTLs. SSE events can trigger query invalidation for real-time feel. | HIGH |
 
-**Key TanStack Query patterns for FootballPulse:**
+**Key TanStack Query patterns for KickLeague:**
 
 ```typescript
 // Different stale times per data type
@@ -141,7 +141,7 @@ function Sparkline({ data, color }: { data: number[]; color: string }) {
 - **Paraglide (Inlang):** Interesting compiler-based approach with smaller bundle, but less mature ecosystem. Worth watching.
 - **ICU MessageFormat directly:** Too low-level. next-intl wraps ICU format with React integration.
 
-**Key i18n considerations for FootballPulse:**
+**Key i18n considerations for KickLeague:**
 - Team names: Some have official translations (e.g., "Bayern Munich" vs "Bayern Munchen"), others do not. Store canonical + translated names in the database.
 - Date formats: DD/MM/YYYY for UK/EU, locale-aware via `Intl.DateTimeFormat`.
 - Number formats: 1,000 (EN) vs 1.000 (DE/ES/IT/FR). Use `Intl.NumberFormat`.
@@ -157,7 +157,7 @@ function Sparkline({ data, color }: { data: number[]; color: string }) {
 | **Drizzle ORM** | `0.3x.x` | Database ORM | Type-safe SQL with zero abstraction cost. Generates raw SQL, so no ORM performance penalty for the complex standing calculation queries. Schema-as-code with migrations. Lighter than Prisma, faster queries. | HIGH |
 
 **Why Neon over alternatives:**
-- **Supabase:** Also Postgres, also serverless. Supabase bundles auth, storage, realtime — features FootballPulse doesn't need for v1. Neon is more focused (just the database) and has better Vercel integration with connection pooling via `@neondatabase/serverless`. Supabase is a fine alternative if Neon's free tier is exhausted.
+- **Supabase:** Also Postgres, also serverless. Supabase bundles auth, storage, realtime — features KickLeague doesn't need for v1. Neon is more focused (just the database) and has better Vercel integration with connection pooling via `@neondatabase/serverless`. Supabase is a fine alternative if Neon's free tier is exhausted.
 - **PlanetScale:** The spec originally proposed this. PlanetScale deprecated their free tier in 2024 and uses MySQL, not Postgres. PostgreSQL is superior for this use case (JSONB, richer query capabilities, standard SQL). **Do not use PlanetScale.**
 - **Vercel Postgres (powered by Neon):** Possible but has markup over direct Neon pricing. Use Neon directly for cost control.
 - **Railway Postgres:** Good alternative with simple pricing but less serverless-optimised than Neon.
@@ -230,7 +230,7 @@ export async function GET(request: Request) {
 ```
 
 **Why SSE over alternatives:**
-- **WebSocket:** Bidirectional, but FootballPulse only needs server-to-client pushes. WebSocket adds complexity (connection management, reconnection logic, proxy issues) for no benefit.
+- **WebSocket:** Bidirectional, but KickLeague only needs server-to-client pushes. WebSocket adds complexity (connection management, reconnection logic, proxy issues) for no benefit.
 - **Polling:** Simpler but wastes bandwidth and adds latency. SSE gives instant updates when standings change.
 - **Pusher / Ably:** Third-party services add cost and another dependency. SSE from our own API routes is free and sufficient for the expected traffic volume.
 - **Supabase Realtime:** Would require Supabase as database. Too coupled.
@@ -380,7 +380,7 @@ This fits comfortably within the stated $100-150/month budget.
 
 ```bash
 # Core framework
-npx create-next-app@latest footballpulse --typescript --tailwind --eslint --app --src-dir
+npx create-next-app@latest kickleague --typescript --tailwind --eslint --app --src-dir
 
 # State & data fetching
 npm install zustand @tanstack/react-query
@@ -415,7 +415,7 @@ npm install -D vitest @vitejs/plugin-react prettier prettier-plugin-tailwindcss 
 
 ```env
 # Database
-DATABASE_URL=postgresql://...@ep-xxx.us-east-2.aws.neon.tech/footballpulse
+DATABASE_URL=postgresql://...@ep-xxx.us-east-2.aws.neon.tech/kickleague
 
 # Cache
 UPSTASH_REDIS_REST_URL=https://...upstash.io
@@ -441,7 +441,7 @@ INSTAGRAM_ACCESS_TOKEN=...
 OPENAI_API_KEY=...
 
 # App
-NEXT_PUBLIC_BASE_URL=https://footballpulse.com
+NEXT_PUBLIC_BASE_URL=https://kickleague.com
 ```
 
 ---

@@ -1,7 +1,7 @@
 # Domain Pitfalls
 
 **Domain:** Football statistics and league table platform (Big 5 European leagues)
-**Project:** FootballPulse
+**Project:** KickLeague
 **Researched:** 2026-02-04
 
 ---

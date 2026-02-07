@@ -119,13 +119,13 @@ Plans:
 **Milestone Goal:** The site presents itself as KickLeague with complete branding, full i18n coverage, search engine discoverability, and display ad monetisation -- ready for public launch.
 
 #### Phase 11: Rebrand to KickLeague
-**Goal**: Every user-facing and developer-facing reference identifies the site as KickLeague, not FootballPulse or KickData
+**Goal**: Every user-facing and developer-facing reference identifies the site as KickLeague, not KickLeague or KickLeague
 **Depends on**: Phase 10 (v1.1 shipped)
 **Requirements**: BRAND-01, BRAND-02, BRAND-03, BRAND-04
 **Success Criteria** (what must be TRUE):
-  1. Searching the codebase for "FootballPulse" or "KickData" returns zero hits in source files (comments, strings, config)
+  1. Searching the codebase for "KickLeague" or "KickLeague" returns zero hits in source files (comments, strings, config)
   2. Running `npm pkg get name` returns "kickleague"
-  3. Every page's browser tab shows "KickLeague" in the title (not FootballPulse or KickData)
+  3. Every page's browser tab shows "KickLeague" in the title (not KickLeague or KickLeague)
   4. A KickLeague wordmark/logo SVG asset exists and renders correctly at multiple sizes
 **Plans**: 4 plans
 

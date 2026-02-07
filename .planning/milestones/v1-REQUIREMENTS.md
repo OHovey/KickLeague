@@ -8,7 +8,7 @@ For current requirements, see `.planning/PROJECT.md` (Validated section carries 
 
 ---
 
-# Requirements: FootballPulse
+# Requirements: KickLeague
 
 **Defined:** 2026-02-04
 **Core Value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.

@@ -12,7 +12,7 @@ requires:
     provides: "Match detail page at /matches/[id]"
 provides:
   - "Home page match preview section with 5 recent + 5 upcoming matches"
-  - "Site header with KickData title and Matches navigation link"
+  - "Site header with KickLeague title and Matches navigation link"
   - "Inline H2H and form display on match cards (no expand required)"
   - "Visible match date on every card"
 affects: [04-player-profiles, 06-live-data]
@@ -62,7 +62,7 @@ completed: 2026-02-05
 
 ## Accomplishments
 - Home page shows MatchPreviewSection with 5 recent results and 5 upcoming fixtures (desktop only)
-- Header component with "KickData" title and "Matches" navigation link on both pages
+- Header component with "KickLeague" title and "Matches" navigation link on both pages
 - Match cards now show date, form badges, and H2H bar inline without expand/collapse interaction
 - Added formatMatchDateShort utility for compact card date display
 

@@ -1,13 +1,13 @@
 # Project Research Summary
 
-**Project:** FootballPulse
+**Project:** KickLeague
 **Domain:** Football statistics and league table platform (Big 5 European leagues)
 **Researched:** 2026-02-04
 **Confidence:** MEDIUM-HIGH
 
 ## Executive Summary
 
-FootballPulse is a data-dense football statistics platform inspired by CoinMarketCap's information-rich aesthetic. The core differentiator is embedding sparklines directly into league tables to show positional trajectory over the season — a visualization pattern no competitor (FotMob, SofaScore, WhoScored, Transfermarkt, FlashScore) currently implements. The platform targets football analytics enthusiasts who want more than basic standings: interactive season timelines, full-page league theming, financial dashboard aesthetics, and eventually betting odds integration for monetization.
+KickLeague is a data-dense football statistics platform inspired by CoinMarketCap's information-rich aesthetic. The core differentiator is embedding sparklines directly into league tables to show positional trajectory over the season — a visualization pattern no competitor (FotMob, SofaScore, WhoScored, Transfermarkt, FlashScore) currently implements. The platform targets football analytics enthusiasts who want more than basic standings: interactive season timelines, full-page league theming, financial dashboard aesthetics, and eventually betting odds integration for monetization.
 
 The recommended technical approach is a Next.js 15 App Router application on Vercel with Neon Postgres for data storage, Drizzle ORM for type-safe queries, and Upstash Redis for caching. The architecture separates three execution contexts: user-facing serving (RSC with ISR), background data ingestion (QStash cron jobs calling API-Football), and processing pipelines (match detection, standings recalculation, cache warming, social media automation). This serverless-native pattern handles the read-heavy workload efficiently while keeping costs within the $100-150/month production budget. State management is minimal: Zustand for client preferences, TanStack Query for server state, with most data pre-rendered on the server.
 
@@ -37,7 +37,7 @@ The most critical risks are: (1) league-specific tiebreaker rules differ dramati
 
 ### Expected Features
 
-FootballPulse must balance table-stakes features (expected by all users) with signature differentiators (the product identity). Missing any table-stakes feature means users immediately leave for FotMob or SofaScore. Differentiators create the "wow" factor that justifies return visits.
+KickLeague must balance table-stakes features (expected by all users) with signature differentiators (the product identity). Missing any table-stakes feature means users immediately leave for FotMob or SofaScore. Differentiators create the "wow" factor that justifies return visits.
 
 **Must have (table stakes):**
 - League table with core stats (P, W, D, L, GF, GA, GD, Pts, form guide, position change)
@@ -76,7 +76,7 @@ FootballPulse must balance table-stakes features (expected by all users) with si
 
 ### Architecture Approach
 
-FootballPulse is a **read-heavy, event-driven data platform** with three distinct execution contexts that must be architecturally separated:
+KickLeague is a **read-heavy, event-driven data platform** with three distinct execution contexts that must be architecturally separated:
 
 **Major components:**
 
@@ -201,7 +201,7 @@ Based on combined research findings, architectural dependencies, and pitfall pre
 
 ### Phase 3: Enhanced Display & Sparklines
 
-**Rationale:** With automated data ingestion working, Phase 3 adds the signature visual differentiators. Sparklines are the core product identity but require position history accumulated over matchweeks (Phase 2 pipeline provides this). This phase delivers the "wow" factor that makes FootballPulse visually distinctive.
+**Rationale:** With automated data ingestion working, Phase 3 adds the signature visual differentiators. Sparklines are the core product identity but require position history accumulated over matchweeks (Phase 2 pipeline provides this). This phase delivers the "wow" factor that makes KickLeague visually distinctive.
 
 **Delivers:**
 - Sparkline component (Canvas-based for performance, custom ~30-line implementation)

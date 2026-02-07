@@ -1,4 +1,4 @@
-# Project Milestones: FootballPulse
+# Project Milestones: KickLeague
 
 ## v1 MVP (Shipped: 2026-02-06)
 

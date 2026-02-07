@@ -30,7 +30,7 @@ tech_debt:
       - "Hardcoded season '2025' in LeagueTableWrapper (line 36) — requires code change when season rolls over"
 ---
 
-# Milestone v1: FootballPulse — Audit Report
+# Milestone v1: KickLeague — Audit Report
 
 **Milestone:** v1 (8 phases)
 **Audited:** 2026-02-06

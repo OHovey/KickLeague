@@ -8,7 +8,7 @@
 
 ## Recommended Architecture
 
-FootballPulse is a **read-heavy, event-driven data platform** with three distinct execution contexts: user-facing rendering, background data ingestion, and asynchronous content generation. The architecture separates these cleanly while sharing a common data layer.
+KickLeague is a **read-heavy, event-driven data platform** with three distinct execution contexts: user-facing rendering, background data ingestion, and asynchronous content generation. The architecture separates these cleanly while sharing a common data layer.
 
 ### High-Level System Diagram
 

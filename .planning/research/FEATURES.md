@@ -1,7 +1,7 @@
 # Feature Landscape
 
 **Domain:** Football statistics and league table platforms
-**Project:** FootballPulse
+**Project:** KickLeague
 **Researched:** 2026-02-04
 **Competitors surveyed:** FotMob, WhoScored, SofaScore, Transfermarkt, FlashScore
 **Overall confidence:** MEDIUM (based on training data knowledge of competitors; web verification tools were unavailable during this research session)
@@ -35,7 +35,7 @@ Before categorising features, here is what each major competitor offers. This gr
 | Sparklines in tables | No | No | No | No | No |
 | Information density | Medium | Medium-High | Medium | High (text) | Low-Medium |
 
-**Key observation:** No competitor does CoinMarketCap-style sparklines directly in league tables. This validates FootballPulse's core differentiator. Transfermarkt is the closest to "information dense" but its density is text-heavy, not visual. FotMob and SofaScore are the UX benchmark for modern football data presentation.
+**Key observation:** No competitor does CoinMarketCap-style sparklines directly in league tables. This validates KickLeague's core differentiator. Transfermarkt is the closest to "information dense" but its density is text-heavy, not visual. FotMob and SofaScore are the UX benchmark for modern football data presentation.
 
 ---
 
@@ -65,7 +65,7 @@ Features users expect from any football statistics platform. Missing any of thes
 
 ## Differentiators
 
-Features that set FootballPulse apart. Not expected by users, but create the "wow" factor and justify return visits. Ordered by impact-to-effort ratio.
+Features that set KickLeague apart. Not expected by users, but create the "wow" factor and justify return visits. Ordered by impact-to-effort ratio.
 
 ### Tier 1: Core Differentiators (define the product identity)
 
@@ -92,16 +92,16 @@ Features that set FootballPulse apart. Not expected by users, but create the "wo
 | Feature | Value Proposition | Complexity | Competitor Status | Notes |
 |---|---|---|---|---|
 | **"What if" scenario calculator** | Drag teams up/down, input hypothetical results, see table impact. Extremely engaging late-season. | High | 0/5 have this well | Deferred in spec to post-launch. Correct decision -- complex to build well, but massive engagement potential. |
-| **Odds comparison with best-odds highlighting** | Multi-bookmaker comparison showing which bookie offers best value. Affiliate revenue driver. | Medium | 3/5 (FotMob, SofaScore, FlashScore) | Competitors have this but it is a revenue feature, not a competitive differentiation feature. FootballPulse's version should be cleaner and more prominent. |
+| **Odds comparison with best-odds highlighting** | Multi-bookmaker comparison showing which bookie offers best value. Affiliate revenue driver. | Medium | 3/5 (FotMob, SofaScore, FlashScore) | Competitors have this but it is a revenue feature, not a competitive differentiation feature. KickLeague's version should be cleaner and more prominent. |
 | **Social media automation** | Auto-generated match posts for X and Instagram. Growth channel, not a user-facing feature. | High | 0/5 do this as a product feature | This is a growth mechanism, not a product feature users see. Should be built after core product is solid. |
 | **Season comparison mode** | Compare this season's trajectory with last season (or any historical season). | Medium | 1/5 (Transfermarkt has historical data) | Requires multi-season data ingestion. Very compelling for pre-season and title-race analysis. |
-| **Embeddable widgets** | Let bloggers/podcasters embed FootballPulse tables on their sites. Distribution channel. | Medium | 1/5 (Transfermarkt has this) | iframe widgets with branding. Growth mechanism that also provides backlinks for SEO. |
+| **Embeddable widgets** | Let bloggers/podcasters embed KickLeague tables on their sites. Distribution channel. | Medium | 1/5 (Transfermarkt has this) | iframe widgets with branding. Growth mechanism that also provides backlinks for SEO. |
 
 ---
 
 ## Anti-Features
 
-Features to deliberately NOT build. These are common in competitors but would either dilute FootballPulse's focus, waste resources, or harm the product.
+Features to deliberately NOT build. These are common in competitors but would either dilute KickLeague's focus, waste resources, or harm the product.
 
 | Anti-Feature | Why Avoid | What to Do Instead |
 |---|---|---|
@@ -229,7 +229,7 @@ Sparklines, timeline, and odds are enhancements that layer on top of this chain.
 
 The MVP must prove the core thesis: **"A CoinMarketCap-style league table is more compelling than what exists."** This means the table itself -- with sparklines, form, position changes, zone colours, dark theme, league theming -- must be excellent on day one. Everything else (odds, social, i18n) is layered on after the core experience validates.
 
-Sparklines belong in MVP, not Phase 2, because without them FootballPulse is just another league table site. They are the single feature that makes a first-time visitor say "this is different."
+Sparklines belong in MVP, not Phase 2, because without them KickLeague is just another league table site. They are the single feature that makes a first-time visitor say "this is different."
 
 ---
 

@@ -6,7 +6,7 @@
 
 ## Overview
 
-FootballPulse delivers a CoinMarketCap-inspired football statistics platform across 8 phases. The journey starts with data foundations (schema, API client, seeding), builds the core league table experience with sparklines and league theming, expands into match and team detail pages, adds the interactive season timeline, automates the data pipeline for live updates, layers betting odds for monetisation, finishes with 5-language localisation, and closes with a gap fix for team fixture odds threading.
+KickLeague delivers a CoinMarketCap-inspired football statistics platform across 8 phases. The journey starts with data foundations (schema, API client, seeding), builds the core league table experience with sparklines and league theming, expands into match and team detail pages, adds the interactive season timeline, automates the data pipeline for live updates, layers betting odds for monetisation, finishes with 5-language localisation, and closes with a gap fix for team fixture odds threading.
 
 ## Phases
 

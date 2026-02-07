@@ -6,7 +6,7 @@
 
 ## Summary
 
-This phase builds the entire data layer for FootballPulse: a PostgreSQL database (Neon serverless), an API-Football client with rate limiting and Zod validation, a local file-cache proxy for development, and a seeding pipeline for all 5 Big European leagues across 2 seasons (2024/25 and 2025/26).
+This phase builds the entire data layer for KickLeague: a PostgreSQL database (Neon serverless), an API-Football client with rate limiting and Zod validation, a local file-cache proxy for development, and a seeding pipeline for all 5 Big European leagues across 2 seasons (2024/25 and 2025/26).
 
 The standard stack for this domain is Drizzle ORM (TypeScript-first, SQL-like API, built-in migration tooling) with Neon's serverless HTTP driver, Zod for runtime API response validation (with `drizzle-zod` bridging DB schemas and validation), the `limiter` npm package for token-bucket rate limiting, and a custom file-system cache proxy using Node.js `fs` with TTL-based invalidation.
 
@@ -540,7 +540,7 @@ const program = new Command();
 
 program
   .name('seed')
-  .description('Seed FootballPulse database from API-Football')
+  .description('Seed KickLeague database from API-Football')
   .option('--league <slug>', 'Seed a specific league (e.g., premier-league)')
   .option('--all', 'Seed all 5 leagues')
   .option('--refresh', 'Only fetch data newer than last seed')

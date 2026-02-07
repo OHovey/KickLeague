@@ -6,7 +6,7 @@
 
 ## Summary
 
-This phase adds two cross-cutting layers to KickData: (1) multi-bookmaker odds comparison with affiliate monetisation and geo-based compliance, and (2) five-language internationalisation with locale-aware formatting. Both are well-served by established libraries with clear integration patterns for the existing Next.js 16 App Router stack.
+This phase adds two cross-cutting layers to KickLeague: (1) multi-bookmaker odds comparison with affiliate monetisation and geo-based compliance, and (2) five-language internationalisation with locale-aware formatting. Both are well-served by established libraries with clear integration patterns for the existing Next.js 16 App Router stack.
 
 The odds pipeline uses The Odds API as the sole data provider. The API returns odds from multiple bookmakers across configurable regions (eu, uk), with built-in deep linking support for affiliate betslip URLs via the `includeLinks` parameter. Odds data should be cached in the database (not just file cache) since it needs to be served to multiple users and supports historical movement tracking. The 2-tier geo-compliance model (Tier 1: show betting, Tier 2: block all betting) maps cleanly to Vercel's `X-Vercel-IP-Country` header in proxy.ts, which provides ISO 3166-1 alpha-2 country codes at the edge.
 
@@ -294,7 +294,7 @@ export const affiliateClicks = pgTable(
 // messages/en.json
 {
   "Common": {
-    "appName": "KickData",
+    "appName": "KickLeague",
     "backToMatches": "Back to matches",
     "loading": "Loading..."
   },

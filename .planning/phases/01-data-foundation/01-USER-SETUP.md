@@ -5,7 +5,7 @@
 
 ## Why
 
-FootballPulse stores all league, team, fixture, and standings data in a PostgreSQL database. Neon provides a serverless PostgreSQL service with an HTTP driver that works well with Next.js on Vercel.
+KickLeague stores all league, team, fixture, and standings data in a PostgreSQL database. Neon provides a serverless PostgreSQL service with an HTTP driver that works well with Next.js on Vercel.
 
 ## Steps
 
@@ -17,7 +17,7 @@ FootballPulse stores all league, team, fixture, and standings data in a PostgreS
 ### 2. Create a New Project
 
 1. Click **"New Project"** in the Neon dashboard
-2. **Project name:** `footballpulse`
+2. **Project name:** `kickleague`
 3. **Region:** Choose the closest region to you (or `us-east-1` for Vercel East)
 4. **PostgreSQL version:** Leave as default (latest)
 5. Click **"Create Project"**
