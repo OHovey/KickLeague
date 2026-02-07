@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { Header } from '@/components/header/Header';
 import { routing } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import '../globals.css';
@@ -49,7 +50,10 @@ export default async function LocaleLayout({ children, params }: Props) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider>
-          <NuqsAdapter>{children}</NuqsAdapter>
+          <NuqsAdapter>
+            <Header />
+            {children}
+          </NuqsAdapter>
         </NextIntlClientProvider>
       </body>
     </html>

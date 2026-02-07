@@ -8,7 +8,7 @@ export function Header() {
   const isMatchesActive = pathname?.startsWith('/matches');
 
   return (
-    <header className="sticky top-0 z-20 border-b border-white/10 bg-black/20 backdrop-blur-md">
+    <header className="border-b border-white/10 bg-black/20 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Wordmark */}
         <Link

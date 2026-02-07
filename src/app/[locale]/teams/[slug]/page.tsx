@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { ThemeBackground } from '@/components/ThemeBackground';
-import { Header } from '@/components/header/Header';
+
 import { TeamHero } from '@/components/team-detail/TeamHero';
 import { TeamTabs } from '@/components/team-detail/TeamTabs';
 import { fetchTeamBySlug } from '@/components/team-detail/actions';
@@ -62,7 +62,6 @@ export default async function TeamDetailPage({
     <>
       <ThemeBackground theme={teamData.leagueSlug} />
       <div className="min-h-screen">
-        <Header />
         <div className="mx-auto max-w-6xl px-4 pb-12">
           <TeamHero team={teamData} />
           <TeamTabs
