@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Football icon: minimal outline with pentagon seam pattern -->
+  <!-- Outer circle -->
+  <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2.5" fill="none"/>
+  <!-- Pentagon shape in center (classic football panel) -->
+  <polygon
+    points="24,10 33.5,17 30,28.5 18,28.5 14.5,17"
+    stroke="currentColor"
+    stroke-width="2"
+    fill="none"
+    stroke-linejoin="round"
+  />
+  <!-- Seam lines from pentagon vertices to outer circle -->
+  <line x1="24" y1="10" x2="24" y2="2" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="33.5" y1="17" x2="44" y2="12" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="30" y1="28.5" x2="40" y2="38" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="18" y1="28.5" x2="8" y2="38" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="14.5" y1="17" x2="4" y2="12" stroke="currentColor" stroke-width="1.5"/>
+</svg>
