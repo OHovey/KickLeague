@@ -144,7 +144,12 @@ Plans:
   2. Switching locale via the header updates the page language without a full reload and persists across navigation
   3. The homepage displays three stat-highlight cards (Top Scorer, Biggest Upset, Form Team) with real data from the database
   4. The league table and other date-sensitive components display the current season year dynamically (not hardcoded "2025")
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 12-01-PLAN.md -- Header to layout, static positioning, dynamic season fix
+- [ ] 12-02-PLAN.md -- Stat highlight database queries and server action
+- [ ] 12-03-PLAN.md -- StatHighlights component and homepage wiring
 
 #### Phase 13: i18n Completeness
 **Goal**: Every user-visible string renders in the user's chosen locale, including team names
@@ -196,7 +201,7 @@ Phases execute in numeric order: 11 -> 12 -> 13 -> 14 -> 15
 | 9. Affiliate Links | v1.1 | 3/3 | Complete | 2026-02-06 |
 | 10. Geo Filtering | v1.1 | 3/3 | Complete | 2026-02-06 |
 | 11. Rebrand | v1.2 | 4/4 | Complete | 2026-02-07 |
-| 12. Site Chrome | v1.2 | 0/TBD | Not started | - |
+| 12. Site Chrome | v1.2 | 0/3 | Planned | - |
 | 13. i18n Complete | v1.2 | 0/TBD | Not started | - |
 | 14. SEO | v1.2 | 0/TBD | Not started | - |
 | 15. Display Ads | v1.2 | 0/TBD | Not started | - |
