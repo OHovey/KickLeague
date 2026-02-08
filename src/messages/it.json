@@ -16,6 +16,10 @@
     "unableToLoadMatch": "Impossibile caricare la partita",
     "viewAll": "Vedi tutto"
   },
+  "Charts": {
+    "matchweekShort": "G {week}",
+    "points": "{count} pts"
+  },
   "DataFreshness": {
     "hoursAgo": "{count}h fa",
     "justNow": "adesso",
@@ -177,6 +181,7 @@
     "winnerAtOdds": "Vincitore a quota {odds}"
   },
   "TeamFixtures": {
+    "matchweekShort": "G {week}",
     "noFixtureData": "Nessun dato sulle partite disponibile",
     "opponentPosition": "Posizione in classifica dell'avversario: {position}",
     "recentResults": "Risultati recenti",

@@ -16,6 +16,10 @@
     "unableToLoadMatch": "Unable to Load Match",
     "viewAll": "View all"
   },
+  "Charts": {
+    "matchweekShort": "MW {week}",
+    "points": "{count} pts"
+  },
   "DataFreshness": {
     "hoursAgo": "{count}h ago",
     "justNow": "just now",
@@ -177,6 +181,7 @@
     "winnerAtOdds": "Winner at {odds} odds"
   },
   "TeamFixtures": {
+    "matchweekShort": "MW {week}",
     "noFixtureData": "No fixture data available",
     "opponentPosition": "Opponent league position: {position}",
     "recentResults": "Recent Results",

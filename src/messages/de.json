@@ -16,6 +16,10 @@
     "unableToLoadMatch": "Spiel konnte nicht geladen werden",
     "viewAll": "Alle anzeigen"
   },
+  "Charts": {
+    "matchweekShort": "ST {week}",
+    "points": "{count} Pkt"
+  },
   "DataFreshness": {
     "hoursAgo": "vor {count}h",
     "justNow": "gerade eben",
@@ -177,6 +181,7 @@
     "winnerAtOdds": "Sieger bei Quote {odds}"
   },
   "TeamFixtures": {
+    "matchweekShort": "ST {week}",
     "noFixtureData": "Keine Spieldaten verf\u00fcgbar",
     "opponentPosition": "Tabellenposition des Gegners: {position}",
     "recentResults": "Aktuelle Ergebnisse",

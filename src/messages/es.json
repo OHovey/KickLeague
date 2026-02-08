@@ -16,6 +16,10 @@
     "unableToLoadMatch": "No se pudo cargar el partido",
     "viewAll": "Ver todo"
   },
+  "Charts": {
+    "matchweekShort": "J {week}",
+    "points": "{count} pts"
+  },
   "DataFreshness": {
     "hoursAgo": "hace {count}h",
     "justNow": "ahora mismo",
@@ -177,6 +181,7 @@
     "winnerAtOdds": "Ganador a cuota de {odds}"
   },
   "TeamFixtures": {
+    "matchweekShort": "J {week}",
     "noFixtureData": "No hay datos de partidos disponibles",
     "opponentPosition": "Posici\u00f3n del rival en la liga: {position}",
     "recentResults": "Resultados recientes",
