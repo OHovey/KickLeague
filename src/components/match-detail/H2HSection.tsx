@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import type { H2HSummary } from '@/lib/matches/h2h';
 import { formatMatchDate } from '@/lib/dates/format';
 
@@ -21,14 +24,15 @@ export function H2HSection({
   team1Id,
   locale = 'en-GB',
 }: H2HSectionProps) {
+  const t = useTranslations('MatchDetail');
   const total = h2hData.team1Wins + h2hData.team2Wins + h2hData.draws;
 
   return (
     <section className="mt-6 rounded-xl bg-white/5 p-6">
-      <h2 className="mb-4 text-lg font-semibold text-white">Head to Head</h2>
+      <h2 className="mb-4 text-lg font-semibold text-white">{t('headToHead')}</h2>
 
       {total === 0 ? (
-        <p className="text-sm text-white/40">No previous meetings found.</p>
+        <p className="text-sm text-white/40">{t('noPreviousMeetings')}</p>
       ) : (
         <>
           {/* Summary bar */}
@@ -58,18 +62,18 @@ export function H2HSection({
             <div className="flex items-center gap-1.5">
               <span className="font-medium text-blue-400">{team1Name}</span>
               <span className="tabular-nums text-white/90">
-                {h2hData.team1Wins} {h2hData.team1Wins === 1 ? 'win' : 'wins'}
+                {t('wins', { count: h2hData.team1Wins })}
               </span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="tabular-nums text-white/60">
-                {h2hData.draws} {h2hData.draws === 1 ? 'draw' : 'draws'}
+                {t('draws', { count: h2hData.draws })}
               </span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="font-medium text-red-400">{team2Name}</span>
               <span className="tabular-nums text-white/90">
-                {h2hData.team2Wins} {h2hData.team2Wins === 1 ? 'win' : 'wins'}
+                {t('wins', { count: h2hData.team2Wins })}
               </span>
             </div>
           </div>
@@ -126,8 +130,7 @@ export function H2HSection({
           {/* Note if fewer than 5 meetings */}
           {h2hData.meetings.length < 5 && h2hData.meetings.length > 0 && (
             <p className="mt-3 text-[10px] text-white/30">
-              Based on {h2hData.meetings.length} available{' '}
-              {h2hData.meetings.length === 1 ? 'meeting' : 'meetings'}
+              {t('basedOnMeetings', { count: h2hData.meetings.length })}
             </p>
           )}
         </>

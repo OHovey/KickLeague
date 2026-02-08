@@ -1,4 +1,8 @@
+'use client';
+
 // Form guide for both teams, reusing the color pattern from FormBadges
+
+import { useTranslations } from 'next-intl';
 
 // ── Form Colors (matching FormBadges pattern) ──────────────────────────────
 
@@ -48,9 +52,11 @@ function FormBadgesInline({ form }: { form: string }) {
 function TeamFormRow({
   teamName,
   form,
+  noFormLabel,
 }: {
   teamName: string;
   form: string | null;
+  noFormLabel: string;
 }) {
   if (!form) {
     return (
@@ -58,7 +64,7 @@ function TeamFormRow({
         <span className="w-32 shrink-0 text-sm font-medium text-white/70 truncate">
           {teamName}
         </span>
-        <span className="text-xs text-white/30">No form data</span>
+        <span className="text-xs text-white/30">{noFormLabel}</span>
       </div>
     );
   }
@@ -91,12 +97,14 @@ export function FormGuide({
   homeForm,
   awayForm,
 }: FormGuideProps) {
+  const t = useTranslations('MatchDetail');
+
   return (
     <section className="mt-6 rounded-xl bg-white/5 p-6">
-      <h2 className="mb-4 text-lg font-semibold text-white">Form Guide</h2>
+      <h2 className="mb-4 text-lg font-semibold text-white">{t('formGuide')}</h2>
       <div className="space-y-3">
-        <TeamFormRow teamName={homeTeamName} form={homeForm} />
-        <TeamFormRow teamName={awayTeamName} form={awayForm} />
+        <TeamFormRow teamName={homeTeamName} form={homeForm} noFormLabel={t('noFormData')} />
+        <TeamFormRow teamName={awayTeamName} form={awayForm} noFormLabel={t('noFormData')} />
       </div>
     </section>
   );

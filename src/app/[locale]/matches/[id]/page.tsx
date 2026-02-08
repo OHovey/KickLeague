@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
-import { setRequestLocale } from 'next-intl/server';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { ThemeBackground } from '@/components/ThemeBackground';
 import { ScoreHero } from '@/components/match-detail/ScoreHero';
 import { StatsComparison } from '@/components/match-detail/StatsComparison';
@@ -27,13 +27,15 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; id: string }>;
 }): Promise<Metadata> {
-  const { id } = await params;
+  const { locale, id } = await params;
+  const tMeta = await getTranslations({ locale, namespace: 'Metadata' });
+  const tCommon = await getTranslations({ locale, namespace: 'Common' });
   const fixtureId = parseInt(id, 10);
-  if (isNaN(fixtureId)) return { title: 'Match Not Found' };
+  if (isNaN(fixtureId)) return { title: tCommon('notFound') };
 
   try {
     const match = await fetchMatchDetail(fixtureId);
-    if (!match) return { title: 'Match Not Found' };
+    if (!match) return { title: tCommon('notFound') };
 
     const homeName = match.homeTeam.shortName ?? match.homeTeam.name;
     const awayName = match.awayTeam.shortName ?? match.awayTeam.name;
@@ -44,9 +46,9 @@ export async function generateMetadata({
       };
     }
 
-    return { title: `${homeName} vs ${awayName}` };
+    return { title: tMeta('matchTitle', { home: homeName, away: awayName }) };
   } catch {
-    return { title: 'Match' };
+    return { title: tMeta('matchesTitle') };
   }
 }
 
@@ -59,6 +61,8 @@ export default async function MatchDetailPage({
 }) {
   const { locale, id } = await params;
   setRequestLocale(locale);
+
+  const tCommon = await getTranslations('Common');
 
   // Read geo-compliance flags from proxy headers
   const headerStore = await headers();
@@ -77,10 +81,10 @@ export default async function MatchDetailPage({
         <div className="mx-auto max-w-3xl px-4 py-8">
           <div className="rounded-lg bg-white/5 p-8 text-center">
             <p className="text-lg font-medium text-white/90">
-              Unable to Load Match
+              {tCommon('unableToLoadMatch')}
             </p>
             <p className="mt-2 text-white/70">
-              Could not connect to the database. Please check your configuration.
+              {tCommon('checkConfiguration')}
             </p>
           </div>
         </div>
@@ -123,7 +127,7 @@ export default async function MatchDetailPage({
               href="/matches"
               className="mb-4 inline-block text-sm text-white/50 transition-colors hover:text-white/70"
             >
-              &larr; Back to matches
+              &larr; {tCommon('backToMatches')}
             </Link>
 
             <ScoreHero
@@ -179,7 +183,7 @@ export default async function MatchDetailPage({
             href="/matches"
             className="mb-4 inline-block text-sm text-white/50 transition-colors hover:text-white/70"
           >
-            &larr; Back to matches
+            &larr; {tCommon('backToMatches')}
           </Link>
 
           <ScoreHero

@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import type { MatchStatRow } from './actions';
 
 // ── StatBar ────────────────────────────────────────────────────────────────
@@ -63,11 +66,13 @@ interface StatsComparisonProps {
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function StatsComparison({ homeStats, awayStats }: StatsComparisonProps) {
+  const t = useTranslations('MatchDetail');
+
   if (!homeStats || !awayStats) {
     return (
       <section className="mt-6 rounded-xl bg-white/5 p-6">
-        <h2 className="mb-4 text-lg font-semibold text-white">Match Stats</h2>
-        <p className="text-sm text-white/40">No stats available for this match.</p>
+        <h2 className="mb-4 text-lg font-semibold text-white">{t('matchStats')}</h2>
+        <p className="text-sm text-white/40">{t('noStatsAvailable')}</p>
       </section>
     );
   }
@@ -75,43 +80,43 @@ export function StatsComparison({ homeStats, awayStats }: StatsComparisonProps) 
   // Build stat entries conditionally
   const statEntries: StatBarProps[] = [
     {
-      label: 'Possession',
+      label: t('possession'),
       homeValue: homeStats.possession ?? 50,
       awayValue: awayStats.possession ?? 50,
       format: 'percentage',
     },
     {
-      label: 'Shots',
+      label: t('shots'),
       homeValue: homeStats.shots ?? 0,
       awayValue: awayStats.shots ?? 0,
     },
     {
-      label: 'Shots on Target',
+      label: t('shotsOnTarget'),
       homeValue: homeStats.shotsOnTarget ?? 0,
       awayValue: awayStats.shotsOnTarget ?? 0,
     },
     {
-      label: 'Corners',
+      label: t('corners'),
       homeValue: homeStats.corners ?? 0,
       awayValue: awayStats.corners ?? 0,
     },
     {
-      label: 'Fouls',
+      label: t('fouls'),
       homeValue: homeStats.fouls ?? 0,
       awayValue: awayStats.fouls ?? 0,
     },
     {
-      label: 'Offsides',
+      label: t('offsides'),
       homeValue: homeStats.offsides ?? 0,
       awayValue: awayStats.offsides ?? 0,
     },
     {
-      label: 'Yellow Cards',
+      label: t('yellowCards'),
       homeValue: homeStats.yellowCards ?? 0,
       awayValue: awayStats.yellowCards ?? 0,
     },
     {
-      label: 'Red Cards',
+      label: t('redCards'),
       homeValue: homeStats.redCards ?? 0,
       awayValue: awayStats.redCards ?? 0,
     },
@@ -120,7 +125,7 @@ export function StatsComparison({ homeStats, awayStats }: StatsComparisonProps) 
   // Add xG only if both teams have it
   if (homeStats.xg !== null && awayStats.xg !== null) {
     statEntries.push({
-      label: 'xG',
+      label: t('xg'),
       homeValue: homeStats.xg,
       awayValue: awayStats.xg,
       format: 'decimal',
@@ -129,7 +134,7 @@ export function StatsComparison({ homeStats, awayStats }: StatsComparisonProps) 
 
   return (
     <section className="mt-6 rounded-xl bg-white/5 p-6">
-      <h2 className="mb-4 text-lg font-semibold text-white">Match Stats</h2>
+      <h2 className="mb-4 text-lg font-semibold text-white">{t('matchStats')}</h2>
       <div className="space-y-4">
         {statEntries.map((entry) => (
           <StatBar key={entry.label} {...entry} />

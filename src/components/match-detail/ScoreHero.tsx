@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { formatMatchDate, formatKickoffTime } from '@/lib/dates/format';
 
@@ -50,13 +53,14 @@ export function ScoreHero({
   status,
   locale = 'en-GB',
 }: ScoreHeroProps) {
+  const t = useTranslations('MatchDetail');
   const isCompleted = status === 'finished';
 
   return (
     <section className="rounded-xl bg-gradient-to-b from-white/10 to-white/5 p-6">
       {/* Top line: matchweek + venue */}
       <div className="mb-4 flex items-center justify-center gap-2 text-xs text-white/50">
-        {matchweek && <span>Matchweek {matchweek}</span>}
+        {matchweek && <span>{t('matchweekN', { week: matchweek })}</span>}
         {matchweek && venue && <span>-</span>}
         {venue && <span>{venue}</span>}
       </div>

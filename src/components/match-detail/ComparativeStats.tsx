@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import type { TeamSeasonStats } from './actions';
 
 // ── Comparison Row ─────────────────────────────────────────────────────────
@@ -98,14 +101,16 @@ export function ComparativeStats({
   homeTeamName,
   awayTeamName,
 }: ComparativeStatsProps) {
+  const t = useTranslations('MatchDetail');
+
   if (!homeTeamStats || !awayTeamStats) {
     return (
       <section className="mt-6 rounded-xl bg-white/5 p-6">
         <h2 className="mb-4 text-lg font-semibold text-white">
-          Season Comparison
+          {t('seasonComparison')}
         </h2>
         <p className="text-sm text-white/40">
-          Season stats not available for comparison.
+          {t('seasonStatsNotAvailable')}
         </p>
       </section>
     );
@@ -141,38 +146,38 @@ export function ComparativeStats({
   return (
     <section className="mt-6 rounded-xl bg-white/5 p-6">
       <h2 className="mb-2 text-lg font-semibold text-white">
-        Season Comparison
+        {t('seasonComparison')}
       </h2>
       <p className="mb-4 text-xs text-white/40">
         {homeTeamName} vs {awayTeamName}
       </p>
       <div className="space-y-4">
         <ComparisonRow
-          label="League Position"
+          label={t('leaguePosition')}
           homeValue={homeTeamStats.position}
           awayValue={awayTeamStats.position}
           lowerIsBetter
         />
         <ComparisonRow
-          label="Points"
+          label={t('pointsLabel')}
           homeValue={homeTeamStats.points}
           awayValue={awayTeamStats.points}
         />
         <ComparisonRow
-          label="Goals / Game"
+          label={t('goalsPerGame')}
           homeValue={homeGPG}
           awayValue={awayGPG}
           format="decimal"
         />
         <ComparisonRow
-          label="Conceded / Game"
+          label={t('concededPerGame')}
           homeValue={homeGCPG}
           awayValue={awayGCPG}
           format="decimal"
           lowerIsBetter
         />
         <ComparisonRow
-          label="Win Rate"
+          label={t('winRate')}
           homeValue={homeWinRate}
           awayValue={awayWinRate}
           format="percentage"
