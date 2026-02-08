@@ -31,11 +31,25 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'Metadata' });
 
   return {
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL ?? 'https://kickleague.com'
+    ),
     title: {
       template: '%s | KickLeague',
       default: 'KickLeague',
     },
     description: t('siteDescription'),
+    openGraph: {
+      type: 'website',
+      siteName: 'KickLeague',
+      locale: locale,
+    },
+    alternates: {
+      canonical: `/${locale}`,
+      languages: Object.fromEntries(
+        routing.locales.map((l) => [l, `/${l}`])
+      ),
+    },
   };
 }
 
