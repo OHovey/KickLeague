@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 13 in progress
+**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 13 COMPLETE
 
 ## Current Position
 
-Phase: 13 of 15 (i18n Completeness)
-Plan: 04 of 6 complete
-Status: In progress
-Last activity: 2026-02-08 -- Completed 13-04-PLAN.md (team detail, header, stat highlights, layout i18n wiring)
+Phase: 13 of 15 (i18n Completeness) -- COMPLETE
+Plan: 06 of 6 complete
+Status: Phase complete
+Last activity: 2026-02-08 -- Completed 13-06-PLAN.md (complete translations for ES/DE/IT/FR)
 
-Progress: [##############################.] 96% (39/39 through phase 12 + 4/6 phase 13 plans complete, 43/45 total)
+Progress: [###############################] 100% (39/39 through phase 12 + 6/6 phase 13 plans complete, 45/45 total)
 
 ## Performance Metrics
 
@@ -50,6 +50,8 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 - 13-02: ZoneLegend promoted to client component for useTranslations; DataFreshness split into getTimeBucket (pure) + formatRelativeTime (i18n); developer CLI instructions left untranslated
 - 13-03: Match detail components converted to client components for useTranslations; EventsTimeline passes t function as prop to sub-components; ICU plural format for H2H wins/draws/meetings
 - 13-04: TeamHero converted to client component for useTranslations; layout.tsx switched from static metadata to generateMetadata for translated description; FixturesTab uses callback pattern for translated tooltip labels; added Teams.gd and TeamPerformance.noHomeAwayData keys to en.json
+- 13-05: Added teamId to TopScorerResult/BiggestUpsetResult for localization; position history chart keys remapped English->localized; seed script resolves team IDs by name at runtime
+- 13-06: Complete translations for ES/DE/IT/FR (229 keys each); football-domain terminology per locale; German ASCII umlaut corrections; French "clean sheets" preserved as-is
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
@@ -64,7 +66,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 
 ### Tech Debt (targeted in v1.2)
 
-- Team name translation helper orphaned (getTeamName never called) -- Phase 13
+- ~~Team name translation helper orphaned (getTeamName never called)~~ -- RESOLVED in 13-05 (getLocalizedTeamNames wired into all 5 server actions)
 - ~~Hardcoded season '2025' in LeagueTableWrapper~~ -- RESOLVED in 12-01
 - ~~UI text hardcoded English despite message files existing~~ -- RESOLVED in 13-02 through 13-04 (team detail, header, stat highlights, layout all wired)
 
@@ -75,5 +77,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 13-04-PLAN.md (team detail, header, stat highlights, layout i18n wiring)
+Stopped at: Completed 13-06-PLAN.md (Phase 13 COMPLETE -- all locales fully translated)
 Resume file: None
