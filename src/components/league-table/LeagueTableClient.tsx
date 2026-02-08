@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
 import { LayoutGroup } from 'motion/react';
 import type { EnhancedStandingsRow } from '@/lib/standings/queries';
 import type { Zone } from '@/lib/zones';
@@ -65,6 +66,8 @@ function TableSkeleton() {
 const GRID_COLS = 'grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] md:grid-cols-[2rem_8fr_2fr_2fr_2fr_2fr_2fr_2fr_2.5fr_2.5fr_minmax(7rem,5fr)_2fr_minmax(6rem,5fr)]';
 
 export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps) {
+  const t = useTranslations('LeagueTable');
+  const tCommon = useTranslations('Common');
   const [data, setData] = useState<StandingsData | null>(null);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -88,7 +91,7 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
         setData(result);
         setError(null);
       } catch (e) {
-        setError(e instanceof Error ? e.message : 'Failed to load standings');
+        setError(e instanceof Error ? e.message : tCommon('unableToLoad'));
       }
     });
   }, [league, matchweek]);
@@ -109,9 +112,9 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
   if (data?.error === 'database_not_configured') {
     return (
       <div className="rounded-lg bg-white/5 p-8 text-center">
-        <p className="text-lg font-medium text-white/90">Database Not Configured</p>
+        <p className="text-lg font-medium text-white/90">{tCommon('databaseNotConfigured')}</p>
         <p className="mt-2 text-white/70">
-          Set up your database to see league standings
+          {tCommon('setupDatabase')}
         </p>
         <div className="mt-4 rounded bg-black/30 p-4 text-left">
           <p className="text-xs font-mono text-white/50">1. Create a Neon database at neon.tech</p>
@@ -126,7 +129,7 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
   if (!data || !data.leagueName) {
     return (
       <div className="rounded-lg bg-white/5 p-8 text-center">
-        <p className="text-white/70">League not found</p>
+        <p className="text-white/70">{tCommon('leagueNotFound')}</p>
       </div>
     );
   }
@@ -134,9 +137,9 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
   if (data.standings.length === 0) {
     return (
       <div className="rounded-lg bg-white/5 p-8 text-center">
-        <p className="text-white/70">No standings data available</p>
+        <p className="text-white/70">{t('noStandingsData')}</p>
         <p className="mt-2 text-sm text-white/50">
-          Run the seed script to populate league data
+          {tCommon('neonInstructions')}
         </p>
       </div>
     );
@@ -152,11 +155,11 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
   const getNextState = (): { state: ExpandState; label: string } => {
     switch (expandState) {
       case 'collapsed':
-        return { state: 'default', label: 'Show 10 rows' };
+        return { state: 'default', label: t('showRows', { count: 10 }) };
       case 'default':
-        return { state: 'expanded', label: 'Show full table' };
+        return { state: 'expanded', label: t('showFullTable') };
       case 'expanded':
-        return { state: 'collapsed', label: 'Collapse' };
+        return { state: 'collapsed', label: t('collapse') };
     }
   };
   const { state: nextState, label: buttonLabel } = getNextState();
@@ -165,9 +168,9 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
     <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
       {/* Table header */}
       <div className="border-b border-white/10 px-4 py-3 flex items-baseline gap-2">
-        <h2 className="text-sm font-medium text-white/70">Standings</h2>
+        <h2 className="text-sm font-medium text-white/70">{t('standings')}</h2>
         {data.matchweek && (
-          <span className="text-xs text-white/40">Matchweek {data.matchweek}</span>
+          <span className="text-xs text-white/40">{t('matchweekN', { week: data.matchweek })}</span>
         )}
       </div>
 
@@ -182,23 +185,23 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
             >
               {/* Always visible columns */}
               <div role="columnheader" className="py-3 pl-4 pr-2 text-center font-medium">#</div>
-              <div role="columnheader" className="py-3 px-2 text-left font-medium">Team</div>
-              <div role="columnheader" className="py-3 px-2 text-center font-medium">P</div>
+              <div role="columnheader" className="py-3 px-2 text-left font-medium">{t('team')}</div>
+              <div role="columnheader" className="py-3 px-2 text-center font-medium">{t('played')}</div>
               {/* Desktop-only columns */}
-              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">W</div>
-              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">D</div>
-              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">L</div>
-              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">GF</div>
-              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">GA</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('won')}</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('drawn')}</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('lost')}</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('goalsFor')}</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('goalsAgainst')}</div>
               {/* Always visible columns */}
-              <div role="columnheader" className="py-3 px-2 text-center font-medium">GD</div>
-              <div role="columnheader" className="py-3 pl-2 pr-2 text-center font-medium">Pts</div>
+              <div role="columnheader" className="py-3 px-2 text-center font-medium">{t('goalDifference')}</div>
+              <div role="columnheader" className="py-3 pl-2 pr-2 text-center font-medium">{t('points')}</div>
               {/* Desktop-only visual columns */}
-              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">Form</div>
-              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">+/-</div>
-              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">Trend</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('form')}</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('positionChange')}</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('trend')}</div>
               {/* Expand indicator for mobile */}
-              <div role="columnheader" className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">Expand</span></div>
+              <div role="columnheader" className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">{t('expand')}</span></div>
             </div>
 
             {/* Body */}

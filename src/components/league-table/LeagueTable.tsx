@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server';
 import { getStandingsWithZones } from '@/lib/standings/queries';
 import { getZoneColor } from '@/lib/zones';
 import { TableRow } from './TableRow';
@@ -8,14 +9,16 @@ interface LeagueTableProps {
 }
 
 export async function LeagueTable({ league }: LeagueTableProps) {
+  const t = await getTranslations('LeagueTable');
+  const tCommon = await getTranslations('Common');
   const data = await getStandingsWithZones(league);
 
   if (data.error === 'database_not_configured') {
     return (
       <div className="rounded-lg bg-white/5 p-8 text-center">
-        <p className="text-lg font-medium text-white/90">Database Not Configured</p>
+        <p className="text-lg font-medium text-white/90">{tCommon('databaseNotConfigured')}</p>
         <p className="mt-2 text-white/70">
-          Set up your database to see league standings
+          {tCommon('setupDatabase')}
         </p>
         <div className="mt-4 rounded bg-black/30 p-4 text-left">
           <p className="text-xs font-mono text-white/50">1. Create a Neon database at neon.tech</p>
@@ -30,7 +33,7 @@ export async function LeagueTable({ league }: LeagueTableProps) {
   if (!data.league) {
     return (
       <div className="rounded-lg bg-white/5 p-8 text-center">
-        <p className="text-white/70">League not found</p>
+        <p className="text-white/70">{tCommon('leagueNotFound')}</p>
       </div>
     );
   }
@@ -38,9 +41,9 @@ export async function LeagueTable({ league }: LeagueTableProps) {
   if (data.standings.length === 0) {
     return (
       <div className="rounded-lg bg-white/5 p-8 text-center">
-        <p className="text-white/70">No standings data available</p>
+        <p className="text-white/70">{t('noStandingsData')}</p>
         <p className="mt-2 text-sm text-white/50">
-          Run the seed script to populate league data
+          {tCommon('neonInstructions')}
         </p>
       </div>
     );
@@ -50,9 +53,9 @@ export async function LeagueTable({ league }: LeagueTableProps) {
     <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
       {/* Table header */}
       <div className="border-b border-white/10 px-4 py-3 flex items-baseline gap-2">
-        <h2 className="text-sm font-medium text-white/70">Standings</h2>
+        <h2 className="text-sm font-medium text-white/70">{t('standings')}</h2>
         {data.matchweek && (
-          <span className="text-xs text-white/40">Matchweek {data.matchweek}</span>
+          <span className="text-xs text-white/40">{t('matchweekN', { week: data.matchweek })}</span>
         )}
       </div>
 
@@ -63,23 +66,23 @@ export async function LeagueTable({ league }: LeagueTableProps) {
             <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-white/50">
               {/* Always visible columns */}
               <th className="py-3 pl-4 pr-2 text-center font-medium">#</th>
-              <th className="py-3 px-2 text-left font-medium">Team</th>
-              <th className="py-3 px-2 text-center font-medium">P</th>
+              <th className="py-3 px-2 text-left font-medium">{t('team')}</th>
+              <th className="py-3 px-2 text-center font-medium">{t('played')}</th>
               {/* Desktop-only columns */}
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">W</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">D</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">L</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GF</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">GA</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">{t('won')}</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">{t('drawn')}</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">{t('lost')}</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">{t('goalsFor')}</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">{t('goalsAgainst')}</th>
               {/* Always visible columns */}
-              <th className="py-3 px-2 text-center font-medium">GD</th>
-              <th className="py-3 pl-2 pr-2 text-center font-medium">Pts</th>
+              <th className="py-3 px-2 text-center font-medium">{t('goalDifference')}</th>
+              <th className="py-3 pl-2 pr-2 text-center font-medium">{t('points')}</th>
               {/* Desktop-only visual columns */}
-              <th className="hidden py-3 px-2 text-left font-medium md:table-cell">Form</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">+/-</th>
-              <th className="hidden py-3 px-2 pr-4 text-left font-medium md:table-cell">Trend</th>
+              <th className="hidden py-3 px-2 text-left font-medium md:table-cell">{t('form')}</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">{t('positionChange')}</th>
+              <th className="hidden py-3 px-2 pr-4 text-left font-medium md:table-cell">{t('trend')}</th>
               {/* Expand indicator for mobile */}
-              <th className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">Expand</span></th>
+              <th className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">{t('expand')}</span></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
