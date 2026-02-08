@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-06)
 ## Current Position
 
 Phase: 14 of 15 (SEO Foundation)
-Plan: 02 of 5 complete
+Plan: 04 of 5 (3 complete: 01, 02, 04)
 Status: In progress
-Last activity: 2026-02-08 -- Completed 14-02-PLAN.md (team & match page SEO metadata)
+Last activity: 2026-02-08 -- Completed 14-04-PLAN.md (OG image generators)
 
-Progress: [######################################------] 94% (48/51 total plans complete)
+Progress: [################################################--] 96% (49/51 total plans complete)
 
 ## Performance Metrics
 
@@ -57,6 +57,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 **v1.2 Phase 14:**
 - 14-01: metadataBase uses NEXT_PUBLIC_SITE_URL with fallback; matches page metadata in layout.tsx (client component workaround); hreflang alternates from routing.pathnames config
 - 14-02: Spoiler-free OG title for match pages (browser tab shows score, social share does not); hreflang alternates from routing.pathnames with slug/id replacement; league name in team title
+- 14-04: Light gradient OG images (#f8f9fa to #e9ecef) for all 4 page types; direct DB queries instead of server actions for OG (avoids getLocale context); spoiler-free match OG (no scores)
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
@@ -82,5 +83,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 14-02-PLAN.md (team & match page SEO metadata)
+Stopped at: Completed 14-04-PLAN.md (OG image generators)
 Resume file: None
