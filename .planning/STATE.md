@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-06)
 ## Current Position
 
 Phase: 13 of 15 (i18n Completeness)
-Plan: 02 of 6 complete
+Plan: 04 of 6 complete
 Status: In progress
-Last activity: 2026-02-08 -- Completed 13-02-PLAN.md (league table, timeline, DataFreshness i18n wiring)
+Last activity: 2026-02-08 -- Completed 13-04-PLAN.md (team detail, header, stat highlights, layout i18n wiring)
 
-Progress: [#############################.] 91% (39/39 through phase 12 + 2/6 phase 13 plans complete, 41/45 total)
+Progress: [##############################.] 96% (39/39 through phase 12 + 4/6 phase 13 plans complete, 43/45 total)
 
 ## Performance Metrics
 
@@ -48,6 +48,8 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 **v1.2 Phase 13:**
 - 13-01: Dual routing config (routing with pathnames for middleware, navigationRouting without pathnames for Link/useRouter); middleware.ts re-exports proxy.ts; ICU plural format for count-dependent strings
 - 13-02: ZoneLegend promoted to client component for useTranslations; DataFreshness split into getTimeBucket (pure) + formatRelativeTime (i18n); developer CLI instructions left untranslated
+- 13-03: Match detail components converted to client components for useTranslations; EventsTimeline passes t function as prop to sub-components; ICU plural format for H2H wins/draws/meetings
+- 13-04: TeamHero converted to client component for useTranslations; layout.tsx switched from static metadata to generateMetadata for translated description; FixturesTab uses callback pattern for translated tooltip labels; added Teams.gd and TeamPerformance.noHomeAwayData keys to en.json
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
@@ -64,7 +66,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 
 - Team name translation helper orphaned (getTeamName never called) -- Phase 13
 - ~~Hardcoded season '2025' in LeagueTableWrapper~~ -- RESOLVED in 12-01
-- UI text hardcoded English despite message files existing -- Phase 13 (en.json keys ready, wiring in 13-02 through 13-04)
+- ~~UI text hardcoded English despite message files existing~~ -- RESOLVED in 13-02 through 13-04 (team detail, header, stat highlights, layout all wired)
 
 ### Blockers/Concerns
 
@@ -73,5 +75,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 13-02-PLAN.md (league table, timeline, DataFreshness i18n wiring)
+Stopped at: Completed 13-04-PLAN.md (team detail, header, stat highlights, layout i18n wiring)
 Resume file: None
