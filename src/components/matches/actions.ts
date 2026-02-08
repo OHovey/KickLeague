@@ -13,6 +13,8 @@ import { getLeagueBySlug } from '@/lib/standings/queries';
 import { isDatabaseConfigured } from '@/db/connection';
 import { headers } from 'next/headers';
 import { isCountryMapped } from '@/lib/geo/bookmaker-availability';
+import { getLocale } from 'next-intl/server';
+import { getLocalizedTeamNames } from '@/lib/teams/translations';
 
 export interface RecentMatchesResult {
   matches: MatchWithTeams[];
@@ -65,7 +67,23 @@ export async function fetchRecentMatches(
     teamForms[k] = v;
   }
 
-  return { matches, events, teamForms };
+  // Localize team names
+  const locale = await getLocale();
+  const allTeamIds = [...new Set(matches.flatMap((m) => [m.homeTeam.id, m.awayTeam.id]))];
+  const englishNames = new Map<number, string>();
+  for (const m of matches) {
+    englishNames.set(m.homeTeam.id, m.homeTeam.name);
+    englishNames.set(m.awayTeam.id, m.awayTeam.name);
+  }
+  const localizedNames = await getLocalizedTeamNames(allTeamIds, locale, englishNames);
+
+  const localizedMatches = matches.map((m) => ({
+    ...m,
+    homeTeam: { ...m.homeTeam, name: localizedNames.get(m.homeTeam.id) ?? m.homeTeam.name },
+    awayTeam: { ...m.awayTeam, name: localizedNames.get(m.awayTeam.id) ?? m.awayTeam.name },
+  }));
+
+  return { matches: localizedMatches, events, teamForms };
 }
 
 /**
@@ -95,7 +113,23 @@ export async function fetchUpcomingFixtures(
     teamForms[k] = v;
   }
 
-  return { matches, teamForms };
+  // Localize team names
+  const locale = await getLocale();
+  const allTeamIds = [...new Set(matches.flatMap((m) => [m.homeTeam.id, m.awayTeam.id]))];
+  const englishNames = new Map<number, string>();
+  for (const m of matches) {
+    englishNames.set(m.homeTeam.id, m.homeTeam.name);
+    englishNames.set(m.awayTeam.id, m.awayTeam.name);
+  }
+  const localizedNames = await getLocalizedTeamNames(allTeamIds, locale, englishNames);
+
+  const localizedMatches = matches.map((m) => ({
+    ...m,
+    homeTeam: { ...m.homeTeam, name: localizedNames.get(m.homeTeam.id) ?? m.homeTeam.name },
+    awayTeam: { ...m.awayTeam, name: localizedNames.get(m.awayTeam.id) ?? m.awayTeam.name },
+  }));
+
+  return { matches: localizedMatches, teamForms };
 }
 
 /**

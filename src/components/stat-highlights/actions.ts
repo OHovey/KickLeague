@@ -10,6 +10,8 @@ import {
   type BiggestUpsetResult,
   type FormTeamResult,
 } from '@/lib/stats/queries';
+import { getLocale } from 'next-intl/server';
+import { getLocalizedTeamNames } from '@/lib/teams/translations';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -56,14 +58,49 @@ export async function fetchStatHighlights(
       getFormTeam(league.id, league.currentSeason),
     ]);
 
+  const topScorer =
+    topScorerResult.status === 'fulfilled' ? topScorerResult.value : null;
+  const biggestUpset =
+    biggestUpsetResult.status === 'fulfilled'
+      ? biggestUpsetResult.value
+      : null;
+  const formTeam =
+    formTeamResult.status === 'fulfilled' ? formTeamResult.value : null;
+
+  // Localize team names across all stat highlights
+  const locale = await getLocale();
+  const teamIds: number[] = [];
+  const englishNames = new Map<number, string>();
+
+  if (topScorer) {
+    teamIds.push(topScorer.teamId);
+    englishNames.set(topScorer.teamId, topScorer.teamName);
+  }
+  if (biggestUpset) {
+    teamIds.push(biggestUpset.homeTeamId, biggestUpset.awayTeamId);
+    englishNames.set(biggestUpset.homeTeamId, biggestUpset.homeTeamName);
+    englishNames.set(biggestUpset.awayTeamId, biggestUpset.awayTeamName);
+  }
+  if (formTeam) {
+    teamIds.push(formTeam.teamId);
+    englishNames.set(formTeam.teamId, formTeam.teamName);
+  }
+
+  const localizedNames = await getLocalizedTeamNames(teamIds, locale, englishNames);
+
   return {
-    topScorer:
-      topScorerResult.status === 'fulfilled' ? topScorerResult.value : null,
-    biggestUpset:
-      biggestUpsetResult.status === 'fulfilled'
-        ? biggestUpsetResult.value
-        : null,
-    formTeam:
-      formTeamResult.status === 'fulfilled' ? formTeamResult.value : null,
+    topScorer: topScorer
+      ? { ...topScorer, teamName: localizedNames.get(topScorer.teamId) ?? topScorer.teamName }
+      : null,
+    biggestUpset: biggestUpset
+      ? {
+          ...biggestUpset,
+          homeTeamName: localizedNames.get(biggestUpset.homeTeamId) ?? biggestUpset.homeTeamName,
+          awayTeamName: localizedNames.get(biggestUpset.awayTeamId) ?? biggestUpset.awayTeamName,
+        }
+      : null,
+    formTeam: formTeam
+      ? { ...formTeam, teamName: localizedNames.get(formTeam.teamId) ?? formTeam.teamName }
+      : null,
   };
 }

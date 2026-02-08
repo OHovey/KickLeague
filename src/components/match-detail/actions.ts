@@ -13,6 +13,8 @@ import {
   leagues,
 } from '@/db/schema';
 import { getH2HSummary, type H2HSummary } from '@/lib/matches/h2h';
+import { getLocale } from 'next-intl/server';
+import { getLocalizedTeamNames } from '@/lib/teams/translations';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -130,6 +132,15 @@ export async function fetchMatchDetail(
   const row = rows[0];
   if (!row) return null;
 
+  // Localize team names
+  const locale = await getLocale();
+  const teamIds = [row.homeTeamId, row.awayTeamId];
+  const englishNames = new Map<number, string>([
+    [row.homeTeamId, row.homeTeamName],
+    [row.awayTeamId, row.awayTeamName],
+  ]);
+  const localizedNames = await getLocalizedTeamNames(teamIds, locale, englishNames);
+
   return {
     id: row.id,
     leagueId: row.leagueId,
@@ -143,14 +154,14 @@ export async function fetchMatchDetail(
     referee: row.referee,
     homeTeam: {
       id: row.homeTeamId,
-      name: row.homeTeamName,
+      name: localizedNames.get(row.homeTeamId) ?? row.homeTeamName,
       shortName: row.homeTeamShortName,
       logoUrl: row.homeTeamLogoUrl,
       slug: row.homeTeamSlug,
     },
     awayTeam: {
       id: row.awayTeamId,
-      name: row.awayTeamName,
+      name: localizedNames.get(row.awayTeamId) ?? row.awayTeamName,
       shortName: row.awayTeamShortName,
       logoUrl: row.awayTeamLogoUrl,
       slug: row.awayTeamSlug,

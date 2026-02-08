@@ -7,6 +7,8 @@ import {
   type MatchweekListResult,
 } from '@/lib/standings/queries';
 import type { Zone } from '@/lib/zones';
+import { getLocale } from 'next-intl/server';
+import { getLocalizedTeamNames } from '@/lib/teams/translations';
 
 export interface StandingsResult {
   standings: EnhancedStandingsRow[];
@@ -25,8 +27,19 @@ export interface StandingsResult {
 export async function fetchStandings(league: string, matchweek?: number): Promise<StandingsResult> {
   const data = await getStandingsWithZones(league, undefined, matchweek);
 
+  // Localize team names
+  const locale = await getLocale();
+  const teamIds = data.standings.map((s) => s.teamId);
+  const englishNames = new Map(data.standings.map((s) => [s.teamId, s.teamName]));
+  const localizedNames = await getLocalizedTeamNames(teamIds, locale, englishNames);
+
+  const standings = data.standings.map((s) => ({
+    ...s,
+    teamName: localizedNames.get(s.teamId) ?? s.teamName,
+  }));
+
   return {
-    standings: data.standings,
+    standings,
     zones: data.zones,
     matchweek: data.matchweek,
     leagueName: data.league?.name ?? null,
