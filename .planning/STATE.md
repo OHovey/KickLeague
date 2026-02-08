@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 11 complete, ready for Phase 12
+**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 13 in progress
 
 ## Current Position
 
-Phase: 11 of 15 (Rebrand to KickLeague) -- COMPLETE
-Plan: 04 of 4 complete
-Status: Phase complete
-Last activity: 2026-02-07 -- Completed 11-04-PLAN.md (infrastructure renames)
+Phase: 13 of 15 (i18n Completeness)
+Plan: 01 of 6 complete
+Status: In progress
+Last activity: 2026-02-08 -- Completed 13-01-PLAN.md (en.json keys + i18n infrastructure)
 
-Progress: [########################......] 76% (33/33 v1.0+v1.1 + 4/4 phase 11 plans complete, 36/36 through phase 11)
+Progress: [############################..] 87% (39/39 through phase 12 + 1/6 phase 13 plans complete, 40/45 total)
 
 ## Performance Metrics
 
@@ -40,6 +40,14 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 - 11-03: Inline SVG icon + styled HTML text for wordmark (avoids font-embedding); OG image uses Satori/ImageResponse with inline SVG
 - 11-04: GitHub repo already renamed to KickLeague (pre-completed); Neon project rename skipped (never branded as KickData, uses default "neondb")
 
+**v1.2 Phase 12:**
+- 12-01: Header rendered in locale layout.tsx (not per-page); season derived dynamically from league.currentSeason via MatchweekListResult
+- 12-02: Odds-based upset detection (AVG across bookmakers); Promise.allSettled for parallel query resilience; form scoring W=3, D=1, L=0
+- 12-03: Plain <img> for team logos (avoid next/image domain config); inline SVG icons (no icon library); skeleton cards match card dimensions
+
+**v1.2 Phase 13:**
+- 13-01: Dual routing config (routing with pathnames for middleware, navigationRouting without pathnames for Link/useRouter); middleware.ts re-exports proxy.ts; ICU plural format for count-dependent strings
+
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
 - Provision production infrastructure (Neon, Vercel, QStash, Odds API)
@@ -54,8 +62,8 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 ### Tech Debt (targeted in v1.2)
 
 - Team name translation helper orphaned (getTeamName never called) -- Phase 13
-- Hardcoded season '2025' in LeagueTableWrapper -- Phase 12
-- UI text hardcoded English despite message files existing -- Phase 13
+- ~~Hardcoded season '2025' in LeagueTableWrapper~~ -- RESOLVED in 12-01
+- UI text hardcoded English despite message files existing -- Phase 13 (en.json keys ready, wiring in 13-02 through 13-04)
 
 ### Blockers/Concerns
 
@@ -63,6 +71,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-07
-Stopped at: Completed 11-04-PLAN.md (Phase 11 fully complete)
+Last session: 2026-02-08
+Stopped at: Completed 13-01-PLAN.md (en.json keys + i18n infrastructure)
 Resume file: None
