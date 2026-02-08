@@ -20,6 +20,7 @@ import {
   getLeagueSlugById,
 } from '@/components/match-detail/actions';
 import { isCountryMapped } from '@/lib/geo/bookmaker-availability';
+import { buildSportsEvent, buildBreadcrumbs, serializeJsonLd } from '@/lib/seo/structured-data';
 
 // -- Metadata ----------------------------------------------------------------
 
@@ -127,6 +128,26 @@ export default async function MatchDetailPage({
     // Use fallback
   }
 
+  // Build JSON-LD structured data (shared by both completed & upcoming branches)
+  const tMeta = await getTranslations('Metadata');
+  const sportsEventJsonLd = buildSportsEvent({
+    homeTeamName: match.homeTeam.name,
+    awayTeamName: match.awayTeam.name,
+    kickoff: match.kickoff,
+    venue: match.venue,
+    homeScore: match.homeScore,
+    awayScore: match.awayScore,
+    status: match.status,
+  });
+  const breadcrumbJsonLd = buildBreadcrumbs([
+    { name: 'Home', url: `/${locale}` },
+    { name: tMeta('matchesTitle'), url: `/${locale}/matches` },
+    {
+      name: `${match.homeTeam.shortName ?? match.homeTeam.name} vs ${match.awayTeam.shortName ?? match.awayTeam.name}`,
+      url: `/${locale}/matches/${match.id}`,
+    },
+  ]);
+
   if (isCompleted) {
     // Completed match: fetch stats, events, and H2H in parallel
     const [stats, events, context] = await Promise.all([
@@ -142,6 +163,14 @@ export default async function MatchDetailPage({
 
     return (
       <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(sportsEventJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
+        />
         <ThemeBackground theme={leagueSlug} />
         <div className="min-h-screen">
           <div className="mx-auto max-w-3xl px-4 py-8">
@@ -198,6 +227,14 @@ export default async function MatchDetailPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(sportsEventJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
+      />
       <ThemeBackground theme={leagueSlug} />
       <div className="min-h-screen">
         <div className="mx-auto max-w-3xl px-4 py-8">

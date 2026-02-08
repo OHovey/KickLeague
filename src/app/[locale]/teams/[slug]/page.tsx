@@ -7,6 +7,7 @@ import { routing } from '@/i18n/routing';
 import { TeamHero } from '@/components/team-detail/TeamHero';
 import { TeamTabs } from '@/components/team-detail/TeamTabs';
 import { fetchTeamBySlug } from '@/components/team-detail/actions';
+import { buildSportsTeam, buildBreadcrumbs, serializeJsonLd } from '@/lib/seo/structured-data';
 
 // -- Metadata ----------------------------------------------------------------
 
@@ -97,8 +98,28 @@ export default async function TeamDetailPage({
 
   if (!teamData) return notFound();
 
+  const sportsTeamJsonLd = buildSportsTeam({
+    name: teamData.name,
+    logoUrl: teamData.logoUrl,
+    url: `/${locale}/teams/${teamData.slug}`,
+    leagueName: teamData.leagueName,
+  });
+  const breadcrumbJsonLd = buildBreadcrumbs([
+    { name: 'Home', url: `/${locale}` },
+    { name: teamData.leagueName, url: `/${locale}` },
+    { name: teamData.name, url: `/${locale}/teams/${teamData.slug}` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(sportsTeamJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
+      />
       <ThemeBackground theme={teamData.leagueSlug} />
       <div className="min-h-screen">
         <div className="mx-auto max-w-6xl px-4 pb-12">
