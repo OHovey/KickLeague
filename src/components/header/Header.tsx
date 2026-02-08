@@ -1,9 +1,11 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { LanguagePicker } from '@/components/i18n/LanguagePicker';
 
 export function Header() {
+  const t = useTranslations('Navigation');
   const pathname = usePathname();
   const isMatchesActive = pathname?.startsWith('/matches');
 
@@ -13,7 +15,7 @@ export function Header() {
         {/* Wordmark */}
         <Link
           href="/"
-          aria-label="KickLeague home"
+          aria-label={t('homeAriaLabel')}
           className="flex items-center gap-2 text-white transition-colors hover:text-white/90"
         >
           {/* Football icon: circle with pentagon seam pattern */}
@@ -52,7 +54,7 @@ export function Header() {
                 : 'text-white/70 hover:text-white'
             }`}
           >
-            Matches
+            {t('matches')}
           </Link>
           <LanguagePicker />
         </nav>

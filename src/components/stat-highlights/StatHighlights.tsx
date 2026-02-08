@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 import { useLeague } from '@/lib/hooks/use-league';
 import { fetchStatHighlights, type StatHighlightsResult } from './actions';
 import { StatCard } from './StatCard';
 import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
 import type { League } from '@/lib/themes/league-themes';
+import { getLocalizedOrdinal } from '@/lib/i18n/ordinals';
 
 // ─── Inline SVG Icons ───────────────────────────────────────────────────────
 
@@ -92,23 +94,6 @@ function FlameIcon() {
   );
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-function getOrdinalSuffix(n: number): string {
-  const mod100 = n % 100;
-  if (mod100 >= 11 && mod100 <= 13) return 'th';
-  switch (n % 10) {
-    case 1:
-      return 'st';
-    case 2:
-      return 'nd';
-    case 3:
-      return 'rd';
-    default:
-      return 'th';
-  }
-}
-
 // ─── Skeleton ────────────────────────────────────────────────────────────────
 
 function StatCardSkeleton() {
@@ -136,6 +121,8 @@ function StatCardSkeleton() {
 
 export function StatHighlights() {
   const { league } = useLeague();
+  const t = useTranslations('StatHighlights');
+  const locale = useLocale();
   const [data, setData] = useState<StatHighlightsResult | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -152,7 +139,7 @@ export function StatHighlights() {
   // Loading state: show skeletons
   if (isPending && !data) {
     return (
-      <section aria-label="League highlights">
+      <section aria-label={t('leagueHighlights')}>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <StatCardSkeleton />
           <StatCardSkeleton />
@@ -172,16 +159,16 @@ export function StatHighlights() {
 
   return (
     <section
-      aria-label="League highlights"
+      aria-label={t('leagueHighlights')}
       className={isPending ? 'opacity-60 transition-opacity' : ''}
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {/* Top Scorer */}
         <StatCard
-          label="TOP SCORER"
+          label={t('topScorer')}
           icon={<TrophyIcon />}
           primaryStat={
-            data?.topScorer ? `${data.topScorer.goalCount} goals` : ''
+            data?.topScorer ? t('nGoals', { count: data.topScorer.goalCount }) : ''
           }
           subject={data?.topScorer?.playerName ?? ''}
           context={data?.topScorer?.teamName}
@@ -192,10 +179,10 @@ export function StatHighlights() {
 
         {/* Biggest Upset */}
         <StatCard
-          label="BIGGEST UPSET"
+          label={t('biggestUpset')}
           icon={<LightningIcon />}
           primaryStat={
-            upset?.matchweek != null ? `Matchweek ${upset.matchweek}` : ''
+            upset?.matchweek != null ? t('matchweekN', { week: upset.matchweek }) : ''
           }
           subject={
             upset
@@ -204,7 +191,7 @@ export function StatHighlights() {
           }
           context={
             upset
-              ? `Winner at ${upset.winningOdds.toFixed(1)} odds`
+              ? t('winnerAtOdds', { odds: upset.winningOdds.toFixed(1) })
               : undefined
           }
           teamLogoUrl={upsetWinnerLogo}
@@ -214,13 +201,13 @@ export function StatHighlights() {
 
         {/* Best Form */}
         <StatCard
-          label="BEST FORM"
+          label={t('bestForm')}
           icon={<FlameIcon />}
           primaryStat={data?.formTeam?.form ?? ''}
           subject={data?.formTeam?.teamName ?? ''}
           context={
             data?.formTeam
-              ? `${data.formTeam.position}${getOrdinalSuffix(data.formTeam.position)} \u2022 ${data.formTeam.points} pts`
+              ? `${getLocalizedOrdinal(data.formTeam.position, locale)} \u2022 ${t('nPts', { count: data.formTeam.points })}`
               : undefined
           }
           teamLogoUrl={data?.formTeam?.teamLogoUrl}

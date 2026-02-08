@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 
@@ -23,6 +23,7 @@ const LOCALE_SHORT: Record<Locale, string> = {
 
 export function LanguagePicker() {
   const locale = useLocale() as Locale;
+  const t = useTranslations('Navigation');
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -49,7 +50,7 @@ export function LanguagePicker() {
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-white/70 transition-colors hover:bg-white/10 hover:text-white"
-        aria-label="Select language"
+        aria-label={t('selectLanguage')}
         aria-expanded={open}
       >
         {LOCALE_SHORT[locale]}

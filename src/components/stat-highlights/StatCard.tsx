@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 interface StatCardProps {
   label: string;
@@ -23,6 +24,8 @@ export function StatCard({
   accentColor,
   isEmpty,
 }: StatCardProps) {
+  const tCommon = useTranslations('Common');
+
   return (
     <div
       className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-colors hover:bg-white/10"
@@ -57,7 +60,7 @@ export function StatCard({
         </div>
 
         {isEmpty ? (
-          <p className="text-sm text-white/30">No data available</p>
+          <p className="text-sm text-white/30">{tCommon('noDataAvailable')}</p>
         ) : (
           <>
             {/* Primary stat */}
