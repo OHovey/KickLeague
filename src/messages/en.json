@@ -213,8 +213,9 @@
     "home": "Home",
     "homeAwaySplits": "Home / Away Splits",
     "lost": "Lost",
+    "noHomeAwayData": "No home/away data available",
     "noMatchesPlayed": "No matches played",
-    "percentOfMatches": "% of matches",
+    "percentOfMatches": "{percent}% of matches",
     "scoredFirst": "Scored First",
     "scoringFirstRecord": "Scoring First Record",
     "won": "Won",
@@ -240,8 +241,9 @@
     "topScorer": "Top Scorer"
   },
   "Teams": {
-    "currentForm": "Current Form",
+    "currentForm": "Form",
     "fixtures": "Fixtures",
+    "gd": "GD",
     "overview": "Overview",
     "performance": "Performance",
     "played": "Played",

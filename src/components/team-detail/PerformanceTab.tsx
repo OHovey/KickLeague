@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { fetchPerformanceData, type PerformanceData } from './actions';
 import { GoalsByPeriodChart } from './charts/GoalsByPeriodChart';
 import { CumulativeXgChart } from './charts/CumulativeXgChart';
@@ -61,6 +62,7 @@ export function PerformanceTab({
   season,
   hasXg,
 }: PerformanceTabProps) {
+  const t = useTranslations('TeamPerformance');
   const [data, setData] = useState<PerformanceData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -103,17 +105,17 @@ export function PerformanceTab({
 
   // Build home/away comparison stats
   const homeAwayStats = [
-    { label: 'Won', home: homeSplit.won, away: awaySplit.won },
-    { label: 'Drawn', home: homeSplit.drawn, away: awaySplit.drawn },
-    { label: 'Lost', home: homeSplit.lost, away: awaySplit.lost },
-    { label: 'Goals For', home: homeSplit.goalsFor, away: awaySplit.goalsFor },
+    { label: t('won'), home: homeSplit.won, away: awaySplit.won },
+    { label: t('drawn'), home: homeSplit.drawn, away: awaySplit.drawn },
+    { label: t('lost'), home: homeSplit.lost, away: awaySplit.lost },
+    { label: t('goalsFor'), home: homeSplit.goalsFor, away: awaySplit.goalsFor },
     {
-      label: 'Goals Against',
+      label: t('goalsAgainst'),
       home: homeSplit.goalsAgainst,
       away: awaySplit.goalsAgainst,
     },
     {
-      label: 'Goal Diff',
+      label: t('goalDiff'),
       home: homeSplit.goalDifference,
       away: awaySplit.goalDifference,
     },
@@ -124,7 +126,7 @@ export function PerformanceTab({
       {/* Home/Away Splits */}
       <section className="rounded-xl bg-white/5 p-4">
         <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
-          Home / Away Splits
+          {t('homeAwaySplits')}
         </h3>
         <HomeAwayBars stats={homeAwayStats} />
       </section>
@@ -136,7 +138,7 @@ export function PerformanceTab({
           {hasGoalsByPeriod && (
             <section className="rounded-xl bg-white/5 p-4">
               <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
-                Goals by Period
+                {t('goalsByPeriod')}
               </h3>
               <GoalsByPeriodChart data={goalsByPeriod} />
             </section>
@@ -146,23 +148,23 @@ export function PerformanceTab({
           {hasXg && hasXgData && (
             <section className="rounded-xl bg-white/5 p-4">
               <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
-                xG Analysis
+                {t('xgAnalysis')}
               </h3>
               <div className="mb-3 flex gap-3">
                 <div className="flex-1 rounded-lg bg-white/5 px-3 py-2">
-                  <p className="text-xs text-amber-400/70">Expected (xG)</p>
+                  <p className="text-xs text-amber-400/70">{t('expectedXg')}</p>
                   <p className="text-lg font-bold tabular-nums text-amber-400">
                     {totalXg.toFixed(2)}
                   </p>
                 </div>
                 <div className="flex-1 rounded-lg bg-white/5 px-3 py-2">
-                  <p className="text-xs text-green-400/70">Actual Goals</p>
+                  <p className="text-xs text-green-400/70">{t('actualGoals')}</p>
                   <p className="text-lg font-bold tabular-nums text-green-400">
                     {totalGoals}
                   </p>
                 </div>
                 <div className="flex-1 rounded-lg bg-white/5 px-3 py-2">
-                  <p className="text-xs text-white/40">Difference</p>
+                  <p className="text-xs text-white/40">{t('difference')}</p>
                   <p
                     className={`text-lg font-bold tabular-nums ${
                       totalGoals - totalXg > 0 ? 'text-green-400' : 'text-red-400'
@@ -184,7 +186,7 @@ export function PerformanceTab({
         {/* Clean Sheets */}
         <section className="rounded-xl bg-white/5 p-4">
           <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
-            Clean Sheets
+            {t('cleanSheets')}
           </h3>
           <div className="flex items-baseline gap-1">
             <span className="text-3xl font-bold tabular-nums text-white">
@@ -196,10 +198,12 @@ export function PerformanceTab({
           </div>
           <p className="mt-1 text-xs text-white/30">
             {cleanSheets.totalMatches > 0
-              ? `${Math.round(
-                  (cleanSheets.cleanSheets / cleanSheets.totalMatches) * 100
-                )}% of matches`
-              : 'No matches played'}
+              ? t('percentOfMatches', {
+                  percent: Math.round(
+                    (cleanSheets.cleanSheets / cleanSheets.totalMatches) * 100
+                  ),
+                })
+              : t('noMatchesPlayed')}
           </p>
         </section>
 
@@ -207,11 +211,11 @@ export function PerformanceTab({
         {hasScoringFirst && (
           <section className="rounded-xl bg-white/5 p-4">
             <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
-              Scoring First Record
+              {t('scoringFirstRecord')}
             </h3>
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-white/60">Scored First</span>
+                <span className="text-white/60">{t('scoredFirst')}</span>
                 <span className="tabular-nums text-white">
                   <span className="text-green-400">
                     {scoringFirstRecord.scoredFirst.wins}W
@@ -230,7 +234,7 @@ export function PerformanceTab({
                 </span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-white/60">Conceded First</span>
+                <span className="text-white/60">{t('concededFirst')}</span>
                 <span className="tabular-nums text-white">
                   <span className="text-green-400">
                     {scoringFirstRecord.concededFirst.wins}W
@@ -249,7 +253,7 @@ export function PerformanceTab({
                 </span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-white/60">0-0 Draws</span>
+                <span className="text-white/60">{t('zeroDrews')}</span>
                 <span className="tabular-nums text-white/70">
                   {scoringFirstRecord.noGoals}
                 </span>

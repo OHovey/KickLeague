@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
+import { useTranslations } from 'next-intl';
 import { fetchSquadData, type SquadData } from './actions';
 import type { PlayerStat } from '@/lib/teams/queries';
 
@@ -8,12 +9,12 @@ import type { PlayerStat } from '@/lib/teams/queries';
 
 const POSITION_ORDER = ['GK', 'DEF', 'MID', 'FWD', 'Other'] as const;
 
-const POSITION_LABELS: Record<string, string> = {
-  GK: 'Goalkeepers',
-  DEF: 'Defenders',
-  MID: 'Midfielders',
-  FWD: 'Forwards',
-  Other: 'Other',
+const POSITION_KEYS: Record<string, string> = {
+  GK: 'goalkeepers',
+  DEF: 'defenders',
+  MID: 'midfielders',
+  FWD: 'forwards',
+  Other: 'other',
 };
 
 function groupByPosition(players: PlayerStat[]): Record<string, PlayerStat[]> {
@@ -112,6 +113,7 @@ interface SquadTabProps {
 }
 
 export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
+  const t = useTranslations('TeamSquad');
   const [data, setData] = useState<SquadData | null>(null);
   const [isPending, startTransition] = useTransition();
   const [loaded, setLoaded] = useState(false);
@@ -133,7 +135,7 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
   if (!data || data.playerStats.length === 0) {
     return (
       <div className="rounded-xl bg-white/5 p-6 text-center">
-        <p className="text-white/50">No squad data available</p>
+        <p className="text-white/50">{t('noSquadData')}</p>
       </div>
     );
   }
@@ -169,27 +171,27 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {topScorer && topScorer.goals > 0 && (
             <TopPerformerCard
-              label="Top Scorer"
+              label={t('topScorer')}
               player={topScorer}
               stat={topScorer.goals}
-              statLabel="Goals"
+              statLabel={t('goals')}
             />
           )}
           {topAssister && topAssister.assists > 0 && (
             <TopPerformerCard
-              label="Top Assister"
+              label={t('topAssister')}
               player={topAssister}
               stat={topAssister.assists}
-              statLabel="Assists"
+              statLabel={t('assists')}
             />
           )}
           {mostBooked &&
             mostBooked.yellowCards + mostBooked.redCards > 0 && (
               <TopPerformerCard
-                label="Most Booked"
+                label={t('mostBooked')}
                 player={mostBooked}
                 stat={mostBooked.yellowCards + mostBooked.redCards}
-                statLabel="Cards"
+                statLabel={t('cards')}
               />
             )}
         </div>
@@ -203,21 +205,21 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
         return (
           <div key={pos}>
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/60">
-              {POSITION_LABELS[pos]}
+              {t(POSITION_KEYS[pos] as 'goalkeepers' | 'defenders' | 'midfielders' | 'forwards' | 'other')}
             </h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/10 text-[11px] uppercase tracking-wider text-white/40">
                     <th className="py-2 pr-2 text-left w-10">#</th>
-                    <th className="py-2 px-2 text-left">Player</th>
+                    <th className="py-2 px-2 text-left">{t('player')}</th>
                     {hasDetailedStats && (
                       <>
-                        <th className="py-2 px-2 text-center w-16">Apps</th>
+                        <th className="py-2 px-2 text-center w-16">{t('apps')}</th>
                         <th className="py-2 px-2 text-left min-w-[100px]"></th>
-                        <th className="py-2 px-2 text-center w-12">G</th>
-                        <th className="py-2 px-2 text-center w-12">A</th>
-                        <th className="py-2 px-2 text-center w-16">Cards</th>
+                        <th className="py-2 px-2 text-center w-12">{t('g')}</th>
+                        <th className="py-2 px-2 text-center w-12">{t('a')}</th>
+                        <th className="py-2 px-2 text-center w-16">{t('cards')}</th>
                       </>
                     )}
                   </tr>

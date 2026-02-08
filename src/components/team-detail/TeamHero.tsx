@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { FormBadges } from '@/components/league-table/FormBadges';
 import type { TeamPageData } from './actions';
 
@@ -6,6 +9,7 @@ interface TeamHeroProps {
 }
 
 export function TeamHero({ team }: TeamHeroProps) {
+  const t = useTranslations('Teams');
   const { standings } = team;
 
   return (
@@ -50,7 +54,7 @@ export function TeamHero({ team }: TeamHeroProps) {
                 <span className="text-3xl font-extrabold text-white">
                   #{standings.position}
                 </span>
-                <p className="text-xs text-white/50">Position</p>
+                <p className="text-xs text-white/50">{t('position')}</p>
               </div>
 
               {/* Points */}
@@ -58,7 +62,7 @@ export function TeamHero({ team }: TeamHeroProps) {
                 <span className="text-3xl font-extrabold text-white">
                   {standings.points}
                 </span>
-                <p className="text-xs text-white/50">Points</p>
+                <p className="text-xs text-white/50">{t('points')}</p>
               </div>
 
               {/* Played */}
@@ -66,7 +70,7 @@ export function TeamHero({ team }: TeamHeroProps) {
                 <span className="text-3xl font-extrabold text-white/80">
                   {standings.played}
                 </span>
-                <p className="text-xs text-white/50">Played</p>
+                <p className="text-xs text-white/50">{t('played')}</p>
               </div>
 
               {/* Goal difference */}
@@ -75,7 +79,7 @@ export function TeamHero({ team }: TeamHeroProps) {
                   {standings.goalDifference > 0 ? '+' : ''}
                   {standings.goalDifference}
                 </span>
-                <p className="text-xs text-white/50">GD</p>
+                <p className="text-xs text-white/50">{t('gd')}</p>
               </div>
             </div>
           )}
@@ -83,7 +87,7 @@ export function TeamHero({ team }: TeamHeroProps) {
           {/* Form badges */}
           {standings?.form && (
             <div className="flex items-center gap-2">
-              <span className="text-xs text-white/50">Form</span>
+              <span className="text-xs text-white/50">{t('currentForm')}</span>
               <FormBadges form={standings.form} />
             </div>
           )}

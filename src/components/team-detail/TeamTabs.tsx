@@ -4,6 +4,7 @@ import { Suspense, useState, useEffect } from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import { parseAsStringEnum, useQueryState } from 'nuqs';
 import { clsx } from 'clsx';
+import { useTranslations } from 'next-intl';
 import { OverviewTab } from './OverviewTab';
 import { PerformanceTab } from './PerformanceTab';
 import { SquadTab } from './SquadTab';
@@ -12,13 +13,6 @@ import { getGeoContext } from '@/components/matches/actions';
 
 const TAB_VALUES = ['overview', 'performance', 'squad', 'fixtures'] as const;
 type TabValue = (typeof TAB_VALUES)[number];
-
-const TAB_LABELS: Record<TabValue, string> = {
-  overview: 'Overview',
-  performance: 'Performance',
-  squad: 'Squad',
-  fixtures: 'Fixtures',
-};
 
 interface TeamTabsProps {
   teamId: number;
@@ -35,10 +29,18 @@ function TeamTabsInner({
   teamName,
   hasXg,
 }: TeamTabsProps) {
+  const t = useTranslations('Teams');
   const [tab, setTab] = useQueryState(
     'tab',
     parseAsStringEnum([...TAB_VALUES]).withDefault('overview')
   );
+
+  const tabLabels: Record<TabValue, string> = {
+    overview: t('overview'),
+    performance: t('performance'),
+    squad: t('squad'),
+    fixtures: t('fixtures'),
+  };
 
   const [geoContext, setGeoContext] = useState<{
     showBetting: boolean;
@@ -69,7 +71,7 @@ function TeamTabsInner({
                 : 'text-white/70 hover:bg-white/10 hover:text-white'
             )}
           >
-            {TAB_LABELS[value]}
+            {tabLabels[value]}
           </Tabs.Trigger>
         ))}
       </Tabs.List>
@@ -113,7 +115,7 @@ export function TeamTabs(props: TeamTabsProps) {
               key={value}
               className="flex-1 rounded-md bg-white/5 px-3 py-2 text-center text-sm text-white/30"
             >
-              {TAB_LABELS[value]}
+              &nbsp;
             </div>
           ))}
         </div>

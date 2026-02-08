@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 // ── Types ──────────────────────────────────────────────────────────────────
 
 interface HomeAwayBarsStat {
@@ -58,10 +60,12 @@ function ComparisonRow({ label, home, away }: HomeAwayBarsStat) {
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function HomeAwayBars({ stats }: HomeAwayBarsProps) {
+  const t = useTranslations('TeamPerformance');
+
   if (!stats || stats.length === 0) {
     return (
       <div className="py-4 text-center text-sm text-white/30">
-        No home/away data available
+        {t('noHomeAwayData')}
       </div>
     );
   }
@@ -72,10 +76,10 @@ export function HomeAwayBars({ stats }: HomeAwayBarsProps) {
       <div className="flex items-center justify-between text-xs text-white/40">
         <div className="flex items-center gap-1.5">
           <span className="inline-block h-2 w-2 rounded-full bg-blue-500" />
-          <span>Home</span>
+          <span>{t('home')}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span>Away</span>
+          <span>{t('away')}</span>
           <span className="inline-block h-2 w-2 rounded-full bg-amber-500" />
         </div>
       </div>

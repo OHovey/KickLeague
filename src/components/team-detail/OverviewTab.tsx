@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { fetchOverviewData, type OverviewData } from './actions';
 import { BumpChart } from './charts/BumpChart';
 import { CumulativePointsChart } from './charts/CumulativePointsChart';
@@ -77,6 +78,7 @@ export function OverviewTab({
   season,
   teamName,
 }: OverviewTabProps) {
+  const t = useTranslations('TeamOverview');
   const [data, setData] = useState<OverviewData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -109,19 +111,19 @@ export function OverviewTab({
       {seasonSummary && (
         <section>
           <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
-            Season Summary
+            {t('seasonSummary')}
           </h3>
           <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 md:grid-cols-9">
-            <StatCard label="Pos" value={seasonSummary.position} color={seasonSummary.position <= 4 ? 'green' : seasonSummary.position >= 18 ? 'red' : 'neutral'} />
-            <StatCard label="Pts" value={seasonSummary.points} color="green" />
-            <StatCard label="P" value={seasonSummary.played} />
-            <StatCard label="W" value={seasonSummary.won} color="green" />
-            <StatCard label="D" value={seasonSummary.drawn} color="amber" />
-            <StatCard label="L" value={seasonSummary.lost} color="red" />
-            <StatCard label="GF" value={seasonSummary.goalsFor} color="green" />
-            <StatCard label="GA" value={seasonSummary.goalsAgainst} color="red" />
+            <StatCard label={t('pos')} value={seasonSummary.position} color={seasonSummary.position <= 4 ? 'green' : seasonSummary.position >= 18 ? 'red' : 'neutral'} />
+            <StatCard label={t('pts')} value={seasonSummary.points} color="green" />
+            <StatCard label={t('p')} value={seasonSummary.played} />
+            <StatCard label={t('w')} value={seasonSummary.won} color="green" />
+            <StatCard label={t('d')} value={seasonSummary.drawn} color="amber" />
+            <StatCard label={t('l')} value={seasonSummary.lost} color="red" />
+            <StatCard label={t('gf')} value={seasonSummary.goalsFor} color="green" />
+            <StatCard label={t('ga')} value={seasonSummary.goalsAgainst} color="red" />
             <StatCard
-              label="GD"
+              label={t('gd')}
               value={
                 seasonSummary.goalDifference > 0
                   ? `+${seasonSummary.goalDifference}`
@@ -138,7 +140,7 @@ export function OverviewTab({
         {/* Position Over Time (Bump Chart) */}
         <section className="rounded-xl bg-white/5 p-4">
           <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
-            Position Over Time
+            {t('positionOverTime')}
           </h3>
           <BumpChart
             data={positionHistory}
@@ -150,7 +152,7 @@ export function OverviewTab({
         {/* Cumulative Points */}
         <section className="rounded-xl bg-white/5 p-4">
           <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
-            Cumulative Points
+            {t('cumulativePoints')}
           </h3>
           <CumulativePointsChart data={cumulativePoints} />
         </section>
@@ -160,11 +162,11 @@ export function OverviewTab({
       {seasonSummary?.form && (
         <section className="rounded-xl bg-white/5 p-4">
           <h3 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/40">
-            Current Form
+            {t('currentForm')}
           </h3>
           <div className="flex items-center gap-3">
             <FormBadges form={seasonSummary.form} />
-            <span className="text-xs text-white/30">Last {seasonSummary.form.length} matches</span>
+            <span className="text-xs text-white/30">{t('lastNMatches', { count: seasonSummary.form.length })}</span>
           </div>
         </section>
       )}

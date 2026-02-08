@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { formatKickoffTime } from '@/lib/dates/format';
 import { fetchFixturesData, type FixturesData } from './actions';
@@ -43,8 +43,10 @@ const RESULT_BG = {
 
 function DifficultyBadge({
   position,
+  label,
 }: {
   position: number | undefined;
+  label: string;
 }) {
   if (!position) return null;
 
@@ -60,7 +62,7 @@ function DifficultyBadge({
   return (
     <span
       className={`inline-flex h-6 w-6 items-center justify-center rounded border text-[10px] font-bold tabular-nums ${colorClass}`}
-      title={`Opponent league position: ${position}`}
+      title={label}
     >
       {position}
     </span>
@@ -102,12 +104,14 @@ function FixtureRow({
   opponentPositions,
   isResult,
   locale,
+  opponentPositionLabel,
 }: {
   fixture: FixtureWithTeams;
   teamId: number;
   opponentPositions: Record<number, number>;
   isResult: boolean;
   locale: string;
+  opponentPositionLabel: (position: number) => string;
 }) {
   const result = isResult ? getResult(fixture, teamId) : null;
   const isHome = fixture.homeTeam.id === teamId;
@@ -170,7 +174,10 @@ function FixtureRow({
             {result}
           </span>
         ) : !isResult ? (
-          <DifficultyBadge position={opponentPositions[opponentId]} />
+          <DifficultyBadge
+            position={opponentPositions[opponentId]}
+            label={opponentPositionLabel(opponentPositions[opponentId])}
+          />
         ) : null}
       </div>
     </Link>
@@ -189,6 +196,7 @@ interface FixturesTabProps {
 
 export function FixturesTab({ teamId, leagueId, season, showBetting = false, countryCode = null }: FixturesTabProps) {
   const locale = useLocale();
+  const t = useTranslations('TeamFixtures');
   const [data, setData] = useState<FixturesData | null>(null);
   const [oddsMap, setOddsMap] = useState<Record<number, CompactOddsData>>({});
   const [isPending, startTransition] = useTransition();
@@ -218,10 +226,13 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false, cou
   if (!data || (data.recent.length === 0 && data.upcoming.length === 0)) {
     return (
       <div className="rounded-xl bg-white/5 p-6 text-center">
-        <p className="text-white/50">No fixture data available</p>
+        <p className="text-white/50">{t('noFixtureData')}</p>
       </div>
     );
   }
+
+  const opponentPositionLabel = (position: number) =>
+    t('opponentPosition', { position });
 
   return (
     <div className="space-y-8">
@@ -229,7 +240,7 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false, cou
       {data.recent.length > 0 && (
         <div>
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/60">
-            Recent Results
+            {t('recentResults')}
           </h3>
           <div className="space-y-1">
             {data.recent.map((fixture) => (
@@ -240,6 +251,7 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false, cou
                 opponentPositions={data.opponentPositions}
                 isResult
                 locale={locale}
+                opponentPositionLabel={opponentPositionLabel}
               />
             ))}
           </div>
@@ -250,7 +262,7 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false, cou
       {data.upcoming.length > 0 && (
         <div>
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/60">
-            Upcoming Fixtures
+            {t('upcomingFixtures')}
           </h3>
           <div className="space-y-1">
             {data.upcoming.map((fixture) => (
@@ -261,6 +273,7 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false, cou
                   opponentPositions={data.opponentPositions}
                   isResult={false}
                   locale={locale}
+                  opponentPositionLabel={opponentPositionLabel}
                 />
                 {oddsMap[fixture.id] && (
                   <div className="ml-12 mr-8 -mt-1 mb-1">

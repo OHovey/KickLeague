@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { setRequestLocale } from 'next-intl/server';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { ThemeBackground } from '@/components/ThemeBackground';
 
 import { TeamHero } from '@/components/team-detail/TeamHero';
@@ -14,14 +14,21 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
 
   try {
-    const team = await fetchTeamBySlug(slug);
-    if (!team) return { title: 'Team Not Found' };
-    return { title: team.name };
+    const [team, tMeta] = await Promise.all([
+      fetchTeamBySlug(slug),
+      getTranslations({ locale, namespace: 'Metadata' }),
+    ]);
+    if (!team) {
+      const tTeams = await getTranslations({ locale, namespace: 'Teams' });
+      return { title: tTeams('teamNotFound') };
+    }
+    return { title: tMeta('teamTitle', { team: team.name }) };
   } catch {
-    return { title: 'Team' };
+    const tTeams = await getTranslations({ locale, namespace: 'Teams' });
+    return { title: tTeams('teamNotFound') };
   }
 }
 
@@ -35,6 +42,9 @@ export default async function TeamDetailPage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
+  const tTeams = await getTranslations('Teams');
+  const tCommon = await getTranslations('Common');
+
   let teamData;
   try {
     teamData = await fetchTeamBySlug(slug);
@@ -44,11 +54,10 @@ export default async function TeamDetailPage({
         <div className="mx-auto max-w-6xl px-4 py-8">
           <div className="rounded-lg bg-white/5 p-8 text-center">
             <p className="text-lg font-medium text-white/90">
-              Unable to Load Team
+              {tTeams('unableToLoadTeam')}
             </p>
             <p className="mt-2 text-white/70">
-              Could not connect to the database. Please check your
-              configuration.
+              {tCommon('checkConfiguration')}
             </p>
           </div>
         </div>
