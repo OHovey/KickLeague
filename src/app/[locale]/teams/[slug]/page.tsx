@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { ThemeBackground } from '@/components/ThemeBackground';
+import { routing } from '@/i18n/routing';
 
 import { TeamHero } from '@/components/team-detail/TeamHero';
 import { TeamTabs } from '@/components/team-detail/TeamTabs';
@@ -25,7 +26,36 @@ export async function generateMetadata({
       const tTeams = await getTranslations({ locale, namespace: 'Teams' });
       return { title: tTeams('teamNotFound') };
     }
-    return { title: tMeta('teamTitle', { team: team.name }) };
+
+    const title = tMeta('teamTitle', { team: team.name, league: team.leagueName });
+    const description = tMeta('teamDescription', {
+      team: team.name,
+      league: team.leagueName,
+      season: team.currentSeason,
+    });
+
+    const teamsPathname = routing.pathnames['/teams/[slug]'];
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title: `${title} | KickLeague`,
+        description,
+        type: 'website',
+      },
+      alternates: {
+        languages: Object.fromEntries(
+          routing.locales.map((l) => {
+            const localizedPath =
+              typeof teamsPathname === 'string'
+                ? teamsPathname
+                : teamsPathname[l];
+            return [l, `/${l}${localizedPath.replace('[slug]', slug)}`];
+          })
+        ),
+      },
+    };
   } catch {
     const tTeams = await getTranslations({ locale, namespace: 'Teams' });
     return { title: tTeams('teamNotFound') };
