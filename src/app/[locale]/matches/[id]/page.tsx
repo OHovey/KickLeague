@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { ThemeBackground } from '@/components/ThemeBackground';
+import { routing } from '@/i18n/routing';
 import { ScoreHero } from '@/components/match-detail/ScoreHero';
 import { StatsComparison } from '@/components/match-detail/StatsComparison';
 import { EventsTimeline } from '@/components/match-detail/EventsTimeline';
@@ -40,13 +41,34 @@ export async function generateMetadata({
     const homeName = match.homeTeam.shortName ?? match.homeTeam.name;
     const awayName = match.awayTeam.shortName ?? match.awayTeam.name;
 
-    if (match.status === 'finished') {
-      return {
-        title: `${homeName} ${match.homeScore}-${match.awayScore} ${awayName}`,
-      };
-    }
+    const ogTitle = `${tMeta('matchTitle', { home: homeName, away: awayName })} | KickLeague`;
+    const description = tMeta('matchDescription', { home: homeName, away: awayName });
 
-    return { title: tMeta('matchTitle', { home: homeName, away: awayName }) };
+    const matchPathname = routing.pathnames['/matches/[id]'];
+
+    return {
+      title:
+        match.status === 'finished'
+          ? `${homeName} ${match.homeScore}-${match.awayScore} ${awayName}`
+          : tMeta('matchTitle', { home: homeName, away: awayName }),
+      description,
+      openGraph: {
+        title: ogTitle,
+        description,
+        type: 'website',
+      },
+      alternates: {
+        languages: Object.fromEntries(
+          routing.locales.map((l) => {
+            const localizedPath =
+              typeof matchPathname === 'string'
+                ? matchPathname
+                : matchPathname[l];
+            return [l, `/${l}${localizedPath.replace('[id]', id)}`];
+          })
+        ),
+      },
+    };
   } catch {
     return { title: tMeta('matchesTitle') };
   }
