@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import { TimelineStrip, NavArrow } from './TimelineStrip';
 import type { TimelineStripHandle } from './TimelineStrip';
 import { TimelineControls } from './TimelineControls';
@@ -66,11 +67,13 @@ export function SeasonTimeline({
     }
   }, [isAtEnd, isPlaying, onWeekChange, toggle]);
 
+  const t = useTranslations('Timeline');
+
   return (
     <div>
       <div className="mb-1.5 flex items-baseline gap-2">
-        <h2 className="text-sm font-medium text-white/70">Season Timeline</h2>
-        <span className="text-xs text-white/40">Select a matchweek to view historical standings</span>
+        <h2 className="text-sm font-medium text-white/70">{t('seasonTimeline')}</h2>
+        <span className="text-xs text-white/40">{t('selectMatchweek')}</span>
       </div>
       <div className="relative">
       {/* Play button + left arrow — positioned outside left edge */}

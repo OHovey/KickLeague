@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useCallback, useImperativeHandle, forwardRef } from 'react';
+import { useTranslations } from 'next-intl';
 import { TimelineCircle } from './TimelineCircle';
 
 export interface TimelineStripHandle {
@@ -24,12 +25,14 @@ export function NavArrow({
   onClick: () => void;
   disabled: boolean;
 }) {
+  const t = useTranslations('Timeline');
+
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      aria-label={`Scroll ${direction} 5 matchweeks`}
+      aria-label={t('scrollDirection', { direction })}
       className={`
         flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full
         transition-colors
@@ -71,6 +74,7 @@ export const TimelineStrip = forwardRef<TimelineStripHandle, TimelineStripProps>
     { matchweeks, selectedWeek, latestCompleted, leagueColor, onSelectWeek },
     ref
   ) {
+    const t = useTranslations('Timeline');
     const containerRef = useRef<HTMLDivElement>(null);
     const circleRefs = useRef<Map<number, HTMLButtonElement>>(new Map());
 
@@ -137,7 +141,7 @@ export const TimelineStrip = forwardRef<TimelineStripHandle, TimelineStripProps>
       <div
         ref={containerRef}
         role="listbox"
-        aria-label="Season matchweeks"
+        aria-label={t('seasonMatchweeks')}
         tabIndex={0}
         onKeyDown={handleKeyDown}
         className="flex flex-1 items-center gap-1.5 overflow-x-auto px-2 py-2 outline-none focus-visible:ring-1 focus-visible:ring-white/20"

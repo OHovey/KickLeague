@@ -1,6 +1,7 @@
 'use client';
 
 import { forwardRef } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface TimelineCircleProps {
   weekNumber: number;
@@ -23,6 +24,8 @@ export const TimelineCircle = forwardRef<HTMLButtonElement, TimelineCircleProps>
     },
     ref
   ) {
+    const t = useTranslations('Timeline');
+
     // Show label for matchweek 1, every 5th, and the last matchweek
     const showLabel =
       weekNumber === 1 || weekNumber % 5 === 0 || weekNumber === totalWeeks;
@@ -63,7 +66,7 @@ export const TimelineCircle = forwardRef<HTMLButtonElement, TimelineCircleProps>
           type="button"
           role="option"
           aria-selected={isSelected}
-          aria-label={`Matchweek ${weekNumber}${completed ? '' : ' (upcoming)'}`}
+          aria-label={t('matchweek', { week: weekNumber }) + (completed ? '' : ` (${t('upcoming')})`)}
           disabled={!completed}
           onClick={onClick}
           className={`
