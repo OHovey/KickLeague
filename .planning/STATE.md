@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-06)
 ## Current Position
 
 Phase: 13 of 15 (i18n Completeness) -- COMPLETE
-Plan: 06 of 6 complete
+Plan: 07 of 7 complete
 Status: Phase complete
-Last activity: 2026-02-08 -- Completed 13-06-PLAN.md (complete translations for ES/DE/IT/FR)
+Last activity: 2026-02-08 -- Completed 13-07-PLAN.md (chart tooltip i18n gap closure)
 
-Progress: [###############################] 100% (39/39 through phase 12 + 6/6 phase 13 plans complete, 45/45 total)
+Progress: [################################] 100% (39/39 through phase 12 + 7/7 phase 13 plans complete, 46/46 total)
 
 ## Performance Metrics
 
@@ -52,6 +52,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 - 13-04: TeamHero converted to client component for useTranslations; layout.tsx switched from static metadata to generateMetadata for translated description; FixturesTab uses callback pattern for translated tooltip labels; added Teams.gd and TeamPerformance.noHomeAwayData keys to en.json
 - 13-05: Added teamId to TopScorerResult/BiggestUpsetResult for localization; position history chart keys remapped English->localized; seed script resolves team IDs by name at runtime
 - 13-06: Complete translations for ES/DE/IT/FR (229 keys each); football-domain terminology per locale; German ASCII umlaut corrections; French "clean sheets" preserved as-is
+- 13-07: Recharts tooltip i18n via prop-passing pattern (formatMatchweek/formatOrdinal callbacks); replaced hardcoded MW and ordinal() in 5 chart components
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
@@ -77,5 +78,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 13-06-PLAN.md (Phase 13 COMPLETE -- all locales fully translated)
+Stopped at: Completed 13-07-PLAN.md (chart tooltip i18n gap closure -- Phase 13 fully complete)
 Resume file: None
