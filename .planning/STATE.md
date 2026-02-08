@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-06)
 ## Current Position
 
 Phase: 14 of 15 (SEO Foundation)
-Plan: 04 of 5 (3 complete: 01, 02, 04)
+Plan: 04 of 5 (4 complete: 01, 02, 03, 04)
 Status: In progress
-Last activity: 2026-02-08 -- Completed 14-04-PLAN.md (OG image generators)
+Last activity: 2026-02-08 -- Completed 14-03-PLAN.md (robots.txt and sitemap.xml)
 
-Progress: [################################################--] 96% (49/51 total plans complete)
+Progress: [################################################--] 98% (50/51 total plans complete)
 
 ## Performance Metrics
 
@@ -46,7 +46,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 - 12-03: Plain <img> for team logos (avoid next/image domain config); inline SVG icons (no icon library); skeleton cards match card dimensions
 
 **v1.2 Phase 13:**
-- 13-01: Dual routing config (routing with pathnames for middleware, navigationRouting without pathnames for Link/useRouter); middleware.ts re-exports proxy.ts; ICU plural format for count-dependent strings
+- 13-01: Dual routing config (routing with pathnames for middleware, navigationRouting without pathnames for Link/useRouter); ICU plural format for count-dependent strings
 - 13-02: ZoneLegend promoted to client component for useTranslations; DataFreshness split into getTimeBucket (pure) + formatRelativeTime (i18n); developer CLI instructions left untranslated
 - 13-03: Match detail components converted to client components for useTranslations; EventsTimeline passes t function as prop to sub-components; ICU plural format for H2H wins/draws/meetings
 - 13-04: TeamHero converted to client component for useTranslations; layout.tsx switched from static metadata to generateMetadata for translated description; FixturesTab uses callback pattern for translated tooltip labels; added Teams.gd and TeamPerformance.noHomeAwayData keys to en.json
@@ -57,6 +57,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 **v1.2 Phase 14:**
 - 14-01: metadataBase uses NEXT_PUBLIC_SITE_URL with fallback; matches page metadata in layout.tsx (client component workaround); hreflang alternates from routing.pathnames config
 - 14-02: Spoiler-free OG title for match pages (browser tab shows score, social share does not); hreflang alternates from routing.pathnames with slug/id replacement; league name in team title
+- 14-03: Removed deprecated middleware.ts (proxy.ts only for Next.js 16); robots.txt/sitemap.xml at app root outside [locale]; routing.pathnames for localized sitemap URLs; only finished matches in sitemap
 - 14-04: Light gradient OG images (#f8f9fa to #e9ecef) for all 4 page types; direct DB queries instead of server actions for OG (avoids getLocale context); spoiler-free match OG (no scores)
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
@@ -83,5 +84,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 14-04-PLAN.md (OG image generators)
+Stopped at: Completed 14-03-PLAN.md (robots.txt and sitemap.xml)
 Resume file: None
