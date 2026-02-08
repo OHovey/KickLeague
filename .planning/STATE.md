@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-06)
 ## Current Position
 
 Phase: 13 of 15 (i18n Completeness)
-Plan: 01 of 6 complete
+Plan: 02 of 6 complete
 Status: In progress
-Last activity: 2026-02-08 -- Completed 13-01-PLAN.md (en.json keys + i18n infrastructure)
+Last activity: 2026-02-08 -- Completed 13-02-PLAN.md (league table, timeline, DataFreshness i18n wiring)
 
-Progress: [############################..] 87% (39/39 through phase 12 + 1/6 phase 13 plans complete, 40/45 total)
+Progress: [#############################.] 91% (39/39 through phase 12 + 2/6 phase 13 plans complete, 41/45 total)
 
 ## Performance Metrics
 
@@ -47,6 +47,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 
 **v1.2 Phase 13:**
 - 13-01: Dual routing config (routing with pathnames for middleware, navigationRouting without pathnames for Link/useRouter); middleware.ts re-exports proxy.ts; ICU plural format for count-dependent strings
+- 13-02: ZoneLegend promoted to client component for useTranslations; DataFreshness split into getTimeBucket (pure) + formatRelativeTime (i18n); developer CLI instructions left untranslated
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
@@ -72,5 +73,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 13-01-PLAN.md (en.json keys + i18n infrastructure)
+Stopped at: Completed 13-02-PLAN.md (league table, timeline, DataFreshness i18n wiring)
 Resume file: None
