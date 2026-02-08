@@ -135,10 +135,15 @@
     "vs": "gegen"
   },
   "Metadata": {
+    "homeDescription": "Live-Tabellen, Formtabellen, Spielstatistiken und Positionsverlaeufe fuer Premier League, La Liga, Serie A, Bundesliga und Ligue 1.",
+    "homeTitle": "Fussball-Tabellen & Statistiken",
+    "matchDescription": "{home} gegen {away} - Spieldetails, Statistiken und Direktvergleich.",
+    "matchesDescription": "Aktuelle Ergebnisse und kommende Spiele der europaeischen Fussball-Topligen.",
     "matchesTitle": "Spiele",
     "matchTitle": "{home} gegen {away}",
-    "siteDescription": "Fu\u00dfballintelligenz, visualisiert",
-    "teamTitle": "{team}"
+    "siteDescription": "Fussballintelligenz, visualisiert. Tabellen, Form, Statistiken und Spielanalysen der europaeischen Topligen.",
+    "teamDescription": "Tabelle, Formverlaeufe und Positionshistorie von {team} in der Saison {season} der {league}.",
+    "teamTitle": "{team} - {league}"
   },
   "Navigation": {
     "home": "Startseite",

@@ -135,10 +135,15 @@
     "vs": "contro"
   },
   "Metadata": {
+    "homeDescription": "Classifiche in tempo reale, tabelle di forma, statistiche delle partite e storico delle posizioni per Premier League, La Liga, Serie A, Bundesliga e Ligue 1.",
+    "homeTitle": "Classifiche e statistiche di calcio",
+    "matchDescription": "{home} contro {away} - Dettagli della partita, statistiche e storico degli scontri diretti.",
+    "matchesDescription": "Risultati recenti e prossime partite dei principali campionati di calcio europei.",
     "matchesTitle": "Partite",
     "matchTitle": "{home} contro {away}",
-    "siteDescription": "Intelligenza calcistica, visualizzata",
-    "teamTitle": "{team}"
+    "siteDescription": "Intelligenza calcistica, visualizzata. Classifiche, forma, statistiche e analisi delle partite dei principali campionati europei.",
+    "teamDescription": "Classifica, serie di forma e storico delle posizioni di {team} nella stagione {season} della {league}.",
+    "teamTitle": "{team} - {league}"
   },
   "Navigation": {
     "home": "Home",

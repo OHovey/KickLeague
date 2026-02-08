@@ -135,10 +135,15 @@
     "vs": "vs"
   },
   "Metadata": {
+    "homeDescription": "Live standings, form tables, match stats, and position history for Premier League, La Liga, Serie A, Bundesliga, and Ligue 1.",
+    "homeTitle": "Football Standings & Stats",
+    "matchDescription": "{home} vs {away} - Match details, stats, and head-to-head history.",
+    "matchesDescription": "View recent results and upcoming fixtures for Europe's top football leagues.",
     "matchesTitle": "Matches",
     "matchTitle": "{home} vs {away}",
-    "siteDescription": "Football intelligence, visualized",
-    "teamTitle": "{team}"
+    "siteDescription": "Football intelligence, visualized. Standings, form, stats, and match analysis for Europe's top leagues.",
+    "teamDescription": "View {team} standings, form runs, and position history for the {season} {league} season.",
+    "teamTitle": "{team} - {league}"
   },
   "Navigation": {
     "home": "Home",
