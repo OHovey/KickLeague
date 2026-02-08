@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import {
   LineChart,
   Line,
@@ -32,16 +33,17 @@ interface CustomTooltipProps {
   active?: boolean;
   label?: number;
   payload?: TooltipPayload[];
+  formatMatchweek?: (mw: number) => string;
 }
 
 // ── Tooltip ────────────────────────────────────────────────────────────────
 
-function XgTooltip({ active, label, payload }: CustomTooltipProps) {
+function XgTooltip({ active, label, payload, formatMatchweek }: CustomTooltipProps) {
   if (!active || !payload || payload.length === 0) return null;
 
   return (
     <div className="rounded-lg border border-white/10 bg-gray-900/95 px-3 py-2 shadow-lg backdrop-blur-sm">
-      <p className="mb-1 text-xs font-medium text-white/50">MW {label}</p>
+      <p className="mb-1 text-xs font-medium text-white/50">{formatMatchweek?.(label ?? 0) ?? `MW ${label}`}</p>
       {payload.map((entry) => (
         <div key={entry.dataKey} className="flex items-center gap-2 text-xs">
           <span
@@ -61,6 +63,8 @@ function XgTooltip({ active, label, payload }: CustomTooltipProps) {
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function CumulativeXgChart({ data }: CumulativeXgChartProps) {
+  const t = useTranslations('Charts');
+
   if (!data || data.length === 0) {
     return (
       <div className="flex h-[250px] items-center justify-center text-sm text-white/30">
@@ -89,7 +93,13 @@ export function CumulativeXgChart({ data }: CumulativeXgChartProps) {
           tickLine={false}
           width={30}
         />
-        <Tooltip content={<XgTooltip />} />
+        <Tooltip
+          content={
+            <XgTooltip
+              formatMatchweek={(mw) => t('matchweekShort', { week: mw })}
+            />
+          }
+        />
         <Legend
           wrapperStyle={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}
         />

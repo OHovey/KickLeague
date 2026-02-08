@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import {
   LineChart,
   Line,
@@ -8,6 +10,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { getLocalizedOrdinal } from '@/lib/i18n/ordinals';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -27,6 +30,8 @@ interface CustomTooltipProps {
   active?: boolean;
   label?: number;
   payload?: TooltipPayload[];
+  formatMatchweek?: (mw: number) => string;
+  formatOrdinal?: (n: number) => string;
 }
 
 // ── Constants ─────────────────────────────────────────────────────────────
@@ -40,17 +45,9 @@ const RIVAL_COLORS = [
   '#facc15', // yellow-400
 ];
 
-// ── Helpers ────────────────────────────────────────────────────────────────
-
-function ordinal(n: number): string {
-  const suffixes = ['th', 'st', 'nd', 'rd'];
-  const v = n % 100;
-  return n + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
-}
-
 // ── Tooltip ────────────────────────────────────────────────────────────────
 
-function BumpTooltip({ active, label, payload }: CustomTooltipProps) {
+function BumpTooltip({ active, label, payload, formatMatchweek, formatOrdinal }: CustomTooltipProps) {
   if (!active || !payload || payload.length === 0) return null;
 
   // Sort by position (lower = better = first)
@@ -58,7 +55,7 @@ function BumpTooltip({ active, label, payload }: CustomTooltipProps) {
 
   return (
     <div className="rounded-lg border border-white/10 bg-gray-900/95 px-3 py-2 shadow-lg backdrop-blur-sm">
-      <p className="mb-1 text-xs font-medium text-white/50">MW {label}</p>
+      <p className="mb-1 text-xs font-medium text-white/50">{formatMatchweek?.(label ?? 0) ?? `MW ${label}`}</p>
       {sorted.map((entry) => (
         <div key={entry.dataKey} className="flex items-center gap-2 text-xs">
           <span
@@ -67,7 +64,7 @@ function BumpTooltip({ active, label, payload }: CustomTooltipProps) {
           />
           <span className="text-white/70">{entry.dataKey}</span>
           <span className="ml-auto font-medium text-white">
-            {ordinal(entry.value)}
+            {formatOrdinal?.(entry.value) ?? entry.value}
           </span>
         </div>
       ))}
@@ -78,6 +75,8 @@ function BumpTooltip({ active, label, payload }: CustomTooltipProps) {
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function BumpChart({ data, focusTeam, rivalTeams }: BumpChartProps) {
+  const t = useTranslations('Charts');
+  const locale = useLocale();
   if (!data || data.length === 0) {
     return (
       <div className="flex h-[300px] items-center justify-center text-sm text-white/30">
@@ -103,7 +102,14 @@ export function BumpChart({ data, focusTeam, rivalTeams }: BumpChartProps) {
           tickLine={false}
           width={30}
         />
-        <Tooltip content={<BumpTooltip />} />
+        <Tooltip
+          content={
+            <BumpTooltip
+              formatMatchweek={(mw) => t('matchweekShort', { week: mw })}
+              formatOrdinal={(n) => getLocalizedOrdinal(n, locale)}
+            />
+          }
+        />
         {/* Rival team lines: distinct colors, semi-transparent */}
         {rivalTeams.map((team, i) => {
           const color = RIVAL_COLORS[i % RIVAL_COLORS.length];

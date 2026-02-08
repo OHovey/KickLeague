@@ -1,6 +1,8 @@
 'use client';
 
 import { memo } from 'react';
+import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import {
   LineChart,
   Line,
@@ -8,6 +10,7 @@ import {
   ResponsiveContainer,
   YAxis,
 } from 'recharts';
+import { getLocalizedOrdinal } from '@/lib/i18n/ordinals';
 
 export interface SparklineDataPoint {
   matchweek: number;
@@ -20,15 +23,6 @@ interface SparklineProps {
   height?: number;
 }
 
-/**
- * Convert a number to its ordinal form (1st, 2nd, 3rd, 4th, etc.)
- */
-function ordinal(n: number): string {
-  const suffixes = ['th', 'st', 'nd', 'rd'];
-  const v = n % 100;
-  return n + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
-}
-
 interface TooltipPayload {
   payload?: SparklineDataPoint;
 }
@@ -36,12 +30,14 @@ interface TooltipPayload {
 interface CustomTooltipProps {
   active?: boolean;
   payload?: TooltipPayload[];
+  formatMatchweek?: (mw: number) => string;
+  formatOrdinal?: (n: number) => string;
 }
 
 /**
  * Custom tooltip component for the sparkline
  */
-function SparklineTooltip({ active, payload }: CustomTooltipProps) {
+function SparklineTooltip({ active, payload, formatMatchweek, formatOrdinal }: CustomTooltipProps) {
   if (!active || !payload || payload.length === 0 || !payload[0].payload) {
     return null;
   }
@@ -50,8 +46,8 @@ function SparklineTooltip({ active, payload }: CustomTooltipProps) {
 
   return (
     <div className="rounded border border-gray-700 bg-gray-900 px-2 py-1 shadow">
-      <p className="text-xs text-gray-300">MW {data.matchweek}</p>
-      <p className="text-sm font-bold text-white">{ordinal(data.position)}</p>
+      <p className="text-xs text-gray-300">{formatMatchweek?.(data.matchweek) ?? `MW ${data.matchweek}`}</p>
+      <p className="text-sm font-bold text-white">{formatOrdinal?.(data.position) ?? data.position}</p>
     </div>
   );
 }
@@ -65,6 +61,9 @@ export const Sparkline = memo(function Sparkline({
   width = 120,
   height = 32,
 }: SparklineProps) {
+  const t = useTranslations('Charts');
+  const locale = useLocale();
+
   if (!data || data.length === 0) {
     return (
       <div
@@ -88,7 +87,14 @@ export const Sparkline = memo(function Sparkline({
             hide={true}
             domain={[1, 'dataMax']}
           />
-          <Tooltip content={<SparklineTooltip />} />
+          <Tooltip
+            content={
+              <SparklineTooltip
+                formatMatchweek={(mw) => t('matchweekShort', { week: mw })}
+                formatOrdinal={(n) => getLocalizedOrdinal(n, locale)}
+              />
+            }
+          />
           <Line
             type="monotone"
             dataKey="position"

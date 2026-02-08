@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import {
   AreaChart,
   Area,
@@ -23,11 +24,13 @@ interface TooltipPayload {
 interface CustomTooltipProps {
   active?: boolean;
   payload?: TooltipPayload[];
+  formatMatchweek?: (mw: number) => string;
+  formatPoints?: (count: number) => string;
 }
 
 // ── Tooltip ────────────────────────────────────────────────────────────────
 
-function PointsTooltip({ active, payload }: CustomTooltipProps) {
+function PointsTooltip({ active, payload, formatMatchweek, formatPoints }: CustomTooltipProps) {
   if (!active || !payload || payload.length === 0 || !payload[0].payload) {
     return null;
   }
@@ -36,8 +39,8 @@ function PointsTooltip({ active, payload }: CustomTooltipProps) {
 
   return (
     <div className="rounded-lg border border-white/10 bg-gray-900/95 px-3 py-2 shadow-lg backdrop-blur-sm">
-      <p className="text-xs text-white/50">MW {data.matchweek}</p>
-      <p className="text-sm font-bold text-white">{data.points} pts</p>
+      <p className="text-xs text-white/50">{formatMatchweek?.(data.matchweek) ?? `MW ${data.matchweek}`}</p>
+      <p className="text-sm font-bold text-white">{formatPoints?.(data.points) ?? `${data.points} pts`}</p>
     </div>
   );
 }
@@ -45,6 +48,8 @@ function PointsTooltip({ active, payload }: CustomTooltipProps) {
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function CumulativePointsChart({ data }: CumulativePointsChartProps) {
+  const t = useTranslations('Charts');
+
   if (!data || data.length === 0) {
     return (
       <div className="flex h-[250px] items-center justify-center text-sm text-white/30">
@@ -79,7 +84,14 @@ export function CumulativePointsChart({ data }: CumulativePointsChartProps) {
           tickLine={false}
           width={30}
         />
-        <Tooltip content={<PointsTooltip />} />
+        <Tooltip
+          content={
+            <PointsTooltip
+              formatMatchweek={(mw) => t('matchweekShort', { week: mw })}
+              formatPoints={(count) => t('points', { count })}
+            />
+          }
+        />
         <Area
           type="monotone"
           dataKey="points"

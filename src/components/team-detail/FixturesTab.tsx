@@ -105,6 +105,7 @@ function FixtureRow({
   isResult,
   locale,
   opponentPositionLabel,
+  matchweekLabel,
 }: {
   fixture: FixtureWithTeams;
   teamId: number;
@@ -112,6 +113,7 @@ function FixtureRow({
   isResult: boolean;
   locale: string;
   opponentPositionLabel: (position: number) => string;
+  matchweekLabel: string;
 }) {
   const result = isResult ? getResult(fixture, teamId) : null;
   const isHome = fixture.homeTeam.id === teamId;
@@ -126,7 +128,7 @@ function FixtureRow({
     >
       {/* Matchweek badge */}
       <span className="w-12 shrink-0 text-center text-[10px] font-medium uppercase tracking-wider text-white/30">
-        MW {fixture.matchweek ?? '?'}
+        {matchweekLabel}
       </span>
 
       {/* Teams + Score/Time */}
@@ -252,6 +254,7 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false, cou
                 isResult
                 locale={locale}
                 opponentPositionLabel={opponentPositionLabel}
+                matchweekLabel={t('matchweekShort', { week: fixture.matchweek ?? '?' })}
               />
             ))}
           </div>
@@ -274,6 +277,7 @@ export function FixturesTab({ teamId, leagueId, season, showBetting = false, cou
                   isResult={false}
                   locale={locale}
                   opponentPositionLabel={opponentPositionLabel}
+                  matchweekLabel={t('matchweekShort', { week: fixture.matchweek ?? '?' })}
                 />
                 {oddsMap[fixture.id] && (
                   <div className="ml-12 mr-8 -mt-1 mb-1">
