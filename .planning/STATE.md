@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 13 COMPLETE
+**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 14 in progress
 
 ## Current Position
 
-Phase: 13 of 15 (i18n Completeness) -- COMPLETE
-Plan: 07 of 7 complete
-Status: Phase complete
-Last activity: 2026-02-08 -- Completed 13-07-PLAN.md (chart tooltip i18n gap closure)
+Phase: 14 of 15 (SEO Foundation)
+Plan: 02 of 5 complete
+Status: In progress
+Last activity: 2026-02-08 -- Completed 14-02-PLAN.md (team & match page SEO metadata)
 
-Progress: [################################] 100% (39/39 through phase 12 + 7/7 phase 13 plans complete, 46/46 total)
+Progress: [######################################------] 94% (48/51 total plans complete)
 
 ## Performance Metrics
 
@@ -54,6 +54,10 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 - 13-06: Complete translations for ES/DE/IT/FR (229 keys each); football-domain terminology per locale; German ASCII umlaut corrections; French "clean sheets" preserved as-is
 - 13-07: Recharts tooltip i18n via prop-passing pattern (formatMatchweek/formatOrdinal callbacks); replaced hardcoded MW and ordinal() in 5 chart components
 
+**v1.2 Phase 14:**
+- 14-01: metadataBase uses NEXT_PUBLIC_SITE_URL with fallback; matches page metadata in layout.tsx (client component workaround); hreflang alternates from routing.pathnames config
+- 14-02: Spoiler-free OG title for match pages (browser tab shows score, social share does not); hreflang alternates from routing.pathnames with slug/id replacement; league name in team title
+
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
 - Provision production infrastructure (Neon, Vercel, QStash, Odds API)
@@ -78,5 +82,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 13-07-PLAN.md (chart tooltip i18n gap closure -- Phase 13 fully complete)
+Stopped at: Completed 14-02-PLAN.md (team & match page SEO metadata)
 Resume file: None
