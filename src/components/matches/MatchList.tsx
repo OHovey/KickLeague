@@ -2,6 +2,7 @@
 
 import type { MatchWithTeams, MatchEvent } from '@/lib/matches/queries';
 import type { CompactOddsData } from '@/components/odds/actions';
+import { useTranslations } from 'next-intl';
 import { MatchCard } from './MatchCard';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -49,11 +50,13 @@ export function MatchList({
   onShowMore,
   hasMore,
 }: MatchListProps) {
+  const t = useTranslations('Matches');
+
   if (matches.length === 0) {
     return (
       <div className="rounded-lg bg-white/5 p-8 text-center">
         <p className="text-white/70">
-          {type === 'results' ? 'No recent results' : 'No upcoming fixtures'}
+          {type === 'results' ? t('noRecentResults') : t('noUpcomingFixtures')}
         </p>
       </div>
     );
@@ -68,8 +71,8 @@ export function MatchList({
           {/* Matchweek header */}
           <h3 className="mb-3 text-xs font-medium uppercase tracking-wider text-white/40">
             {group.matchweek != null
-              ? `Matchweek ${group.matchweek}`
-              : 'Matchweek TBD'}
+              ? `${t('matchweek')} ${group.matchweek}`
+              : t('matchweekTBD')}
           </h3>
 
           {/* Match cards */}
@@ -97,7 +100,7 @@ export function MatchList({
             onClick={onShowMore}
             className="min-h-[44px] rounded-lg bg-white/5 px-6 py-2 text-sm text-white/60 transition-colors hover:bg-white/10 hover:text-white/80"
           >
-            Show more {type === 'results' ? 'results' : 'fixtures'}
+            {type === 'results' ? t('showMoreResults') : t('showMoreFixtures')}
           </button>
         </div>
       )}

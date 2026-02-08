@@ -3,6 +3,7 @@
 import * as Tabs from '@radix-ui/react-tabs';
 import { parseAsStringEnum, useQueryState } from 'nuqs';
 import { clsx } from 'clsx';
+import { useTranslations } from 'next-intl';
 import { MatchListClient } from './MatchListClient';
 
 const TAB_VALUES = ['results', 'fixtures'] as const;
@@ -13,6 +14,7 @@ interface ResultsFixturesTabsProps {
 }
 
 export function ResultsFixturesTabs({ league }: ResultsFixturesTabsProps) {
+  const t = useTranslations('Matches');
   const [tab, setTab] = useQueryState(
     'tab',
     parseAsStringEnum([...TAB_VALUES]).withDefault('results')
@@ -36,7 +38,7 @@ export function ResultsFixturesTabs({ league }: ResultsFixturesTabsProps) {
                 : 'text-white/70 hover:bg-white/10 hover:text-white'
             )}
           >
-            Results
+            {t('results')}
           </Tabs.Trigger>
           <Tabs.Trigger
             value="fixtures"
@@ -48,7 +50,7 @@ export function ResultsFixturesTabs({ league }: ResultsFixturesTabsProps) {
                 : 'text-white/70 hover:bg-white/10 hover:text-white'
             )}
           >
-            Fixtures
+            {t('fixtures')}
           </Tabs.Trigger>
         </Tabs.List>
       </Tabs.Root>

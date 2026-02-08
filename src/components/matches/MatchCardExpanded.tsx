@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { formatMatchDate } from '@/lib/dates/format';
 import { fetchH2HSummary } from './actions';
 import type { H2HSummary } from '@/lib/matches/h2h';
@@ -44,6 +44,7 @@ export function MatchCardExpanded({
   awayForm,
 }: MatchCardExpandedProps) {
   const locale = useLocale();
+  const t = useTranslations('Matches');
   const [h2h, setH2h] = useState<H2HSummary | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -69,10 +70,10 @@ export function MatchCardExpanded({
       {/* H2H Record */}
       <div>
         <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-white/50">
-          Head to Head
+          {t('h2h')}
         </h4>
         {totalMeetings === 0 ? (
-          <p className="text-sm text-white/40">No previous meetings found</p>
+          <p className="text-sm text-white/40">{t('noPreviousMeetings')}</p>
         ) : (
           <>
             {/* Record summary */}
@@ -82,7 +83,7 @@ export function MatchCardExpanded({
                 <span className="tabular-nums text-white/90">{h2h.team1Wins}</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-white/50">Draws</span>
+                <span className="text-white/50">{t('draws')}</span>
                 <span className="tabular-nums text-white/90">{h2h.draws}</span>
               </div>
               <div className="flex items-center gap-1.5">
@@ -110,9 +111,9 @@ export function MatchCardExpanded({
                       {t1Score} - {t2Score}
                     </span>
                     {isTeam1Home ? (
-                      <span className="text-white/30">(H)</span>
+                      <span className="text-white/30">{t('homeShort')}</span>
                     ) : (
-                      <span className="text-white/30">(A)</span>
+                      <span className="text-white/30">{t('awayShort')}</span>
                     )}
                   </div>
                 );
@@ -125,7 +126,7 @@ export function MatchCardExpanded({
       {/* Team Forms */}
       <div>
         <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-white/50">
-          Form
+          {t('form')}
         </h4>
         <div className="space-y-2">
           <div className="flex items-center gap-3">

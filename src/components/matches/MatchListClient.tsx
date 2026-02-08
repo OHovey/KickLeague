@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
 import type { MatchWithTeams, MatchEvent } from '@/lib/matches/queries';
 import { fetchRecentMatches, fetchUpcomingFixtures, getGeoContext } from './actions';
 import { fetchCompactOdds, type CompactOddsData } from '@/components/odds/actions';
@@ -51,6 +52,7 @@ interface MatchData {
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export function MatchListClient({ league, tab }: MatchListClientProps) {
+  const t = useTranslations('Common');
   const [data, setData] = useState<MatchData | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -144,11 +146,12 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
   if (dbError === 'database_not_configured') {
     return (
       <div className="rounded-lg bg-white/5 p-8 text-center">
-        <p className="text-lg font-medium text-white/90">Database Not Configured</p>
+        <p className="text-lg font-medium text-white/90">{t('databaseNotConfigured')}</p>
         <p className="mt-2 text-white/70">
-          Set up your database to see match data
+          {t('setupDatabase')}
         </p>
         <div className="mt-4 rounded bg-black/30 p-4 text-left">
+          {/* Developer-facing instructions kept in English */}
           <p className="text-xs font-mono text-white/50">1. Create a Neon database at neon.tech</p>
           <p className="text-xs font-mono text-white/50 mt-1">2. Copy DATABASE_URL to .env.local</p>
           <p className="text-xs font-mono text-white/50 mt-1">3. Run: npx drizzle-kit push</p>

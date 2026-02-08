@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { formatKickoffTime } from '@/lib/dates/format';
 import type { MatchWithTeams } from '@/lib/matches/queries';
@@ -197,6 +197,7 @@ interface MatchPreviewSectionProps {
 }
 
 export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
+  const t = useTranslations('Matches');
   const locale = useLocale();
   const [recentMatches, setRecentMatches] = useState<MatchWithTeams[]>([]);
   const [upcomingMatches, setUpcomingMatches] = useState<MatchWithTeams[]>([]);
@@ -246,7 +247,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
         <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
           <div className="border-b border-white/10 px-4 py-3">
             <h2 className="text-sm font-medium text-white/90">
-              Recent Results
+              {t('recentResults')}
             </h2>
           </div>
           <div className="py-1">
@@ -254,7 +255,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
               <CompactSkeleton />
             ) : recentMatches.length === 0 ? (
               <p className="px-4 py-6 text-center text-sm text-white/40">
-                No recent results
+                {t('noRecentResults')}
               </p>
             ) : (
               <div className="space-y-0">
@@ -266,7 +267,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
           </div>
           <div className="border-t border-white/5 px-4 py-2">
             <ViewAllLink href="/matches?tab=results">
-              View all results
+              {t('viewAllResults')}
             </ViewAllLink>
           </div>
         </div>
@@ -275,7 +276,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
         <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
           <div className="border-b border-white/10 px-4 py-3">
             <h2 className="text-sm font-medium text-white/90">
-              Upcoming Fixtures
+              {t('upcomingFixtures')}
             </h2>
           </div>
           <div className="py-1">
@@ -283,7 +284,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
               <CompactSkeleton />
             ) : upcomingMatches.length === 0 ? (
               <p className="px-4 py-6 text-center text-sm text-white/40">
-                No upcoming fixtures
+                {t('noUpcomingFixtures')}
               </p>
             ) : (
               <div className="space-y-0">
@@ -301,7 +302,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
           </div>
           <div className="border-t border-white/5 px-4 py-2">
             <ViewAllLink href="/matches?tab=fixtures">
-              View all fixtures
+              {t('viewAllFixtures')}
             </ViewAllLink>
           </div>
         </div>

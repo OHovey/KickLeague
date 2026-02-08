@@ -1,6 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
+import { useTranslations } from 'next-intl';
 import { LeagueTabs } from '@/components/league-nav/LeagueTabs';
 import { ThemeBackground } from '@/components/ThemeBackground';
 
@@ -9,6 +10,7 @@ import { useLeague } from '@/lib/hooks/use-league';
 
 function MatchesContent() {
   const { league } = useLeague();
+  const t = useTranslations('Metadata');
 
   return (
     <>
@@ -20,7 +22,7 @@ function MatchesContent() {
           </div>
         </div>
         <main className="mx-auto max-w-7xl px-4 py-8">
-          <h1 className="mb-6 text-2xl font-bold text-white">Matches</h1>
+          <h1 className="mb-6 text-2xl font-bold text-white">{t('matchesTitle')}</h1>
           <ResultsFixturesTabs league={league} />
         </main>
       </div>
