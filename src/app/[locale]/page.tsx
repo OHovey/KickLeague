@@ -6,6 +6,7 @@ import { ThemeBackground } from '@/components/ThemeBackground';
 import { LeagueTableWrapper } from '@/components/league-table/LeagueTableWrapper';
 
 import { MatchPreviewSection } from '@/components/matches/MatchPreviewSection';
+import { StatHighlights } from '@/components/stat-highlights/StatHighlights';
 import { useLeague } from '@/lib/hooks/use-league';
 import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
 
@@ -36,6 +37,9 @@ function HomeContent() {
     <>
       <ThemeBackground theme={league} />
       <div className="min-h-screen">
+        <div className="mx-auto max-w-7xl px-4 pt-6">
+          <StatHighlights />
+        </div>
         <div className="sticky top-0 z-10 border-b border-white/10 bg-black/20 backdrop-blur-md">
           <div className="mx-auto max-w-7xl px-4 py-4">
             <LeagueTabs />
