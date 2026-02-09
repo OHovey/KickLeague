@@ -200,8 +200,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 15-01-PLAN.md -- AdUnit component, ad config, ads.txt, CSS collapse, env vars
-- [ ] 15-02-PLAN.md -- Place ad units on all 4 page types with betting content separation
+- [x] 15-01-PLAN.md -- AdUnit component, ad config, ads.txt, CSS collapse, env vars
+- [x] 15-02-PLAN.md -- Place ad units on all 4 page types with betting content separation
 
 ## Progress
 
@@ -224,8 +224,8 @@ Phases execute in numeric order: 11 -> 12 -> 13 -> 14 -> 15
 | 12. Site Chrome | v1.2 | 3/3 | Complete | 2026-02-08 |
 | 13. i18n Complete | v1.2 | 7/7 | Complete | 2026-02-08 |
 | 14. SEO | v1.2 | 5/5 | Complete | 2026-02-08 |
-| 15. Display Ads | v1.2 | 0/2 | Not started | - |
+| 15. Display Ads | v1.2 | 2/2 | Complete | 2026-02-09 |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-09 after Phase 15 planning (2 plans created)*
+*Last updated: 2026-02-09 after Phase 15 execution complete (2/2 plans, verified)*

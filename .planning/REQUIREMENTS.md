@@ -16,26 +16,26 @@ Requirements for Polish, SEO & Launch Readiness milestone. Each maps to roadmap 
 
 ### Header & Homepage
 
-- [ ] **LAYOUT-01**: Site header with KickLeague wordmark and locale switcher renders on all pages via layout
-- [ ] **LAYOUT-02**: Homepage displays a three-card hero row with key stat highlights (Top Scorer, Biggest Upset, Form Team)
+- [x] **LAYOUT-01**: Site header with KickLeague wordmark and locale switcher renders on all pages via layout
+- [x] **LAYOUT-02**: Homepage displays a three-card hero row with key stat highlights (Top Scorer, Biggest Upset, Form Team)
 
 ### i18n Completeness
 
-- [ ] **I18N-01**: All user-visible hardcoded English strings are wired to next-intl message files
-- [ ] **I18N-02**: getTeamName helper is wired so team names display in the user's locale
-- [ ] **I18N-03**: All 5 locale message files (EN, ES, DE, IT, FR) contain translations for newly wired strings
+- [x] **I18N-01**: All user-visible hardcoded English strings are wired to next-intl message files
+- [x] **I18N-02**: getTeamName helper is wired so team names display in the user's locale
+- [x] **I18N-03**: All 5 locale message files (EN, ES, DE, IT, FR) contain translations for newly wired strings
 
 ### Tech Debt
 
-- [ ] **DEBT-01**: Season year is dynamic (not hardcoded '2025') in LeagueTableWrapper and any other locations
+- [x] **DEBT-01**: Season year is dynamic (not hardcoded '2025') in LeagueTableWrapper and any other locations
 
 ### SEO
 
-- [ ] **SEO-01**: Every page has appropriate meta title and description tags
-- [ ] **SEO-02**: Open Graph tags (og:title, og:description, og:image) are set per page
-- [ ] **SEO-03**: sitemap.xml is generated covering all leagues, teams, and locales
-- [ ] **SEO-04**: robots.txt is configured with appropriate crawl directives
-- [ ] **SEO-05**: hreflang tags link equivalent pages across all 5 locales
+- [x] **SEO-01**: Every page has appropriate meta title and description tags
+- [x] **SEO-02**: Open Graph tags (og:title, og:description, og:image) are set per page
+- [x] **SEO-03**: sitemap.xml is generated covering all leagues, teams, and locales
+- [x] **SEO-04**: robots.txt is configured with appropriate crawl directives
+- [x] **SEO-05**: hreflang tags link equivalent pages across all 5 locales
 
 ### Ads
 
@@ -111,17 +111,17 @@ Deferred to future milestones.
 | BRAND-02 | Phase 11 | Complete |
 | BRAND-03 | Phase 11 | Complete |
 | BRAND-04 | Phase 11 | Complete |
-| LAYOUT-01 | Phase 12 | Pending |
-| LAYOUT-02 | Phase 12 | Pending |
-| DEBT-01 | Phase 12 | Pending |
-| I18N-01 | Phase 13 | Pending |
-| I18N-02 | Phase 13 | Pending |
-| I18N-03 | Phase 13 | Pending |
-| SEO-01 | Phase 14 | Pending |
-| SEO-02 | Phase 14 | Pending |
-| SEO-03 | Phase 14 | Pending |
-| SEO-04 | Phase 14 | Pending |
-| SEO-05 | Phase 14 | Pending |
+| LAYOUT-01 | Phase 12 | Complete |
+| LAYOUT-02 | Phase 12 | Complete |
+| DEBT-01 | Phase 12 | Complete |
+| I18N-01 | Phase 13 | Complete |
+| I18N-02 | Phase 13 | Complete |
+| I18N-03 | Phase 13 | Complete |
+| SEO-01 | Phase 14 | Complete |
+| SEO-02 | Phase 14 | Complete |
+| SEO-03 | Phase 14 | Complete |
+| SEO-04 | Phase 14 | Complete |
+| SEO-05 | Phase 14 | Complete |
 | ADS-01 | Phase 15 | Pending |
 | ADS-02 | Phase 15 | Pending |
 | ADS-03 | Phase 15 | Pending |
@@ -133,4 +133,4 @@ Deferred to future milestones.
 
 ---
 *Requirements defined: 2026-02-06*
-*Last updated: 2026-02-06 after v1.2 roadmap creation*
+*Last updated: 2026-02-08 after Phase 14 complete*
