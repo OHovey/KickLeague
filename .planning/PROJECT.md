@@ -2,7 +2,7 @@
 
 ## What This Is
 
-KickLeague is a CoinMarketCap-inspired football league table and statistics platform covering Europe's Big 5 leagues (Premier League, La Liga, Bundesliga, Serie A, Ligue 1). It provides information-dense dashboards with real-time standings, match data, team analytics, historical trends via an interactive season timeline, betting odds comparison with geo-compliance, and 5-language localisation.
+KickLeague is a CoinMarketCap-inspired football league table and statistics platform covering Europe's Big 5 leagues (Premier League, La Liga, Bundesliga, Serie A, Ligue 1). It provides information-dense dashboards with real-time standings, match data, team analytics, historical trends via an interactive season timeline, betting odds comparison with geo-compliance, affiliate monetisation, full 5-language localisation, SEO discoverability, and display ad revenue — ready for public launch.
 
 ## Core Value
 
@@ -12,28 +12,29 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 ### Validated
 
-- ✓ League table with full stats, position change indicators, form column, and sparkline trends for all Big 5 leagues — v1
-- ✓ League switching with full-page theming (colours, branding per league) — v1
-- ✓ Recent matches and upcoming fixtures tables with inline H2H and form display — v1
-- ✓ Team detail pages with tabbed stats (overview, performance, squad, fixtures) — v1
-- ✓ Match detail pages for completed and upcoming matches — v1
-- ✓ Interactive season timeline — drag/tap to view historical table states at any matchweek — v1
-- ✓ Mobile-first responsive design with condensed mobile columns and expandable rows — v1
-- ✓ Betting odds display with multi-bookmaker comparison, affiliate links, and geo-compliance — v1
-- ✓ Localisation for 5 languages (EN, ES, DE, IT, FR) with locale-aware formatting — v1
+- ✓ League table with full stats, position change indicators, form column, and sparkline trends for all Big 5 leagues — v1.0
+- ✓ League switching with full-page theming (colours, branding per league) — v1.0
+- ✓ Recent matches and upcoming fixtures tables with inline H2H and form display — v1.0
+- ✓ Team detail pages with tabbed stats (overview, performance, squad, fixtures) — v1.0
+- ✓ Match detail pages for completed and upcoming matches — v1.0
+- ✓ Interactive season timeline — drag/tap to view historical table states at any matchweek — v1.0
+- ✓ Mobile-first responsive design with condensed mobile columns and expandable rows — v1.0
+- ✓ Betting odds display with multi-bookmaker comparison, affiliate links, and geo-compliance — v1.0
+- ✓ Localisation for 5 languages (EN, ES, DE, IT, FR) with locale-aware formatting — v1.0
 - ✓ Affiliate link config, link builder, pipeline enrichment, geo-aware filtering — v1.1
-- ✓ Data pipeline with polling, match completion detection, table recalculation, and cache invalidation — v1
-- ✓ Real-time push updates to connected clients (smart polling) — v1
+- ✓ Data pipeline with polling, match completion detection, table recalculation, and cache invalidation — v1.0
+- ✓ Real-time push updates to connected clients (smart polling) — v1.0
+- ✓ Full rebrand to KickLeague (code, UI, package.json, metadata, wordmark, favicons, PWA manifest) — v1.2
+- ✓ Site header with KickLeague wordmark and locale switcher on all pages via layout — v1.2
+- ✓ Homepage three-card hero row with stat highlights (Top Scorer, Biggest Upset, Form Team) — v1.2
+- ✓ Full i18n wiring: all user-visible strings translated, team names localised, chart tooltips internationalised — v1.2
+- ✓ Tech debt resolved: getTeamName wiring, hardcoded season '2025', hardcoded English strings — v1.2
+- ✓ Full SEO: meta tags, Open Graph images, sitemap.xml, robots.txt, JSON-LD structured data, hreflang alternates — v1.2
+- ✓ Google AdSense integration with responsive ad units on 4 page types, betting content separation — v1.2
 
 ### Active
 
-- [ ] Full rebrand from KickLeague/KickLeague to KickLeague (code, UI, package.json, repo, metadata) — v1.2
-- [ ] Site header with logo/wordmark and locale switcher on all pages via layout — v1.2
-- [ ] Homepage three-card hero row with key stat highlights (Top Scorer, Biggest Upset, Form Team) — v1.2
-- [ ] Full i18n wiring: audit all components, wire every user-visible string to message files — v1.2
-- [ ] Tech debt: orphaned getTeamName wiring, hardcoded season '2025' — v1.2
-- [ ] Full SEO: meta tags, Open Graph, sitemap.xml, robots.txt, JSON-LD, hreflang, canonicals, semantic HTML, page speed — v1.2
-- [ ] Google AdSense integration with responsive ad slots on key pages — v1.2
+(No active requirements — next milestone TBD)
 
 ### Out of Scope
 
@@ -45,7 +46,7 @@ Football fans can see league standings with rich visual context — sparklines, 
 - Mobile native app — web-first, responsive design covers mobile
 - Video content — storage/bandwidth costs, not core value
 - Live odds updating during matches — pre-match odds sufficient
-- Automated social media posting — deferred to v2 (complexity, requires API upgrade first)
+- Automated social media posting — deferred (complexity, requires API upgrade first)
 
 ## Context
 
@@ -53,12 +54,15 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 **Inspiration:** CoinMarketCap's dashboard aesthetic — sparklines in tables, trend indicators, information density, clean dark themes.
 
-**Current state (v1 shipped):**
-- 122 TypeScript source files, 16,526 LOC
+**Current state (v1.2 shipped):**
+- 20,173 LOC TypeScript/TSX/CSS across ~150 source files
 - 9 database tables + 4 enums (Drizzle ORM, PostgreSQL/Neon)
-- 5 locale message files with next-intl routing
+- 5 locale message files with next-intl routing (229+ keys each, EN/ES/DE/IT/FR)
 - Automated polling pipeline with QStash cron + Vercel cron
 - Geo-compliance system for betting content (8 Tier 1 countries, Italy banned)
+- Full SEO suite: per-page meta, OG images, sitemap.xml, robots.txt, JSON-LD, hreflang
+- Display ads with AdSense integration and betting content compliance
+- KickLeague branding throughout (wordmark, favicons, PWA manifest, OG images)
 
 **Data sources:**
 - Primary: API-Football (via RapidAPI) — free tier for development (100 req/day), Pro tier ($49.99/month) for production
@@ -69,14 +73,11 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 **Monetisation strategy:** Betting affiliate links (primary, ~70% projected revenue), display advertising (secondary), premium tier (tertiary, post-launch). Projected ~$100-150/month infrastructure cost, revenue target of $5,900/month by month 10-12.
 
-**Known tech debt (from v1 audit — targeted for v1.2):**
-- Team name translation helper (getTeamName) exists but never called — team names always English
-- Hardcoded season '2025' in LeagueTableWrapper
-- UI text still hardcoded English in many components despite message files existing
+**Known tech debt:** None remaining from v1.0/v1.1 — all resolved in v1.2.
 
 ## Constraints
 
-- **Tech stack**: Next.js 16 (App Router), TypeScript, Tailwind CSS, Recharts, Framer Motion (motion), NumberFlow, next-intl, nuqs, Drizzle ORM
+- **Tech stack**: Next.js 16 (App Router), TypeScript, Tailwind CSS 4, Recharts, Framer Motion (motion), NumberFlow, next-intl, nuqs, Drizzle ORM
 - **Database**: PostgreSQL (Neon — serverless)
 - **Queue**: Upstash QStash (serverless job queue)
 - **Hosting**: Vercel
@@ -90,7 +91,7 @@ Football fans can see league standings with rich visual context — sparklines, 
 |----------|-----------|---------|
 | Next.js 16 + Postgres over spec's Next.js 14 + MySQL | Spec referenced Next.js 14 and Planetscale; both have moved on. Postgres is more flexible and Neon offers better free tier | ✓ Good — no issues |
 | API-Football free tier for development | Real data from day one; 100 req/day sufficient for development with proper caching | ✓ Good — cache proxy eliminates repeated API calls |
-| Phased delivery: core tables first, then enhancements, then monetisation | Validates core value (information-dense tables) before investing in affiliate/social complexity | ✓ Good — 8 phases delivered in 2 days |
+| Phased delivery: core tables first, then enhancements, then monetisation | Validates core value (information-dense tables) before investing in affiliate/social complexity | ✓ Good — 15 phases delivered in 5 days |
 | Dark theme as default | Matches CoinMarketCap aesthetic and league branding works better on dark backgrounds | ✓ Good — league gradient theming works well on dark |
 | Drizzle ORM over Prisma | Lighter, SQL-closer, better for complex queries (aggregations, window functions) | ✓ Good — no ORM limitations hit |
 | Server actions for client-server data fetching | Simpler than API routes for same-origin data, works with Next.js 16 patterns | ✓ Good — clean pattern throughout |
@@ -100,20 +101,13 @@ Football fans can see league standings with rich visual context — sparklines, 
 | Partial-accept Zod pattern | safeParse always, passthrough on objects, log warnings but return data on schema mismatch | ✓ Good — resilient to API schema changes |
 | Smart polling over SSE | Browser polls /api/updates/check at adaptive intervals; simpler than SSE, works on all platforms | ✓ Good — no WebSocket server needed |
 | Geo-compliance via proxy headers | proxy.ts sets x-show-betting header; components gate on showBetting prop | ✓ Good — single enforcement point |
-| Combined betting + i18n in Phase 7 | Both are cross-cutting enhancements independent of core product | ✓ Good — natural pairing |
-
-## Current Milestone: v1.2 Polish, SEO & Launch Readiness
-
-**Goal:** Make KickLeague launch-ready with full rebrand, site header, homepage hero, complete i18n wiring, SEO foundations, display ads, and tech debt cleanup.
-
-**Target features:**
-- Full rebrand from KickLeague/KickLeague to KickLeague (code, UI, package.json, repo, all metadata)
-- Site header component with KickLeague wordmark and locale switcher on every page
-- Homepage hero row with three stat-highlight cards (Top Scorer, Biggest Upset, Form Team)
-- Full i18n pass: wire every user-visible hardcoded English string to next-intl message files
-- Tech debt fixes: timeline arrow navigation, getTeamName wiring, dynamic season year
-- Full SEO suite: meta tags, Open Graph, sitemap.xml, robots.txt, JSON-LD structured data, hreflang, canonical URLs, semantic HTML audit, page speed optimization
-- Google AdSense integration with responsive ad units on key pages
+| title.template metadata pattern | Automatic KickLeague suffix on all pages via layout.tsx title.template | ✓ Good — consistent branding |
+| Inline SVG wordmark (not font-embedded) | Avoids font-loading complexity; works in OG images via Satori/ImageResponse | ✓ Good — renders everywhere |
+| ICU plural format for i18n | Handles count-dependent strings (wins, meetings, goals) across all 5 locales | ✓ Good — natural translations |
+| Light OG images (not dark theme) | High contrast required for social media preview cards; dark images look bad in feeds | ✓ Good — readable previews |
+| Spoiler-free OG titles for match pages | Browser tab shows score, social share does not — prevents score spoilers | ✓ Good — user-friendly |
+| IntersectionObserver for ad lazy loading | Ads load when 200px from viewport; module-level singleton prevents duplicate script loads | ✓ Good — minimal performance impact |
+| Betting content separation for ads | At least one full content section between any ad unit and odds/bookmaker content | ✓ Good — compliance maintained |
 
 ---
-*Last updated: 2026-02-06 after v1.2 milestone start*
+*Last updated: 2026-02-09 after v1.2 milestone complete*
