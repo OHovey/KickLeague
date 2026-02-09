@@ -21,6 +21,8 @@ import {
 } from '@/components/match-detail/actions';
 import { isCountryMapped } from '@/lib/geo/bookmaker-availability';
 import { buildSportsEvent, buildBreadcrumbs, serializeJsonLd } from '@/lib/seo/structured-data';
+import { AdUnit } from '@/components/ads/AdUnit';
+import { AD_SLOTS } from '@/components/ads/ad-config';
 
 // -- Metadata ----------------------------------------------------------------
 
@@ -193,6 +195,8 @@ export default async function MatchDetailPage({
               locale={locale}
             />
 
+            <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_1.slotId} className="my-6" />
+
             <StatsComparison
               homeStats={stats.home}
               awayStats={stats.away}
@@ -202,6 +206,8 @@ export default async function MatchDetailPage({
               events={events}
               homeTeamId={match.homeTeam.id}
             />
+
+            <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_2.slotId} className="my-6" />
 
             <H2HSection
               h2hData={context.h2h}
@@ -264,6 +270,8 @@ export default async function MatchDetailPage({
             awayForm={context.awayTeamStats?.form ?? null}
           />
 
+          <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_1.slotId} className="my-6" />
+
           <H2HSection
             h2hData={context.h2h}
             team1Name={match.homeTeam.shortName ?? match.homeTeam.name}
@@ -272,6 +280,8 @@ export default async function MatchDetailPage({
             team2Id={match.awayTeam.id}
             locale={locale}
           />
+
+          <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_2.slotId} className="my-6" />
 
           <ComparativeStats
             homeTeamStats={context.homeTeamStats}

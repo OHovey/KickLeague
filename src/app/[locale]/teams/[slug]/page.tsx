@@ -8,6 +8,8 @@ import { TeamHero } from '@/components/team-detail/TeamHero';
 import { TeamTabs } from '@/components/team-detail/TeamTabs';
 import { fetchTeamBySlug } from '@/components/team-detail/actions';
 import { buildSportsTeam, buildBreadcrumbs, serializeJsonLd } from '@/lib/seo/structured-data';
+import { AdUnit } from '@/components/ads/AdUnit';
+import { AD_SLOTS } from '@/components/ads/ad-config';
 
 // -- Metadata ----------------------------------------------------------------
 
@@ -124,6 +126,7 @@ export default async function TeamDetailPage({
       <div className="min-h-screen">
         <div className="mx-auto max-w-6xl px-4 pb-12">
           <TeamHero team={teamData} />
+          <AdUnit slotId={AD_SLOTS.TEAM_DETAIL_1.slotId} className="my-6" />
           <TeamTabs
             teamId={teamData.id}
             leagueId={teamData.leagueId}
@@ -131,6 +134,7 @@ export default async function TeamDetailPage({
             teamName={teamData.name}
             hasXg={teamData.hasXg}
           />
+          <AdUnit slotId={AD_SLOTS.TEAM_DETAIL_2.slotId} className="mt-6" />
         </div>
       </div>
     </>
