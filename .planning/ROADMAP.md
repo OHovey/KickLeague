@@ -147,9 +147,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 12-01-PLAN.md -- Header to layout, static positioning, dynamic season fix
-- [ ] 12-02-PLAN.md -- Stat highlight database queries and server action
-- [ ] 12-03-PLAN.md -- StatHighlights component and homepage wiring
+- [x] 12-01-PLAN.md -- Header to layout, static positioning, dynamic season fix
+- [x] 12-02-PLAN.md -- Stat highlight database queries and server action
+- [x] 12-03-PLAN.md -- StatHighlights component and homepage wiring
 
 #### Phase 13: i18n Completeness
 **Goal**: Every user-visible string renders in the user's chosen locale, including team names
@@ -159,7 +159,16 @@ Plans:
   1. Switching to any of the 5 locales (EN, ES, DE, IT, FR) shows zero hardcoded English strings -- all UI text comes from message files
   2. Team names display in the user's locale (e.g., "Bayern Munich" in English, "Bayern Munchen" in German) via the getTeamName helper
   3. All 5 locale message files contain complete translations for every key (no missing keys in any locale)
-**Plans**: TBD
+**Plans**: 7 plans (6 original + 1 gap closure)
+
+Plans:
+- [x] 13-01-PLAN.md -- en.json complete key extraction + infrastructure (middleware, localized pathnames, ordinals)
+- [x] 13-02-PLAN.md -- Wire i18n into league table, timeline, and DataFreshness components
+- [x] 13-03-PLAN.md -- Wire i18n into matches list and match detail components
+- [x] 13-04-PLAN.md -- Wire i18n into team detail, header, stat highlights, and page components
+- [x] 13-05-PLAN.md -- Team name translation seed data + server action wiring
+- [x] 13-06-PLAN.md -- Generate complete translations for ES, DE, IT, FR locales
+- [x] 13-07-PLAN.md -- Gap closure: translate hardcoded MW abbreviations and wire getLocalizedOrdinal in chart tooltips
 
 #### Phase 14: SEO Foundation
 **Goal**: Search engines can discover, index, and correctly attribute all pages across all locales
@@ -171,7 +180,14 @@ Plans:
   3. Visiting /sitemap.xml returns a valid sitemap listing all league pages, team pages, and locale variants
   4. Visiting /robots.txt returns a valid robots file that allows search engine crawling and references the sitemap
   5. Every page includes hreflang link tags pointing to equivalent pages in all 5 locales
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+- [x] 14-01-PLAN.md -- Meta foundation: metadataBase, default OG tags, hreflang alternates, matches layout metadata, SEO i18n keys
+- [x] 14-02-PLAN.md -- Page-level meta enhancement: team and match detail generateMetadata with descriptions, OG, alternates
+- [x] 14-03-PLAN.md -- Sitemap and robots: dynamic sitemap.xml with localized alternates, robots.txt with crawl directives
+- [x] 14-04-PLAN.md -- OG images: light, high-contrast dynamic images for all page types (home, matches, team, match detail)
+- [x] 14-05-PLAN.md -- Structured data: SportsEvent, BreadcrumbList, and SportsTeam JSON-LD on match and team pages
 
 #### Phase 15: Display Ads
 **Goal**: The site earns display ad revenue with ads placed on high-traffic pages while maintaining compliance around betting content
@@ -181,7 +197,11 @@ Plans:
   1. The Google AdSense script tag loads on every page (verifiable via browser dev tools Network tab)
   2. Responsive ad units render on the homepage, league table page, and match detail page without breaking layout
   3. No ad units appear within or immediately adjacent to betting odds/bookmaker content sections
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 15-01-PLAN.md -- AdUnit component, ad config, ads.txt, CSS collapse, env vars
+- [ ] 15-02-PLAN.md -- Place ad units on all 4 page types with betting content separation
 
 ## Progress
 
@@ -201,11 +221,11 @@ Phases execute in numeric order: 11 -> 12 -> 13 -> 14 -> 15
 | 9. Affiliate Links | v1.1 | 3/3 | Complete | 2026-02-06 |
 | 10. Geo Filtering | v1.1 | 3/3 | Complete | 2026-02-06 |
 | 11. Rebrand | v1.2 | 4/4 | Complete | 2026-02-07 |
-| 12. Site Chrome | v1.2 | 0/3 | Planned | - |
-| 13. i18n Complete | v1.2 | 0/TBD | Not started | - |
-| 14. SEO | v1.2 | 0/TBD | Not started | - |
-| 15. Display Ads | v1.2 | 0/TBD | Not started | - |
+| 12. Site Chrome | v1.2 | 3/3 | Complete | 2026-02-08 |
+| 13. i18n Complete | v1.2 | 7/7 | Complete | 2026-02-08 |
+| 14. SEO | v1.2 | 5/5 | Complete | 2026-02-08 |
+| 15. Display Ads | v1.2 | 0/2 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-06 after v1.2 roadmap creation*
+*Last updated: 2026-02-09 after Phase 15 planning (2 plans created)*
