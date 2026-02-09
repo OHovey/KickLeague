@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 14 complete
+**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 15 in progress
 
 ## Current Position
 
-Phase: 14 of 15 (SEO Foundation)
-Plan: 05 of 5 (5 complete: 01, 02, 03, 04, 05)
-Status: Phase complete
-Last activity: 2026-02-08 -- Completed 14-05-PLAN.md (structured data JSON-LD)
+Phase: 15 of 15 (Display Ads)
+Plan: 01 of 2 (1 complete: 01)
+Status: In progress
+Last activity: 2026-02-09 -- Completed 15-01-PLAN.md (ad infrastructure)
 
-Progress: [##################################################] 100% (51/51 total plans complete)
+Progress: [##################################################] 100% (52/53 total plans complete)
 
 ## Performance Metrics
 
@@ -61,6 +61,9 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 - 14-04: Light gradient OG images (#f8f9fa to #e9ecef) for all 4 page types; direct DB queries instead of server actions for OG (avoids getLocale context); spoiler-free match OG (no scores)
 - 14-05: JSON-LD builder functions in src/lib/seo/structured-data.ts; SportsEvent + BreadcrumbList on match pages; SportsTeam + BreadcrumbList on team pages; XSS-safe serialization
 
+**v1.2 Phase 15:**
+- 15-01: Module-level script promise singleton for AdSense (one script across all AdUnit instances); IntersectionObserver rootMargin 200px for pre-loading; usePathname as ins key for route-change remount
+
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
 - Provision production infrastructure (Neon, Vercel, QStash, Odds API)
@@ -85,6 +88,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-08
-Stopped at: Completed 14-05-PLAN.md (structured data JSON-LD) -- Phase 14 complete
+Last session: 2026-02-09
+Stopped at: Completed 15-01-PLAN.md (ad infrastructure)
 Resume file: None
