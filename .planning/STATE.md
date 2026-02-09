@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 14 in progress
+**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 14 complete
 
 ## Current Position
 
 Phase: 14 of 15 (SEO Foundation)
-Plan: 04 of 5 (4 complete: 01, 02, 03, 04)
-Status: In progress
-Last activity: 2026-02-08 -- Completed 14-03-PLAN.md (robots.txt and sitemap.xml)
+Plan: 05 of 5 (5 complete: 01, 02, 03, 04, 05)
+Status: Phase complete
+Last activity: 2026-02-08 -- Completed 14-05-PLAN.md (structured data JSON-LD)
 
-Progress: [################################################--] 98% (50/51 total plans complete)
+Progress: [##################################################] 100% (51/51 total plans complete)
 
 ## Performance Metrics
 
@@ -59,6 +59,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 - 14-02: Spoiler-free OG title for match pages (browser tab shows score, social share does not); hreflang alternates from routing.pathnames with slug/id replacement; league name in team title
 - 14-03: Removed deprecated middleware.ts (proxy.ts only for Next.js 16); robots.txt/sitemap.xml at app root outside [locale]; routing.pathnames for localized sitemap URLs; only finished matches in sitemap
 - 14-04: Light gradient OG images (#f8f9fa to #e9ecef) for all 4 page types; direct DB queries instead of server actions for OG (avoids getLocale context); spoiler-free match OG (no scores)
+- 14-05: JSON-LD builder functions in src/lib/seo/structured-data.ts; SportsEvent + BreadcrumbList on match pages; SportsTeam + BreadcrumbList on team pages; XSS-safe serialization
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
@@ -70,6 +71,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 - Collect affiliate IDs/btags from each dashboard after approval
 - Apply migration 0003_young_network.sql to production database
 - Install and use frontend-design Claude skill
+- Pull all required Sports API data and verify daily request budget (<2000 req/day)
 
 ### Tech Debt (targeted in v1.2)
 
@@ -84,5 +86,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 14-03-PLAN.md (robots.txt and sitemap.xml)
+Stopped at: Completed 14-05-PLAN.md (structured data JSON-LD) -- Phase 14 complete
 Resume file: None
