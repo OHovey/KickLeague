@@ -7,6 +7,8 @@ import { LeagueTableWrapper } from '@/components/league-table/LeagueTableWrapper
 
 import { MatchPreviewSection } from '@/components/matches/MatchPreviewSection';
 import { StatHighlights } from '@/components/stat-highlights/StatHighlights';
+import { AdUnit } from '@/components/ads/AdUnit';
+import { AD_SLOTS } from '@/components/ads/ad-config';
 import { useLeague } from '@/lib/hooks/use-league';
 import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
 
@@ -38,6 +40,7 @@ function HomeContent() {
       <ThemeBackground theme={league} />
       <div className="min-h-screen">
         <div className="mx-auto max-w-7xl px-4 pt-6">
+          <AdUnit slotId={AD_SLOTS.HOMEPAGE_TOP.slotId} className="my-4" />
           <StatHighlights />
         </div>
         <div className="sticky top-0 z-10 border-b border-white/10 bg-black/20 backdrop-blur-md">
@@ -49,6 +52,7 @@ function HomeContent() {
           <Suspense fallback={<TableSkeleton />}>
             <LeagueTableWrapper />
           </Suspense>
+          <AdUnit slotId={AD_SLOTS.HOMEPAGE_BOTTOM.slotId} />
           <MatchPreviewSection league={league} />
         </main>
       </div>

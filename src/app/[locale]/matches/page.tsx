@@ -6,6 +6,8 @@ import { LeagueTabs } from '@/components/league-nav/LeagueTabs';
 import { ThemeBackground } from '@/components/ThemeBackground';
 
 import { ResultsFixturesTabs } from '@/components/matches/ResultsFixturesTabs';
+import { AdUnit } from '@/components/ads/AdUnit';
+import { AD_SLOTS } from '@/components/ads/ad-config';
 import { useLeague } from '@/lib/hooks/use-league';
 
 function MatchesContent() {
@@ -23,7 +25,9 @@ function MatchesContent() {
         </div>
         <main className="mx-auto max-w-7xl px-4 py-8">
           <h1 className="mb-6 text-2xl font-bold text-white">{t('matchesTitle')}</h1>
+          <AdUnit slotId={AD_SLOTS.MATCHES_TOP.slotId} className="mb-6" />
           <ResultsFixturesTabs league={league} />
+          <AdUnit slotId={AD_SLOTS.MATCHES_BOTTOM.slotId} className="mt-8" />
         </main>
       </div>
     </>
