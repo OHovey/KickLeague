@@ -71,3 +71,8 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* --- Display Ads: unfilled collapse --- */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}
