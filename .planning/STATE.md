@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-06)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 15 in progress
+**Current focus:** v1.2 Polish, SEO & Launch Readiness -- Phase 15 COMPLETE
 
 ## Current Position
 
 Phase: 15 of 15 (Display Ads)
-Plan: 01 of 2 (1 complete: 01)
-Status: In progress
-Last activity: 2026-02-09 -- Completed 15-01-PLAN.md (ad infrastructure)
+Plan: 02 of 2 (2 complete: 01, 02)
+Status: Phase complete
+Last activity: 2026-02-09 -- Completed 15-02-PLAN.md (ad placements)
 
-Progress: [##################################################] 100% (52/53 total plans complete)
+Progress: [##################################################] 100% (53/53 total plans complete)
 
 ## Performance Metrics
 
@@ -63,6 +63,7 @@ All v1/v1.1 decisions logged in PROJECT.md Key Decisions table.
 
 **v1.2 Phase 15:**
 - 15-01: Module-level script promise singleton for AdSense (one script across all AdUnit instances); IntersectionObserver rootMargin 200px for pre-loading; usePathname as ins key for route-change remount
+- 15-02: Ad placements on all 4 page types (2 per page); upcoming match Ad 2 after H2HSection before ComparativeStats for betting content structural gap compliance
 
 ### Pending Todos (manual/infrastructure -- not in v1.2 scope)
 
@@ -89,5 +90,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 15-01-PLAN.md (ad infrastructure)
+Stopped at: Completed 15-02-PLAN.md (ad placements) -- Phase 15 complete, all v1.2 plans done
 Resume file: None
