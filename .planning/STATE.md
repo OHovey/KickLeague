@@ -11,7 +11,7 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 
 Milestone: v1.2 shipped (2026-02-09)
 Status: All milestones complete, no active work
-Last activity: 2026-02-10 - Completed quick task 1: Fix empty biggest upset card on homepage
+Last activity: 2026-02-10 - Completed quick task 2: Fix league table position change column showing blanks
 
 Progress: [##################################################] 100% (53/53 total plans complete across v1.0, v1.1, v1.2)
 
@@ -62,9 +62,10 @@ None.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 1 | Fix empty biggest upset card on homepage | 2026-02-10 | 0a0c054 | [1-fix-empty-biggest-upset-card-on-homepage](./quick/1-fix-empty-biggest-upset-card-on-homepage/) |
+| 2 | Fix league table position change column showing blanks | 2026-02-10 | 81937b3 | [2-fix-league-table-column-showing-blanks-a](./quick/2-fix-league-table-column-showing-blanks-a/) |
 
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed quick-1 (fix empty biggest upset card)
+Stopped at: Completed quick-2 (fix league table position change column)
 Resume file: None
