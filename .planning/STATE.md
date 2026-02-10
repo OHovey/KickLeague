@@ -11,7 +11,7 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 
 Milestone: v1.2 shipped (2026-02-09)
 Status: All milestones complete, no active work
-Last activity: 2026-02-10 - Completed quick task 5: Make both match preview cards equal height
+Last activity: 2026-02-10 - Completed quick task 7: Add feedback option in navbar
 
 Progress: [##################################################] 100% (53/53 total plans complete across v1.0, v1.1, v1.2)
 
@@ -46,6 +46,7 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 - Sign up for 5 affiliate programs (Paddy Power, Entain, Kindred, 888, William Hill)
 - Collect affiliate IDs/btags from each dashboard after approval
 - Apply migration 0003_young_network.sql to production database
+- Apply migration 0004_cool_dragon_man.sql to production database (feedback table)
 - Set up Google AdSense account and create 8 ad unit slots
 - Update public/ads.txt with real publisher ID
 
@@ -66,9 +67,11 @@ None.
 | 3 | Balance recent results card height to match fixtures | 2026-02-10 | c5a2265 | [3-balance-recent-results-card-height-to-ma](./quick/3-balance-recent-results-card-height-to-ma/) |
 | 4 | Add date to recent result rows and balance height | 2026-02-10 | 7e3dfcf | [4-add-date-to-recent-result-rows-and-balan](./quick/4-add-date-to-recent-result-rows-and-balan/) |
 | 5 | Make both match preview cards equal height | 2026-02-10 | 093ba2a | [5-make-both-match-preview-cards-equal-heig](./quick/5-make-both-match-preview-cards-equal-heig/) |
+| 6 | Prepare frontend-design skill prompt | 2026-02-10 | 8da9ae1 | [6-prepare-a-frontend-design-skill-prompt-f](./quick/6-prepare-a-frontend-design-skill-prompt-f/) |
+| 7 | Add feedback option in navbar | 2026-02-10 | 87f5a4e | [7-add-feedback-option-in-navbar-that-submi](./quick/7-add-feedback-option-in-navbar-that-submi/) |
 
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed quick-5 (make both match preview cards equal height)
+Stopped at: Completed quick-7 (add feedback option in navbar)
 Resume file: None
