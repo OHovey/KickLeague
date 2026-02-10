@@ -2,18 +2,17 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-09)
+See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.2 complete -- planning next milestone
+**Current focus:** v1.3 Production Launch
 
 ## Current Position
 
-Milestone: v1.2 shipped (2026-02-09)
-Status: All milestones complete, no active work
-Last activity: 2026-02-10 - Completed quick task 7: Add feedback option in navbar
-
-Progress: [##################################################] 100% (53/53 total plans complete across v1.0, v1.1, v1.2)
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-02-10 — Milestone v1.3 started
 
 ## Performance Metrics
 
@@ -39,14 +38,9 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 
 ### Pending Todos (manual/infrastructure)
 
-- Provision production infrastructure (Neon, Vercel, QStash, Odds API)
-- API-Football subscription upgrade for fixture events/stats data
-- Seed historical standings data for sparklines/position changes
-- Set environment variables for cron routes and APIs
+- ~~API-Football subscription upgrade~~ — DONE (2026-02-09)
 - Sign up for 5 affiliate programs (Paddy Power, Entain, Kindred, 888, William Hill)
 - Collect affiliate IDs/btags from each dashboard after approval
-- Apply migration 0003_young_network.sql to production database
-- Apply migration 0004_cool_dragon_man.sql to production database (feedback table)
 - Set up Google AdSense account and create 8 ad unit slots
 - Update public/ads.txt with real publisher ID
 
@@ -73,5 +67,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed quick-7 (add feedback option in navbar)
+Stopped at: Starting milestone v1.3 Production Launch
 Resume file: None

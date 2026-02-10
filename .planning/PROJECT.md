@@ -34,7 +34,13 @@ Football fans can see league standings with rich visual context — sparklines, 
 
 ### Active
 
-(No active requirements — next milestone TBD)
+<!-- v1.3 Production Launch -->
+- [ ] Production deployment on Vercel with Neon production database
+- [ ] Error tracking and performance monitoring (Sentry + Vercel Analytics)
+- [ ] Complete environment documentation and production README
+- [ ] Verified data pipeline with cron jobs running and database current
+- [ ] Security hardening (rate limiting, CSP headers)
+- [ ] Manual setup steps documented (AdSense, affiliate programs, DNS)
 
 ### Out of Scope
 
@@ -65,7 +71,7 @@ Football fans can see league standings with rich visual context — sparklines, 
 - KickLeague branding throughout (wordmark, favicons, PWA manifest, OG images)
 
 **Data sources:**
-- Primary: API-Football (via RapidAPI) — free tier for development (100 req/day), Pro tier ($49.99/month) for production
+- Primary: API-Football (via RapidAPI) — Pro tier ($49.99/month, upgraded 2026-02-09)
 - Odds: The Odds API — free tier (500 req/month), paid from $25/month
 - Backup: Football-Data.org — free, rate-limited, for validation
 
@@ -81,8 +87,8 @@ Football fans can see league standings with rich visual context — sparklines, 
 - **Database**: PostgreSQL (Neon — serverless)
 - **Queue**: Upstash QStash (serverless job queue)
 - **Hosting**: Vercel
-- **API budget**: Free tier during development; ~$100-150/month total infrastructure at production
-- **API rate limits**: 100 requests/day on API-Football free tier during development — requires efficient polling and caching
+- **API budget**: ~$100-150/month total infrastructure at production (API-Football Pro tier active)
+- **API rate limits**: Pro tier (7,500 req/day on API-Football) — sufficient for 60s polling
 - **League data**: 5 leagues, ~96 teams, ~380 matches per league per season = ~1,900 matches total
 
 ## Key Decisions
@@ -109,5 +115,17 @@ Football fans can see league standings with rich visual context — sparklines, 
 | IntersectionObserver for ad lazy loading | Ads load when 200px from viewport; module-level singleton prevents duplicate script loads | ✓ Good — minimal performance impact |
 | Betting content separation for ads | At least one full content section between any ad unit and odds/bookmaker content | ✓ Good — compliance maintained |
 
+## Current Milestone: v1.3 Production Launch
+
+**Goal:** Deploy KickLeague to production with monitoring, verified data pipeline, security hardening, and documentation — everything needed to go live.
+
+**Target features:**
+- Production Vercel + Neon deployment with all env vars configured
+- Sentry error tracking + Vercel Analytics
+- Production README and complete env documentation
+- QStash cron schedules running, database seeded and current
+- Rate limiting on public endpoints, CSP headers
+- Manual steps documented (AdSense units, affiliate signups, DNS)
+
 ---
-*Last updated: 2026-02-09 after v1.2 milestone complete*
+*Last updated: 2026-02-10 after v1.3 milestone started*
