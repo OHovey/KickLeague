@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 17 - Monitoring Integration (v1.3 Production Launch)
+**Current focus:** Phase 18 - Production Deployment (v1.3 Production Launch)
 
 ## Current Position
 
-Phase: 17 of 20 (Monitoring Integration)
-Plan: 2 of 2 in current phase (PHASE COMPLETE)
-Status: Phase 17 complete
-Last activity: 2026-02-10 -- Plan 17-02 complete
+Phase: 18 of 20 (Production Deployment)
+Plan: 0 of TBD in current phase
+Status: Ready to plan
+Last activity: 2026-02-10 -- Phase 17 verified and complete
 
-Progress: [############........] 58/TBD (v1.0-v1.2 complete, v1.3 Phase 16 + 17 complete)
+Progress: [############........] 57/TBD (v1.0-v1.2 complete, v1.3 Phases 16-17 complete)
 
 ## Performance Metrics
 
@@ -57,7 +57,7 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 - Collect affiliate IDs/btags from each dashboard after approval
 - Set up Google AdSense account and create 8 ad unit slots
 - Update public/ads.txt with real publisher ID
-- Configure Sentry env vars (NEXT_PUBLIC_SENTRY_DSN, SENTRY_DSN, SENTRY_AUTH_TOKEN, SENTRY_ORG, SENTRY_PROJECT)
+- ~~Configure Sentry env vars~~ (done -- .env.local configured 2026-02-10)
 
 ### Tech Debt
 
@@ -82,5 +82,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed 17-02-PLAN.md (Phase 17 complete)
+Stopped at: Phase 17 complete, ready to plan Phase 18
 Resume file: None

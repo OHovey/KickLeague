@@ -179,7 +179,7 @@ Plans:
 **Milestone Goal:** Deploy KickLeague to production with monitoring, verified data pipeline, security hardening, and documentation -- everything needed to go live.
 
 - [x] **Phase 16: Security Hardening** - Rate limiting and security headers before production deploy
-- [ ] **Phase 17: Monitoring Integration** - Error tracking, performance analytics, and operational alerts
+- [x] **Phase 17: Monitoring Integration** - Error tracking, performance analytics, and operational alerts
 - [ ] **Phase 18: Production Deployment** - Vercel + Neon production environment with seeded data and documentation
 - [ ] **Phase 19: Production Pipeline** - Verified cron schedules, live match polling, and current data
 - [ ] **Phase 20: Launch Documentation** - Manual setup checklists for AdSense, affiliates, and DNS
@@ -210,8 +210,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 17-01-PLAN.md -- Sentry error tracking + Vercel Analytics & Speed Insights
-- [ ] 17-02-PLAN.md -- API budget threshold alerting + cron job failure capture via Sentry
+- [x] 17-01-PLAN.md -- Sentry error tracking + Vercel Analytics & Speed Insights
+- [x] 17-02-PLAN.md -- API budget threshold alerting + cron job failure capture via Sentry
 
 #### Phase 18: Production Deployment
 **Goal**: KickLeague runs on a production Vercel project backed by a production Neon database, with current data and complete setup documentation
@@ -267,11 +267,11 @@ Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in
 | 14. SEO | v1.2 | 5/5 | Complete | 2026-02-08 |
 | 15. Display Ads | v1.2 | 2/2 | Complete | 2026-02-09 |
 | 16. Security | v1.3 | 2/2 | Complete | 2026-02-10 |
-| 17. Monitoring | v1.3 | 0/TBD | Not started | - |
+| 17. Monitoring | v1.3 | 2/2 | Complete | 2026-02-10 |
 | 18. Deployment | v1.3 | 0/TBD | Not started | - |
 | 19. Pipeline | v1.3 | 0/TBD | Not started | - |
 | 20. Launch Docs | v1.3 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-10 -- v1.3 milestone roadmap added*
+*Last updated: 2026-02-10 -- Phase 17 complete*
