@@ -3,7 +3,7 @@
 import { useEffect, useState, useTransition } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { formatKickoffTime } from '@/lib/dates/format';
+import { formatKickoffTime, formatMatchDateShort } from '@/lib/dates/format';
 import type { MatchWithTeams } from '@/lib/matches/queries';
 import { fetchRecentMatches, fetchUpcomingFixtures, getGeoContext } from './actions';
 import { fetchCompactOdds, type CompactOddsData } from '@/components/odds/actions';
@@ -37,38 +37,43 @@ function CompactTeamLogo({
   );
 }
 
-function CompactResultRow({ match }: { match: MatchWithTeams }) {
+function CompactResultRow({ match, locale }: { match: MatchWithTeams; locale: string }) {
   return (
     <Link
       href={`/matches/${match.id}`}
-      className="flex items-center gap-2 rounded-lg px-3 py-2 transition-colors hover:bg-white/5"
+      className="block rounded-lg px-3 py-2 transition-colors hover:bg-white/5"
     >
-      {/* Home team */}
-      <div className="flex flex-1 items-center justify-end gap-2">
-        <span className="truncate text-xs font-medium text-white/80">
-          {match.homeTeam.shortName ?? match.homeTeam.name}
-        </span>
-        <CompactTeamLogo
-          logoUrl={match.homeTeam.logoUrl}
-          name={match.homeTeam.name}
-        />
-      </div>
+      <div className="flex items-center gap-2">
+        {/* Home team */}
+        <div className="flex flex-1 items-center justify-end gap-2">
+          <span className="truncate text-xs font-medium text-white/80">
+            {match.homeTeam.shortName ?? match.homeTeam.name}
+          </span>
+          <CompactTeamLogo
+            logoUrl={match.homeTeam.logoUrl}
+            name={match.homeTeam.name}
+          />
+        </div>
 
-      {/* Score */}
-      <span className="w-12 text-center text-sm font-bold tabular-nums text-white">
-        {match.homeScore} - {match.awayScore}
-      </span>
-
-      {/* Away team */}
-      <div className="flex flex-1 items-center gap-2">
-        <CompactTeamLogo
-          logoUrl={match.awayTeam.logoUrl}
-          name={match.awayTeam.name}
-        />
-        <span className="truncate text-xs font-medium text-white/80">
-          {match.awayTeam.shortName ?? match.awayTeam.name}
+        {/* Score */}
+        <span className="w-12 text-center text-sm font-bold tabular-nums text-white">
+          {match.homeScore} - {match.awayScore}
         </span>
+
+        {/* Away team */}
+        <div className="flex flex-1 items-center gap-2">
+          <CompactTeamLogo
+            logoUrl={match.awayTeam.logoUrl}
+            name={match.awayTeam.name}
+          />
+          <span className="truncate text-xs font-medium text-white/80">
+            {match.awayTeam.shortName ?? match.awayTeam.name}
+          </span>
+        </div>
       </div>
+      <p className="mt-1 text-center text-[11px] text-white/40" suppressHydrationWarning>
+        {formatMatchDateShort(match.kickoff, locale)}
+      </p>
     </Link>
   );
 }
@@ -260,7 +265,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
             ) : (
               <div className="space-y-0">
                 {recentMatches.map((match) => (
-                  <CompactResultRow key={match.id} match={match} />
+                  <CompactResultRow key={match.id} match={match} locale={locale} />
                 ))}
               </div>
             )}
