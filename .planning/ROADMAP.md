@@ -207,7 +207,11 @@ Plans:
   2. Vercel Analytics is active and page load performance is visible in the Vercel dashboard
   3. When daily API-Football request count approaches the 7,500 limit, a warning is logged or alerted
   4. When a QStash or Vercel cron route returns an error status, the failure is captured in Sentry with cron context
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 17-01-PLAN.md -- Sentry error tracking + Vercel Analytics & Speed Insights
+- [ ] 17-02-PLAN.md -- API budget threshold alerting + cron job failure capture via Sentry
 
 #### Phase 18: Production Deployment
 **Goal**: KickLeague runs on a production Vercel project backed by a production Neon database, with current data and complete setup documentation
