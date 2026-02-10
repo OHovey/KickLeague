@@ -255,7 +255,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
               {t('recentResults')}
             </h2>
           </div>
-          <div className="flex-1 py-1">
+          <div className="flex flex-1 flex-col justify-evenly py-1">
             {!hasLoaded ? (
               <CompactSkeleton />
             ) : recentMatches.length === 0 ? (
@@ -263,11 +263,9 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
                 {t('noRecentResults')}
               </p>
             ) : (
-              <div className="space-y-0">
-                {recentMatches.map((match) => (
-                  <CompactResultRow key={match.id} match={match} locale={locale} />
-                ))}
-              </div>
+              recentMatches.map((match) => (
+                <CompactResultRow key={match.id} match={match} locale={locale} />
+              ))
             )}
           </div>
           <div className="mt-auto border-t border-white/5 px-4 py-2">
@@ -284,7 +282,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
               {t('upcomingFixtures')}
             </h2>
           </div>
-          <div className="flex-1 py-1">
+          <div className="flex flex-1 flex-col justify-evenly py-1">
             {!hasLoaded ? (
               <CompactSkeleton />
             ) : upcomingMatches.length === 0 ? (
@@ -292,17 +290,15 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
                 {t('noUpcomingFixtures')}
               </p>
             ) : (
-              <div className="space-y-0">
-                {upcomingMatches.map((match) => (
-                  <CompactFixtureRow
-                    key={match.id}
-                    match={match}
-                    locale={locale}
-                    compactOdds={oddsMap[match.id]}
-                    showBetting={showBetting}
-                  />
-                ))}
-              </div>
+              upcomingMatches.map((match) => (
+                <CompactFixtureRow
+                  key={match.id}
+                  match={match}
+                  locale={locale}
+                  compactOdds={oddsMap[match.id]}
+                  showBetting={showBetting}
+                />
+              ))
             )}
           </div>
           <div className="mt-auto border-t border-white/5 px-4 py-2">
