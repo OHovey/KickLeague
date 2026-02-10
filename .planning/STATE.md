@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 ## Current Position
 
 Phase: 17 of 20 (Monitoring Integration)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-02-10 -- Phase 16 verified and complete
+Plan: 1 of 2 in current phase
+Status: Executing
+Last activity: 2026-02-10 -- Plan 17-01 complete
 
-Progress: [###########.........] 55/TBD (v1.0-v1.2 complete, v1.3 Phase 16 complete)
+Progress: [###########.........] 56/TBD (v1.0-v1.2 complete, v1.3 Phase 16 + 17-01 complete)
 
 ## Performance Metrics
 
@@ -37,6 +37,7 @@ Progress: [###########.........] 55/TBD (v1.0-v1.2 complete, v1.3 Phase 16 compl
 |-------|------|----------|-------|-------|
 | 16 | 01 | 2min | 2 | 3 |
 | 16 | 02 | 1min | 2 | 2 |
+| 17 | 01 | 3min | 2 | 8 |
 
 ## Accumulated Context
 
@@ -46,6 +47,7 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 
 **16-01:** In-memory token bucket rate limiter (no Redis); lazy cleanup for serverless; no X-RateLimit-* headers exposed
 **16-02:** CSP in report-only mode for safe rollout; CSP violation logging via console.warn (not database)
+**17-01:** 10% tracesSampleRate for Sentry (low cost for content site); no Replay integration; CSP updated for Sentry/Vercel analytics domains
 
 ### Pending Todos (manual/infrastructure)
 
@@ -53,6 +55,7 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 - Collect affiliate IDs/btags from each dashboard after approval
 - Set up Google AdSense account and create 8 ad unit slots
 - Update public/ads.txt with real publisher ID
+- Configure Sentry env vars (NEXT_PUBLIC_SENTRY_DSN, SENTRY_DSN, SENTRY_AUTH_TOKEN, SENTRY_ORG, SENTRY_PROJECT)
 
 ### Tech Debt
 
@@ -77,5 +80,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Phase 16 complete, ready to plan Phase 17
+Stopped at: Completed 17-01-PLAN.md
 Resume file: None
