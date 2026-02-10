@@ -79,7 +79,7 @@ export async function LeagueTable({ league }: LeagueTableProps) {
               <th className="py-3 pl-2 pr-2 text-center font-medium">{t('points')}</th>
               {/* Desktop-only visual columns */}
               <th className="hidden py-3 px-2 text-left font-medium md:table-cell">{t('form')}</th>
-              <th className="hidden py-3 px-2 text-center font-medium md:table-cell">{t('positionChange')}</th>
+              <th className="hidden py-3 px-2 text-center font-medium md:table-cell" title={t('positionChangeTooltip')}>{t('positionChange')}</th>
               <th className="hidden py-3 px-2 pr-4 text-left font-medium md:table-cell">{t('trend')}</th>
               {/* Expand indicator for mobile */}
               <th className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">{t('expand')}</span></th>

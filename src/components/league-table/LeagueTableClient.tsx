@@ -198,7 +198,7 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
               <div role="columnheader" className="py-3 pl-2 pr-2 text-center font-medium">{t('points')}</div>
               {/* Desktop-only visual columns */}
               <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('form')}</div>
-              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('positionChange')}</div>
+              <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block" title={t('positionChangeTooltip')}>{t('positionChange')}</div>
               <div role="columnheader" className="hidden py-3 px-2 text-center font-medium md:block">{t('trend')}</div>
               {/* Expand indicator for mobile */}
               <div role="columnheader" className="w-8 py-3 pr-2 md:hidden"><span className="sr-only">{t('expand')}</span></div>
