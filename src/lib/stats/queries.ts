@@ -6,7 +6,6 @@ import { getDb } from '@/db/connection';
 import {
   fixtureEvents,
   fixtures,
-  fixtureOdds,
   players,
   teams,
   standings,
@@ -34,7 +33,7 @@ export interface BiggestUpsetResult {
   homeScore: number;
   awayScore: number;
   matchweek: number | null;
-  winningOdds: number;
+  positionGap: number;
 }
 
 export interface FormTeamResult {
@@ -104,8 +103,8 @@ export async function getTopScorer(
 
 /**
  * Get the biggest upset for a league and season.
- * Uses odds-based approach: the winning team's average pre-match odds
- * determine the upset magnitude (higher odds = bigger upset).
+ * Uses standings-position-based approach: the winning team had a worse
+ * (higher number) league position than the loser, and we find the largest gap.
  * Only considers decisive results (no draws).
  */
 export async function getBiggestUpset(
@@ -114,7 +113,12 @@ export async function getBiggestUpset(
 ): Promise<BiggestUpsetResult | null> {
   const db = getDb();
 
-  // Find the fixture with the highest winning-side average odds
+  const homeStandings = alias(standings, 'home_standings');
+  const awayStandings = alias(standings, 'away_standings');
+  const homeTeam = alias(teams, 'homeTeam');
+  const awayTeam = alias(teams, 'awayTeam');
+
+  // Find the fixture with the largest position gap where the lower-ranked team won
   const result = await db
     .select({
       fixtureId: fixtures.id,
@@ -123,66 +127,71 @@ export async function getBiggestUpset(
       homeScore: fixtures.homeScore,
       awayScore: fixtures.awayScore,
       matchweek: fixtures.matchweek,
-      winningOdds: sql<number>`CASE
-        WHEN ${fixtures.homeScore} > ${fixtures.awayScore} THEN AVG(${fixtureOdds.homeOdds})
-        ELSE AVG(${fixtureOdds.awayOdds})
-      END`.as('winning_odds'),
+      homeTeamName: homeTeam.name,
+      homeTeamLogoUrl: homeTeam.logoUrl,
+      awayTeamName: awayTeam.name,
+      awayTeamLogoUrl: awayTeam.logoUrl,
+      positionGap: sql<number>`CASE
+        WHEN ${fixtures.homeScore} > ${fixtures.awayScore}
+          THEN ${homeStandings.position} - ${awayStandings.position}
+        ELSE ${awayStandings.position} - ${homeStandings.position}
+      END`.as('position_gap'),
     })
     .from(fixtures)
-    .innerJoin(fixtureOdds, eq(fixtureOdds.fixtureId, fixtures.id))
+    .innerJoin(
+      homeStandings,
+      and(
+        eq(homeStandings.teamId, fixtures.homeTeamId),
+        eq(homeStandings.leagueId, fixtures.leagueId),
+        eq(homeStandings.season, fixtures.season),
+        eq(homeStandings.matchweek, fixtures.matchweek)
+      )
+    )
+    .innerJoin(
+      awayStandings,
+      and(
+        eq(awayStandings.teamId, fixtures.awayTeamId),
+        eq(awayStandings.leagueId, fixtures.leagueId),
+        eq(awayStandings.season, fixtures.season),
+        eq(awayStandings.matchweek, fixtures.matchweek)
+      )
+    )
+    .innerJoin(homeTeam, eq(homeTeam.id, fixtures.homeTeamId))
+    .innerJoin(awayTeam, eq(awayTeam.id, fixtures.awayTeamId))
     .where(
       and(
         eq(fixtures.leagueId, leagueId),
         eq(fixtures.season, season),
         eq(fixtures.status, 'finished'),
-        sql`${fixtures.homeScore} != ${fixtures.awayScore}`
+        sql`${fixtures.homeScore} != ${fixtures.awayScore}`,
+        isNotNull(fixtures.matchweek),
+        // Only include upsets: winner had a worse (higher) position than loser
+        sql`CASE
+          WHEN ${fixtures.homeScore} > ${fixtures.awayScore}
+            THEN ${homeStandings.position} - ${awayStandings.position}
+          ELSE ${awayStandings.position} - ${homeStandings.position}
+        END > 0`
       )
     )
-    .groupBy(
-      fixtures.id,
-      fixtures.homeTeamId,
-      fixtures.awayTeamId,
-      fixtures.homeScore,
-      fixtures.awayScore,
-      fixtures.matchweek
-    )
-    .orderBy(desc(sql`winning_odds`))
+    .orderBy(desc(sql`position_gap`))
     .limit(1);
 
   if (!result[0]) return null;
 
   const row = result[0];
 
-  // Enrich with team details using aliased self-joins
-  const homeTeam = alias(teams, 'homeTeam');
-  const awayTeam = alias(teams, 'awayTeam');
-
-  const teamDetails = await db
-    .select({
-      homeTeamName: homeTeam.name,
-      homeTeamLogoUrl: homeTeam.logoUrl,
-      awayTeamName: awayTeam.name,
-      awayTeamLogoUrl: awayTeam.logoUrl,
-    })
-    .from(homeTeam)
-    .innerJoin(awayTeam, eq(awayTeam.id, sql`${row.awayTeamId}`))
-    .where(eq(homeTeam.id, row.homeTeamId))
-    .limit(1);
-
-  if (!teamDetails[0]) return null;
-
   return {
     fixtureId: row.fixtureId,
     homeTeamId: row.homeTeamId,
-    homeTeamName: teamDetails[0].homeTeamName,
-    homeTeamLogoUrl: teamDetails[0].homeTeamLogoUrl,
+    homeTeamName: row.homeTeamName,
+    homeTeamLogoUrl: row.homeTeamLogoUrl,
     awayTeamId: row.awayTeamId,
-    awayTeamName: teamDetails[0].awayTeamName,
-    awayTeamLogoUrl: teamDetails[0].awayTeamLogoUrl,
+    awayTeamName: row.awayTeamName,
+    awayTeamLogoUrl: row.awayTeamLogoUrl,
     homeScore: row.homeScore!,
     awayScore: row.awayScore!,
     matchweek: row.matchweek,
-    winningOdds: row.winningOdds,
+    positionGap: row.positionGap,
   };
 }
 
