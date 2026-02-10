@@ -195,8 +195,21 @@ async function getPositionChanges(
 ): Promise<Map<number, number>> {
   const positionChanges = new Map<number, number>();
 
-  if (currentMatchweek <= 1) {
-    return positionChanges; // No previous matchweek
+  // Find the actual previous matchweek that has data (not hardcoded currentMatchweek - 1)
+  const prevResult = await getDb()
+    .select({ maxWeek: max(standings.matchweek) })
+    .from(standings)
+    .where(
+      and(
+        eq(standings.leagueId, leagueId),
+        eq(standings.season, season),
+        lte(standings.matchweek, currentMatchweek - 1)
+      )
+    );
+  const previousMatchweek = prevResult[0]?.maxWeek;
+
+  if (previousMatchweek === null || previousMatchweek === undefined) {
+    return positionChanges; // No earlier matchweek exists
   }
 
   // Get current positions
@@ -214,7 +227,7 @@ async function getPositionChanges(
       )
     );
 
-  // Get previous matchweek positions
+  // Get previous matchweek positions (using actual previous matchweek with data)
   const previousPositions = await getDb()
     .select({
       teamId: standings.teamId,
@@ -225,7 +238,7 @@ async function getPositionChanges(
       and(
         eq(standings.leagueId, leagueId),
         eq(standings.season, season),
-        eq(standings.matchweek, currentMatchweek - 1)
+        eq(standings.matchweek, previousMatchweek)
       )
     );
 
