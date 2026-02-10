@@ -75,8 +75,8 @@ export function MatchList({
               : t('matchweekTBD')}
           </h3>
 
-          {/* Match cards */}
-          <div className="space-y-2">
+          {/* Match cards — two-column grid on md+ */}
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
             {group.matches.map((match) => (
               <MatchCard
                 key={match.id}

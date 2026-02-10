@@ -55,8 +55,8 @@ function LoadingFallback() {
           <div className="h-9 flex-1 animate-pulse rounded-md bg-white/10" />
           <div className="h-9 flex-1 animate-pulse rounded-md bg-white/10" />
         </div>
-        <div className="space-y-4">
-          {Array.from({ length: 5 }).map((_, i) => (
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+          {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="h-20 animate-pulse rounded-lg bg-white/5" />
           ))}
         </div>

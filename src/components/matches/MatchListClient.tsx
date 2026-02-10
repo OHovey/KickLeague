@@ -13,24 +13,26 @@ function MatchListSkeleton() {
   return (
     <div className="space-y-4">
       <div className="h-4 w-28 animate-pulse rounded bg-white/10" />
-      {Array.from({ length: 5 }).map((_, i) => (
-        <div
-          key={i}
-          className="overflow-hidden rounded-lg bg-white/5 p-4"
-        >
-          <div className="flex items-center gap-3">
-            <div className="flex flex-1 items-center justify-end gap-2">
-              <div className="h-3 w-20 animate-pulse rounded bg-white/10" />
-              <div className="h-8 w-8 animate-pulse rounded-full bg-white/10" />
-            </div>
-            <div className="h-5 w-14 animate-pulse rounded bg-white/10" />
-            <div className="flex flex-1 items-center gap-2">
-              <div className="h-8 w-8 animate-pulse rounded-full bg-white/10" />
-              <div className="h-3 w-20 animate-pulse rounded bg-white/10" />
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div
+            key={i}
+            className="overflow-hidden rounded-lg bg-white/5 p-4"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex flex-1 items-center justify-end gap-2">
+                <div className="h-3 w-20 animate-pulse rounded bg-white/10" />
+                <div className="h-8 w-8 animate-pulse rounded-full bg-white/10" />
+              </div>
+              <div className="h-5 w-14 animate-pulse rounded bg-white/10" />
+              <div className="flex flex-1 items-center gap-2">
+                <div className="h-8 w-8 animate-pulse rounded-full bg-white/10" />
+                <div className="h-3 w-20 animate-pulse rounded bg-white/10" />
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

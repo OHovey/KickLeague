@@ -43,16 +43,95 @@ function getStoredExpandState(): ExpandState {
 
 function TableSkeleton() {
   return (
-    <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
-      <div className="border-b border-white/10 px-4 py-3">
-        <div className="h-4 w-24 animate-pulse rounded bg-white/10" />
+    <div className="glow-card overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
+      {/* Header */}
+      <div className="border-b border-white/10 px-4 py-3 flex items-baseline gap-2">
+        <div className="shimmer-loading h-4 w-24 rounded" />
+        <div className="shimmer-loading h-3 w-16 rounded" />
       </div>
-      <div className="p-4">
+
+      {/* Column headers */}
+      <div className="grid grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] md:grid-cols-[2rem_8fr_2fr_2fr_2fr_2fr_2fr_2fr_2.5fr_2.5fr_minmax(7rem,5fr)_2fr_minmax(6rem,5fr)] items-center border-b border-white/10 px-4 py-3">
+        <div className="shimmer-loading h-2.5 w-4 rounded mx-auto" />
+        <div className="shimmer-loading h-2.5 w-12 rounded" />
+        <div className="shimmer-loading h-2.5 w-4 rounded mx-auto" />
+        <div className="shimmer-loading hidden md:block h-2.5 w-4 rounded mx-auto" />
+        <div className="shimmer-loading hidden md:block h-2.5 w-4 rounded mx-auto" />
+        <div className="shimmer-loading hidden md:block h-2.5 w-4 rounded mx-auto" />
+        <div className="shimmer-loading hidden md:block h-2.5 w-5 rounded mx-auto" />
+        <div className="shimmer-loading hidden md:block h-2.5 w-5 rounded mx-auto" />
+        <div className="shimmer-loading h-2.5 w-5 rounded mx-auto" />
+        <div className="shimmer-loading h-2.5 w-5 rounded mx-auto" />
+        <div className="shimmer-loading hidden md:block h-2.5 w-16 rounded mx-auto" />
+        <div className="shimmer-loading hidden md:block h-2.5 w-5 rounded mx-auto" />
+        <div className="shimmer-loading hidden md:block h-2.5 w-14 rounded mx-auto" />
+      </div>
+
+      {/* Skeleton rows with staggered shimmer */}
+      <div>
         {Array.from({ length: 10 }).map((_, i) => (
-          <div key={i} className="flex items-center gap-4 py-3">
-            <div className="h-4 w-8 animate-pulse rounded bg-white/10" />
-            <div className="h-4 flex-1 animate-pulse rounded bg-white/10" />
-            <div className="h-4 w-16 animate-pulse rounded bg-white/10" />
+          <div
+            key={i}
+            className="grid grid-cols-[2.5rem_1fr_2.5rem_3rem_3rem_2rem] md:grid-cols-[2rem_8fr_2fr_2fr_2fr_2fr_2fr_2fr_2.5fr_2.5fr_minmax(7rem,5fr)_2fr_minmax(6rem,5fr)] items-center border-b border-white/[0.04] px-4 py-3"
+            style={{ animationDelay: `${i * 80}ms` }}
+          >
+            {/* Position */}
+            <div
+              className="shimmer-loading h-4 w-5 rounded mx-auto"
+              style={{ animationDelay: `${i * 80}ms` }}
+            />
+            {/* Team name + logo */}
+            <div className="flex items-center gap-2 px-2">
+              <div
+                className="shimmer-loading h-6 w-6 rounded-full shrink-0"
+                style={{ animationDelay: `${i * 80 + 40}ms` }}
+              />
+              <div
+                className="shimmer-loading h-3.5 rounded"
+                style={{
+                  animationDelay: `${i * 80 + 60}ms`,
+                  width: `${50 + ((i * 17) % 30)}%`,
+                }}
+              />
+            </div>
+            {/* P */}
+            <div
+              className="shimmer-loading h-3.5 w-5 rounded mx-auto"
+              style={{ animationDelay: `${i * 80 + 80}ms` }}
+            />
+            {/* W, D, L (desktop) */}
+            <div className="shimmer-loading hidden md:block h-3.5 w-4 rounded mx-auto" style={{ animationDelay: `${i * 80 + 100}ms` }} />
+            <div className="shimmer-loading hidden md:block h-3.5 w-4 rounded mx-auto" style={{ animationDelay: `${i * 80 + 120}ms` }} />
+            <div className="shimmer-loading hidden md:block h-3.5 w-4 rounded mx-auto" style={{ animationDelay: `${i * 80 + 140}ms` }} />
+            {/* GF, GA (desktop) */}
+            <div className="shimmer-loading hidden md:block h-3.5 w-5 rounded mx-auto" style={{ animationDelay: `${i * 80 + 160}ms` }} />
+            <div className="shimmer-loading hidden md:block h-3.5 w-5 rounded mx-auto" style={{ animationDelay: `${i * 80 + 180}ms` }} />
+            {/* GD */}
+            <div
+              className="shimmer-loading h-3.5 w-6 rounded mx-auto"
+              style={{ animationDelay: `${i * 80 + 200}ms` }}
+            />
+            {/* Pts */}
+            <div
+              className="shimmer-loading h-4 w-6 rounded mx-auto"
+              style={{ animationDelay: `${i * 80 + 220}ms` }}
+            />
+            {/* Form (desktop) */}
+            <div className="hidden md:flex items-center justify-center gap-1">
+              {Array.from({ length: 5 }).map((_, j) => (
+                <div
+                  key={j}
+                  className="shimmer-loading h-4 w-4 rounded-sm"
+                  style={{ animationDelay: `${i * 80 + 240 + j * 30}ms` }}
+                />
+              ))}
+            </div>
+            {/* +/- (desktop) */}
+            <div className="shimmer-loading hidden md:block h-3.5 w-5 rounded mx-auto" style={{ animationDelay: `${i * 80 + 300}ms` }} />
+            {/* Trend (desktop) */}
+            <div className="shimmer-loading hidden md:block h-5 w-14 rounded mx-auto" style={{ animationDelay: `${i * 80 + 320}ms` }} />
+            {/* Mobile expand chevron */}
+            <div className="shimmer-loading md:hidden h-4 w-4 rounded mx-auto" />
           </div>
         ))}
       </div>
@@ -96,8 +175,15 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
     });
   }, [league, matchweek]);
 
-  // Show skeleton during initial load or when switching leagues
-  if (isPending) {
+  // Show skeleton during initial load, switching leagues, or before first fetch
+  if (isPending || !data) {
+    if (error) {
+      return (
+        <div className="rounded-lg bg-white/5 p-8 text-center">
+          <p className="text-red-400">{error}</p>
+        </div>
+      );
+    }
     return <TableSkeleton />;
   }
 
@@ -151,21 +237,8 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
   const totalRows = data.standings.length;
   const isFullyExpanded = expandState === 'expanded' || displayedStandings.length >= totalRows;
 
-  // Determine next state and button text
-  const getNextState = (): { state: ExpandState; label: string } => {
-    switch (expandState) {
-      case 'collapsed':
-        return { state: 'default', label: t('showRows', { count: 10 }) };
-      case 'default':
-        return { state: 'expanded', label: t('showFullTable') };
-      case 'expanded':
-        return { state: 'collapsed', label: t('collapse') };
-    }
-  };
-  const { state: nextState, label: buttonLabel } = getNextState();
-
   return (
-    <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
+    <div className="glow-card overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
       {/* Table header */}
       <div className="border-b border-white/10 px-4 py-3 flex items-baseline gap-2">
         <h2 className="text-sm font-medium text-white/70">{t('standings')}</h2>
@@ -229,15 +302,43 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
         )}
       </div>
 
-      {/* Expand/collapse button */}
-      <div className="border-t border-white/10 px-4 py-3 text-center">
-        <button
-          type="button"
-          onClick={() => handleExpandStateChange(nextState)}
-          className="min-h-[44px] px-4 py-2 text-sm text-primary underline underline-offset-2 transition-colors hover:text-primary/80"
-        >
-          {buttonLabel}
-        </button>
+      {/* Expand/collapse toggle */}
+      <div className="border-t border-white/10 px-4 py-2.5 flex items-center justify-center gap-1">
+        <div className="inline-flex items-center rounded-full bg-white/[0.03] border border-white/[0.06] p-0.5">
+          <button
+            type="button"
+            onClick={() => handleExpandStateChange('collapsed')}
+            className={`relative rounded-full px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 ${
+              expandState === 'collapsed'
+                ? 'bg-glow/20 text-glow shadow-[0_0_8px_var(--league-glow,#00ff87)_inset,0_0_12px_var(--league-glow,#00ff87)/15]'
+                : 'text-white/35 hover:text-white/60 hover:bg-white/[0.04]'
+            }`}
+          >
+            5
+          </button>
+          <button
+            type="button"
+            onClick={() => handleExpandStateChange('default')}
+            className={`relative rounded-full px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 ${
+              expandState === 'default'
+                ? 'bg-glow/20 text-glow shadow-[0_0_8px_var(--league-glow,#00ff87)_inset,0_0_12px_var(--league-glow,#00ff87)/15]'
+                : 'text-white/35 hover:text-white/60 hover:bg-white/[0.04]'
+            }`}
+          >
+            10
+          </button>
+          <button
+            type="button"
+            onClick={() => handleExpandStateChange('expanded')}
+            className={`relative rounded-full px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 ${
+              expandState === 'expanded'
+                ? 'bg-glow/20 text-glow shadow-[0_0_8px_var(--league-glow,#00ff87)_inset,0_0_12px_var(--league-glow,#00ff87)/15]'
+                : 'text-white/35 hover:text-white/60 hover:bg-white/[0.04]'
+            }`}
+          >
+            {totalRows}
+          </button>
+        </div>
       </div>
 
       {/* Zone legend */}
