@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 
 ## Current Position
 
-Phase: 18 of 20 (Production Deployment)
-Plan: 1 of 2 in current phase
-Status: Executing
-Last activity: 2026-02-10 -- Completed 18-01 (env var docs + production README)
+Phase: 18 of 20 (Production Deployment) -- COMPLETE
+Plan: 2 of 2 in current phase (all plans complete)
+Status: Phase 18 complete -- ready for Phase 19
+Last activity: 2026-02-10 -- Completed 18-02 (production deployment to Vercel + Neon)
 
-Progress: [############........] 57/TBD (v1.0-v1.2 complete, v1.3 Phases 16-17 complete)
+Progress: [#############.......] 59/TBD (v1.0-v1.2 complete, v1.3 Phases 16-18 complete)
 
 ## Performance Metrics
 
@@ -40,6 +40,7 @@ Progress: [############........] 57/TBD (v1.0-v1.2 complete, v1.3 Phases 16-17 c
 | 17 | 01 | 3min | 2 | 8 |
 | 17 | 02 | 2min | 2 | 4 |
 | 18 | 01 | 3min | 2 | 2 |
+| 18 | 02 | ~45min | 2 | 0 |
 
 ## Accumulated Context
 
@@ -52,6 +53,7 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 **17-01:** 10% tracesSampleRate for Sentry (low cost for content site); no Replay integration; CSP updated for Sentry/Vercel analytics domains
 **17-02:** Budget thresholds at 80%/93% of daily limit; fatal Sentry level for critical; best-effort budget checks in cron routes
 **18-01:** DEPLOY_URL documented as commented-out optional (falls back to VERCEL_URL); Sentry vars marked required; 14 tables counted in schema
+**18-02:** Personal Vercel account deployment (not team scope); individual league seeding for timeout resilience; migrations applied before first deploy
 
 ### Pending Todos (manual/infrastructure)
 
@@ -84,5 +86,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed 18-01-PLAN.md
+Stopped at: Completed 18-02-PLAN.md (Phase 18 complete)
 Resume file: None
+Production URL: https://kick-league-gray.vercel.app
