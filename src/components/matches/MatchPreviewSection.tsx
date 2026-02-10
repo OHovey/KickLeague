@@ -20,7 +20,7 @@ function CompactTeamLogo({
 }) {
   if (!logoUrl) {
     return (
-      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-[10px] font-bold text-white/50">
+      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/10 text-[9px] font-bold text-white/50">
         {name.charAt(0)}
       </div>
     );
@@ -30,50 +30,87 @@ function CompactTeamLogo({
     <img
       src={logoUrl}
       alt={name}
-      width={24}
-      height={24}
-      className="h-6 w-6 object-contain"
+      width={20}
+      height={20}
+      className="h-5 w-5 shrink-0 object-contain"
     />
   );
 }
 
+/** Group label for a cluster of matches on the same date */
+function DateGroupHeader({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-2 px-3 py-1.5">
+      <span className="text-[10px] font-semibold uppercase tracking-widest text-white/30">
+        {label}
+      </span>
+      <div className="h-px flex-1 bg-white/5" />
+    </div>
+  );
+}
+
 function CompactResultRow({ match, locale }: { match: MatchWithTeams; locale: string }) {
+  const homeWin = (match.homeScore ?? 0) > (match.awayScore ?? 0);
+  const awayWin = (match.awayScore ?? 0) > (match.homeScore ?? 0);
+  const isDraw = match.homeScore === match.awayScore;
+
   return (
     <Link
       href={`/matches/${match.id}`}
-      className="block rounded-lg px-3 py-2 transition-colors hover:bg-white/5"
+      className="group flex items-center gap-1.5 px-3 py-1.5 transition-colors hover:bg-white/5"
     >
-      <div className="flex items-center gap-2">
-        {/* Home team */}
-        <div className="flex flex-1 items-center justify-end gap-2">
-          <span className="truncate text-xs font-medium text-white/80">
-            {match.homeTeam.shortName ?? match.homeTeam.name}
-          </span>
-          <CompactTeamLogo
-            logoUrl={match.homeTeam.logoUrl}
-            name={match.homeTeam.name}
-          />
-        </div>
-
-        {/* Score */}
-        <span className="w-12 text-center text-sm font-bold tabular-nums text-white">
-          {match.homeScore} - {match.awayScore}
+      {/* Home team */}
+      <div className="flex flex-1 items-center justify-end gap-1.5 overflow-hidden">
+        <span
+          className={`truncate text-xs tabular-nums ${
+            homeWin
+              ? 'font-semibold text-white'
+              : isDraw
+                ? 'font-medium text-white/70'
+                : 'font-normal text-white/45'
+          }`}
+        >
+          {match.homeTeam.shortName ?? match.homeTeam.name}
         </span>
-
-        {/* Away team */}
-        <div className="flex flex-1 items-center gap-2">
-          <CompactTeamLogo
-            logoUrl={match.awayTeam.logoUrl}
-            name={match.awayTeam.name}
-          />
-          <span className="truncate text-xs font-medium text-white/80">
-            {match.awayTeam.shortName ?? match.awayTeam.name}
-          </span>
-        </div>
+        <CompactTeamLogo
+          logoUrl={match.homeTeam.logoUrl}
+          name={match.homeTeam.name}
+        />
       </div>
-      <p className="mt-1 text-center text-[11px] text-white/40" suppressHydrationWarning>
-        {formatMatchDateShort(match.kickoff, locale)}
-      </p>
+
+      {/* Score pill */}
+      <div className="flex w-[52px] shrink-0 items-center justify-center gap-px rounded bg-white/[0.07] px-1.5 py-0.5">
+        <span
+          className={`text-xs tabular-nums ${homeWin ? 'font-bold text-white' : 'font-semibold text-white/60'}`}
+        >
+          {match.homeScore}
+        </span>
+        <span className="text-[10px] text-white/25">-</span>
+        <span
+          className={`text-xs tabular-nums ${awayWin ? 'font-bold text-white' : 'font-semibold text-white/60'}`}
+        >
+          {match.awayScore}
+        </span>
+      </div>
+
+      {/* Away team */}
+      <div className="flex flex-1 items-center gap-1.5 overflow-hidden">
+        <CompactTeamLogo
+          logoUrl={match.awayTeam.logoUrl}
+          name={match.awayTeam.name}
+        />
+        <span
+          className={`truncate text-xs tabular-nums ${
+            awayWin
+              ? 'font-semibold text-white'
+              : isDraw
+                ? 'font-medium text-white/70'
+                : 'font-normal text-white/45'
+          }`}
+        >
+          {match.awayTeam.shortName ?? match.awayTeam.name}
+        </span>
+      </div>
     </Link>
   );
 }
@@ -92,11 +129,11 @@ function CompactFixtureRow({
   return (
     <Link
       href={`/matches/${match.id}`}
-      className="block rounded-lg px-3 py-2 transition-colors hover:bg-white/5"
+      className="group block px-3 py-1.5 transition-colors hover:bg-white/5"
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         {/* Home team */}
-        <div className="flex flex-1 items-center justify-end gap-2">
+        <div className="flex flex-1 items-center justify-end gap-1.5 overflow-hidden">
           <span className="truncate text-xs font-medium text-white/80">
             {match.homeTeam.shortName ?? match.homeTeam.name}
           </span>
@@ -106,16 +143,18 @@ function CompactFixtureRow({
           />
         </div>
 
-        {/* Kickoff time */}
-        <span
-          className="w-16 text-center text-xs font-medium text-white/60"
+        {/* Kickoff time pill */}
+        <div
+          className="flex w-[52px] shrink-0 items-center justify-center rounded bg-white/[0.07] px-1.5 py-0.5"
           suppressHydrationWarning
         >
-          {formatKickoffTime(match.kickoff, locale)}
-        </span>
+          <span className="text-[11px] font-medium tabular-nums text-white/60" suppressHydrationWarning>
+            {formatKickoffTime(match.kickoff, locale).replace(/\s*(GMT|BST|CET|CEST|EST|PST|UTC).*$/i, '')}
+          </span>
+        </div>
 
         {/* Away team */}
-        <div className="flex flex-1 items-center gap-2">
+        <div className="flex flex-1 items-center gap-1.5 overflow-hidden">
           <CompactTeamLogo
             logoUrl={match.awayTeam.logoUrl}
             name={match.awayTeam.name}
@@ -142,19 +181,19 @@ function CompactFixtureRow({
 
 // ─── Skeleton ───────────────────────────────────────────────────────────────
 
-function CompactSkeleton() {
+function CompactSkeleton({ rows = 5 }: { rows?: number }) {
   return (
-    <div className="space-y-1">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <div key={i} className="flex items-center gap-2 px-3 py-2">
-          <div className="flex flex-1 items-center justify-end gap-2">
-            <div className="h-3 w-16 animate-pulse rounded bg-white/10" />
-            <div className="h-6 w-6 animate-pulse rounded-full bg-white/10" />
+    <div className="divide-y divide-white/5">
+      {Array.from({ length: rows }).map((_, i) => (
+        <div key={i} className="flex items-center gap-1.5 px-3 py-1.5">
+          <div className="flex flex-1 items-center justify-end gap-1.5">
+            <div className="shimmer-loading h-3 w-14 rounded" />
+            <div className="shimmer-loading h-5 w-5 rounded-full" />
           </div>
-          <div className="h-4 w-12 animate-pulse rounded bg-white/10" />
-          <div className="flex flex-1 items-center gap-2">
-            <div className="h-6 w-6 animate-pulse rounded-full bg-white/10" />
-            <div className="h-3 w-16 animate-pulse rounded bg-white/10" />
+          <div className="shimmer-loading h-5 w-[52px] rounded" />
+          <div className="flex flex-1 items-center gap-1.5">
+            <div className="shimmer-loading h-5 w-5 rounded-full" />
+            <div className="shimmer-loading h-3 w-14 rounded" />
           </div>
         </div>
       ))}
@@ -174,16 +213,16 @@ function ViewAllLink({
   return (
     <Link
       href={href}
-      className="mt-3 flex items-center gap-1 text-sm text-white/50 transition-colors hover:text-white/80"
+      className="flex items-center gap-1 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
     >
       {children}
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-4 w-4"
+        className="h-3 w-3"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
-        strokeWidth={2}
+        strokeWidth={2.5}
       >
         <path
           strokeLinecap="round"
@@ -192,6 +231,59 @@ function ViewAllLink({
         />
       </svg>
     </Link>
+  );
+}
+
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
+/** Group matches by their short date string for matchday headers */
+function groupByDate(
+  matches: MatchWithTeams[],
+  locale: string
+): { label: string; matches: MatchWithTeams[] }[] {
+  const groups: { label: string; matches: MatchWithTeams[] }[] = [];
+  let currentLabel = '';
+
+  for (const match of matches) {
+    const label = formatMatchDateShort(match.kickoff, locale);
+    if (label !== currentLabel) {
+      currentLabel = label;
+      groups.push({ label, matches: [match] });
+    } else {
+      groups[groups.length - 1].matches.push(match);
+    }
+  }
+
+  return groups;
+}
+
+// ─── Section Header ─────────────────────────────────────────────────────────
+
+function SectionHeader({
+  title,
+  count,
+}: {
+  title: string;
+  count: number;
+}) {
+  return (
+    <div className="relative border-b border-white/10 px-4 py-2.5">
+      {/* Subtle accent glow at the top edge */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-30"
+        style={{ background: 'linear-gradient(90deg, transparent 0%, var(--league-accent) 50%, transparent 100%)' }}
+      />
+      <div className="flex items-center justify-between">
+        <h2 className="text-[11px] font-semibold uppercase tracking-widest text-white/70">
+          {title}
+        </h2>
+        {count > 0 && (
+          <span className="text-[10px] font-medium tabular-nums text-white/25">
+            {count}
+          </span>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -242,6 +334,9 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
     });
   }, [league]);
 
+  const resultGroups = groupByDate(recentMatches, locale);
+  const fixtureGroups = groupByDate(upcomingMatches, locale);
+
   // Hidden on mobile -- mobile users use the Matches link in the header
   return (
     <section className="hidden md:block">
@@ -249,26 +344,25 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
         className={`grid grid-cols-2 gap-6 ${isPending && hasLoaded ? 'opacity-60 transition-opacity' : ''}`}
       >
         {/* Recent Results Column */}
-        <div className="flex flex-col overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
-          <div className="border-b border-white/10 px-4 py-3">
-            <h2 className="text-sm font-medium text-white/90">
-              {t('recentResults')}
-            </h2>
-          </div>
-          <div className="flex flex-1 flex-col justify-evenly py-1">
+        <div className="flex flex-col overflow-hidden rounded-lg border border-white/[0.07] bg-white/[0.03] backdrop-blur-sm">
+          <SectionHeader title={t('recentResults')} count={recentMatches.length} />
+          <div className="flex flex-1 flex-col justify-evenly py-0.5">
             {!hasLoaded ? (
-              <CompactSkeleton />
+              <CompactSkeleton rows={8} />
             ) : recentMatches.length === 0 ? (
-              <p className="px-4 py-6 text-center text-sm text-white/40">
+              <p className="px-4 py-6 text-center text-xs text-white/30">
                 {t('noRecentResults')}
               </p>
             ) : (
-              recentMatches.map((match) => (
-                <CompactResultRow key={match.id} match={match} locale={locale} />
-              ))
+              resultGroups.flatMap((group) => [
+                <DateGroupHeader key={`hdr-${group.label}`} label={group.label} />,
+                ...group.matches.map((match) => (
+                  <CompactResultRow key={match.id} match={match} locale={locale} />
+                )),
+              ])
             )}
           </div>
-          <div className="mt-auto border-t border-white/5 px-4 py-2">
+          <div className="mt-auto border-t border-white/[0.06] px-4 py-2">
             <ViewAllLink href="/matches?tab=results">
               {t('viewAllResults')}
             </ViewAllLink>
@@ -276,32 +370,31 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
         </div>
 
         {/* Upcoming Fixtures Column */}
-        <div className="flex flex-col overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
-          <div className="border-b border-white/10 px-4 py-3">
-            <h2 className="text-sm font-medium text-white/90">
-              {t('upcomingFixtures')}
-            </h2>
-          </div>
-          <div className="flex flex-1 flex-col justify-evenly py-1">
+        <div className="flex flex-col overflow-hidden rounded-lg border border-white/[0.07] bg-white/[0.03] backdrop-blur-sm">
+          <SectionHeader title={t('upcomingFixtures')} count={upcomingMatches.length} />
+          <div className="flex flex-1 flex-col justify-evenly py-0.5">
             {!hasLoaded ? (
-              <CompactSkeleton />
+              <CompactSkeleton rows={5} />
             ) : upcomingMatches.length === 0 ? (
-              <p className="px-4 py-6 text-center text-sm text-white/40">
+              <p className="px-4 py-6 text-center text-xs text-white/30">
                 {t('noUpcomingFixtures')}
               </p>
             ) : (
-              upcomingMatches.map((match) => (
-                <CompactFixtureRow
-                  key={match.id}
-                  match={match}
-                  locale={locale}
-                  compactOdds={oddsMap[match.id]}
-                  showBetting={showBetting}
-                />
-              ))
+              fixtureGroups.flatMap((group) => [
+                <DateGroupHeader key={`hdr-${group.label}`} label={group.label} />,
+                ...group.matches.map((match) => (
+                  <CompactFixtureRow
+                    key={match.id}
+                    match={match}
+                    locale={locale}
+                    compactOdds={oddsMap[match.id]}
+                    showBetting={showBetting}
+                  />
+                )),
+              ])
             )}
           </div>
-          <div className="mt-auto border-t border-white/5 px-4 py-2">
+          <div className="mt-auto border-t border-white/[0.06] px-4 py-2">
             <ViewAllLink href="/matches?tab=fixtures">
               {t('viewAllFixtures')}
             </ViewAllLink>
