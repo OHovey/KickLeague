@@ -26,6 +26,16 @@
     "lastUpdated": "Zuletzt aktualisiert:",
     "minutesAgo": "vor {count} Min."
   },
+  "Feedback": {
+    "button": "Feedback",
+    "cancel": "Abbrechen",
+    "error": "Senden fehlgeschlagen. Bitte erneut versuchen.",
+    "placeholder": "Was liegt Ihnen auf dem Herzen? Fehlerberichte, Feature-Wünsche oder allgemeines Feedback...",
+    "submit": "Senden",
+    "success": "Danke für Ihr Feedback!",
+    "title": "Feedback senden",
+    "tooLong": "Feedback muss unter 2000 Zeichen liegen"
+  },
   "Footer": {
     "responsibleGambling": "Bitte spielen Sie verantwortungsvoll. Nur ab 18 Jahren."
   },

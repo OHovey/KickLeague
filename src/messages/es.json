@@ -26,6 +26,16 @@
     "lastUpdated": "\u00daltima actualizaci\u00f3n:",
     "minutesAgo": "hace {count} min"
   },
+  "Feedback": {
+    "button": "Comentarios",
+    "cancel": "Cancelar",
+    "error": "Error al enviar. Inténtalo de nuevo.",
+    "placeholder": "¿Qué tienes en mente? Reportes de errores, solicitudes de funciones o comentarios generales...",
+    "submit": "Enviar",
+    "success": "¡Gracias por tus comentarios!",
+    "title": "Enviar comentarios",
+    "tooLong": "Los comentarios deben tener menos de 2000 caracteres"
+  },
   "Footer": {
     "responsibleGambling": "Por favor, juega con responsabilidad. Solo mayores de 18."
   },

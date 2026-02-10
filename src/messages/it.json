@@ -26,6 +26,16 @@
     "lastUpdated": "Ultimo aggiornamento:",
     "minutesAgo": "{count} min fa"
   },
+  "Feedback": {
+    "button": "Feedback",
+    "cancel": "Annulla",
+    "error": "Invio fallito. Riprova.",
+    "placeholder": "Cosa hai in mente? Segnalazioni di bug, richieste di funzionalità o feedback generali...",
+    "submit": "Invia",
+    "success": "Grazie per il tuo feedback!",
+    "title": "Invia feedback",
+    "tooLong": "Il feedback deve essere inferiore a 2000 caratteri"
+  },
   "Footer": {
     "responsibleGambling": "Gioca responsabilmente. Solo per maggiorenni."
   },

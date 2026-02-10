@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { LanguagePicker } from '@/components/i18n/LanguagePicker';
+import { FeedbackButton } from './FeedbackDialog';
 
 export function Header() {
   const t = useTranslations('Navigation');
@@ -10,18 +11,18 @@ export function Header() {
   const isMatchesActive = pathname?.startsWith('/matches');
 
   return (
-    <header className="border-b border-white/10 bg-black/20 backdrop-blur-md">
+    <header className="relative bg-black/20 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Wordmark */}
         <Link
           href="/"
           aria-label={t('homeAriaLabel')}
-          className="flex items-center gap-2 text-white transition-colors hover:text-white/90"
+          className="group flex items-center gap-2.5 text-white transition-colors hover:text-white/90"
         >
           {/* Football icon: circle with pentagon seam pattern */}
           <svg
             viewBox="0 0 48 48"
-            className="h-7 w-7 flex-shrink-0"
+            className="h-7 w-7 flex-shrink-0 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_var(--league-glow)]"
             fill="none"
             stroke="currentColor"
             aria-hidden="true"
@@ -38,7 +39,7 @@ export function Header() {
             <line x1="18" y1="28.5" x2="8" y2="38" strokeWidth="1.5" />
             <line x1="14.5" y1="17" x2="4" y2="12" strokeWidth="1.5" />
           </svg>
-          {/* Wordmark text: sporty italic bold matching brand identity */}
+          {/* Wordmark text */}
           <span className="text-lg font-extrabold italic tracking-tight">
             KickLeague
           </span>
@@ -46,6 +47,7 @@ export function Header() {
 
         {/* Navigation */}
         <nav className="flex items-center gap-4">
+          <FeedbackButton />
           <Link
             href="/matches"
             className={`text-sm transition-colors ${
@@ -59,6 +61,15 @@ export function Header() {
           <LanguagePicker />
         </nav>
       </div>
+
+      {/* Accent gradient line at bottom */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-px"
+        style={{
+          background: `linear-gradient(90deg, transparent 0%, var(--league-glow) 50%, transparent 100%)`,
+          opacity: 0.25,
+        }}
+      />
     </header>
   );
 }

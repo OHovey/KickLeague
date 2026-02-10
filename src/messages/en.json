@@ -26,6 +26,16 @@
     "lastUpdated": "Last updated:",
     "minutesAgo": "{count} min ago"
   },
+  "Feedback": {
+    "button": "Feedback",
+    "cancel": "Cancel",
+    "error": "Failed to submit. Please try again.",
+    "placeholder": "What's on your mind? Bug reports, feature requests, or general feedback...",
+    "submit": "Submit",
+    "success": "Thanks for your feedback!",
+    "title": "Send Feedback",
+    "tooLong": "Feedback must be under 2000 characters"
+  },
   "Footer": {
     "responsibleGambling": "Please gamble responsibly. 18+ only."
   },

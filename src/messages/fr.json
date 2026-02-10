@@ -26,8 +26,18 @@
     "lastUpdated": "Derni\u00e8re mise \u00e0 jour :",
     "minutesAgo": "il y a {count} min"
   },
+  "Feedback": {
+    "button": "Avis",
+    "cancel": "Annuler",
+    "error": "Envoi échoué. Veuillez réessayer.",
+    "placeholder": "Qu'avez-vous en tête ? Signalements de bugs, demandes de fonctionnalités ou avis généraux...",
+    "submit": "Envoyer",
+    "success": "Merci pour votre avis !",
+    "title": "Envoyer un avis",
+    "tooLong": "L'avis doit faire moins de 2000 caractères"
+  },
   "Footer": {
-    "responsibleGambling": "Jouez de mani\u00e8re responsable. 18+ uniquement."
+    "responsibleGambling": "Jouez de manière responsable. 18+ uniquement."
   },
   "Formats": {
     "american": "Am\u00e9ricain",
