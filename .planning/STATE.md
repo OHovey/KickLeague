@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 ## Current Position
 
 Phase: 17 of 20 (Monitoring Integration)
-Plan: 1 of 2 in current phase
-Status: Executing
-Last activity: 2026-02-10 -- Plan 17-01 complete
+Plan: 2 of 2 in current phase (PHASE COMPLETE)
+Status: Phase 17 complete
+Last activity: 2026-02-10 -- Plan 17-02 complete
 
-Progress: [###########.........] 56/TBD (v1.0-v1.2 complete, v1.3 Phase 16 + 17-01 complete)
+Progress: [############........] 58/TBD (v1.0-v1.2 complete, v1.3 Phase 16 + 17 complete)
 
 ## Performance Metrics
 
@@ -38,6 +38,7 @@ Progress: [###########.........] 56/TBD (v1.0-v1.2 complete, v1.3 Phase 16 + 17-
 | 16 | 01 | 2min | 2 | 3 |
 | 16 | 02 | 1min | 2 | 2 |
 | 17 | 01 | 3min | 2 | 8 |
+| 17 | 02 | 2min | 2 | 4 |
 
 ## Accumulated Context
 
@@ -48,6 +49,7 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 **16-01:** In-memory token bucket rate limiter (no Redis); lazy cleanup for serverless; no X-RateLimit-* headers exposed
 **16-02:** CSP in report-only mode for safe rollout; CSP violation logging via console.warn (not database)
 **17-01:** 10% tracesSampleRate for Sentry (low cost for content site); no Replay integration; CSP updated for Sentry/Vercel analytics domains
+**17-02:** Budget thresholds at 80%/93% of daily limit; fatal Sentry level for critical; best-effort budget checks in cron routes
 
 ### Pending Todos (manual/infrastructure)
 
@@ -80,5 +82,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed 17-01-PLAN.md
+Stopped at: Completed 17-02-PLAN.md (Phase 17 complete)
 Resume file: None
