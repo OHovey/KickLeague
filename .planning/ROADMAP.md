@@ -222,7 +222,11 @@ Plans:
   2. The Neon production database has all Drizzle migrations applied and contains current-season teams, fixtures, standings, and odds data
   3. A `.env.example` file documents every required environment variable with a description of its purpose and where to obtain it
   4. The project README contains setup instructions, architecture overview, environment variable guide, and deployment steps (replacing the Next.js boilerplate)
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 18-01-PLAN.md -- Complete .env.example documentation and production README
+- [ ] 18-02-PLAN.md -- Production Vercel + Neon deployment, migrations, and data seeding
 
 #### Phase 19: Production Pipeline
 **Goal**: The automated data pipeline runs reliably in production, with live match polling at 3-minute intervals and all 5 leagues showing current data
@@ -268,7 +272,7 @@ Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in
 | 15. Display Ads | v1.2 | 2/2 | Complete | 2026-02-09 |
 | 16. Security | v1.3 | 2/2 | Complete | 2026-02-10 |
 | 17. Monitoring | v1.3 | 2/2 | Complete | 2026-02-10 |
-| 18. Deployment | v1.3 | 0/TBD | Not started | - |
+| 18. Deployment | v1.3 | 0/2 | In progress | - |
 | 19. Pipeline | v1.3 | 0/TBD | Not started | - |
 | 20. Launch Docs | v1.3 | 0/TBD | Not started | - |
 
