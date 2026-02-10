@@ -1,4 +1,6 @@
+import * as Sentry from '@sentry/nextjs';
 import { refreshOdds } from '@/lib/pipeline/refresh-odds';
+import { checkBudgetThresholds } from '@/lib/pipeline/api-budget';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -41,14 +43,41 @@ export async function POST(req: Request) {
     return new Response('Unauthorized', { status: 401 });
   }
 
-  const result = await refreshOdds();
-  return Response.json(result);
+  try {
+    const result = await refreshOdds();
+
+    try { await checkBudgetThresholds(); } catch { /* budget check is best-effort */ }
+
+    return Response.json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    Sentry.captureException(error, {
+      tags: { cron: 'refresh-odds' },
+      extra: { route: '/api/cron/refresh-odds' },
+    });
+    console.error('[refresh-odds] Error:', message);
+    return Response.json({ error: message }, { status: 500 });
+  }
 }
 
 export async function GET(_req: Request) {
   if (process.env.NODE_ENV !== 'development') {
     return new Response('Not allowed', { status: 403 });
   }
-  const result = await refreshOdds();
-  return Response.json(result);
+
+  try {
+    const result = await refreshOdds();
+
+    try { await checkBudgetThresholds(); } catch { /* budget check is best-effort */ }
+
+    return Response.json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    Sentry.captureException(error, {
+      tags: { cron: 'refresh-odds' },
+      extra: { route: '/api/cron/refresh-odds' },
+    });
+    console.error('[refresh-odds] Error:', message);
+    return Response.json({ error: message }, { status: 500 });
+  }
 }

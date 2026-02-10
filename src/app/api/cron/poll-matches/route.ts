@@ -18,7 +18,9 @@
  * build when QSTASH_CURRENT_SIGNING_KEY is not set.
  */
 
+import * as Sentry from '@sentry/nextjs';
 import { pollActiveMatches } from '@/lib/pipeline/poll-active-matches';
+import { checkBudgetThresholds } from '@/lib/pipeline/api-budget';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -62,8 +64,21 @@ export async function POST(req: Request) {
     return new Response('Unauthorized', { status: 401 });
   }
 
-  const result = await pollActiveMatches();
-  return Response.json(result);
+  try {
+    const result = await pollActiveMatches();
+
+    try { await checkBudgetThresholds(); } catch { /* budget check is best-effort */ }
+
+    return Response.json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    Sentry.captureException(error, {
+      tags: { cron: 'poll-matches' },
+      extra: { route: '/api/cron/poll-matches' },
+    });
+    console.error('[poll-matches] Error:', message);
+    return Response.json({ error: message }, { status: 500 });
+  }
 }
 
 // Dev-only GET handler for manual testing
@@ -71,6 +86,20 @@ export async function GET(_req: Request) {
   if (process.env.NODE_ENV !== 'development') {
     return new Response('Not allowed', { status: 403 });
   }
-  const result = await pollActiveMatches();
-  return Response.json(result);
+
+  try {
+    const result = await pollActiveMatches();
+
+    try { await checkBudgetThresholds(); } catch { /* budget check is best-effort */ }
+
+    return Response.json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    Sentry.captureException(error, {
+      tags: { cron: 'poll-matches' },
+      extra: { route: '/api/cron/poll-matches' },
+    });
+    console.error('[poll-matches] Error:', message);
+    return Response.json({ error: message }, { status: 500 });
+  }
 }
