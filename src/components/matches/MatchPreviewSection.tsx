@@ -249,13 +249,13 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
         className={`grid grid-cols-2 gap-6 ${isPending && hasLoaded ? 'opacity-60 transition-opacity' : ''}`}
       >
         {/* Recent Results Column */}
-        <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
+        <div className="flex flex-col overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
           <div className="border-b border-white/10 px-4 py-3">
             <h2 className="text-sm font-medium text-white/90">
               {t('recentResults')}
             </h2>
           </div>
-          <div className="py-1">
+          <div className="flex-1 py-1">
             {!hasLoaded ? (
               <CompactSkeleton />
             ) : recentMatches.length === 0 ? (
@@ -270,7 +270,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
               </div>
             )}
           </div>
-          <div className="border-t border-white/5 px-4 py-2">
+          <div className="mt-auto border-t border-white/5 px-4 py-2">
             <ViewAllLink href="/matches?tab=results">
               {t('viewAllResults')}
             </ViewAllLink>
@@ -278,13 +278,13 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
         </div>
 
         {/* Upcoming Fixtures Column */}
-        <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
+        <div className="flex flex-col overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
           <div className="border-b border-white/10 px-4 py-3">
             <h2 className="text-sm font-medium text-white/90">
               {t('upcomingFixtures')}
             </h2>
           </div>
-          <div className="py-1">
+          <div className="flex-1 py-1">
             {!hasLoaded ? (
               <CompactSkeleton />
             ) : upcomingMatches.length === 0 ? (
@@ -305,7 +305,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
               </div>
             )}
           </div>
-          <div className="border-t border-white/5 px-4 py-2">
+          <div className="mt-auto border-t border-white/5 px-4 py-2">
             <ViewAllLink href="/matches?tab=fixtures">
               {t('viewAllFixtures')}
             </ViewAllLink>
