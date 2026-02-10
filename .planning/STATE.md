@@ -35,6 +35,7 @@ Progress: [##########..........] 55/TBD (v1.0-v1.2 complete, v1.3 Phase 16 compl
 **v1.3 Velocity:**
 | Phase | Plan | Duration | Tasks | Files |
 |-------|------|----------|-------|-------|
+| 16 | 01 | 2min | 2 | 3 |
 | 16 | 02 | 1min | 2 | 2 |
 
 ## Accumulated Context
@@ -43,6 +44,7 @@ Progress: [##########..........] 55/TBD (v1.0-v1.2 complete, v1.3 Phase 16 compl
 
 All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked Good).
 
+**16-01:** In-memory token bucket rate limiter (no Redis); lazy cleanup for serverless; no X-RateLimit-* headers exposed
 **16-02:** CSP in report-only mode for safe rollout; CSP violation logging via console.warn (not database)
 
 ### Pending Todos (manual/infrastructure)
