@@ -11,7 +11,7 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 
 Milestone: v1.2 shipped (2026-02-09)
 Status: All milestones complete, no active work
-Last activity: 2026-02-09 -- v1.2 milestone archived
+Last activity: 2026-02-10 - Completed quick task 1: Fix empty biggest upset card on homepage
 
 Progress: [##################################################] 100% (53/53 total plans complete across v1.0, v1.1, v1.2)
 
@@ -48,7 +48,6 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 - Apply migration 0003_young_network.sql to production database
 - Set up Google AdSense account and create 8 ad unit slots
 - Update public/ads.txt with real publisher ID
-- Investigate empty biggest upset card on homepage (fix or replace metric)
 
 ### Tech Debt
 
@@ -58,8 +57,14 @@ None remaining -- all v1.0/v1.1 tech debt resolved in v1.2.
 
 None.
 
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 1 | Fix empty biggest upset card on homepage | 2026-02-10 | 0a0c054 | [1-fix-empty-biggest-upset-card-on-homepage](./quick/1-fix-empty-biggest-upset-card-on-homepage/) |
+
 ## Session Continuity
 
-Last session: 2026-02-09
-Stopped at: v1.2 milestone archived
+Last session: 2026-02-10
+Stopped at: Completed quick-1 (fix empty biggest upset card)
 Resume file: None
