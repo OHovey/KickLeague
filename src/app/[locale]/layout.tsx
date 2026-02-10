@@ -5,6 +5,8 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Header } from '@/components/header/Header';
 import { routing } from '@/i18n/routing';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import '../globals.css';
 
@@ -78,6 +80,8 @@ export default async function LocaleLayout({ children, params }: Props) {
             {children}
           </NuqsAdapter>
         </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
