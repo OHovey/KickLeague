@@ -178,7 +178,7 @@ Plans:
 
 **Milestone Goal:** Deploy KickLeague to production with monitoring, verified data pipeline, security hardening, and documentation -- everything needed to go live.
 
-- [ ] **Phase 16: Security Hardening** - Rate limiting and security headers before production deploy
+- [x] **Phase 16: Security Hardening** - Rate limiting and security headers before production deploy
 - [ ] **Phase 17: Monitoring Integration** - Error tracking, performance analytics, and operational alerts
 - [ ] **Phase 18: Production Deployment** - Vercel + Neon production environment with seeded data and documentation
 - [ ] **Phase 19: Production Pipeline** - Verified cron schedules, live match polling, and current data
@@ -195,8 +195,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 16-01-PLAN.md -- Rate limiting on public API endpoints (in-memory token bucket)
-- [ ] 16-02-PLAN.md -- Security headers (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) + CSP report endpoint
+- [x] 16-01-PLAN.md -- Rate limiting on public API endpoints (in-memory token bucket)
+- [x] 16-02-PLAN.md -- Security headers (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) + CSP report endpoint
 
 #### Phase 17: Monitoring Integration
 **Goal**: Errors are automatically captured, performance is tracked, and operators are alerted when the data pipeline or API budget is at risk
@@ -262,7 +262,7 @@ Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in
 | 13. i18n Complete | v1.2 | 7/7 | Complete | 2026-02-08 |
 | 14. SEO | v1.2 | 5/5 | Complete | 2026-02-08 |
 | 15. Display Ads | v1.2 | 2/2 | Complete | 2026-02-09 |
-| 16. Security | v1.3 | 0/2 | Planned | - |
+| 16. Security | v1.3 | 2/2 | Complete | 2026-02-10 |
 | 17. Monitoring | v1.3 | 0/TBD | Not started | - |
 | 18. Deployment | v1.3 | 0/TBD | Not started | - |
 | 19. Pipeline | v1.3 | 0/TBD | Not started | - |
