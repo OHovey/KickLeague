@@ -70,7 +70,7 @@ export function StatsComparison({ homeStats, awayStats }: StatsComparisonProps) 
 
   if (!homeStats || !awayStats) {
     return (
-      <section className="mt-6 rounded-xl bg-white/5 p-6">
+      <section className="glow-card rounded-xl bg-white/5 p-6">
         <h2 className="mb-4 text-lg font-semibold text-white">{t('matchStats')}</h2>
         <p className="text-sm text-white/40">{t('noStatsAvailable')}</p>
       </section>
@@ -133,7 +133,7 @@ export function StatsComparison({ homeStats, awayStats }: StatsComparisonProps) 
   }
 
   return (
-    <section className="mt-6 rounded-xl bg-white/5 p-6">
+    <section className="glow-card rounded-xl bg-white/5 p-6">
       <h2 className="mb-4 text-lg font-semibold text-white">{t('matchStats')}</h2>
       <div className="space-y-4">
         {statEntries.map((entry) => (

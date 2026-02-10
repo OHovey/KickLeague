@@ -100,7 +100,7 @@ export function FormGuide({
   const t = useTranslations('MatchDetail');
 
   return (
-    <section className="mt-6 rounded-xl bg-white/5 p-6">
+    <section className="glow-card rounded-xl bg-white/5 p-6">
       <h2 className="mb-4 text-lg font-semibold text-white">{t('formGuide')}</h2>
       <div className="space-y-3">
         <TeamFormRow teamName={homeTeamName} form={homeForm} noFormLabel={t('noFormData')} />

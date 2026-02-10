@@ -28,7 +28,7 @@ export function H2HSection({
   const total = h2hData.team1Wins + h2hData.team2Wins + h2hData.draws;
 
   return (
-    <section className="mt-6 rounded-xl bg-white/5 p-6">
+    <section className="glow-card rounded-xl bg-white/5 p-6">
       <h2 className="mb-4 text-lg font-semibold text-white">{t('headToHead')}</h2>
 
       {total === 0 ? (

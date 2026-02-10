@@ -95,7 +95,7 @@ export function EventsTimeline({ events, homeTeamId }: EventsTimelineProps) {
 
   if (events.length === 0) {
     return (
-      <section className="mt-6 rounded-xl bg-white/5 p-6">
+      <section className="glow-card rounded-xl bg-white/5 p-6">
         <h2 className="mb-4 text-lg font-semibold text-white">{t('matchEvents')}</h2>
         <p className="text-sm text-white/40">{t('noEventsRecorded')}</p>
       </section>
@@ -103,7 +103,7 @@ export function EventsTimeline({ events, homeTeamId }: EventsTimelineProps) {
   }
 
   return (
-    <section className="mt-6 rounded-xl bg-white/5 p-6">
+    <section className="glow-card rounded-xl bg-white/5 p-6">
       <h2 className="mb-4 text-lg font-semibold text-white">{t('matchEvents')}</h2>
       <div className="relative">
         {/* Center line */}

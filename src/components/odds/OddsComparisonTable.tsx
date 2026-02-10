@@ -99,7 +99,7 @@ export function OddsComparisonTable({
   // Loading state
   if (!loaded || isPending) {
     return (
-      <div className="mt-6 rounded-xl bg-white/5 p-4">
+      <div className="glow-card rounded-xl bg-white/5 p-4">
         <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/60">
           {t('comparisonTitle')}
         </h3>
@@ -113,7 +113,7 @@ export function OddsComparisonTable({
     // Odds exist in DB but all filtered out by region
     const allFilteredOut = data !== null && data.odds.length === 0 && data.totalBookmakers > 0;
     return (
-      <div className="mt-6 rounded-xl bg-white/5 p-6 text-center">
+      <div className="glow-card rounded-xl bg-white/5 p-6 text-center">
         <p className="text-white/50">
           {allFilteredOut ? t('noOddsRegion') : t('noOdds')}
         </p>
@@ -128,7 +128,7 @@ export function OddsComparisonTable({
 
   return (
     <OddsFormatProvider>
-      <div className="mt-6 space-y-3">
+      <div className="space-y-3">
         {/* Header */}
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-semibold uppercase tracking-wider text-white/60">
@@ -138,7 +138,7 @@ export function OddsComparisonTable({
         </div>
 
         {/* Table */}
-        <div className="overflow-hidden rounded-xl bg-white/5">
+        <div className="glow-card overflow-hidden rounded-xl bg-white/5">
           {/* Column headers */}
           <div className="grid grid-cols-[1fr_repeat(3,80px)] items-center gap-1 border-b border-white/10 px-3 py-2 text-xs font-medium uppercase tracking-wider text-white/40">
             <span>Bookmaker</span>

@@ -5,6 +5,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--league-primary);
   --color-accent: var(--league-accent);
+  --color-glow: var(--league-glow);
   --color-bg-gradient-start: var(--league-bg-start);
   --color-bg-gradient-end: var(--league-bg-end);
   --font-sans: var(--font-geist-sans);
@@ -19,6 +20,7 @@
     /* Default: Premier League */
     --league-primary: #3d195b;
     --league-accent: #00ff87;
+    --league-glow: #00ff87;
     --league-bg-start: #3d195b;
     --league-bg-end: #1a0a2e;
   }
@@ -26,6 +28,7 @@
   [data-theme="premier-league"] {
     --league-primary: #3d195b;
     --league-accent: #00ff87;
+    --league-glow: #00ff87;
     --league-bg-start: #3d195b;
     --league-bg-end: #1a0a2e;
   }
@@ -33,6 +36,7 @@
   [data-theme="la-liga"] {
     --league-primary: #ee8707;
     --league-accent: #1a1a1a;
+    --league-glow: #ee8707;
     --league-bg-start: #ee8707;
     --league-bg-end: #5a3200;
   }
@@ -40,6 +44,7 @@
   [data-theme="serie-a"] {
     --league-primary: #024494;
     --league-accent: #ffffff;
+    --league-glow: #4a9eff;
     --league-bg-start: #024494;
     --league-bg-end: #001d40;
   }
@@ -47,6 +52,7 @@
   [data-theme="bundesliga"] {
     --league-primary: #d20515;
     --league-accent: #ffffff;
+    --league-glow: #ff3d4d;
     --league-bg-start: #d20515;
     --league-bg-end: #5a0208;
   }
@@ -54,6 +60,7 @@
   [data-theme="ligue-1"] {
     --league-primary: #091c3e;
     --league-accent: #daff02;
+    --league-glow: #daff02;
     --league-bg-start: #091c3e;
     --league-bg-end: #030810;
   }
@@ -70,6 +77,69 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ── Premium Data Terminal Effects ────────────────────────────────────────── */
+
+/* Accent shimmer for branded loading states */
+@keyframes accent-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+/* Subtle accent pulse */
+@keyframes accent-pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Shimmer loading state using league glow color */
+.shimmer-loading {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.shimmer-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--league-glow, rgba(255, 255, 255, 0.1)) 50%,
+    transparent 100%
+  );
+  opacity: 0.12;
+  animation: accent-shimmer 1.8s ease-in-out infinite;
+}
+
+/* ── Glow Card Effect ───────────────────────────────────────────────────── */
+
+/* Subtle league-themed glow for section containers */
+.glow-card {
+  border: 1px solid color-mix(in srgb, var(--league-glow) 8%, transparent);
+  box-shadow:
+    0 0 20px color-mix(in srgb, var(--league-glow) 4%, transparent),
+    0 0 40px color-mix(in srgb, var(--league-glow) 2%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--league-glow) 5%, transparent);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.glow-card:hover {
+  border-color: color-mix(in srgb, var(--league-glow) 14%, transparent);
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--league-glow) 7%, transparent),
+    0 0 48px color-mix(in srgb, var(--league-glow) 4%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--league-glow) 8%, transparent);
 }
 
 /* --- Display Ads: unfilled collapse --- */

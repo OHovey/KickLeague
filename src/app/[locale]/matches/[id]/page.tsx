@@ -99,7 +99,7 @@ export default async function MatchDetailPage({
   } catch {
     return (
       <div className="min-h-screen bg-[#0a0a0f]">
-        <div className="mx-auto max-w-3xl px-4 py-8">
+        <div className="mx-auto max-w-6xl px-4 py-8">
           <div className="rounded-lg bg-white/5 p-8 text-center">
             <p className="text-lg font-medium text-white/90">
               {tCommon('unableToLoadMatch')}
@@ -171,7 +171,7 @@ export default async function MatchDetailPage({
         />
         <ThemeBackground theme={leagueSlug} />
         <div className="min-h-screen">
-          <div className="mx-auto max-w-3xl px-4 py-8">
+          <div className="mx-auto max-w-6xl px-4 py-8">
             <Link
               href="/matches"
               className="mb-4 inline-block text-sm text-white/50 transition-colors hover:text-white/70"
@@ -191,28 +191,37 @@ export default async function MatchDetailPage({
               locale={locale}
             />
 
-            <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_1.slotId} className="my-6" />
+            {/* Two-column grid: stats left, H2H right */}
+            <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_340px]">
+              {/* Column 1: Match analysis */}
+              <div className="flex flex-col gap-6">
+                <StatsComparison
+                  homeStats={stats.home}
+                  awayStats={stats.away}
+                />
 
-            <StatsComparison
-              homeStats={stats.home}
-              awayStats={stats.away}
-            />
+                <EventsTimeline
+                  events={events}
+                  homeTeamId={match.homeTeam.id}
+                />
 
-            <EventsTimeline
-              events={events}
-              homeTeamId={match.homeTeam.id}
-            />
+                <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_1.slotId} />
+              </div>
 
-            <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_2.slotId} className="my-6" />
+              {/* Column 2: Context */}
+              <div className="lg:sticky lg:top-8 lg:self-start flex flex-col gap-6">
+                <H2HSection
+                  h2hData={context.h2h}
+                  team1Name={match.homeTeam.shortName ?? match.homeTeam.name}
+                  team2Name={match.awayTeam.shortName ?? match.awayTeam.name}
+                  team1Id={match.homeTeam.id}
+                  team2Id={match.awayTeam.id}
+                  locale={locale}
+                />
 
-            <H2HSection
-              h2hData={context.h2h}
-              team1Name={match.homeTeam.shortName ?? match.homeTeam.name}
-              team2Name={match.awayTeam.shortName ?? match.awayTeam.name}
-              team1Id={match.homeTeam.id}
-              team2Id={match.awayTeam.id}
-              locale={locale}
-            />
+                <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_2.slotId} />
+              </div>
+            </div>
           </div>
         </div>
       </>
@@ -239,7 +248,7 @@ export default async function MatchDetailPage({
       />
       <ThemeBackground theme={leagueSlug} />
       <div className="min-h-screen">
-        <div className="mx-auto max-w-3xl px-4 py-8">
+        <div className="mx-auto max-w-6xl px-4 py-8">
           <Link
             href="/matches"
             className="mb-4 inline-block text-sm text-white/50 transition-colors hover:text-white/70"
@@ -259,39 +268,47 @@ export default async function MatchDetailPage({
             locale={locale}
           />
 
-          <FormGuide
-            homeTeamName={match.homeTeam.shortName ?? match.homeTeam.name}
-            awayTeamName={match.awayTeam.shortName ?? match.awayTeam.name}
-            homeForm={context.homeTeamStats?.form ?? null}
-            awayForm={context.awayTeamStats?.form ?? null}
-          />
+          {/* Two-column grid: analysis left, odds right */}
+          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_340px]">
+            {/* Column 1: Match context */}
+            <div className="flex flex-col gap-6">
+              <FormGuide
+                homeTeamName={match.homeTeam.shortName ?? match.homeTeam.name}
+                awayTeamName={match.awayTeam.shortName ?? match.awayTeam.name}
+                homeForm={context.homeTeamStats?.form ?? null}
+                awayForm={context.awayTeamStats?.form ?? null}
+              />
 
-          <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_1.slotId} className="my-6" />
+              <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_1.slotId} />
 
-          <H2HSection
-            h2hData={context.h2h}
-            team1Name={match.homeTeam.shortName ?? match.homeTeam.name}
-            team2Name={match.awayTeam.shortName ?? match.awayTeam.name}
-            team1Id={match.homeTeam.id}
-            team2Id={match.awayTeam.id}
-            locale={locale}
-          />
+              <H2HSection
+                h2hData={context.h2h}
+                team1Name={match.homeTeam.shortName ?? match.homeTeam.name}
+                team2Name={match.awayTeam.shortName ?? match.awayTeam.name}
+                team1Id={match.homeTeam.id}
+                team2Id={match.awayTeam.id}
+                locale={locale}
+              />
 
-          <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_2.slotId} className="my-6" />
+              <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_2.slotId} />
 
-          <ComparativeStats
-            homeTeamStats={context.homeTeamStats}
-            awayTeamStats={context.awayTeamStats}
-            homeTeamName={match.homeTeam.shortName ?? match.homeTeam.name}
-            awayTeamName={match.awayTeam.shortName ?? match.awayTeam.name}
-          />
+              <ComparativeStats
+                homeTeamStats={context.homeTeamStats}
+                awayTeamStats={context.awayTeamStats}
+                homeTeamName={match.homeTeam.shortName ?? match.homeTeam.name}
+                awayTeamName={match.awayTeam.shortName ?? match.awayTeam.name}
+              />
+            </div>
 
-          {/* Odds comparison table (upcoming matches only) */}
-          <OddsComparisonTable
-            fixtureId={fixtureId}
-            homeTeam={match.homeTeam.shortName ?? match.homeTeam.name}
-            awayTeam={match.awayTeam.shortName ?? match.awayTeam.name}
-          />
+            {/* Column 2: Betting odds */}
+            <div className="lg:sticky lg:top-8 lg:self-start">
+              <OddsComparisonTable
+                fixtureId={fixtureId}
+                homeTeam={match.homeTeam.shortName ?? match.homeTeam.name}
+                awayTeam={match.awayTeam.shortName ?? match.awayTeam.name}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>
