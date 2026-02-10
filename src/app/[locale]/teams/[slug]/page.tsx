@@ -11,6 +11,9 @@ import { buildSportsTeam, buildBreadcrumbs, serializeJsonLd } from '@/lib/seo/st
 import { AdUnit } from '@/components/ads/AdUnit';
 import { AD_SLOTS } from '@/components/ads/ad-config';
 
+// ISR: revalidate every 30 minutes (matches poll frequency)
+export const revalidate = 1800;
+
 // -- Metadata ----------------------------------------------------------------
 
 export async function generateMetadata({

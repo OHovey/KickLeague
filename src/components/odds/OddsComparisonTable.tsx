@@ -3,6 +3,7 @@
 import { useEffect, useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { fetchOddsForFixture, type FixtureOddsResult } from './actions';
+import { getGeoContext } from '@/components/matches/actions';
 import { OddsCell } from './OddsCell';
 import {
   OddsFormatSwitcher,
@@ -15,9 +16,6 @@ interface OddsComparisonTableProps {
   fixtureId: number;
   homeTeam: string;
   awayTeam: string;
-  showBetting: boolean;
-  countryCode: string | null;
-  isMapped?: boolean;
 }
 
 // ── Skeleton ───────────────────────────────────────────────────────────────
@@ -69,20 +67,23 @@ export function OddsComparisonTable({
   fixtureId,
   homeTeam,
   awayTeam,
-  showBetting,
-  countryCode,
-  isMapped = true,
 }: OddsComparisonTableProps) {
   const t = useTranslations('Odds');
   const [data, setData] = useState<FixtureOddsResult | null>(null);
   const [isPending, startTransition] = useTransition();
   const [loaded, setLoaded] = useState(false);
+  const [geo, setGeo] = useState<{ showBetting: boolean; countryCode: string | null; isMapped: boolean } | null>(null);
 
   useEffect(() => {
-    if (!showBetting) return;
     startTransition(async () => {
       try {
-        const result = await fetchOddsForFixture(fixtureId, countryCode);
+        const geoCtx = await getGeoContext();
+        setGeo(geoCtx);
+        if (!geoCtx.showBetting) {
+          setLoaded(true);
+          return;
+        }
+        const result = await fetchOddsForFixture(fixtureId, geoCtx.countryCode);
         setData(result);
       } catch {
         // Silently fail - odds are supplementary
@@ -90,10 +91,10 @@ export function OddsComparisonTable({
         setLoaded(true);
       }
     });
-  }, [fixtureId, showBetting, countryCode]);
+  }, [fixtureId]);
 
   // Geo-blocked: render nothing
-  if (!showBetting) return null;
+  if (geo && !geo.showBetting) return null;
 
   // Loading state
   if (!loaded || isPending) {
@@ -232,7 +233,7 @@ export function OddsComparisonTable({
         <RegionNote
           filteredCount={data.odds.length}
           totalCount={data.totalBookmakers}
-          isFallback={!isMapped}
+          isFallback={!(geo?.isMapped ?? true)}
         />
 
         {/* Responsible gambling */}

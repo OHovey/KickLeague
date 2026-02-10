@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation';
-import { headers } from 'next/headers';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
@@ -19,10 +18,12 @@ import {
   fetchUpcomingMatchContext,
   getLeagueSlugById,
 } from '@/components/match-detail/actions';
-import { isCountryMapped } from '@/lib/geo/bookmaker-availability';
 import { buildSportsEvent, buildBreadcrumbs, serializeJsonLd } from '@/lib/seo/structured-data';
 import { AdUnit } from '@/components/ads/AdUnit';
 import { AD_SLOTS } from '@/components/ads/ad-config';
+
+// ISR: revalidate every 30 minutes (matches poll frequency)
+export const revalidate = 1800;
 
 // -- Metadata ----------------------------------------------------------------
 
@@ -88,11 +89,6 @@ export default async function MatchDetailPage({
   setRequestLocale(locale);
 
   const tCommon = await getTranslations('Common');
-
-  // Read geo-compliance flags from proxy headers
-  const headerStore = await headers();
-  const showBetting = headerStore.get('x-show-betting') === '1';
-  const countryCode = headerStore.get('x-user-country')?.toUpperCase() ?? null;
 
   const fixtureId = parseInt(id, 10);
   if (isNaN(fixtureId)) return notFound();
@@ -295,9 +291,6 @@ export default async function MatchDetailPage({
             fixtureId={fixtureId}
             homeTeam={match.homeTeam.shortName ?? match.homeTeam.name}
             awayTeam={match.awayTeam.shortName ?? match.awayTeam.name}
-            showBetting={showBetting}
-            countryCode={countryCode}
-            isMapped={isCountryMapped(countryCode)}
           />
         </div>
       </div>
