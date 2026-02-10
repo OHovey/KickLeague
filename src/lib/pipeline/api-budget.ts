@@ -4,13 +4,23 @@
  * Logs every API-Football call to the api_call_log table and provides
  * budget-checking utilities to prevent exceeding the daily limit.
  *
- * The free tier allows 100 calls/day. The pipeline reserves 20 calls
- * for manual/debug use, so the default pipeline budget is 80 calls/day.
+ * The Pro tier allows 7,500 calls/day. The pipeline reserves 500 calls
+ * for manual/debug use, so the default pipeline budget is 7,000 calls/day.
  */
 
+import * as Sentry from '@sentry/nextjs';
 import { getDb } from '@/db/connection';
 import { apiCallLog } from '@/db/schema';
 import { gte, sql, count } from 'drizzle-orm';
+
+/** 80% of the 7,500 daily API-Football Pro tier limit */
+const WARNING_THRESHOLD = 6000;
+
+/** 93% of the 7,500 daily API-Football Pro tier limit */
+const CRITICAL_THRESHOLD = 7000;
+
+/** Absolute daily limit for API-Football Pro tier */
+const DAILY_LIMIT = 7500;
 
 interface LogApiCallParams {
   endpoint: string;
@@ -59,12 +69,48 @@ export async function getDailyCallCount(): Promise<number> {
 /**
  * Check if the pipeline can make another API call within the daily budget.
  *
- * @param dailyLimit - Maximum pipeline calls per day (default: 80, reserving 20 for manual use)
+ * @param dailyLimit - Maximum pipeline calls per day (default: 7000, reserving 500 for manual use)
  * @returns true if the daily count is below the limit
  */
 export async function canMakePipelineCall(
-  dailyLimit: number = 80,
+  dailyLimit: number = 7000,
 ): Promise<boolean> {
   const dailyCount = await getDailyCallCount();
   return dailyCount < dailyLimit;
+}
+
+/**
+ * Check daily API-Football usage against budget thresholds and alert via Sentry.
+ *
+ * - >= 6,000 (80%): Sentry warning
+ * - >= 7,000 (93%): Sentry fatal alert
+ *
+ * Intended to be called at the end of each cron route as a best-effort check.
+ */
+export async function checkBudgetThresholds(): Promise<void> {
+  const dailyCount = await getDailyCallCount();
+
+  if (dailyCount >= CRITICAL_THRESHOLD) {
+    const message = `API-Football budget CRITICAL: ${dailyCount}/${DAILY_LIMIT} daily requests used`;
+    Sentry.captureMessage(message, {
+      level: 'fatal',
+      extra: {
+        dailyCount,
+        threshold: CRITICAL_THRESHOLD,
+        dailyLimit: DAILY_LIMIT,
+      },
+    });
+    console.error(message);
+  } else if (dailyCount >= WARNING_THRESHOLD) {
+    const message = `API-Football budget WARNING: ${dailyCount}/${DAILY_LIMIT} daily requests used`;
+    Sentry.captureMessage(message, {
+      level: 'warning',
+      extra: {
+        dailyCount,
+        threshold: WARNING_THRESHOLD,
+        dailyLimit: DAILY_LIMIT,
+      },
+    });
+    console.warn(message);
+  }
 }
