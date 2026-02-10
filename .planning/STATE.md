@@ -46,7 +46,6 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 - Sign up for 5 affiliate programs (Paddy Power, Entain, Kindred, 888, William Hill)
 - Collect affiliate IDs/btags from each dashboard after approval
 - Apply migration 0003_young_network.sql to production database
-- Pull all required Sports API data and verify daily request budget (<2000 req/day)
 - Set up Google AdSense account and create 8 ad unit slots
 - Update public/ads.txt with real publisher ID
 - Investigate empty biggest upset card on homepage (fix or replace metric)
