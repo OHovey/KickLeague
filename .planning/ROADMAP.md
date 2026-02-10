@@ -192,7 +192,11 @@ Plans:
   1. Requests to `/api/updates/check` and `/api/clicks` are rate-limited and return 429 when limits are exceeded
   2. The site serves a Content Security Policy header that allows its own scripts, styles, AdSense, and analytics while blocking unexpected sources
   3. Every response includes X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers with secure defaults
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 16-01-PLAN.md -- Rate limiting on public API endpoints (in-memory token bucket)
+- [ ] 16-02-PLAN.md -- Security headers (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) + CSP report endpoint
 
 #### Phase 17: Monitoring Integration
 **Goal**: Errors are automatically captured, performance is tracked, and operators are alerted when the data pipeline or API budget is at risk
@@ -258,7 +262,7 @@ Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in
 | 13. i18n Complete | v1.2 | 7/7 | Complete | 2026-02-08 |
 | 14. SEO | v1.2 | 5/5 | Complete | 2026-02-08 |
 | 15. Display Ads | v1.2 | 2/2 | Complete | 2026-02-09 |
-| 16. Security | v1.3 | 0/TBD | Not started | - |
+| 16. Security | v1.3 | 0/2 | Planned | - |
 | 17. Monitoring | v1.3 | 0/TBD | Not started | - |
 | 18. Deployment | v1.3 | 0/TBD | Not started | - |
 | 19. Pipeline | v1.3 | 0/TBD | Not started | - |
