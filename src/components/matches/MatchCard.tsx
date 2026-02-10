@@ -203,7 +203,7 @@ export function MatchCard({
   return (
     <Link
       href={`/matches/${match.id}`}
-      className="block overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm transition-colors hover:bg-white/[0.08]"
+      className="glow-card block overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm transition-colors hover:bg-white/[0.08]"
     >
       <div className="px-4 py-3 space-y-3">
         {/* Date */}
@@ -238,14 +238,14 @@ export function MatchCard({
           </div>
 
           {/* Score / Time */}
-          <div className="flex w-20 flex-col items-center">
+          <div className="flex shrink-0 flex-col items-center">
             {isFinished ? (
               <span className="text-lg font-bold tabular-nums text-white">
                 {match.homeScore} - {match.awayScore}
               </span>
             ) : (
               <span
-                className="text-sm font-medium text-white/80"
+                className="whitespace-nowrap text-sm font-medium text-white/80"
                 suppressHydrationWarning
               >
                 {formatKickoffTime(match.kickoff, locale)}
