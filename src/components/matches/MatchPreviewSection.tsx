@@ -210,7 +210,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
     startTransition(async () => {
       try {
         const [recentResult, upcomingResult, geo] = await Promise.all([
-          fetchRecentMatches(league, 5),
+          fetchRecentMatches(league, 10),
           fetchUpcomingFixtures(league, 5),
           getGeoContext(),
         ]);
