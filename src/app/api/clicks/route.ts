@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, isDatabaseConfigured } from '@/db/connection';
 import { affiliateClicks } from '@/db/schema';
+import { rateLimit, RATE_LIMIT_CLICKS } from '@/lib/rate-limit';
 
 const VALID_OUTCOMES = new Set(['home', 'draw', 'away']);
 
@@ -13,6 +14,22 @@ const VALID_OUTCOMES = new Set(['home', 'draw', 'away']);
  * Body: { fixtureId: number, bookmakerKey: string, outcome: string, odds: number, affiliateProgram?: string }
  */
 export async function POST(request: NextRequest) {
+  // Rate limit check -- must be first guard
+  const ip =
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+    request.headers.get('x-real-ip') ??
+    'unknown';
+  const rl = rateLimit(ip, RATE_LIMIT_CLICKS);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests', retryAfter: rl.retryAfterSeconds },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(rl.retryAfterSeconds) },
+      }
+    );
+  }
+
   try {
     if (!isDatabaseConfigured()) {
       return NextResponse.json({ ok: true }, { status: 200 });

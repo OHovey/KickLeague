@@ -4,6 +4,7 @@ import { standings } from '@/db/schema/standings';
 import { fixtures } from '@/db/schema/fixtures';
 import { leagues } from '@/db/schema/leagues';
 import { eq, and, max, inArray, gte, sql } from 'drizzle-orm';
+import { rateLimit, RATE_LIMIT_UPDATES } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,6 +19,22 @@ const LIVE_STATUSES = [
 ] as const;
 
 export async function GET(request: Request) {
+  // Rate limit check -- must be first guard
+  const ip =
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+    request.headers.get('x-real-ip') ??
+    'unknown';
+  const rl = rateLimit(ip, RATE_LIMIT_UPDATES);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests', retryAfter: rl.retryAfterSeconds },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(rl.retryAfterSeconds) },
+      }
+    );
+  }
+
   const { searchParams } = new URL(request.url);
   const leagueSlug = searchParams.get('leagueSlug');
   const season = searchParams.get('season');
