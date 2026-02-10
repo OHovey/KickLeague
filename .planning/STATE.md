@@ -11,7 +11,7 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 
 Milestone: v1.2 shipped (2026-02-09)
 Status: All milestones complete, no active work
-Last activity: 2026-02-10 - Completed quick task 4: Add date to recent result rows and balance height
+Last activity: 2026-02-10 - Completed quick task 5: Make both match preview cards equal height
 
 Progress: [##################################################] 100% (53/53 total plans complete across v1.0, v1.1, v1.2)
 
@@ -65,9 +65,10 @@ None.
 | 2 | Fix league table position change column showing blanks | 2026-02-10 | 81937b3 | [2-fix-league-table-column-showing-blanks-a](./quick/2-fix-league-table-column-showing-blanks-a/) |
 | 3 | Balance recent results card height to match fixtures | 2026-02-10 | c5a2265 | [3-balance-recent-results-card-height-to-ma](./quick/3-balance-recent-results-card-height-to-ma/) |
 | 4 | Add date to recent result rows and balance height | 2026-02-10 | 7e3dfcf | [4-add-date-to-recent-result-rows-and-balan](./quick/4-add-date-to-recent-result-rows-and-balan/) |
+| 5 | Make both match preview cards equal height | 2026-02-10 | 093ba2a | [5-make-both-match-preview-cards-equal-heig](./quick/5-make-both-match-preview-cards-equal-heig/) |
 
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed quick-4 (add date to recent result rows)
+Stopped at: Completed quick-5 (make both match preview cards equal height)
 Resume file: None
