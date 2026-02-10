@@ -183,7 +183,7 @@
     "nGoals": "{count} gol",
     "nPts": "{count} pti",
     "topScorer": "CAPOCANNONIERE",
-    "winnerAtOdds": "Vincitore a quota {odds}"
+    "positionGapContext": "{gap} posizioni di distacco"
   },
   "TeamFixtures": {
     "matchweekShort": "G {week}",

@@ -183,7 +183,7 @@
     "nGoals": "{count} Tore",
     "nPts": "{count} Pkt",
     "topScorer": "TORSCH\u00dcTZENK\u00d6NIG",
-    "winnerAtOdds": "Sieger bei Quote {odds}"
+    "positionGapContext": "{gap} Pl\u00e4tze Unterschied"
   },
   "TeamFixtures": {
     "matchweekShort": "ST {week}",

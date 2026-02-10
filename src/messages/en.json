@@ -183,7 +183,7 @@
     "nGoals": "{count} goals",
     "nPts": "{count} pts",
     "topScorer": "TOP SCORER",
-    "winnerAtOdds": "Winner at {odds} odds"
+    "positionGapContext": "{gap} places apart"
   },
   "TeamFixtures": {
     "matchweekShort": "MW {week}",

@@ -183,7 +183,7 @@
     "nGoals": "{count} buts",
     "nPts": "{count} pts",
     "topScorer": "MEILLEUR BUTEUR",
-    "winnerAtOdds": "Vainqueur \u00e0 la cote de {odds}"
+    "positionGapContext": "{gap} places d'\u00e9cart"
   },
   "TeamFixtures": {
     "matchweekShort": "J {week}",

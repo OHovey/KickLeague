@@ -191,7 +191,7 @@ export function StatHighlights() {
           }
           context={
             upset
-              ? t('winnerAtOdds', { odds: upset.winningOdds.toFixed(1) })
+              ? t('positionGapContext', { gap: upset.positionGap })
               : undefined
           }
           teamLogoUrl={upsetWinnerLogo}
