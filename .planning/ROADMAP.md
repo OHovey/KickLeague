@@ -5,6 +5,7 @@
 - **v1.0 MVP** - Phases 1-8 (shipped 2026-02-06)
 - **v1.1 Affiliate Monetisation** - Phases 9-10 (shipped 2026-02-06)
 - **v1.2 Polish, SEO & Launch Readiness** - Phases 11-15 (shipped 2026-02-09)
+- **v1.3 Production Launch** - Phases 16-20 (in progress)
 
 ## Phases
 
@@ -173,7 +174,72 @@ Plans:
 
 </details>
 
+### v1.3 Production Launch (In Progress)
+
+**Milestone Goal:** Deploy KickLeague to production with monitoring, verified data pipeline, security hardening, and documentation -- everything needed to go live.
+
+- [ ] **Phase 16: Security Hardening** - Rate limiting and security headers before production deploy
+- [ ] **Phase 17: Monitoring Integration** - Error tracking, performance analytics, and operational alerts
+- [ ] **Phase 18: Production Deployment** - Vercel + Neon production environment with seeded data and documentation
+- [ ] **Phase 19: Production Pipeline** - Verified cron schedules, live match polling, and current data
+- [ ] **Phase 20: Launch Documentation** - Manual setup checklists for AdSense, affiliates, and DNS
+
+#### Phase 16: Security Hardening
+**Goal**: Public API endpoints are protected from abuse and the site sends proper security headers on every response
+**Depends on**: Phase 15 (v1.2 shipped)
+**Requirements**: SEC-01, SEC-02, SEC-03
+**Success Criteria** (what must be TRUE):
+  1. Requests to `/api/updates/check` and `/api/clicks` are rate-limited and return 429 when limits are exceeded
+  2. The site serves a Content Security Policy header that allows its own scripts, styles, AdSense, and analytics while blocking unexpected sources
+  3. Every response includes X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers with secure defaults
+**Plans**: TBD
+
+#### Phase 17: Monitoring Integration
+**Goal**: Errors are automatically captured, performance is tracked, and operators are alerted when the data pipeline or API budget is at risk
+**Depends on**: Phase 16
+**Requirements**: MON-01, MON-02, MON-03, MON-04
+**Success Criteria** (what must be TRUE):
+  1. Unhandled errors and rejected promises are captured in Sentry with source maps and environment tags (development vs production)
+  2. Vercel Analytics is active and page load performance is visible in the Vercel dashboard
+  3. When daily API-Football request count approaches the 7,500 limit, a warning is logged or alerted
+  4. When a QStash or Vercel cron route returns an error status, the failure is captured in Sentry with cron context
+**Plans**: TBD
+
+#### Phase 18: Production Deployment
+**Goal**: KickLeague runs on a production Vercel project backed by a production Neon database, with current data and complete setup documentation
+**Depends on**: Phase 17
+**Requirements**: DEPLOY-01, DEPLOY-02, DEPLOY-03, DEPLOY-04, DEPLOY-05
+**Success Criteria** (what must be TRUE):
+  1. The production Vercel project deploys successfully with all environment variables configured and the site loads at the production URL
+  2. The Neon production database has all Drizzle migrations applied and contains current-season teams, fixtures, standings, and odds data
+  3. A `.env.example` file documents every required environment variable with a description of its purpose and where to obtain it
+  4. The project README contains setup instructions, architecture overview, environment variable guide, and deployment steps (replacing the Next.js boilerplate)
+**Plans**: TBD
+
+#### Phase 19: Production Pipeline
+**Goal**: The automated data pipeline runs reliably in production, with live match polling at 3-minute intervals and all 5 leagues showing current data
+**Depends on**: Phase 18
+**Requirements**: PIPE-01, PIPE-02, PIPE-03
+**Success Criteria** (what must be TRUE):
+  1. QStash cron schedules are configured and visibly running in the Upstash dashboard, triggering the polling and odds routes on their defined intervals
+  2. During live matches, the polling frequency increases to 3-minute intervals so match scores stay near real-time
+  3. All 5 leagues show current match results and standings that match the latest data from API-Football
+**Plans**: TBD
+
+#### Phase 20: Launch Documentation
+**Goal**: Every manual setup step needed for full monetisation and DNS is documented in actionable checklists so nothing is forgotten
+**Depends on**: Nothing (documentation-only, can run in parallel)
+**Requirements**: MANUAL-01, MANUAL-02, MANUAL-03
+**Success Criteria** (what must be TRUE):
+  1. An AdSense setup checklist exists documenting account creation steps, ad unit ID collection for all 8 slots, and the `ads.txt` update procedure
+  2. An affiliate program setup checklist exists documenting signup steps for each bookmaker program, ID/btag collection, and where to configure them in the codebase
+  3. A DNS/domain setup checklist exists documenting domain purchase, DNS record configuration, Vercel domain linking, and SSL verification steps
+**Plans**: TBD
+
 ## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in parallel with 18-19)
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -192,7 +258,12 @@ Plans:
 | 13. i18n Complete | v1.2 | 7/7 | Complete | 2026-02-08 |
 | 14. SEO | v1.2 | 5/5 | Complete | 2026-02-08 |
 | 15. Display Ads | v1.2 | 2/2 | Complete | 2026-02-09 |
+| 16. Security | v1.3 | 0/TBD | Not started | - |
+| 17. Monitoring | v1.3 | 0/TBD | Not started | - |
+| 18. Deployment | v1.3 | 0/TBD | Not started | - |
+| 19. Pipeline | v1.3 | 0/TBD | Not started | - |
+| 20. Launch Docs | v1.3 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-09 — v1.2 milestone archived*
+*Last updated: 2026-02-10 -- v1.3 milestone roadmap added*

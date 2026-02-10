@@ -5,14 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.3 Production Launch
+**Current focus:** Phase 16 - Security Hardening (v1.3 Production Launch)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-10 — Milestone v1.3 started
+Phase: 16 of 20 (Security Hardening)
+Plan: 0 of TBD in current phase
+Status: Ready to plan
+Last activity: 2026-02-10 -- v1.3 roadmap created
+
+Progress: [##########..........] 53/TBD (v1.0-v1.2 complete, v1.3 starting)
 
 ## Performance Metrics
 
@@ -30,15 +32,16 @@ Last activity: 2026-02-10 — Milestone v1.3 started
 - Total plans completed: 21
 - Timeline: 5 days (2026-02-07 to 2026-02-09)
 
+**v1.3:** Not started
+
 ## Accumulated Context
 
 ### Decisions
 
-All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked ✓ Good).
+All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked Good).
 
 ### Pending Todos (manual/infrastructure)
 
-- ~~API-Football subscription upgrade~~ — DONE (2026-02-09)
 - Sign up for 5 affiliate programs (Paddy Power, Entain, Kindred, 888, William Hill)
 - Collect affiliate IDs/btags from each dashboard after approval
 - Set up Google AdSense account and create 8 ad unit slots
@@ -67,5 +70,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Starting milestone v1.3 Production Launch
+Stopped at: v1.3 roadmap created, ready to plan Phase 16
 Resume file: None

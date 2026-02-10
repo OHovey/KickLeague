@@ -1,7 +1,7 @@
 # Requirements: KickLeague
 
 **Defined:** 2026-02-10
-**Core Value:** Football fans can see league standings with rich visual context — sparklines, trend indicators, form runs, position history — presented with the information density of a financial dashboard.
+**Core Value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
 
 ## v1.3 Requirements
 
@@ -68,13 +68,30 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated by roadmapper) | | |
+| SEC-01 | Phase 16: Security Hardening | Pending |
+| SEC-02 | Phase 16: Security Hardening | Pending |
+| SEC-03 | Phase 16: Security Hardening | Pending |
+| MON-01 | Phase 17: Monitoring Integration | Pending |
+| MON-02 | Phase 17: Monitoring Integration | Pending |
+| MON-03 | Phase 17: Monitoring Integration | Pending |
+| MON-04 | Phase 17: Monitoring Integration | Pending |
+| DEPLOY-01 | Phase 18: Production Deployment | Pending |
+| DEPLOY-02 | Phase 18: Production Deployment | Pending |
+| DEPLOY-03 | Phase 18: Production Deployment | Pending |
+| DEPLOY-04 | Phase 18: Production Deployment | Pending |
+| DEPLOY-05 | Phase 18: Production Deployment | Pending |
+| PIPE-01 | Phase 19: Production Pipeline | Pending |
+| PIPE-02 | Phase 19: Production Pipeline | Pending |
+| PIPE-03 | Phase 19: Production Pipeline | Pending |
+| MANUAL-01 | Phase 20: Launch Documentation | Pending |
+| MANUAL-02 | Phase 20: Launch Documentation | Pending |
+| MANUAL-03 | Phase 20: Launch Documentation | Pending |
 
 **Coverage:**
 - v1.3 requirements: 18 total
-- Mapped to phases: 0
-- Unmapped: 18
+- Mapped to phases: 18
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-10*
-*Last updated: 2026-02-10 after initial definition*
+*Last updated: 2026-02-10 -- traceability populated by roadmapper*
