@@ -181,7 +181,7 @@ Plans:
 - [x] **Phase 16: Security Hardening** - Rate limiting and security headers before production deploy
 - [x] **Phase 17: Monitoring Integration** - Error tracking, performance analytics, and operational alerts
 - [x] **Phase 18: Production Deployment** - Vercel + Neon production environment with seeded data and documentation
-- [ ] **Phase 19: Production Pipeline** - Verified cron schedules, live match polling, and current data
+- [x] **Phase 19: Production Pipeline** - Verified cron schedules, live match polling, and current data
 - [ ] **Phase 20: Launch Documentation** - Manual setup checklists for AdSense, affiliates, and DNS
 
 #### Phase 16: Security Hardening
@@ -225,8 +225,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 18-01-PLAN.md -- Complete .env.example documentation and production README
-- [ ] 18-02-PLAN.md -- Production Vercel + Neon deployment, migrations, and data seeding
+- [x] 18-01-PLAN.md -- Complete .env.example documentation and production README
+- [x] 18-02-PLAN.md -- Production Vercel + Neon deployment, migrations, and data seeding
 
 #### Phase 19: Production Pipeline
 **Goal**: The automated data pipeline runs reliably in production, with live match polling at 3-minute intervals and all 5 leagues showing current data
@@ -239,8 +239,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 19-01-PLAN.md -- Configure QStash cron schedules with 3-minute polling and verify in Upstash dashboard
-- [ ] 19-02-PLAN.md -- Verify database freshness and production site data currency across all 5 leagues
+- [x] 19-01-PLAN.md -- Configure QStash cron schedules with 3-minute polling and verify in Upstash dashboard
+- [x] 19-02-PLAN.md -- Verify database freshness and production site data currency across all 5 leagues
 
 #### Phase 20: Launch Documentation
 **Goal**: Every manual setup step needed for full monetisation and DNS is documented in actionable checklists so nothing is forgotten
@@ -277,9 +277,9 @@ Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in
 | 16. Security | v1.3 | 2/2 | Complete | 2026-02-10 |
 | 17. Monitoring | v1.3 | 2/2 | Complete | 2026-02-10 |
 | 18. Deployment | v1.3 | 2/2 | Complete | 2026-02-11 |
-| 19. Pipeline | v1.3 | 0/TBD | Not started | - |
+| 19. Pipeline | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 20. Launch Docs | v1.3 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-11 -- Phase 18 complete*
+*Last updated: 2026-02-11 -- Phase 19 complete*
