@@ -1,4 +1,15 @@
+/**
+ * QStash-triggered cron route for refreshing betting odds.
+ *
+ * POST: Called by QStash every 6 hours.
+ *       Verifies QStash signature via Receiver (manual verification
+ *       to avoid unhandled SignatureError from verifySignatureAppRouter).
+ *
+ * GET:  Dev-only manual trigger for local testing (403 in production).
+ */
+
 import * as Sentry from '@sentry/nextjs';
+import { Receiver } from '@upstash/qstash';
 import { refreshOdds } from '@/lib/pipeline/refresh-odds';
 import { checkBudgetThresholds } from '@/lib/pipeline/api-budget';
 
@@ -6,43 +17,26 @@ export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
 export async function POST(req: Request) {
-  try {
-    const { Receiver } = await import('@upstash/qstash');
-
-    const signingKey = process.env.QSTASH_CURRENT_SIGNING_KEY;
-    const nextSigningKey = process.env.QSTASH_NEXT_SIGNING_KEY;
-
-    if (!signingKey || !nextSigningKey) {
-      console.error(
-        '[refresh-odds] Missing QSTASH_CURRENT_SIGNING_KEY or QSTASH_NEXT_SIGNING_KEY',
-      );
-      return new Response('Server configuration error', { status: 500 });
-    }
-
-    const receiver = new Receiver({
-      currentSigningKey: signingKey,
-      nextSigningKey: nextSigningKey,
-    });
-
-    const signature = req.headers.get('upstash-signature');
-    if (!signature) {
-      return new Response('Missing signature', { status: 401 });
-    }
-
-    const body = await req.text();
-    const isValid = await receiver.verify({
-      signature,
-      body,
-    });
-
-    if (!isValid) {
-      return new Response('Invalid signature', { status: 401 });
-    }
-  } catch (error) {
-    console.error('[refresh-odds] Signature verification failed:', error);
-    return new Response('Unauthorized', { status: 401 });
+  // --- QStash signature verification ---
+  const signature = req.headers.get('upstash-signature');
+  if (!signature) {
+    return new Response('`Upstash-Signature` header is missing', { status: 401 });
   }
 
+  try {
+    const receiver = new Receiver({
+      currentSigningKey: process.env.QSTASH_CURRENT_SIGNING_KEY!,
+      nextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!,
+    });
+    const body = await req.text();
+    await receiver.verify({ signature, body });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error('[refresh-odds] QStash signature verification failed:', message);
+    return Response.json({ error: `Signature verification failed: ${message}` }, { status: 401 });
+  }
+
+  // --- Business logic ---
   try {
     const result = await refreshOdds();
 
