@@ -11,6 +11,9 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from 'recharts';
+import { useLeague } from '@/lib/hooks/use-league';
+import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
+import type { League } from '@/lib/themes/league-themes';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -64,6 +67,8 @@ function XgTooltip({ active, label, payload, formatMatchweek }: CustomTooltipPro
 
 export function CumulativeXgChart({ data }: CumulativeXgChartProps) {
   const t = useTranslations('Charts');
+  const { league } = useLeague();
+  const glowColor = LEAGUE_THEMES[league as League]?.colors.glow ?? '#22c55e';
 
   if (!data || data.length === 0) {
     return (
@@ -116,10 +121,10 @@ export function CumulativeXgChart({ data }: CumulativeXgChartProps) {
         <Line
           type="monotone"
           dataKey="cumulativeGoals"
-          stroke="#22c55e"
+          stroke={glowColor}
           strokeWidth={2}
           dot={false}
-          activeDot={{ r: 4, fill: '#22c55e' }}
+          activeDot={{ r: 4, fill: glowColor }}
           name="Actual Goals"
         />
       </LineChart>

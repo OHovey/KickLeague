@@ -15,6 +15,7 @@ export interface LeagueTheme {
   colors: {
     primary: string;
     accent: string;
+    glow: string;
     bgStart: string;
     bgEnd: string;
   };
@@ -28,6 +29,7 @@ export const LEAGUE_THEMES: Record<League, LeagueTheme> = {
     colors: {
       primary: '#3d195b',
       accent: '#00ff87',
+      glow: '#00ff87',
       bgStart: '#3d195b',
       bgEnd: '#1a0a2e',
     },
@@ -39,6 +41,7 @@ export const LEAGUE_THEMES: Record<League, LeagueTheme> = {
     colors: {
       primary: '#ee8707',
       accent: '#1a1a1a',
+      glow: '#ee8707',
       bgStart: '#ee8707',
       bgEnd: '#5a3200',
     },
@@ -50,6 +53,7 @@ export const LEAGUE_THEMES: Record<League, LeagueTheme> = {
     colors: {
       primary: '#024494',
       accent: '#ffffff',
+      glow: '#4a9eff',
       bgStart: '#024494',
       bgEnd: '#001d40',
     },
@@ -61,6 +65,7 @@ export const LEAGUE_THEMES: Record<League, LeagueTheme> = {
     colors: {
       primary: '#d20515',
       accent: '#ffffff',
+      glow: '#ff3d4d',
       bgStart: '#d20515',
       bgEnd: '#5a0208',
     },
@@ -72,6 +77,7 @@ export const LEAGUE_THEMES: Record<League, LeagueTheme> = {
     colors: {
       primary: '#091c3e',
       accent: '#daff02',
+      glow: '#daff02',
       bgStart: '#091c3e',
       bgEnd: '#030810',
     },

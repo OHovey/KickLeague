@@ -10,6 +10,9 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from 'recharts';
+import { useLeague } from '@/lib/hooks/use-league';
+import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
+import type { League } from '@/lib/themes/league-themes';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -49,6 +52,11 @@ function PointsTooltip({ active, payload, formatMatchweek, formatPoints }: Custo
 
 export function CumulativePointsChart({ data }: CumulativePointsChartProps) {
   const t = useTranslations('Charts');
+  const { league } = useLeague();
+  const glowColor = LEAGUE_THEMES[league as League]?.colors.glow ?? '#22c55e';
+
+  // Unique gradient ID per league to avoid conflicts
+  const gradientId = `pointsFill-${league}`;
 
   if (!data || data.length === 0) {
     return (
@@ -62,9 +70,9 @@ export function CumulativePointsChart({ data }: CumulativePointsChartProps) {
     <ResponsiveContainer width="100%" height={250}>
       <AreaChart data={data} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
         <defs>
-          <linearGradient id="pointsFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#22c55e" stopOpacity={0.3} />
-            <stop offset="100%" stopColor="#22c55e" stopOpacity={0.02} />
+          <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={glowColor} stopOpacity={0.3} />
+            <stop offset="100%" stopColor={glowColor} stopOpacity={0.02} />
           </linearGradient>
         </defs>
         <CartesianGrid
@@ -95,11 +103,11 @@ export function CumulativePointsChart({ data }: CumulativePointsChartProps) {
         <Area
           type="monotone"
           dataKey="points"
-          stroke="#22c55e"
+          stroke={glowColor}
           strokeWidth={2}
-          fill="url(#pointsFill)"
+          fill={`url(#${gradientId})`}
           dot={false}
-          activeDot={{ r: 4, fill: '#22c55e' }}
+          activeDot={{ r: 4, fill: glowColor }}
         />
       </AreaChart>
     </ResponsiveContainer>

@@ -11,6 +11,7 @@ interface StatCardProps {
   context?: string;
   teamLogoUrl?: string | null;
   accentColor?: string;
+  glowColor?: string;
   isEmpty?: boolean;
 }
 
@@ -22,23 +23,31 @@ export function StatCard({
   context,
   teamLogoUrl,
   accentColor,
+  glowColor,
   isEmpty,
 }: StatCardProps) {
   const tCommon = useTranslations('Common');
+  const effectiveGlow = glowColor ?? accentColor;
 
   return (
     <div
-      className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-colors hover:bg-white/10"
+      className="glow-card group relative overflow-hidden rounded-xl bg-white/5 p-5 backdrop-blur-sm transition-all duration-300 hover:bg-white/10"
       style={
         accentColor
-          ? { borderLeftColor: accentColor, borderLeftWidth: '3px' }
+          ? {
+              borderLeftColor: accentColor,
+              borderLeftWidth: '3px',
+              boxShadow: effectiveGlow
+                ? `inset 3px 0 16px -6px ${effectiveGlow}35`
+                : undefined,
+            }
           : undefined
       }
     >
-      {/* Subtle accent gradient overlay */}
+      {/* Accent gradient overlay */}
       {accentColor && (
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          className="pointer-events-none absolute inset-0 opacity-[0.07] transition-opacity duration-300 group-hover:opacity-[0.12]"
           style={{
             background: `linear-gradient(135deg, ${accentColor} 0%, transparent 60%)`,
           }}
@@ -64,7 +73,7 @@ export function StatCard({
         ) : (
           <>
             {/* Primary stat */}
-            <p className="text-2xl font-bold text-white md:text-3xl">
+            <p className="text-2xl font-bold tabular-nums text-white md:text-3xl">
               {primaryStat}
             </p>
 
@@ -84,7 +93,7 @@ export function StatCard({
               )}
               <span
                 className="text-lg font-semibold"
-                style={{ color: accentColor ?? '#ffffff' }}
+                style={{ color: glowColor ?? accentColor ?? '#ffffff' }}
               >
                 {subject}
               </span>

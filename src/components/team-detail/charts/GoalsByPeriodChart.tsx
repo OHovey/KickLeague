@@ -10,6 +10,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { useLeague } from '@/lib/hooks/use-league';
+import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
+import type { League } from '@/lib/themes/league-themes';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -55,6 +58,9 @@ function PeriodTooltip({ active, label, payload }: CustomTooltipProps) {
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function GoalsByPeriodChart({ data }: GoalsByPeriodChartProps) {
+  const { league } = useLeague();
+  const glowColor = LEAGUE_THEMES[league as League]?.colors.glow ?? '#22c55e';
+
   if (!data || data.length === 0) {
     return (
       <div className="flex h-[250px] items-center justify-center text-sm text-white/30">
@@ -88,7 +94,7 @@ export function GoalsByPeriodChart({ data }: GoalsByPeriodChartProps) {
         <Legend
           wrapperStyle={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}
         />
-        <Bar dataKey="scored" fill="#22c55e" name="Scored" radius={[2, 2, 0, 0]} />
+        <Bar dataKey="scored" fill={glowColor} name="Scored" radius={[2, 2, 0, 0]} />
         <Bar dataKey="conceded" fill="#ef4444" name="Conceded" radius={[2, 2, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>

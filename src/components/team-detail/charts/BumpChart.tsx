@@ -11,6 +11,9 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { getLocalizedOrdinal } from '@/lib/i18n/ordinals';
+import { useLeague } from '@/lib/hooks/use-league';
+import { LEAGUE_THEMES } from '@/lib/themes/league-themes';
+import type { League } from '@/lib/themes/league-themes';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -77,6 +80,9 @@ function BumpTooltip({ active, label, payload, formatMatchweek, formatOrdinal }:
 export function BumpChart({ data, focusTeam, rivalTeams }: BumpChartProps) {
   const t = useTranslations('Charts');
   const locale = useLocale();
+  const { league } = useLeague();
+  const glowColor = LEAGUE_THEMES[league as League]?.colors.glow ?? '#22c55e';
+
   if (!data || data.length === 0) {
     return (
       <div className="flex h-[300px] items-center justify-center text-sm text-white/30">
@@ -126,14 +132,14 @@ export function BumpChart({ data, focusTeam, rivalTeams }: BumpChartProps) {
             />
           );
         })}
-        {/* Focus team: thick green line with dots */}
+        {/* Focus team: thick line with league glow color */}
         <Line
           type="monotone"
           dataKey={focusTeam}
-          stroke="#22c55e"
+          stroke={glowColor}
           strokeWidth={3}
-          dot={{ r: 2, fill: '#22c55e', strokeWidth: 0 }}
-          activeDot={{ r: 4, fill: '#22c55e' }}
+          dot={{ r: 2, fill: glowColor, strokeWidth: 0 }}
+          activeDot={{ r: 4, fill: glowColor }}
         />
       </LineChart>
     </ResponsiveContainer>

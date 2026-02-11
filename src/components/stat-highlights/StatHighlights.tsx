@@ -98,21 +98,21 @@ function FlameIcon() {
 
 function StatCardSkeleton() {
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+    <div className="shimmer-loading rounded-xl border border-white/10 p-5">
       {/* Label row */}
       <div className="mb-3 flex items-center gap-2">
-        <div className="h-4 w-4 animate-pulse rounded bg-white/10" />
-        <div className="h-3 w-20 animate-pulse rounded bg-white/10" />
+        <div className="h-4 w-4 rounded bg-white/10" />
+        <div className="h-3 w-20 rounded bg-white/10" />
       </div>
       {/* Primary stat */}
-      <div className="h-8 w-28 animate-pulse rounded bg-white/10" />
+      <div className="h-8 w-28 rounded bg-white/10" />
       {/* Subject */}
       <div className="mt-2 flex items-center gap-2">
-        <div className="h-7 w-7 animate-pulse rounded-full bg-white/10" />
-        <div className="h-5 w-32 animate-pulse rounded bg-white/10" />
+        <div className="h-7 w-7 rounded-full bg-white/10" />
+        <div className="h-5 w-32 rounded bg-white/10" />
       </div>
       {/* Context */}
-      <div className="mt-1 h-4 w-24 animate-pulse rounded bg-white/10" />
+      <div className="mt-1 h-4 w-24 rounded bg-white/10" />
     </div>
   );
 }
@@ -133,10 +133,11 @@ export function StatHighlights() {
     });
   }, [league]);
 
-  const accentColor =
-    LEAGUE_THEMES[league as League]?.colors.accent ?? '#00ff87';
+  const theme = LEAGUE_THEMES[league as League];
+  const accentColor = theme?.colors.accent ?? '#00ff87';
+  const glowColor = theme?.colors.glow ?? '#00ff87';
 
-  // Loading state: show skeletons
+  // Loading state: show branded shimmer skeletons
   if (isPending && !data) {
     return (
       <section aria-label={t('leagueHighlights')}>
@@ -174,6 +175,7 @@ export function StatHighlights() {
           context={data?.topScorer?.teamName}
           teamLogoUrl={data?.topScorer?.teamLogoUrl}
           accentColor={accentColor}
+          glowColor={glowColor}
           isEmpty={!data?.topScorer}
         />
 
@@ -196,6 +198,7 @@ export function StatHighlights() {
           }
           teamLogoUrl={upsetWinnerLogo}
           accentColor={accentColor}
+          glowColor={glowColor}
           isEmpty={!upset}
         />
 
@@ -212,6 +215,7 @@ export function StatHighlights() {
           }
           teamLogoUrl={data?.formTeam?.teamLogoUrl}
           accentColor={accentColor}
+          glowColor={glowColor}
           isEmpty={!data?.formTeam}
         />
       </div>

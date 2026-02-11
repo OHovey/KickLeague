@@ -68,6 +68,7 @@ export async function seedTeams(
       .onConflictDoUpdate({
         target: teams.apiId,
         set: buildConflictUpdateColumns(teams, [
+          "slug",
           "name",
           "shortName",
           "logoUrl",

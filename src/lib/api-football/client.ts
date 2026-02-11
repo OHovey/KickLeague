@@ -5,8 +5,8 @@
  * Request chain: cache check -> rate limit -> fetch -> validate -> cache write
  *
  * This client is the single gateway to API-Football data. It protects
- * the free tier budget (100 req/day) by caching every response to disk,
- * enforces the 10 req/minute rate limit, and validates all responses
+ * the Pro tier budget (7,500 req/day) by caching every response to disk,
+ * enforces the 30 req/minute rate limit, and validates all responses
  * with Zod using the partial accept pattern (log warnings but don't
  * reject entire responses for minor schema mismatches).
  *

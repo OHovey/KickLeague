@@ -16,14 +16,14 @@ function TableSkeleton() {
   return (
     <div className="overflow-hidden rounded-lg bg-white/5 backdrop-blur-sm">
       <div className="border-b border-white/10 px-4 py-3">
-        <div className="h-4 w-24 animate-pulse rounded bg-white/10" />
+        <div className="shimmer-loading h-4 w-24 rounded" />
       </div>
       <div className="p-4">
         {Array.from({ length: 10 }).map((_, i) => (
           <div key={i} className="flex items-center gap-4 py-3">
-            <div className="h-4 w-8 animate-pulse rounded bg-white/10" />
-            <div className="h-4 flex-1 animate-pulse rounded bg-white/10" />
-            <div className="h-4 w-16 animate-pulse rounded bg-white/10" />
+            <div className="shimmer-loading h-4 w-8 rounded" />
+            <div className="shimmer-loading h-4 flex-1 rounded" />
+            <div className="shimmer-loading h-4 w-16 rounded" />
           </div>
         ))}
       </div>
@@ -69,16 +69,17 @@ function LoadingFallback() {
             {Array.from({ length: 5 }).map((_, i) => (
               <div
                 key={i}
-                className="h-9 flex-1 animate-pulse rounded-md bg-white/10"
+                className="shimmer-loading h-9 flex-1 rounded-md"
               />
             ))}
           </div>
         </div>
       </header>
       <main className="mx-auto max-w-7xl px-4 py-12">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="h-10 w-48 animate-pulse rounded bg-white/20" />
-          <div className="h-6 w-64 animate-pulse rounded bg-white/10" />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="shimmer-loading h-36 rounded-xl border border-white/10" />
+          ))}
         </div>
       </main>
     </div>

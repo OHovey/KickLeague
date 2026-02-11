@@ -52,6 +52,7 @@ async function main() {
   const pollSchedule = await client.schedules.create({
     destination: `${baseUrl}/api/cron/poll-matches`,
     cron: '*/3 * * * *',
+    retries: 0,
   });
 
   console.log(`  Schedule ID: ${pollSchedule.scheduleId}`);
@@ -64,6 +65,7 @@ async function main() {
   const oddsSchedule = await client.schedules.create({
     destination: `${baseUrl}/api/cron/refresh-odds`,
     cron: '0 */6 * * *',
+    retries: 0,
   });
 
   console.log(`  Schedule ID: ${oddsSchedule.scheduleId}`);

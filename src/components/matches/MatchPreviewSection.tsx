@@ -344,7 +344,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
         className={`grid grid-cols-2 gap-6 ${isPending && hasLoaded ? 'opacity-60 transition-opacity' : ''}`}
       >
         {/* Recent Results Column */}
-        <div className="flex flex-col overflow-hidden rounded-lg border border-white/[0.07] bg-white/[0.03] backdrop-blur-sm">
+        <div className="glow-card flex flex-col overflow-hidden rounded-lg bg-white/[0.03] backdrop-blur-sm">
           <SectionHeader title={t('recentResults')} count={recentMatches.length} />
           <div className="flex flex-1 flex-col justify-evenly py-0.5">
             {!hasLoaded ? (
@@ -370,7 +370,7 @@ export function MatchPreviewSection({ league }: MatchPreviewSectionProps) {
         </div>
 
         {/* Upcoming Fixtures Column */}
-        <div className="flex flex-col overflow-hidden rounded-lg border border-white/[0.07] bg-white/[0.03] backdrop-blur-sm">
+        <div className="glow-card flex flex-col overflow-hidden rounded-lg bg-white/[0.03] backdrop-blur-sm">
           <SectionHeader title={t('upcomingFixtures')} count={upcomingMatches.length} />
           <div className="flex flex-1 flex-col justify-evenly py-0.5">
             {!hasLoaded ? (

@@ -1,15 +1,15 @@
 import { RateLimiter } from "limiter";
 
 /**
- * Create a rate limiter configured for API-Football free tier:
- * 10 requests per minute.
+ * Create a rate limiter configured for API-Football Pro tier:
+ * 30 requests per minute (conservative; Pro allows 300/min).
  *
  * The limiter uses a token bucket algorithm. Calling `removeTokens(1)`
  * will await until a token is available if the bucket is empty.
  */
 export function createRateLimiter(): RateLimiter {
   return new RateLimiter({
-    tokensPerInterval: 10,
+    tokensPerInterval: 30,
     interval: "minute",
   });
 }
@@ -17,18 +17,18 @@ export function createRateLimiter(): RateLimiter {
 /**
  * Tracks daily API quota from API-Football response headers.
  *
- * API-Football free tier allows 100 requests/day. This tracker reads
+ * API-Football Pro tier allows 7,500 requests/day. This tracker reads
  * the `x-ratelimit-requests-remaining` and `x-ratelimit-requests-limit`
  * headers from each response to maintain an accurate count.
  *
  * The `canMakeRequest()` method reserves a configurable number of requests
- * for critical operations (e.g., live updates in Phase 6), defaulting to 10.
+ * for critical operations (e.g., live updates), defaulting to 10.
  */
 export class DailyQuotaTracker {
   remaining: number;
   limit: number;
 
-  constructor(limit: number = 100) {
+  constructor(limit: number = 7500) {
     this.limit = limit;
     this.remaining = limit;
   }
