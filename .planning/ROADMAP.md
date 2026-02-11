@@ -182,7 +182,7 @@ Plans:
 - [x] **Phase 17: Monitoring Integration** - Error tracking, performance analytics, and operational alerts
 - [x] **Phase 18: Production Deployment** - Vercel + Neon production environment with seeded data and documentation
 - [x] **Phase 19: Production Pipeline** - Verified cron schedules, live match polling, and current data
-- [ ] **Phase 20: Launch Documentation** - Manual setup checklists for AdSense, affiliates, and DNS
+- [x] **Phase 20: Launch Documentation** - Manual setup checklists for AdSense, affiliates, and DNS
 
 #### Phase 16: Security Hardening
 **Goal**: Public API endpoints are protected from abuse and the site sends proper security headers on every response
@@ -253,7 +253,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 20-01-PLAN.md -- AdSense, affiliate program, and DNS/domain setup checklists
+- [x] 20-01-PLAN.md -- AdSense, affiliate program, and DNS/domain setup checklists
 
 ## Progress
 
@@ -281,8 +281,8 @@ Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in
 | 17. Monitoring | v1.3 | 2/2 | Complete | 2026-02-10 |
 | 18. Deployment | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 19. Pipeline | v1.3 | 2/2 | Complete | 2026-02-11 |
-| 20. Launch Docs | v1.3 | 0/1 | Not started | - |
+| 20. Launch Docs | v1.3 | 1/1 | Complete | 2026-02-11 |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-11 -- Phase 19 complete*
+*Last updated: 2026-02-11 -- Phase 20 complete*
