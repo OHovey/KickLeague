@@ -180,7 +180,7 @@ Plans:
 
 - [x] **Phase 16: Security Hardening** - Rate limiting and security headers before production deploy
 - [x] **Phase 17: Monitoring Integration** - Error tracking, performance analytics, and operational alerts
-- [ ] **Phase 18: Production Deployment** - Vercel + Neon production environment with seeded data and documentation
+- [x] **Phase 18: Production Deployment** - Vercel + Neon production environment with seeded data and documentation
 - [ ] **Phase 19: Production Pipeline** - Verified cron schedules, live match polling, and current data
 - [ ] **Phase 20: Launch Documentation** - Manual setup checklists for AdSense, affiliates, and DNS
 
@@ -272,10 +272,10 @@ Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in
 | 15. Display Ads | v1.2 | 2/2 | Complete | 2026-02-09 |
 | 16. Security | v1.3 | 2/2 | Complete | 2026-02-10 |
 | 17. Monitoring | v1.3 | 2/2 | Complete | 2026-02-10 |
-| 18. Deployment | v1.3 | 0/2 | In progress | - |
+| 18. Deployment | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 19. Pipeline | v1.3 | 0/TBD | Not started | - |
 | 20. Launch Docs | v1.3 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-10 -- Phase 17 complete*
+*Last updated: 2026-02-11 -- Phase 18 complete*
