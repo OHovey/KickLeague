@@ -236,7 +236,11 @@ Plans:
   1. QStash cron schedules are configured and visibly running in the Upstash dashboard, triggering the polling and odds routes on their defined intervals
   2. During live matches, the polling frequency increases to 3-minute intervals so match scores stay near real-time
   3. All 5 leagues show current match results and standings that match the latest data from API-Football
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 19-01-PLAN.md -- Configure QStash cron schedules with 3-minute polling and verify in Upstash dashboard
+- [ ] 19-02-PLAN.md -- Verify database freshness and production site data currency across all 5 leagues
 
 #### Phase 20: Launch Documentation
 **Goal**: Every manual setup step needed for full monetisation and DNS is documented in actionable checklists so nothing is forgotten
