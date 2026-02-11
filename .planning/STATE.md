@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 19 - Production Pipeline (v1.3 Production Launch) -- COMPLETE
+**Current focus:** Phase 20 - Launch Documentation (v1.3 Production Launch) -- COMPLETE
 
 ## Current Position
 
-Phase: 19 of 20 (Production Pipeline) -- COMPLETE
-Plan: 2 of 2 in current phase (all plans complete)
-Status: Phase 19 complete -- ready for Phase 20
-Last activity: 2026-02-11 -- Completed 19-02 (database freshness verification)
+Phase: 20 of 20 (Launch Documentation) -- COMPLETE
+Plan: 1 of 1 in current phase (all plans complete)
+Status: Phase 20 complete -- all v1.3 phases complete
+Last activity: 2026-02-11 -- Completed 20-01 (launch documentation checklists)
 
-Progress: [###############.....] 61/TBD (v1.0-v1.2 complete, v1.3 Phases 16-19 complete)
+Progress: [####################] 62/62 (v1.0-v1.3 complete, all 20 phases done)
 
 ## Performance Metrics
 
@@ -43,6 +43,7 @@ Progress: [###############.....] 61/TBD (v1.0-v1.2 complete, v1.3 Phases 16-19 c
 | 18 | 02 | ~45min | 2 | 0 |
 | 19 | 01 | 5min | 2 | 2 |
 | 19 | 02 | 10min | 2 | 0 |
+| 20 | 01 | 2min | 3 | 3 |
 
 ## Accumulated Context
 
@@ -58,6 +59,7 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 **18-02:** Personal Vercel account deployment (not team scope); individual league seeding for timeout resilience; migrations applied before first deploy
 **19-01:** 3-minute QStash polling (484/1000 daily QStash free tier); fixture-window detection prevents wasted API-Football calls
 **19-02:** 2-day data gap (Feb 9-11) expected — daily-resync at 04:00 UTC will backfill; no manual intervention needed
+**20-01:** Checklists reference exact env var names from source code for accuracy; markdown checkboxes for trackable action items
 
 ### Pending Todos (manual/infrastructure)
 
@@ -91,6 +93,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-11
-Stopped at: Completed 19-02-PLAN.md (Phase 19 complete)
+Stopped at: Completed 20-01-PLAN.md (Phase 20 complete -- all v1.3 phases done)
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
