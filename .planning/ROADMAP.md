@@ -250,7 +250,10 @@ Plans:
   1. An AdSense setup checklist exists documenting account creation steps, ad unit ID collection for all 8 slots, and the `ads.txt` update procedure
   2. An affiliate program setup checklist exists documenting signup steps for each bookmaker program, ID/btag collection, and where to configure them in the codebase
   3. A DNS/domain setup checklist exists documenting domain purchase, DNS record configuration, Vercel domain linking, and SSL verification steps
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+- [ ] 20-01-PLAN.md -- AdSense, affiliate program, and DNS/domain setup checklists
 
 ## Progress
 
@@ -278,7 +281,7 @@ Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in
 | 17. Monitoring | v1.3 | 2/2 | Complete | 2026-02-10 |
 | 18. Deployment | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 19. Pipeline | v1.3 | 2/2 | Complete | 2026-02-11 |
-| 20. Launch Docs | v1.3 | 0/TBD | Not started | - |
+| 20. Launch Docs | v1.3 | 0/1 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
