@@ -1,7 +1,7 @@
 /**
  * QStash-triggered cron route for polling active matches.
  *
- * POST: Called by QStash every 30 minutes (budget tier).
+ * POST: Called by QStash every 3 minutes (Pro tier).
  *       Verifies QStash signature at runtime to prevent unauthorized access.
  *
  * GET:  Dev-only manual trigger for local testing (403 in production).
