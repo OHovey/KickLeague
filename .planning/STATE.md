@@ -70,6 +70,10 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 - ~~Configure Sentry env vars~~ (done -- .env.local configured 2026-02-10)
 - ~~Configure QStash env vars~~ (done -- .env.local configured 2026-02-11)
 
+### Pending Todos (code)
+
+- Show current matchweek standings before week completes (league table only shows fully completed matchweek data)
+
 ### Tech Debt
 
 None remaining -- all v1.0/v1.1 tech debt resolved in v1.2.
