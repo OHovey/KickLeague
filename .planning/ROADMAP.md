@@ -235,7 +235,7 @@ Plans:
 
 - [x] **Phase 21: Sitemap Index Refactor** - Segmented sitemap-index foundation for all current and upcoming page types
 - [x] **Phase 22: League Landing Pages** - Dedicated per-league pages with standings, top performers, and recent results
-- [ ] **Phase 23: Statistical Leaderboards** - Top scorers, assists, and disciplinary leaderboards for each league
+- [x] **Phase 23: Statistical Leaderboards** - Top scorers, assists, and disciplinary leaderboards for each league
 - [ ] **Phase 24: Player Pages** - Individual player profiles with season stats and match involvement
 - [ ] **Phase 25: Head-to-Head Pages** - Team pair comparison pages with meeting history and form context
 
@@ -294,7 +294,11 @@ Plans:
   3. Player page shows the last 10 matches the player participated in, with match events (goals scored, assists, cards received)
   4. Only players with 5 or more appearances this season have generated pages; navigating to a sub-threshold player slug returns 404
   5. Each player page has unique SEO metadata, JSON-LD (Person/Athlete), OG image, and hreflang alternates, and the player sitemap segment only lists qualifying players
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 24-01-PLAN.md -- Player slug migration, data queries, server action, page UI, and i18n
+- [ ] 24-02-PLAN.md -- SEO infrastructure: Person JSON-LD, OG images, hreflang, player sitemap segment
 
 #### Phase 25: Head-to-Head Pages
 **Goal**: Users can compare two teams side-by-side with meeting history and current form, limited to pairs with enough meetings to provide substantive content
@@ -339,9 +343,9 @@ Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on
 | 21. Sitemap Index | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 22. League Landing | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 23. Stat Leaderboards | v1.4 | 2/2 | Complete | 2026-02-12 |
-| 24. Player Pages | v1.4 | 0/TBD | Not started | - |
+| 24. Player Pages | v1.4 | 0/2 | Not started | - |
 | 25. Head-to-Head | v1.4 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-12 -- Phase 23 complete*
+*Last updated: 2026-02-12 -- Phase 24 planned*
