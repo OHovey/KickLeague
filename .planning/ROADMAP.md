@@ -311,7 +311,11 @@ Plans:
   4. Only team pairs with 3 or more meetings across available data have generated pages; sub-threshold pairs return 404
   5. Cross-linking is wired between all page types: player pages link to their team, team pages link to their players, league pages link to stats and teams, H2H pages link to both teams
 
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 25-01-PLAN.md -- H2H data layer, routing, page UI with meetings/aggregate/form comparison, and i18n
+- [ ] 25-02-PLAN.md -- SEO infrastructure (OG images, JSON-LD, sitemap segment) and cross-linking between all page types
 
 ## Progress
 
@@ -344,7 +348,7 @@ Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on
 | 22. League Landing | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 23. Stat Leaderboards | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 24. Player Pages | v1.4 | 2/2 | Complete | 2026-02-12 |
-| 25. Head-to-Head | v1.4 | 0/TBD | Not started | - |
+| 25. Head-to-Head | v1.4 | 0/2 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
