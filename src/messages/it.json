@@ -44,6 +44,21 @@
     "decimal": "Decimale",
     "fractional": "Frazionario"
   },
+  "LeaguePage": {
+    "standings": "Classifica attuale",
+    "topScorers": "Capocannonieri",
+    "formTeam": "Miglior forma",
+    "recentMatches": "Partite recenti",
+    "upcomingMatches": "Prossime partite",
+    "goals": "{count, plural, one {# gol} other {# gol}}",
+    "position": "{position, selectordinal, one {#o} two {#o} few {#o} other {#o}}",
+    "vs": "contro",
+    "season": "Stagione {season}",
+    "noScorers": "Ancora nessun marcatore questa stagione",
+    "noFormData": "Nessun dato sulla forma disponibile",
+    "noRecentMatches": "Nessuna partita recente",
+    "noUpcomingMatches": "Nessuna prossima partita"
+  },
   "LeagueTable": {
     "championsLeagueQualifying": "Qualificazione Champions League",
     "championLeague": "Champions League",
@@ -154,7 +169,9 @@
     "matchTitle": "{home} contro {away}",
     "siteDescription": "Intelligenza calcistica, visualizzata. Classifiche, forma, statistiche e analisi delle partite dei principali campionati europei.",
     "teamDescription": "Classifica, serie di forma e storico delle posizioni di {team} nella stagione {season} della {league}.",
-    "teamTitle": "{team} - {league}"
+    "teamTitle": "{team} - {league}",
+    "leagueTitle": "Classifica e statistiche di {league}",
+    "leagueDescription": "Classifica, capocannonieri, guida alla forma e risultati di {league} {season}."
   },
   "Navigation": {
     "home": "Home",

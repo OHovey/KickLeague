@@ -44,6 +44,21 @@
     "decimal": "Dezimal",
     "fractional": "Bruch"
   },
+  "LeaguePage": {
+    "standings": "Aktuelle Tabelle",
+    "topScorers": "Torjager",
+    "formTeam": "Beste Form",
+    "recentMatches": "Letzte Spiele",
+    "upcomingMatches": "Nachste Spiele",
+    "goals": "{count, plural, one {# Tor} other {# Tore}}",
+    "position": "{position, selectordinal, one {#.} two {#.} few {#.} other {#.}}",
+    "vs": "gegen",
+    "season": "Saison {season}",
+    "noScorers": "Noch keine Torschutzen in dieser Saison",
+    "noFormData": "Keine Formdaten verfugbar",
+    "noRecentMatches": "Keine letzten Spiele",
+    "noUpcomingMatches": "Keine nachsten Spiele"
+  },
   "LeagueTable": {
     "championsLeagueQualifying": "Champions-League-Qualifikation",
     "championLeague": "Champions League",
@@ -154,7 +169,9 @@
     "matchTitle": "{home} gegen {away}",
     "siteDescription": "Fussballintelligenz, visualisiert. Tabellen, Form, Statistiken und Spielanalysen der europaeischen Topligen.",
     "teamDescription": "Tabelle, Formverlaeufe und Positionshistorie von {team} in der Saison {season} der {league}.",
-    "teamTitle": "{team} - {league}"
+    "teamTitle": "{team} - {league}",
+    "leagueTitle": "{league} Tabelle & Statistiken",
+    "leagueDescription": "{league} {season} Tabelle, Torjager, Formkurve und Spielergebnisse."
   },
   "Navigation": {
     "home": "Startseite",

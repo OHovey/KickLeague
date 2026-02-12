@@ -44,6 +44,21 @@
     "decimal": "Decimal",
     "fractional": "Fraccionario"
   },
+  "LeaguePage": {
+    "standings": "Clasificacion actual",
+    "topScorers": "Goleadores",
+    "formTeam": "Mejor racha",
+    "recentMatches": "Partidos recientes",
+    "upcomingMatches": "Proximos partidos",
+    "goals": "{count, plural, one {# gol} other {# goles}}",
+    "position": "{position, selectordinal, one {#.o} two {#.o} few {#.o} other {#.o}}",
+    "vs": "vs",
+    "season": "Temporada {season}",
+    "noScorers": "Aun no hay goleadores esta temporada",
+    "noFormData": "No hay datos de forma disponibles",
+    "noRecentMatches": "No hay partidos recientes",
+    "noUpcomingMatches": "No hay proximos partidos"
+  },
   "LeagueTable": {
     "championsLeagueQualifying": "Clasificaci\u00f3n a la Champions League",
     "championLeague": "Liga de Campeones",
@@ -154,7 +169,9 @@
     "matchTitle": "{home} vs {away}",
     "siteDescription": "Inteligencia futbolistica, visualizada. Clasificaciones, forma, estadisticas y analisis de partidos de las principales ligas de Europa.",
     "teamDescription": "Clasificacion, rachas de forma e historial de posiciones de {team} en la temporada {season} de {league}.",
-    "teamTitle": "{team} - {league}"
+    "teamTitle": "{team} - {league}",
+    "leagueTitle": "Clasificacion y estadisticas de {league}",
+    "leagueDescription": "Clasificacion, goleadores, guia de forma y resultados de {league} {season}."
   },
   "Navigation": {
     "home": "Inicio",

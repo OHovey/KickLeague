@@ -44,6 +44,21 @@
     "decimal": "Decimal",
     "fractional": "Fractional"
   },
+  "LeaguePage": {
+    "standings": "Current Standings",
+    "topScorers": "Top Scorers",
+    "formTeam": "Best Form",
+    "recentMatches": "Recent Matches",
+    "upcomingMatches": "Upcoming Matches",
+    "goals": "{count, plural, one {# goal} other {# goals}}",
+    "position": "{position, selectordinal, one {#st} two {#nd} few {#rd} other {#th}}",
+    "vs": "vs",
+    "season": "{season} Season",
+    "noScorers": "No scorers yet this season",
+    "noFormData": "No form data available",
+    "noRecentMatches": "No recent matches",
+    "noUpcomingMatches": "No upcoming matches"
+  },
   "LeagueTable": {
     "championsLeagueQualifying": "Champions League Qualifying",
     "championLeague": "Champions League",
@@ -154,7 +169,9 @@
     "matchTitle": "{home} vs {away}",
     "siteDescription": "Football intelligence, visualized. Standings, form, stats, and match analysis for Europe's top leagues.",
     "teamDescription": "View {team} standings, form runs, and position history for the {season} {league} season.",
-    "teamTitle": "{team} - {league}"
+    "teamTitle": "{team} - {league}",
+    "leagueTitle": "{league} Standings & Stats",
+    "leagueDescription": "{league} {season} standings, top scorers, form guide, and match results."
   },
   "Navigation": {
     "home": "Home",
