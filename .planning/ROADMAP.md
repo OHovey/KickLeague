@@ -234,7 +234,7 @@ Plans:
 **Milestone Goal:** Expand KickLeague's indexable page surface through programmatic SEO -- dedicated league pages, stat leaderboards, player profiles, and head-to-head comparisons -- each with enough substantive content to avoid thin content penalties.
 
 - [x] **Phase 21: Sitemap Index Refactor** - Segmented sitemap-index foundation for all current and upcoming page types
-- [ ] **Phase 22: League Landing Pages** - Dedicated per-league pages with standings, top performers, and recent results
+- [x] **Phase 22: League Landing Pages** - Dedicated per-league pages with standings, top performers, and recent results
 - [ ] **Phase 23: Statistical Leaderboards** - Top scorers, assists, and disciplinary leaderboards for each league
 - [ ] **Phase 24: Player Pages** - Individual player profiles with season stats and match involvement
 - [ ] **Phase 25: Head-to-Head Pages** - Team pair comparison pages with meeting history and form context
@@ -266,8 +266,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 22-01-PLAN.md -- League page data layer, routing, full page UI, and i18n keys
-- [ ] 22-02-PLAN.md -- SEO infrastructure: metadata, OG images, JSON-LD, hreflang, sitemap segment
+- [x] 22-01-PLAN.md -- League page data layer, routing, full page UI, and i18n keys
+- [x] 22-02-PLAN.md -- SEO infrastructure: metadata, OG images, JSON-LD, hreflang, sitemap segment
 
 #### Phase 23: Statistical Leaderboards
 **Goal**: Users can view top-20 statistical leaderboards for each league, giving the site 15 new indexable page types (3 stat types x 5 leagues)
@@ -333,11 +333,11 @@ Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on
 | 19. Pipeline | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 20. Launch Docs | v1.3 | 1/1 | Complete | 2026-02-11 |
 | 21. Sitemap Index | v1.4 | 2/2 | Complete | 2026-02-12 |
-| 22. League Landing | v1.4 | 0/2 | Not started | - |
+| 22. League Landing | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 23. Stat Leaderboards | v1.4 | 0/TBD | Not started | - |
 | 24. Player Pages | v1.4 | 0/TBD | Not started | - |
 | 25. Head-to-Head | v1.4 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-12 -- Phase 21 complete*
+*Last updated: 2026-02-12 -- Phase 22 complete*
