@@ -231,6 +231,7 @@ async function computeLiveStandings(
           teamId: standings.teamId,
           teamName: teams.name,
           teamSlug: teams.slug,
+          teamLogoUrl: teams.logoUrl,
           position: standings.position,
           played: standings.played,
           won: standings.won,
@@ -260,6 +261,7 @@ async function computeLiveStandings(
       teamId: number;
       teamName: string;
       teamSlug: string;
+      teamLogoUrl: string | null;
       played: number;
       won: number;
       drawn: number;
@@ -277,6 +279,7 @@ async function computeLiveStandings(
       teamId: row.teamId,
       teamName: row.teamName,
       teamSlug: row.teamSlug,
+      teamLogoUrl: row.teamLogoUrl,
       played: row.played,
       won: row.won,
       drawn: row.drawn,
@@ -334,7 +337,7 @@ async function computeLiveStandings(
     for (const teamId of allTeamIds) {
       if (!teamStatsMap.has(teamId)) {
         const teamRow = await db
-          .select({ name: teams.name, slug: teams.slug })
+          .select({ name: teams.name, slug: teams.slug, logoUrl: teams.logoUrl })
           .from(teams)
           .where(eq(teams.id, teamId))
           .limit(1);
@@ -343,6 +346,7 @@ async function computeLiveStandings(
             teamId,
             teamName: teamRow[0].name,
             teamSlug: teamRow[0].slug,
+            teamLogoUrl: teamRow[0].logoUrl ?? null,
             played: 0,
             won: 0,
             drawn: 0,
@@ -419,6 +423,7 @@ async function computeLiveStandings(
     teamId: row.teamId,
     teamName: row.teamName,
     teamSlug: row.teamSlug,
+    teamLogoUrl: row.teamLogoUrl ?? null,
     position: index + 1,
     played: row.played,
     won: row.won,
@@ -699,6 +704,7 @@ export async function getStandingsWithZones(
         teamId: standings.teamId,
         teamName: teams.name,
         teamSlug: teams.slug,
+        teamLogoUrl: teams.logoUrl,
         position: standings.position,
         played: standings.played,
         won: standings.won,

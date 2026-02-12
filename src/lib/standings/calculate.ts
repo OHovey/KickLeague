@@ -6,6 +6,7 @@ export interface StandingsRow {
   teamId: number;
   teamName: string;
   teamSlug: string;
+  teamLogoUrl: string | null;
   position: number;
   played: number;
   won: number;

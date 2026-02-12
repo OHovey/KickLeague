@@ -13,6 +13,7 @@ function createRow(overrides: Partial<StandingsRow>): StandingsRow {
     teamId: 1,
     teamName: 'Team A',
     teamSlug: 'team-a',
+    teamLogoUrl: null,
     position: 1,
     played: 20,
     won: 10,
