@@ -1,5 +1,5 @@
 import { getDb, isDatabaseConfigured } from '@/db/connection';
-import { teams, fixtures } from '@/db/schema';
+import { teams, fixtures, leagues } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import type { SitemapEntry } from './sitemap-registry';
 
@@ -53,5 +53,23 @@ export async function getMatchSitemapEntries(): Promise<SitemapEntry[]> {
     routeKey: '/matches/[id]',
     params: { id: String(r.id) },
     lastmod: r.kickoff,
+  }));
+}
+
+/**
+ * Fetch all leagues as SitemapEntry objects.
+ * No updatedAt column exists, so lastmod defaults to now.
+ */
+export async function getLeagueSitemapEntries(): Promise<SitemapEntry[]> {
+  if (!isDatabaseConfigured()) return [];
+  const rows = await getDb()
+    .select({ slug: leagues.slug })
+    .from(leagues);
+  const now = new Date();
+  return rows.map((r) => ({
+    path: `/leagues/${r.slug}`,
+    routeKey: '/leagues/[slug]',
+    params: { slug: r.slug },
+    lastmod: now,
   }));
 }
