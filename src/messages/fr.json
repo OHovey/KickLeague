@@ -96,7 +96,8 @@
     "trend": "Tendance",
     "viewingMatchweek": "Affichage de la journ\u00e9e {week}",
     "won": "V",
-    "drawn": "N"
+    "drawn": "N",
+    "viewFullStandings": "Voir le classement complet"
   },
   "MatchDetail": {
     "assist": "Passe d\u00e9cisive :",
@@ -130,6 +131,7 @@
     "shotsOnTarget": "Tirs cadr\u00e9s",
     "unknown": "Inconnu",
     "varDecision": "VAR",
+    "viewFullH2H": "Voir le bilan complet",
     "winRate": "Taux de victoires",
     "wins": "{count, plural, one {# victoire} other {# victoires}}",
     "xg": "xG",

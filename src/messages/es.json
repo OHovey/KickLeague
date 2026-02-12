@@ -96,7 +96,8 @@
     "trend": "Tendencia",
     "viewingMatchweek": "Viendo jornada {week}",
     "won": "G",
-    "drawn": "E"
+    "drawn": "E",
+    "viewFullStandings": "Ver clasificaci\u00f3n completa"
   },
   "MatchDetail": {
     "assist": "Asistencia:",
@@ -130,6 +131,7 @@
     "shotsOnTarget": "Tiros a puerta",
     "unknown": "Desconocido",
     "varDecision": "VAR",
+    "viewFullH2H": "Ver historial completo",
     "winRate": "Porcentaje de victorias",
     "wins": "{count, plural, one {# victoria} other {# victorias}}",
     "xg": "xG",

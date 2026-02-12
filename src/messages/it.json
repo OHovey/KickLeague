@@ -96,7 +96,8 @@
     "trend": "Tendenza",
     "viewingMatchweek": "Visualizzazione giornata {week}",
     "won": "V",
-    "drawn": "P"
+    "drawn": "P",
+    "viewFullStandings": "Visualizza classifica completa"
   },
   "MatchDetail": {
     "assist": "Assist:",
@@ -130,6 +131,7 @@
     "shotsOnTarget": "Tiri in porta",
     "unknown": "Sconosciuto",
     "varDecision": "VAR",
+    "viewFullH2H": "Vedi confronto completo",
     "winRate": "Percentuale vittorie",
     "wins": "{count, plural, one {# vittoria} other {# vittorie}}",
     "xg": "xG",

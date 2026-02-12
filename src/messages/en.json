@@ -96,7 +96,8 @@
     "trend": "Trend",
     "viewingMatchweek": "Viewing Matchweek {week}",
     "won": "W",
-    "drawn": "D"
+    "drawn": "D",
+    "viewFullStandings": "View full standings"
   },
   "MatchDetail": {
     "assist": "Assist:",
@@ -130,6 +131,7 @@
     "shotsOnTarget": "Shots on Target",
     "unknown": "Unknown",
     "varDecision": "VAR",
+    "viewFullH2H": "View full head-to-head",
     "winRate": "Win Rate",
     "wins": "{count, plural, one {# win} other {# wins}}",
     "xg": "xG",

@@ -96,7 +96,8 @@
     "trend": "Trend",
     "viewingMatchweek": "Spieltag {week} wird angezeigt",
     "won": "S",
-    "drawn": "U"
+    "drawn": "U",
+    "viewFullStandings": "Komplette Tabelle anzeigen"
   },
   "MatchDetail": {
     "assist": "Vorlage:",
@@ -130,6 +131,7 @@
     "shotsOnTarget": "Sch\u00fcsse aufs Tor",
     "unknown": "Unbekannt",
     "varDecision": "VAR",
+    "viewFullH2H": "Kompletten Vergleich anzeigen",
     "winRate": "Siegquote",
     "wins": "{count, plural, one {# Sieg} other {# Siege}}",
     "xg": "xG",

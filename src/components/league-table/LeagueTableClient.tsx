@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState, useTransition, useCallback } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { LayoutGroup } from 'motion/react';
 import type { EnhancedStandingsRow } from '@/lib/standings/queries';
 import type { Zone } from '@/lib/zones';
@@ -344,6 +345,19 @@ export function LeagueTableClient({ league, matchweek }: LeagueTableClientProps)
       {/* Zone legend */}
       <div className="border-t border-white/10 px-4 py-3">
         <ZoneLegend zones={data.zones} />
+      </div>
+
+      {/* View full standings link */}
+      <div className="border-t border-white/[0.06] px-4 py-2">
+        <Link
+          href={`/leagues/${league}`}
+          className="flex items-center gap-1 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
+        >
+          {t('viewFullStandings')}
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
       </div>
     </div>
   );
