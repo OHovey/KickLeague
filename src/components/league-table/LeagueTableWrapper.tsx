@@ -52,6 +52,7 @@ export function LeagueTableWrapper() {
   useEffect(() => {
     let cancelled = false;
     setIsLoadingMatchweeks(true);
+    setMatchweekInfo(null);
 
     fetchMatchweekList(league).then((result) => {
       if (cancelled) return;

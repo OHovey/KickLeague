@@ -154,16 +154,17 @@ async function getLatestMatchweek(leagueId: number, season: string): Promise<num
 
 /**
  * Detect the in-progress matchweek for a league/season.
- * An in-progress matchweek has at least one finished fixture AND at least one scheduled fixture.
- * Returns the minimum such matchweek, or null if none exists.
+ * An in-progress matchweek has at least one finished fixture AND at least one non-finished fixture,
+ * AND is after the latest completed matchweek (to exclude earlier weeks with postponed games).
  */
 export async function getInProgressMatchweek(
   leagueId: number,
-  season: string
+  season: string,
+  latestCompletedMatchweek: number
 ): Promise<number | null> {
   const db = getDb();
 
-  // Get matchweeks that have at least one finished fixture
+  // Get matchweeks AFTER latestCompleted that have at least one finished fixture
   const finishedRows = await db
     .selectDistinct({ matchweek: fixtures.matchweek })
     .from(fixtures)
@@ -172,11 +173,12 @@ export async function getInProgressMatchweek(
         eq(fixtures.leagueId, leagueId),
         eq(fixtures.season, season),
         eq(fixtures.status, 'finished'),
-        sql`${fixtures.matchweek} IS NOT NULL`
+        sql`${fixtures.matchweek} IS NOT NULL`,
+        sql`${fixtures.matchweek} > ${latestCompletedMatchweek}`
       )
     );
 
-  // Get matchweeks that have at least one non-finished fixture (scheduled, live, etc.)
+  // Get matchweeks AFTER latestCompleted that have at least one non-finished fixture
   const nonFinishedRows = await db
     .selectDistinct({ matchweek: fixtures.matchweek })
     .from(fixtures)
@@ -185,7 +187,8 @@ export async function getInProgressMatchweek(
         eq(fixtures.leagueId, leagueId),
         eq(fixtures.season, season),
         ne(fixtures.status, 'finished'),
-        sql`${fixtures.matchweek} IS NOT NULL`
+        sql`${fixtures.matchweek} IS NOT NULL`,
+        sql`${fixtures.matchweek} > ${latestCompletedMatchweek}`
       )
     );
 
@@ -580,8 +583,8 @@ export async function getMatchweekList(
     ? completedRows[completedRows.length - 1].matchweek
     : 0;
 
-  // Detect in-progress matchweek
-  const inProgress = await getInProgressMatchweek(league.id, targetSeason);
+  // Detect in-progress matchweek (only after latest completed, to ignore postponed games)
+  const inProgress = await getInProgressMatchweek(league.id, targetSeason, latestCompleted);
 
   const matchweeks: Array<{ number: number; completed: boolean; inProgress: boolean }> = [];
   for (let i = 1; i <= matchweeksTotal; i++) {
@@ -642,8 +645,9 @@ export async function getStandingsWithZones(
   // 3. Fetch league config
   const config = await getLeagueConfig(league.id, targetSeason);
 
-  // 4. Detect in-progress matchweek
-  const inProgressWeek = await getInProgressMatchweek(league.id, targetSeason);
+  // 4. Get latest completed matchweek and detect in-progress matchweek
+  const latestCompleted = await getLatestMatchweek(league.id, targetSeason);
+  const inProgressWeek = await getInProgressMatchweek(league.id, targetSeason, latestCompleted ?? 0);
 
   // 5. Determine matchweek: use provided value, fall back to in-progress, then latest completed
   let resolvedMatchweek: number | null;
@@ -652,7 +656,7 @@ export async function getStandingsWithZones(
   } else if (inProgressWeek !== null) {
     resolvedMatchweek = inProgressWeek;
   } else {
-    resolvedMatchweek = await getLatestMatchweek(league.id, targetSeason);
+    resolvedMatchweek = latestCompleted;
   }
 
   const configResult = config
@@ -730,10 +734,9 @@ export async function getStandingsWithZones(
 
   // 10. Fetch position changes
   // For in-progress matchweek, compare live positions against last completed matchweek
-  const lastCompletedWeek = await getLatestMatchweek(league.id, targetSeason);
   let positionChanges: Map<number, number>;
 
-  if (isInProgress && lastCompletedWeek !== null) {
+  if (isInProgress && latestCompleted !== null) {
     // Get last completed matchweek positions from DB
     const prevPositions = await getDb()
       .select({
@@ -745,7 +748,7 @@ export async function getStandingsWithZones(
         and(
           eq(standings.leagueId, league.id),
           eq(standings.season, targetSeason),
-          eq(standings.matchweek, lastCompletedWeek)
+          eq(standings.matchweek, latestCompleted)
         )
       );
 
@@ -766,8 +769,8 @@ export async function getStandingsWithZones(
 
   // 11. Fetch sparkline data for each team (in parallel)
   // For in-progress matchweek, use last completed week for sparkline data (live week has no DB entry)
-  const sparklineWeek = isInProgress && lastCompletedWeek !== null
-    ? lastCompletedWeek
+  const sparklineWeek = isInProgress && latestCompleted !== null
+    ? latestCompleted
     : resolvedMatchweek;
 
   const sparklinePromises = sortedStandings.map((row) =>
