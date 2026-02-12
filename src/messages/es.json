@@ -171,7 +171,12 @@
     "teamDescription": "Clasificacion, rachas de forma e historial de posiciones de {team} en la temporada {season} de {league}.",
     "teamTitle": "{team} - {league}",
     "leagueTitle": "Clasificacion y estadisticas de {league}",
-    "leagueDescription": "Clasificacion, goleadores, guia de forma y resultados de {league} {season}."
+    "leagueDescription": "Clasificacion, goleadores, guia de forma y resultados de {league} {season}.",
+    "statsTitle": "{stat} - {league}",
+    "statsDescription": "Tabla de {stat} de {league} {season} - Los 20 mejores jugadores clasificados por {stat} con apariciones y promedios por partido.",
+    "statTopScorers": "Goleadores",
+    "statTopAssists": "Asistencias",
+    "statDisciplinary": "Disciplina"
   },
   "Navigation": {
     "home": "Inicio",

@@ -171,7 +171,12 @@
     "teamDescription": "Classifica, serie di forma e storico delle posizioni di {team} nella stagione {season} della {league}.",
     "teamTitle": "{team} - {league}",
     "leagueTitle": "Classifica e statistiche di {league}",
-    "leagueDescription": "Classifica, capocannonieri, guida alla forma e risultati di {league} {season}."
+    "leagueDescription": "Classifica, capocannonieri, guida alla forma e risultati di {league} {season}.",
+    "statsTitle": "{stat} - {league}",
+    "statsDescription": "Classifica {stat} di {league} {season} - I migliori 20 giocatori per {stat} con presenze e medie a partita.",
+    "statTopScorers": "Capocannonieri",
+    "statTopAssists": "Migliori Assist",
+    "statDisciplinary": "Disciplinare"
   },
   "Navigation": {
     "home": "Home",

@@ -171,7 +171,12 @@
     "teamDescription": "View {team} standings, form runs, and position history for the {season} {league} season.",
     "teamTitle": "{team} - {league}",
     "leagueTitle": "{league} Standings & Stats",
-    "leagueDescription": "{league} {season} standings, top scorers, form guide, and match results."
+    "leagueDescription": "{league} {season} standings, top scorers, form guide, and match results.",
+    "statsTitle": "{stat} - {league}",
+    "statsDescription": "{league} {season} {stat} leaderboard - Top 20 players ranked by {stat} with appearances and per-game averages.",
+    "statTopScorers": "Top Scorers",
+    "statTopAssists": "Top Assists",
+    "statDisciplinary": "Disciplinary"
   },
   "Navigation": {
     "home": "Home",

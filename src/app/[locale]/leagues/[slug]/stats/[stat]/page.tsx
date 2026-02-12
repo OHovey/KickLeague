@@ -1,12 +1,18 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
 import { ThemeBackground } from '@/components/ThemeBackground';
 import { LEAGUES, LEAGUE_THEMES } from '@/lib/themes/league-themes';
 import {
   fetchLeaderboardData,
   type LeaderboardData,
 } from '@/components/leaderboard/actions';
+import {
+  buildBreadcrumbs,
+  buildItemList,
+  serializeJsonLd,
+} from '@/lib/seo/structured-data';
 
 // ISR: revalidate every 30 minutes
 export const revalidate = 1800;
@@ -20,6 +26,12 @@ const STAT_TITLE_KEYS: Record<StatParam, string> = {
   'top-scorers': 'topScorers',
   'top-assists': 'topAssists',
   disciplinary: 'disciplinary',
+};
+
+const STAT_META_KEYS: Record<StatParam, string> = {
+  'top-scorers': 'statTopScorers',
+  'top-assists': 'statTopAssists',
+  disciplinary: 'statDisciplinary',
 };
 
 // -- Static Params -----------------------------------------------------------
@@ -51,16 +63,42 @@ export async function generateMetadata({
   }
 
   const theme = LEAGUE_THEMES[slug as keyof typeof LEAGUE_THEMES];
-  const t = await getTranslations({ locale, namespace: 'StatsPage' });
-  const statTitle = t(STAT_TITLE_KEYS[stat as StatParam]);
-  const title = `${theme?.name ?? slug} ${statTitle}`;
+  const tMeta = await getTranslations({ locale, namespace: 'Metadata' });
+  const statDisplayName = tMeta(STAT_META_KEYS[stat as StatParam]);
+  const title = tMeta('statsTitle', {
+    stat: statDisplayName,
+    league: theme?.name ?? slug,
+  });
+  const description = tMeta('statsDescription', {
+    league: theme?.name ?? slug,
+    season: new Date().getFullYear().toString(),
+    stat: statDisplayName,
+  });
+
+  const statsPathname =
+    routing.pathnames['/leagues/[slug]/stats/[stat]'];
 
   return {
     title,
-    description: `${title} - Player statistics and leaderboard rankings.`,
+    description,
     openGraph: {
       title: `${title} | KickLeague`,
+      description,
       type: 'website',
+    },
+    alternates: {
+      languages: Object.fromEntries(
+        routing.locales.map((l) => {
+          const localizedPath =
+            typeof statsPathname === 'string'
+              ? statsPathname
+              : statsPathname[l];
+          return [
+            l,
+            `/${l}${localizedPath.replace('[slug]', slug).replace('[stat]', stat)}`,
+          ];
+        })
+      ),
     },
   };
 }
@@ -107,8 +145,31 @@ export default async function StatsLeaderboardPage({
   const logoUrl = data?.league.logoUrl || theme?.logoUrl || '';
   const statTitle = t(STAT_TITLE_KEYS[stat as StatParam]);
 
+  // JSON-LD: BreadcrumbList
+  const breadcrumbJsonLd = buildBreadcrumbs([
+    { name: 'Home', url: `/${locale}` },
+    { name: leagueName, url: `/${locale}/leagues/${slug}` },
+    { name: statTitle, url: `/${locale}/leagues/${slug}/stats/${stat}` },
+  ]);
+
+  // JSON-LD: ItemList from leaderboard rows
+  const itemListJsonLd = buildItemList(
+    (data?.rows ?? []).map((row, index) => ({
+      name: row.playerName,
+      position: index + 1,
+    }))
+  );
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(itemListJsonLd) }}
+      />
       <ThemeBackground theme={slug} />
       <div className="min-h-screen">
         <div className="mx-auto max-w-6xl px-4 pb-12">

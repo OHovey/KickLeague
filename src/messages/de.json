@@ -171,7 +171,12 @@
     "teamDescription": "Tabelle, Formverlaeufe und Positionshistorie von {team} in der Saison {season} der {league}.",
     "teamTitle": "{team} - {league}",
     "leagueTitle": "{league} Tabelle & Statistiken",
-    "leagueDescription": "{league} {season} Tabelle, Torjager, Formkurve und Spielergebnisse."
+    "leagueDescription": "{league} {season} Tabelle, Torjager, Formkurve und Spielergebnisse.",
+    "statsTitle": "{stat} - {league}",
+    "statsDescription": "{league} {season} {stat} Rangliste - Die besten 20 Spieler sortiert nach {stat} mit Einsaetzen und Durchschnittswerten pro Spiel.",
+    "statTopScorers": "Torjaeger",
+    "statTopAssists": "Vorlagen",
+    "statDisciplinary": "Disziplinarisches"
   },
   "Navigation": {
     "home": "Startseite",

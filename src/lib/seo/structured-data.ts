@@ -83,6 +83,23 @@ export function buildSportsTeam(team: {
   };
 }
 
+export function buildItemList(
+  items: Array<{ name: string; position: number; url?: string }>
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: items.map((item) => ({
+      '@type': 'ListItem',
+      position: item.position,
+      name: item.name,
+      ...(item.url && {
+        url: item.url.startsWith('http') ? item.url : `${SITE_URL}${item.url}`,
+      }),
+    })),
+  };
+}
+
 /**
  * Safely serialize JSON-LD for injection into a <script> tag.
  * Escapes < to \u003c to prevent XSS via </script> injection.
