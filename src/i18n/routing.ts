@@ -47,6 +47,13 @@ export const routing = defineRouting({
       it: '/campionati/[slug]/statistiche/[stat]',
       fr: '/championnats/[slug]/statistiques/[stat]',
     },
+    '/players/[slug]': {
+      en: '/players/[slug]',
+      es: '/jugadores/[slug]',
+      de: '/spieler/[slug]',
+      it: '/giocatori/[slug]',
+      fr: '/joueurs/[slug]',
+    },
   },
 });
 

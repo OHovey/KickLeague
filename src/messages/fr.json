@@ -176,7 +176,9 @@
     "statsDescription": "Classement {stat} de {league} {season} - Les 20 meilleurs joueurs classes par {stat} avec apparitions et moyennes par match.",
     "statTopScorers": "Meilleurs buteurs",
     "statTopAssists": "Meilleures passes",
-    "statDisciplinary": "Disciplinaire"
+    "statDisciplinary": "Disciplinaire",
+    "playerTitle": "{player} - Statistiques de saison de {team}",
+    "playerDescription": "{player} ({position}) joue pour {team} en {league}. Statistiques de saison : {goals} buts, {assists} passes decisives en {appearances} matchs."
   },
   "Navigation": {
     "home": "Accueil",
@@ -313,6 +315,28 @@
     "redCards": "CR",
     "noData": "Aucune donnee disponible pour ce classement.",
     "backToLeague": "Retour a {league}"
+  },
+  "PlayerPage": {
+    "backToTeam": "Retour a {team}",
+    "seasonStats": "Statistiques de saison",
+    "recentMatches": "Matchs recents",
+    "goals": "Buts",
+    "assists": "Passes decisives",
+    "yellowCards": "Cartons jaunes",
+    "redCards": "Cartons rouges",
+    "appearances": "Matchs joues",
+    "matchweek": "J {week}",
+    "noRecentMatches": "Aucune donnee de match recent disponible",
+    "position_GK": "Gardien",
+    "position_DEF": "Defenseur",
+    "position_MID": "Milieu",
+    "position_FWD": "Attaquant",
+    "goal": "But",
+    "assist": "Passe decisive",
+    "yellowCard": "Carton jaune",
+    "redCard": "Carton rouge",
+    "penaltyScored": "Penalty",
+    "minuteLabel": "{minute}'"
   },
   "Timeline": {
     "autoPlay": "Lecture automatique",

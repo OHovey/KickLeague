@@ -20,8 +20,8 @@ export interface PlayerPageData {
   recentMatches: PlayerMatchInvolvement[];
 }
 
-// Re-export types for consumer convenience
-export type { PlayerProfile, PlayerSeasonStats, PlayerMatchInvolvement };
+// Note: types are NOT re-exported from 'use server' modules.
+// Import them directly from '@/lib/players/queries' in consumers.
 
 // -- Server Action -----------------------------------------------------------
 

@@ -176,7 +176,9 @@
     "statsDescription": "Tabla de {stat} de {league} {season} - Los 20 mejores jugadores clasificados por {stat} con apariciones y promedios por partido.",
     "statTopScorers": "Goleadores",
     "statTopAssists": "Asistencias",
-    "statDisciplinary": "Disciplina"
+    "statDisciplinary": "Disciplina",
+    "playerTitle": "{player} - Estadisticas de {team}",
+    "playerDescription": "{player} ({position}) juega en {team} en {league}. Estadisticas de temporada: {goals} goles, {assists} asistencias en {appearances} partidos."
   },
   "Navigation": {
     "home": "Inicio",
@@ -313,6 +315,28 @@
     "redCards": "TR",
     "noData": "No hay datos disponibles para esta clasificacion todavia.",
     "backToLeague": "Volver a {league}"
+  },
+  "PlayerPage": {
+    "backToTeam": "Volver a {team}",
+    "seasonStats": "Estadisticas de temporada",
+    "recentMatches": "Partidos recientes",
+    "goals": "Goles",
+    "assists": "Asistencias",
+    "yellowCards": "Tarjetas amarillas",
+    "redCards": "Tarjetas rojas",
+    "appearances": "Partidos jugados",
+    "matchweek": "J {week}",
+    "noRecentMatches": "No hay datos de partidos recientes",
+    "position_GK": "Portero",
+    "position_DEF": "Defensa",
+    "position_MID": "Centrocampista",
+    "position_FWD": "Delantero",
+    "goal": "Gol",
+    "assist": "Asistencia",
+    "yellowCard": "Tarjeta amarilla",
+    "redCard": "Tarjeta roja",
+    "penaltyScored": "Penalti",
+    "minuteLabel": "{minute}'"
   },
   "Timeline": {
     "autoPlay": "Reproducci\u00f3n autom\u00e1tica",

@@ -176,7 +176,9 @@
     "statsDescription": "{league} {season} {stat} leaderboard - Top 20 players ranked by {stat} with appearances and per-game averages.",
     "statTopScorers": "Top Scorers",
     "statTopAssists": "Top Assists",
-    "statDisciplinary": "Disciplinary"
+    "statDisciplinary": "Disciplinary",
+    "playerTitle": "{player} - {team} Season Stats",
+    "playerDescription": "{player} ({position}) plays for {team} in the {league}. Season stats: {goals} goals, {assists} assists in {appearances} appearances."
   },
   "Navigation": {
     "home": "Home",
@@ -313,6 +315,28 @@
     "redCards": "RC",
     "noData": "No data available for this leaderboard yet.",
     "backToLeague": "Back to {league}"
+  },
+  "PlayerPage": {
+    "backToTeam": "Back to {team}",
+    "seasonStats": "Season Stats",
+    "recentMatches": "Recent Matches",
+    "goals": "Goals",
+    "assists": "Assists",
+    "yellowCards": "Yellow Cards",
+    "redCards": "Red Cards",
+    "appearances": "Appearances",
+    "matchweek": "MW {week}",
+    "noRecentMatches": "No recent match data available",
+    "position_GK": "Goalkeeper",
+    "position_DEF": "Defender",
+    "position_MID": "Midfielder",
+    "position_FWD": "Forward",
+    "goal": "Goal",
+    "assist": "Assist",
+    "yellowCard": "Yellow Card",
+    "redCard": "Red Card",
+    "penaltyScored": "Penalty",
+    "minuteLabel": "{minute}'"
   },
   "Timeline": {
     "autoPlay": "Auto-play",

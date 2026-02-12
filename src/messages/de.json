@@ -176,7 +176,9 @@
     "statsDescription": "{league} {season} {stat} Rangliste - Die besten 20 Spieler sortiert nach {stat} mit Einsaetzen und Durchschnittswerten pro Spiel.",
     "statTopScorers": "Torjaeger",
     "statTopAssists": "Vorlagen",
-    "statDisciplinary": "Disziplinarisches"
+    "statDisciplinary": "Disziplinarisches",
+    "playerTitle": "{player} - {team} Saisonstatistiken",
+    "playerDescription": "{player} ({position}) spielt fuer {team} in der {league}. Saisonstatistiken: {goals} Tore, {assists} Vorlagen in {appearances} Spielen."
   },
   "Navigation": {
     "home": "Startseite",
@@ -313,6 +315,28 @@
     "redCards": "RK",
     "noData": "Noch keine Daten fur diese Rangliste verfugbar.",
     "backToLeague": "Zuruck zu {league}"
+  },
+  "PlayerPage": {
+    "backToTeam": "Zurueck zu {team}",
+    "seasonStats": "Saisonstatistiken",
+    "recentMatches": "Letzte Spiele",
+    "goals": "Tore",
+    "assists": "Vorlagen",
+    "yellowCards": "Gelbe Karten",
+    "redCards": "Rote Karten",
+    "appearances": "Einsaetze",
+    "matchweek": "ST {week}",
+    "noRecentMatches": "Keine aktuellen Spieldaten verfuegbar",
+    "position_GK": "Torwart",
+    "position_DEF": "Verteidiger",
+    "position_MID": "Mittelfeldspieler",
+    "position_FWD": "Stuermer",
+    "goal": "Tor",
+    "assist": "Vorlage",
+    "yellowCard": "Gelbe Karte",
+    "redCard": "Rote Karte",
+    "penaltyScored": "Elfmeter",
+    "minuteLabel": "{minute}'"
   },
   "Timeline": {
     "autoPlay": "Automatische Wiedergabe",

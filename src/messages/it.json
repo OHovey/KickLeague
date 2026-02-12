@@ -176,7 +176,9 @@
     "statsDescription": "Classifica {stat} di {league} {season} - I migliori 20 giocatori per {stat} con presenze e medie a partita.",
     "statTopScorers": "Capocannonieri",
     "statTopAssists": "Migliori Assist",
-    "statDisciplinary": "Disciplinare"
+    "statDisciplinary": "Disciplinare",
+    "playerTitle": "{player} - Statistiche stagionali di {team}",
+    "playerDescription": "{player} ({position}) gioca nel {team} in {league}. Statistiche stagionali: {goals} gol, {assists} assist in {appearances} presenze."
   },
   "Navigation": {
     "home": "Home",
@@ -313,6 +315,28 @@
     "redCards": "AR",
     "noData": "Nessun dato disponibile per questa classifica.",
     "backToLeague": "Torna a {league}"
+  },
+  "PlayerPage": {
+    "backToTeam": "Torna a {team}",
+    "seasonStats": "Statistiche stagionali",
+    "recentMatches": "Partite recenti",
+    "goals": "Gol",
+    "assists": "Assist",
+    "yellowCards": "Cartellini gialli",
+    "redCards": "Cartellini rossi",
+    "appearances": "Presenze",
+    "matchweek": "G {week}",
+    "noRecentMatches": "Nessun dato sulle partite recenti disponibile",
+    "position_GK": "Portiere",
+    "position_DEF": "Difensore",
+    "position_MID": "Centrocampista",
+    "position_FWD": "Attaccante",
+    "goal": "Gol",
+    "assist": "Assist",
+    "yellowCard": "Cartellino giallo",
+    "redCard": "Cartellino rosso",
+    "penaltyScored": "Rigore",
+    "minuteLabel": "{minute}'"
   },
   "Timeline": {
     "autoPlay": "Riproduzione automatica",
