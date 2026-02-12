@@ -1,14 +1,18 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { LanguagePicker } from '@/components/i18n/LanguagePicker';
 import { FeedbackButton } from './FeedbackDialog';
+import { LEAGUES, LEAGUE_THEMES } from '@/lib/themes/league-themes';
 
 export function Header() {
   const t = useTranslations('Navigation');
   const pathname = usePathname();
   const isMatchesActive = pathname?.startsWith('/matches');
+  const isLeaguesActive = pathname?.startsWith('/leagues');
+  const [leaguesOpen, setLeaguesOpen] = useState(false);
 
   return (
     <header className="relative z-50 bg-black/20 backdrop-blur-md">
@@ -48,6 +52,52 @@ export function Header() {
         {/* Navigation */}
         <nav className="flex items-center gap-4">
           <FeedbackButton />
+
+          {/* Leagues dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setLeaguesOpen(true)}
+            onMouseLeave={() => setLeaguesOpen(false)}
+          >
+            <button
+              className={`text-sm transition-colors ${
+                isLeaguesActive
+                  ? 'font-medium text-white'
+                  : 'text-white/70 hover:text-white'
+              }`}
+              onClick={() => setLeaguesOpen(!leaguesOpen)}
+              aria-expanded={leaguesOpen}
+            >
+              {t('leagues')}
+            </button>
+            {leaguesOpen && (
+              <div className="absolute right-0 top-full mt-1 w-56 rounded-lg border border-white/10 bg-[#1a1a2e]/95 p-2 shadow-xl backdrop-blur-md z-50">
+                {LEAGUES.map((slug) => {
+                  const theme = LEAGUE_THEMES[slug];
+                  return (
+                    <Link
+                      key={slug}
+                      href={`/leagues/${slug}`}
+                      className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                      onClick={() => setLeaguesOpen(false)}
+                    >
+                      {theme?.logoUrl && (
+                        <img
+                          src={theme.logoUrl}
+                          width={20}
+                          height={20}
+                          alt=""
+                          className="h-5 w-5 object-contain"
+                        />
+                      )}
+                      <span>{theme?.name ?? slug}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
           <Link
             href="/matches"
             className={`text-sm transition-colors ${
