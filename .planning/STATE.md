@@ -103,6 +103,7 @@ v1.4 decisions:
 - Set up Google AdSense account and create 8 ad unit slots
 - Update public/ads.txt with real publisher ID
 - Discuss how to make v1.4 pages more discoverable through homepage links
+- Redesign match detail page layout with two-row grid (summary+H2H top, stats+events bottom)
 
 ### Roadmap Evolution
 
