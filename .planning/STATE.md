@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.4 Programmatic SEO -- Phase 24 in progress (1/2 plans complete)
+**Current focus:** v1.4 Programmatic SEO -- Phase 24 complete (2/2 plans), ready for Phase 25
 
 ## Current Position
 
 Phase: 24 of 25 (Player Pages)
-Plan: 1 of 2
-Status: 24-01 complete, ready for 24-02
-Last activity: 2026-02-12 -- 24-01 player profile pages
+Plan: 2 of 2
+Status: Phase 24 complete, ready for Phase 25
+Last activity: 2026-02-12 -- 24-02 player SEO infrastructure
 
-Progress: [#####-----] 50% (1/2 plans)
+Progress: [##########] 100% (2/2 plans)
 
 ## Performance Metrics
 
@@ -45,6 +45,7 @@ Progress: [#####-----] 50% (1/2 plans)
 | 23    | 01   | 4min     | 2     | 9     |
 | 23    | 02   | 3min     | 2     | 10    |
 | 24    | 01   | 10min    | 2     | 14    |
+| 24    | 02   | 8min     | 2     | 5     |
 
 ## Accumulated Context
 
@@ -73,6 +74,9 @@ v1.4 decisions:
 - Types not re-exported from 'use server' modules (Next.js 16 Turbopack limitation)
 - Local PlayerPageData interface in page.tsx rather than importing from server action
 - Migration backfill uses LOWER-first ordering to preserve letters correctly
+- English-only OG images for players (consistent with leagues and stats pattern)
+- Weekly changefreq for player sitemap (stats change less frequently than standings)
+- Reuse getQualifyingPlayerSlugs for sitemap instead of duplicating query logic
 
 ### Pending Todos (manual/infrastructure)
 
@@ -93,6 +97,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: Completed 24-01-PLAN.md (player profile pages) -- ready for 24-02 (player sitemap)
+Stopped at: Completed 24-02-PLAN.md (player SEO) -- Phase 24 fully complete, ready for Phase 25
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
