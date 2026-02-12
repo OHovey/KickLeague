@@ -292,6 +292,23 @@
     "teamNotFound": "Squadra non trovata",
     "unableToLoadTeam": "Impossibile caricare la squadra"
   },
+  "StatsPage": {
+    "topScorers": "Capocannonieri",
+    "topAssists": "Assist",
+    "disciplinary": "Disciplinare",
+    "rank": "#",
+    "player": "Giocatore",
+    "team": "Squadra",
+    "goals": "Gol",
+    "assists": "Assist",
+    "appearances": "Pres",
+    "goalsPerAppearance": "Gol/Pres",
+    "assistsPerAppearance": "Assist/Pres",
+    "yellowCards": "AG",
+    "redCards": "AR",
+    "noData": "Nessun dato disponibile per questa classifica.",
+    "backToLeague": "Torna a {league}"
+  },
   "Timeline": {
     "autoPlay": "Riproduzione automatica",
     "matchweek": "Giornata {week}",

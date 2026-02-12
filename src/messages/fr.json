@@ -292,6 +292,23 @@
     "teamNotFound": "\u00c9quipe non trouv\u00e9e",
     "unableToLoadTeam": "Impossible de charger l'\u00e9quipe"
   },
+  "StatsPage": {
+    "topScorers": "Meilleurs buteurs",
+    "topAssists": "Meilleurs passeurs",
+    "disciplinary": "Disciplinaire",
+    "rank": "#",
+    "player": "Joueur",
+    "team": "Equipe",
+    "goals": "Buts",
+    "assists": "Passes dec.",
+    "appearances": "MJ",
+    "goalsPerAppearance": "Buts/MJ",
+    "assistsPerAppearance": "PD/MJ",
+    "yellowCards": "CJ",
+    "redCards": "CR",
+    "noData": "Aucune donnee disponible pour ce classement.",
+    "backToLeague": "Retour a {league}"
+  },
   "Timeline": {
     "autoPlay": "Lecture automatique",
     "matchweek": "Journ\u00e9e {week}",

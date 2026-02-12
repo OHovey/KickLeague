@@ -292,6 +292,23 @@
     "teamNotFound": "Equipo no encontrado",
     "unableToLoadTeam": "No se pudo cargar el equipo"
   },
+  "StatsPage": {
+    "topScorers": "Goleadores",
+    "topAssists": "Asistencias",
+    "disciplinary": "Disciplina",
+    "rank": "#",
+    "player": "Jugador",
+    "team": "Equipo",
+    "goals": "Goles",
+    "assists": "Asistencias",
+    "appearances": "PJ",
+    "goalsPerAppearance": "Goles/PJ",
+    "assistsPerAppearance": "Asist./PJ",
+    "yellowCards": "TA",
+    "redCards": "TR",
+    "noData": "No hay datos disponibles para esta clasificacion todavia.",
+    "backToLeague": "Volver a {league}"
+  },
   "Timeline": {
     "autoPlay": "Reproducci\u00f3n autom\u00e1tica",
     "matchweek": "Jornada {week}",

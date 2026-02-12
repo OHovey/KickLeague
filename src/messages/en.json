@@ -292,6 +292,23 @@
     "teamNotFound": "Team Not Found",
     "unableToLoadTeam": "Unable to Load Team"
   },
+  "StatsPage": {
+    "topScorers": "Top Scorers",
+    "topAssists": "Top Assists",
+    "disciplinary": "Disciplinary",
+    "rank": "#",
+    "player": "Player",
+    "team": "Team",
+    "goals": "Goals",
+    "assists": "Assists",
+    "appearances": "Apps",
+    "goalsPerAppearance": "Goals/App",
+    "assistsPerAppearance": "Assists/App",
+    "yellowCards": "YC",
+    "redCards": "RC",
+    "noData": "No data available for this leaderboard yet.",
+    "backToLeague": "Back to {league}"
+  },
   "Timeline": {
     "autoPlay": "Auto-play",
     "matchweek": "Matchweek {week}",

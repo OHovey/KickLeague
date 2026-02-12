@@ -292,6 +292,23 @@
     "teamNotFound": "Mannschaft nicht gefunden",
     "unableToLoadTeam": "Mannschaft konnte nicht geladen werden"
   },
+  "StatsPage": {
+    "topScorers": "Torjager",
+    "topAssists": "Vorlagengeber",
+    "disciplinary": "Disziplinarisches",
+    "rank": "#",
+    "player": "Spieler",
+    "team": "Mannschaft",
+    "goals": "Tore",
+    "assists": "Vorlagen",
+    "appearances": "Sp",
+    "goalsPerAppearance": "Tore/Sp",
+    "assistsPerAppearance": "Vorl./Sp",
+    "yellowCards": "GK",
+    "redCards": "RK",
+    "noData": "Noch keine Daten fur diese Rangliste verfugbar.",
+    "backToLeague": "Zuruck zu {league}"
+  },
   "Timeline": {
     "autoPlay": "Automatische Wiedergabe",
     "matchweek": "Spieltag {week}",
