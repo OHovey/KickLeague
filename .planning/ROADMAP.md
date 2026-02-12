@@ -247,7 +247,11 @@ Plans:
   1. `/sitemap-index.xml` returns a sitemap index listing separate sitemap URLs for each page type (teams, matches, and a placeholder structure for leagues, players, stats, h2h)
   2. Each individual sitemap (e.g., `/sitemaps/teams.xml`) returns valid sitemap XML with correct `<loc>` and `<lastmod>` entries including all locale variants
   3. The existing monolithic `sitemap.xml` is replaced by the sitemap-index without losing any currently indexed URLs
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 21-01-PLAN.md -- Sitemap registry, XML generation, and route handlers for sitemap-index + segment sitemaps
+- [ ] 21-02-PLAN.md -- Migration verification script, robots.txt validation, and end-to-end URL preservation check
 
 #### Phase 22: League Landing Pages
 **Goal**: Users can browse a dedicated page for each league with standings, top performers, recent results, and full SEO discoverability
@@ -324,7 +328,7 @@ Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on
 | 18. Deployment | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 19. Pipeline | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 20. Launch Docs | v1.3 | 1/1 | Complete | 2026-02-11 |
-| 21. Sitemap Index | v1.4 | 0/TBD | Not started | - |
+| 21. Sitemap Index | v1.4 | 0/2 | Planned | - |
 | 22. League Landing | v1.4 | 0/TBD | Not started | - |
 | 23. Stat Leaderboards | v1.4 | 0/TBD | Not started | - |
 | 24. Player Pages | v1.4 | 0/TBD | Not started | - |
