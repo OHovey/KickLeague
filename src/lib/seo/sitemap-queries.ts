@@ -3,6 +3,7 @@ import { teams, fixtures, leagues } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import type { SitemapEntry } from './sitemap-registry';
 import { getQualifyingPlayerSlugs } from '@/lib/players/queries';
+import { getQualifyingH2HPairs } from '@/lib/h2h/queries';
 
 const STAT_TYPES = ['top-scorers', 'top-assists', 'disciplinary'] as const;
 
@@ -119,4 +120,24 @@ export async function getPlayerSitemapEntries(): Promise<SitemapEntry[]> {
     params: { slug },
     lastmod: now,
   }));
+}
+
+/**
+ * Fetch qualifying H2H pairs (3+ meetings) as SitemapEntry objects.
+ * Uses canonical slug ordering (alphabetical) for consistent URLs.
+ * No updatedAt column exists, so lastmod defaults to now.
+ */
+export async function getH2HSitemapEntries(): Promise<SitemapEntry[]> {
+  if (!isDatabaseConfigured()) return [];
+  const pairs = await getQualifyingH2HPairs();
+  const now = new Date();
+  return pairs.map((pair) => {
+    const matchup = `${pair.team1Slug}-vs-${pair.team2Slug}`;
+    return {
+      path: `/h2h/${matchup}`,
+      routeKey: '/h2h/[matchup]',
+      params: { matchup },
+      lastmod: now,
+    };
+  });
 }
