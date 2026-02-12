@@ -77,13 +77,34 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated by roadmapper) | | |
+| INFRA-01 | Phase 21 | Pending |
+| LEAGUE-01 | Phase 22 | Pending |
+| LEAGUE-02 | Phase 22 | Pending |
+| LEAGUE-03 | Phase 22 | Pending |
+| LEAGUE-04 | Phase 22 | Pending |
+| INFRA-02 | Phase 22 | Pending |
+| INFRA-04 | Phase 22 | Pending |
+| STATS-01 | Phase 23 | Pending |
+| STATS-02 | Phase 23 | Pending |
+| STATS-03 | Phase 23 | Pending |
+| STATS-04 | Phase 23 | Pending |
+| PLAYER-01 | Phase 24 | Pending |
+| PLAYER-02 | Phase 24 | Pending |
+| PLAYER-03 | Phase 24 | Pending |
+| PLAYER-04 | Phase 24 | Pending |
+| PLAYER-05 | Phase 24 | Pending |
+| H2H-01 | Phase 25 | Pending |
+| H2H-02 | Phase 25 | Pending |
+| H2H-03 | Phase 25 | Pending |
+| H2H-04 | Phase 25 | Pending |
+| H2H-05 | Phase 25 | Pending |
+| INFRA-03 | Phase 25 | Pending |
 
 **Coverage:**
 - v1.4 requirements: 22 total
-- Mapped to phases: 0
-- Unmapped: 22
+- Mapped to phases: 22
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-12*
-*Last updated: 2026-02-12 -- initial definition*
+*Last updated: 2026-02-12 -- traceability populated by roadmapper*

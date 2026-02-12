@@ -5,7 +5,8 @@
 - **v1.0 MVP** - Phases 1-8 (shipped 2026-02-06)
 - **v1.1 Affiliate Monetisation** - Phases 9-10 (shipped 2026-02-06)
 - **v1.2 Polish, SEO & Launch Readiness** - Phases 11-15 (shipped 2026-02-09)
-- **v1.3 Production Launch** - Phases 16-20 (in progress)
+- **v1.3 Production Launch** - Phases 16-20 (shipped 2026-02-12)
+- **v1.4 Programmatic SEO** - Phases 21-25 (in progress)
 
 ## Phases
 
@@ -174,91 +175,132 @@ Plans:
 
 </details>
 
-### v1.3 Production Launch (In Progress)
+<details>
+<summary>v1.3 Production Launch (Phases 16-20) - SHIPPED 2026-02-12</summary>
 
-**Milestone Goal:** Deploy KickLeague to production with monitoring, verified data pipeline, security hardening, and documentation -- everything needed to go live.
-
-- [x] **Phase 16: Security Hardening** - Rate limiting and security headers before production deploy
-- [x] **Phase 17: Monitoring Integration** - Error tracking, performance analytics, and operational alerts
-- [x] **Phase 18: Production Deployment** - Vercel + Neon production environment with seeded data and documentation
-- [x] **Phase 19: Production Pipeline** - Verified cron schedules, live match polling, and current data
-- [x] **Phase 20: Launch Documentation** - Manual setup checklists for AdSense, affiliates, and DNS
-
-#### Phase 16: Security Hardening
+### Phase 16: Security Hardening
 **Goal**: Public API endpoints are protected from abuse and the site sends proper security headers on every response
 **Depends on**: Phase 15 (v1.2 shipped)
 **Requirements**: SEC-01, SEC-02, SEC-03
-**Success Criteria** (what must be TRUE):
-  1. Requests to `/api/updates/check` and `/api/clicks` are rate-limited and return 429 when limits are exceeded
-  2. The site serves a Content Security Policy header that allows its own scripts, styles, AdSense, and analytics while blocking unexpected sources
-  3. Every response includes X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers with secure defaults
 **Plans**: 2 plans
 
 Plans:
 - [x] 16-01-PLAN.md -- Rate limiting on public API endpoints (in-memory token bucket)
 - [x] 16-02-PLAN.md -- Security headers (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) + CSP report endpoint
 
-#### Phase 17: Monitoring Integration
+### Phase 17: Monitoring Integration
 **Goal**: Errors are automatically captured, performance is tracked, and operators are alerted when the data pipeline or API budget is at risk
 **Depends on**: Phase 16
 **Requirements**: MON-01, MON-02, MON-03, MON-04
-**Success Criteria** (what must be TRUE):
-  1. Unhandled errors and rejected promises are captured in Sentry with source maps and environment tags (development vs production)
-  2. Vercel Analytics is active and page load performance is visible in the Vercel dashboard
-  3. When daily API-Football request count approaches the 7,500 limit, a warning is logged or alerted
-  4. When a QStash or Vercel cron route returns an error status, the failure is captured in Sentry with cron context
 **Plans**: 2 plans
 
 Plans:
 - [x] 17-01-PLAN.md -- Sentry error tracking + Vercel Analytics & Speed Insights
 - [x] 17-02-PLAN.md -- API budget threshold alerting + cron job failure capture via Sentry
 
-#### Phase 18: Production Deployment
+### Phase 18: Production Deployment
 **Goal**: KickLeague runs on a production Vercel project backed by a production Neon database, with current data and complete setup documentation
 **Depends on**: Phase 17
 **Requirements**: DEPLOY-01, DEPLOY-02, DEPLOY-03, DEPLOY-04, DEPLOY-05
-**Success Criteria** (what must be TRUE):
-  1. The production Vercel project deploys successfully with all environment variables configured and the site loads at the production URL
-  2. The Neon production database has all Drizzle migrations applied and contains current-season teams, fixtures, standings, and odds data
-  3. A `.env.example` file documents every required environment variable with a description of its purpose and where to obtain it
-  4. The project README contains setup instructions, architecture overview, environment variable guide, and deployment steps (replacing the Next.js boilerplate)
 **Plans**: 2 plans
 
 Plans:
 - [x] 18-01-PLAN.md -- Complete .env.example documentation and production README
 - [x] 18-02-PLAN.md -- Production Vercel + Neon deployment, migrations, and data seeding
 
-#### Phase 19: Production Pipeline
+### Phase 19: Production Pipeline
 **Goal**: The automated data pipeline runs reliably in production, with live match polling at 3-minute intervals and all 5 leagues showing current data
 **Depends on**: Phase 18
 **Requirements**: PIPE-01, PIPE-02, PIPE-03
-**Success Criteria** (what must be TRUE):
-  1. QStash cron schedules are configured and visibly running in the Upstash dashboard, triggering the polling and odds routes on their defined intervals
-  2. During live matches, the polling frequency increases to 3-minute intervals so match scores stay near real-time
-  3. All 5 leagues show current match results and standings that match the latest data from API-Football
 **Plans**: 2 plans
 
 Plans:
 - [x] 19-01-PLAN.md -- Configure QStash cron schedules with 3-minute polling and verify in Upstash dashboard
 - [x] 19-02-PLAN.md -- Verify database freshness and production site data currency across all 5 leagues
 
-#### Phase 20: Launch Documentation
+### Phase 20: Launch Documentation
 **Goal**: Every manual setup step needed for full monetisation and DNS is documented in actionable checklists so nothing is forgotten
 **Depends on**: Nothing (documentation-only, can run in parallel)
 **Requirements**: MANUAL-01, MANUAL-02, MANUAL-03
-**Success Criteria** (what must be TRUE):
-  1. An AdSense setup checklist exists documenting account creation steps, ad unit ID collection for all 8 slots, and the `ads.txt` update procedure
-  2. An affiliate program setup checklist exists documenting signup steps for each bookmaker program, ID/btag collection, and where to configure them in the codebase
-  3. A DNS/domain setup checklist exists documenting domain purchase, DNS record configuration, Vercel domain linking, and SSL verification steps
 **Plans**: 1 plan
 
 Plans:
 - [x] 20-01-PLAN.md -- AdSense, affiliate program, and DNS/domain setup checklists
 
+</details>
+
+### v1.4 Programmatic SEO (In Progress)
+
+**Milestone Goal:** Expand KickLeague's indexable page surface through programmatic SEO -- dedicated league pages, stat leaderboards, player profiles, and head-to-head comparisons -- each with enough substantive content to avoid thin content penalties.
+
+- [ ] **Phase 21: Sitemap Index Refactor** - Segmented sitemap-index foundation for all current and upcoming page types
+- [ ] **Phase 22: League Landing Pages** - Dedicated per-league pages with standings, top performers, and recent results
+- [ ] **Phase 23: Statistical Leaderboards** - Top scorers, assists, and disciplinary leaderboards for each league
+- [ ] **Phase 24: Player Pages** - Individual player profiles with season stats and match involvement
+- [ ] **Phase 25: Head-to-Head Pages** - Team pair comparison pages with meeting history and form context
+
+#### Phase 21: Sitemap Index Refactor
+**Goal**: The sitemap uses a segmented sitemap-index pattern so each page type has its own sitemap file, ready for new page types to register as they are built
+**Depends on**: Phase 20 (v1.3 shipped)
+**Requirements**: INFRA-01
+**Success Criteria** (what must be TRUE):
+  1. `/sitemap-index.xml` returns a sitemap index listing separate sitemap URLs for each page type (teams, matches, and a placeholder structure for leagues, players, stats, h2h)
+  2. Each individual sitemap (e.g., `/sitemaps/teams.xml`) returns valid sitemap XML with correct `<loc>` and `<lastmod>` entries including all locale variants
+  3. The existing monolithic `sitemap.xml` is replaced by the sitemap-index without losing any currently indexed URLs
+**Plans**: TBD
+
+#### Phase 22: League Landing Pages
+**Goal**: Users can browse a dedicated page for each league with standings, top performers, recent results, and full SEO discoverability
+**Depends on**: Phase 21
+**Requirements**: LEAGUE-01, LEAGUE-02, LEAGUE-03, LEAGUE-04, INFRA-02, INFRA-04
+**Success Criteria** (what must be TRUE):
+  1. User can navigate to `/leagues/premier-league` (and equivalent slugs for all 5 leagues) and see the current standings table, a league description, and zone context (Champions League spots, relegation)
+  2. Each league page displays the top 5 scorers and the current form team for that league
+  3. Each league page shows recent match results and upcoming fixtures for that league
+  4. Each league page has a unique `<title>`, meta description, JSON-LD (SportsOrganization), OG image, and hreflang alternates across all 5 locales
+  5. League pages use `generateStaticParams` for build-time generation with ISR revalidation, and the leagues sitemap segment is populated
+**Plans**: TBD
+
+#### Phase 23: Statistical Leaderboards
+**Goal**: Users can view top-20 statistical leaderboards for each league, giving the site 15 new indexable page types (3 stat types x 5 leagues)
+**Depends on**: Phase 22
+**Requirements**: STATS-01, STATS-02, STATS-03, STATS-04
+**Success Criteria** (what must be TRUE):
+  1. User can view a top scorers leaderboard for each league showing the top 20 players with goals, appearances, goals-per-90, and team
+  2. User can view a top assists leaderboard for each league showing the top 20 players with assists, appearances, assists-per-90, and team
+  3. User can view a disciplinary leaderboard for each league showing the top 20 players with yellow cards, red cards, appearances, and team
+  4. Each leaderboard page has unique SEO metadata, JSON-LD, OG image, hreflang alternates, and appears in the stats sitemap segment
+**Plans**: TBD
+
+#### Phase 24: Player Pages
+**Goal**: Users can view individual player profiles with season stats and recent match involvement, limited to players with sufficient data to avoid thin content
+**Depends on**: Phase 23
+**Requirements**: PLAYER-01, PLAYER-02, PLAYER-03, PLAYER-04, PLAYER-05
+**Success Criteria** (what must be TRUE):
+  1. User can navigate to `/players/[slug]` and see the player's photo, position, nationality, current team, and shirt number
+  2. Player page shows a season stats summary with goals, assists, yellow cards, red cards, and total appearances
+  3. Player page shows the last 10 matches the player participated in, with match events (goals scored, assists, cards received)
+  4. Only players with 5 or more appearances this season have generated pages; navigating to a sub-threshold player slug returns 404
+  5. Each player page has unique SEO metadata, JSON-LD (Person/Athlete), OG image, and hreflang alternates, and the player sitemap segment only lists qualifying players
+**Plans**: TBD
+
+#### Phase 25: Head-to-Head Pages
+**Goal**: Users can compare two teams side-by-side with meeting history and current form, limited to pairs with enough meetings to provide substantive content
+**Depends on**: Phase 22
+**Requirements**: H2H-01, H2H-02, H2H-03, H2H-04, H2H-05, INFRA-03
+**Success Criteria** (what must be TRUE):
+  1. User can navigate to `/h2h/[team1]-vs-[team2]` and see all meetings between the two teams this season with scores, dates, and venues
+  2. H2H page shows the aggregate record (wins per side, draws, total goals per side) and expanded detail for the most recent meeting
+  3. H2H page shows a current form comparison (last 5 results) and league position comparison for both teams
+  4. Only team pairs with 3 or more meetings across available data have generated pages; sub-threshold pairs return 404
+  5. Cross-linking is wired between all page types: player pages link to their team, team pages link to their players, league pages link to stats and teams, H2H pages link to both teams
+
+**Plans**: TBD
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in parallel with 18-19)
+Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on 22, not 24, so could potentially run in parallel with 23-24)
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -282,7 +324,12 @@ Phases execute in numeric order: 16 -> 17 -> 18 -> 19 -> 20 (Phase 20 can run in
 | 18. Deployment | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 19. Pipeline | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 20. Launch Docs | v1.3 | 1/1 | Complete | 2026-02-11 |
+| 21. Sitemap Index | v1.4 | 0/TBD | Not started | - |
+| 22. League Landing | v1.4 | 0/TBD | Not started | - |
+| 23. Stat Leaderboards | v1.4 | 0/TBD | Not started | - |
+| 24. Player Pages | v1.4 | 0/TBD | Not started | - |
+| 25. Head-to-Head | v1.4 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-11 -- Phase 20 complete*
+*Last updated: 2026-02-12 -- v1.4 Programmatic SEO roadmap added*
