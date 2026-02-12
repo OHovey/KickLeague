@@ -65,7 +65,9 @@ export interface MatchEventRow {
   extraMinute: number | null;
   teamId: number;
   playerName: string | null;
+  playerSlug: string | null;
   assistPlayerName: string | null;
+  assistPlayerSlug: string | null;
   detail: string | null;
 }
 
@@ -249,7 +251,9 @@ export async function fetchMatchEvents(
       extraMinute: fixtureEvents.extraMinute,
       teamId: fixtureEvents.teamId,
       playerName: players.name,
+      playerSlug: players.slug,
       assistPlayerName: assistPlayer.name,
+      assistPlayerSlug: assistPlayer.slug,
       detail: fixtureEvents.detail,
     })
     .from(fixtureEvents)

@@ -217,6 +217,8 @@ export default async function MatchDetailPage({
                   team1Id={match.homeTeam.id}
                   team2Id={match.awayTeam.id}
                   locale={locale}
+                  team1Slug={match.homeTeam.slug}
+                  team2Slug={match.awayTeam.slug}
                 />
 
                 <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_2.slotId} />
@@ -288,6 +290,8 @@ export default async function MatchDetailPage({
                 team1Id={match.homeTeam.id}
                 team2Id={match.awayTeam.id}
                 locale={locale}
+                team1Slug={match.homeTeam.slug}
+                team2Slug={match.awayTeam.slug}
               />
 
               <AdUnit slotId={AD_SLOTS.MATCH_DETAIL_2.slotId} />

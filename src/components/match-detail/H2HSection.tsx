@@ -13,6 +13,8 @@ interface H2HSectionProps {
   team1Id: number;
   team2Id: number;
   locale?: string;
+  team1Slug?: string;
+  team2Slug?: string;
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
@@ -23,6 +25,8 @@ export function H2HSection({
   team2Name,
   team1Id,
   locale = 'en-GB',
+  team1Slug,
+  team2Slug,
 }: H2HSectionProps) {
   const t = useTranslations('MatchDetail');
   const total = h2hData.team1Wins + h2hData.team2Wins + h2hData.draws;
@@ -132,6 +136,19 @@ export function H2HSection({
             <p className="mt-3 text-[10px] text-white/30">
               {t('basedOnMeetings', { count: h2hData.meetings.length })}
             </p>
+          )}
+
+          {/* Link to full H2H page */}
+          {team1Slug && team2Slug && (
+            <a
+              href={`/${locale}/h2h/${team1Slug}-vs-${team2Slug}`}
+              className="mt-4 flex items-center gap-1 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
+            >
+              {t('viewFullH2H')}
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
           )}
         </>
       )}

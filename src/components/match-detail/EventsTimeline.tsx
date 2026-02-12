@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import type { MatchEventRow } from './actions';
 
 // ── Event Icon ─────────────────────────────────────────────────────────────
@@ -55,7 +55,35 @@ function formatMinute(minute: number, extraMinute: number | null): string {
 
 // ── Event Content ──────────────────────────────────────────────────────────
 
-function EventContent({ event, t }: { event: MatchEventRow; t: TranslationFn }) {
+function PlayerName({ name, slug, locale }: { name: string; slug: string | null; locale: string }) {
+  if (slug) {
+    return (
+      <a
+        href={`/${locale}/players/${slug}`}
+        className="text-sm font-medium text-white/90 underline decoration-white/20 underline-offset-2 transition-colors hover:text-white hover:decoration-white/50"
+      >
+        {name}
+      </a>
+    );
+  }
+  return <span className="text-sm font-medium text-white/90">{name}</span>;
+}
+
+function AssistPlayerName({ name, slug, locale }: { name: string; slug: string | null; locale: string }) {
+  if (slug) {
+    return (
+      <a
+        href={`/${locale}/players/${slug}`}
+        className="text-white/50 underline decoration-white/20 underline-offset-2 transition-colors hover:text-white/70 hover:decoration-white/40"
+      >
+        {name}
+      </a>
+    );
+  }
+  return <>{name}</>;
+}
+
+function EventContent({ event, t, locale }: { event: MatchEventRow; t: TranslationFn; locale: string }) {
   const icon = getEventIcon(event.type);
   const label = getEventLabel(event.type, t);
 
@@ -64,15 +92,17 @@ function EventContent({ event, t }: { event: MatchEventRow; t: TranslationFn }) 
       <div className="flex items-center gap-1">
         <span>{icon}</span>
         {label && <span className="text-xs font-medium text-white/70">{label}</span>}
-        <span className="text-sm font-medium text-white/90">
-          {event.playerName ?? t('unknown')}
-        </span>
+        {event.playerName ? (
+          <PlayerName name={event.playerName} slug={event.playerSlug} locale={locale} />
+        ) : (
+          <span className="text-sm font-medium text-white/90">{t('unknown')}</span>
+        )}
       </div>
       {event.type === 'substitution' && event.assistPlayerName && (
-        <p className="text-xs text-white/40">{t('forPlayer')} {event.assistPlayerName}</p>
+        <p className="text-xs text-white/40">{t('forPlayer')} <AssistPlayerName name={event.assistPlayerName} slug={event.assistPlayerSlug} locale={locale} /></p>
       )}
       {event.type !== 'substitution' && event.assistPlayerName && (
-        <p className="text-xs text-white/40">{t('assist')} {event.assistPlayerName}</p>
+        <p className="text-xs text-white/40">{t('assist')} <AssistPlayerName name={event.assistPlayerName} slug={event.assistPlayerSlug} locale={locale} /></p>
       )}
       {event.detail && event.type !== 'substitution' && (
         <p className="text-[10px] text-white/30">{event.detail}</p>
@@ -92,6 +122,7 @@ interface EventsTimelineProps {
 
 export function EventsTimeline({ events, homeTeamId }: EventsTimelineProps) {
   const t = useTranslations('MatchDetail');
+  const locale = useLocale();
 
   if (events.length === 0) {
     return (
@@ -117,7 +148,7 @@ export function EventsTimeline({ events, homeTeamId }: EventsTimelineProps) {
               <div key={event.id} className="flex items-start">
                 {/* Home side (left) */}
                 <div className="flex flex-1 justify-end pr-4">
-                  {isHome && <EventContent event={event} t={t} />}
+                  {isHome && <EventContent event={event} t={t} locale={locale} />}
                 </div>
 
                 {/* Center: minute marker */}
@@ -127,7 +158,7 @@ export function EventsTimeline({ events, homeTeamId }: EventsTimelineProps) {
 
                 {/* Away side (right) */}
                 <div className="flex flex-1 pl-4">
-                  {!isHome && <EventContent event={event} t={t} />}
+                  {!isHome && <EventContent event={event} t={t} locale={locale} />}
                 </div>
               </div>
             );
