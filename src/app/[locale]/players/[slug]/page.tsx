@@ -15,6 +15,7 @@ interface PlayerPageData {
 }
 import {
   buildBreadcrumbs,
+  buildPerson,
   serializeJsonLd,
 } from '@/lib/seo/structured-data';
 
@@ -207,6 +208,16 @@ export default async function PlayerPage({
     },
   ]);
 
+  // JSON-LD: Person/Athlete
+  const personJsonLd = buildPerson({
+    name: player.name,
+    photoUrl: player.photoUrl,
+    url: `/${locale}/players/${player.slug}`,
+    teamName: player.teamName,
+    nationality: player.nationality,
+    position: player.position,
+  });
+
   // Stat card data
   const statCards = [
     {
@@ -257,6 +268,10 @@ export default async function PlayerPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(personJsonLd) }}
       />
       <ThemeBackground theme={player.leagueSlug} />
       <div className="min-h-screen">

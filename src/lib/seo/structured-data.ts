@@ -83,6 +83,31 @@ export function buildSportsTeam(team: {
   };
 }
 
+export function buildPerson(player: {
+  name: string;
+  photoUrl: string | null;
+  url: string;
+  teamName: string;
+  nationality: string | null;
+  position: string | null;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: player.name,
+    url: player.url.startsWith('http') ? player.url : `${SITE_URL}${player.url}`,
+    ...(player.photoUrl && { image: player.photoUrl }),
+    ...(player.nationality && { nationality: player.nationality }),
+    ...(player.position && {
+      jobTitle: `Professional Football ${player.position}`,
+    }),
+    memberOf: {
+      '@type': 'SportsTeam',
+      name: player.teamName,
+    },
+  };
+}
+
 export function buildItemList(
   items: Array<{ name: string; position: number; url?: string }>
 ) {
