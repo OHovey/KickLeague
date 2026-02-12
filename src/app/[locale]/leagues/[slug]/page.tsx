@@ -7,10 +7,16 @@ import { LEAGUES, LEAGUE_THEMES } from '@/lib/themes/league-themes';
 import { fetchLeaguePageData } from '@/components/league-page/actions';
 import { getZoneColor } from '@/lib/zones';
 import { ZoneLegend } from '@/components/league-table/ZoneLegend';
-import { buildBreadcrumbs, serializeJsonLd } from '@/lib/seo/structured-data';
+import { buildBreadcrumbs, buildSportsOrganization, serializeJsonLd } from '@/lib/seo/structured-data';
 
 // ISR: revalidate every 30 minutes (matches poll frequency)
 export const revalidate = 1800;
+
+// -- Static Params -----------------------------------------------------------
+
+export function generateStaticParams() {
+  return LEAGUES.map((slug) => ({ slug }));
+}
 
 // -- Metadata ----------------------------------------------------------------
 
@@ -134,6 +140,11 @@ export default async function LeaguePage({
   const logoUrl = data.league.logoUrl || theme?.logoUrl || '';
   const leagueName = data.league.name || theme?.name || slug;
 
+  const leagueJsonLd = buildSportsOrganization({
+    name: leagueName,
+    logoUrl: logoUrl || null,
+    url: `/${locale}/leagues/${slug}`,
+  });
   const breadcrumbJsonLd = buildBreadcrumbs([
     { name: 'Home', url: `/${locale}` },
     { name: leagueName, url: `/${locale}/leagues/${slug}` },
@@ -141,6 +152,10 @@ export default async function LeaguePage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(leagueJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}

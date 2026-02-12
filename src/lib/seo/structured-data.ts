@@ -47,6 +47,22 @@ export function buildSportsEvent(match: {
   };
 }
 
+export function buildSportsOrganization(league: {
+  name: string;
+  logoUrl: string | null;
+  url: string;
+  sport?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SportsOrganization',
+    name: league.name,
+    sport: league.sport ?? 'Football',
+    url: league.url.startsWith('http') ? league.url : `${SITE_URL}${league.url}`,
+    ...(league.logoUrl && { logo: league.logoUrl }),
+  };
+}
+
 export function buildSportsTeam(team: {
   name: string;
   logoUrl: string | null;
