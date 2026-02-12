@@ -281,8 +281,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 23-01-PLAN.md -- Leaderboard data layer, routing, page UI, and i18n for all 3 stat types
-- [ ] 23-02-PLAN.md -- SEO infrastructure: metadata, OG images, JSON-LD, hreflang, stats sitemap segment
+- [x] 23-01-PLAN.md -- Leaderboard data layer, routing, page UI, and i18n for all 3 stat types
+- [x] 23-02-PLAN.md -- SEO infrastructure: metadata, OG images, JSON-LD, hreflang, stats sitemap segment
 
 #### Phase 24: Player Pages
 **Goal**: Users can view individual player profiles with season stats and recent match involvement, limited to players with sufficient data to avoid thin content
@@ -338,10 +338,10 @@ Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on
 | 20. Launch Docs | v1.3 | 1/1 | Complete | 2026-02-11 |
 | 21. Sitemap Index | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 22. League Landing | v1.4 | 2/2 | Complete | 2026-02-12 |
-| 23. Stat Leaderboards | v1.4 | 0/TBD | Not started | - |
+| 23. Stat Leaderboards | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 24. Player Pages | v1.4 | 0/TBD | Not started | - |
 | 25. Head-to-Head | v1.4 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-12 -- Phase 22 complete*
+*Last updated: 2026-02-12 -- Phase 23 complete*
