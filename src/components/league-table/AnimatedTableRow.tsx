@@ -71,10 +71,18 @@ export const AnimatedTableRow = memo(function AnimatedTableRow({
         </div>
 
         {/* Team name - Always visible */}
-        <div role="cell" className="min-h-[44px] py-3 px-2 text-left text-sm font-medium text-white">
+        <div role="cell" className="min-h-[44px] py-3 px-2 text-left text-sm font-medium text-white flex items-center gap-2">
+          {row.teamLogoUrl && (
+            <img
+              src={row.teamLogoUrl}
+              alt=""
+              className="h-5 w-5 shrink-0 object-contain"
+              loading="lazy"
+            />
+          )}
           <Link
             href={`/teams/${row.teamSlug}`}
-            className="hover:underline"
+            className="hover:underline truncate"
             onClick={(e) => e.stopPropagation()}
           >
             {row.teamName}

@@ -83,7 +83,7 @@ function TableSkeleton() {
             {/* Team name + logo */}
             <div className="flex items-center gap-2 px-2">
               <div
-                className="shimmer-loading h-6 w-6 rounded-full shrink-0"
+                className="shimmer-loading h-5 w-5 rounded-full shrink-0"
                 style={{ animationDelay: `${i * 80 + 40}ms` }}
               />
               <div
