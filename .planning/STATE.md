@@ -2,19 +2,17 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-10)
+See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** Phase 20 - Launch Documentation (v1.3 Production Launch) -- COMPLETE
+**Current focus:** v1.4 Programmatic SEO -- Defining requirements
 
 ## Current Position
 
-Phase: 20 of 20 (Launch Documentation) -- COMPLETE
-Plan: 1 of 1 in current phase (all plans complete)
-Status: Phase 20 complete -- all v1.3 phases complete
-Last activity: 2026-02-11 -- Completed 20-01 (launch documentation checklists)
-
-Progress: [####################] 62/62 (v1.0-v1.3 complete, all 20 phases done)
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements for v1.4
+Last activity: 2026-02-12 — Milestone v1.4 started, v1.3 archived
 
 ## Performance Metrics
 
@@ -72,7 +70,10 @@ All decisions logged in PROJECT.md Key Decisions table (17 decisions, all marked
 
 ### Pending Todos (code)
 
-- Show current matchweek standings before week completes (league table only shows fully completed matchweek data)
+- ~~Show current matchweek standings before week completes~~ (done -- quick task 8, 2026-02-12)
+- ~~Fix language dropdown z-index behind stats card~~ (done -- quick task 9, 2026-02-12)
+- ~~Include team emblem in league table~~ (done -- quick task 10, 2026-02-12)
+- ~~Rename results to recent matches and fixtures to upcoming matches~~ (done -- quick task 11, 2026-02-12)
 
 ### Tech Debt
 
@@ -93,10 +94,14 @@ None.
 | 5 | Make both match preview cards equal height | 2026-02-10 | 093ba2a | [5-make-both-match-preview-cards-equal-heig](./quick/5-make-both-match-preview-cards-equal-heig/) |
 | 6 | Prepare frontend-design skill prompt | 2026-02-10 | 8da9ae1 | [6-prepare-a-frontend-design-skill-prompt-f](./quick/6-prepare-a-frontend-design-skill-prompt-f/) |
 | 7 | Add feedback option in navbar | 2026-02-10 | 87f5a4e | [7-add-feedback-option-in-navbar-that-submi](./quick/7-add-feedback-option-in-navbar-that-submi/) |
+| 8 | Show in-progress matchweek standings by default | 2026-02-12 | 1aa013a | [8-show-in-progress-matchweek-standings-by-](./quick/8-show-in-progress-matchweek-standings-by-/) |
+| 9 | Fix language dropdown z-index behind stat cards | 2026-02-12 | a275b28 | [9-fix-language-dropdown-z-index-behind-sta](./quick/9-fix-language-dropdown-z-index-behind-sta/) |
+| 10 | Include team emblem in league table | 2026-02-12 | fdd7b16 | [10-include-team-emblem-in-league-table](./quick/10-include-team-emblem-in-league-table/) |
+| 11 | Rename Results/Fixtures to Recent Matches/Upcoming Matches | 2026-02-12 | 5025118 | [11-rename-results-to-recent-matches-and-fix](./quick/11-rename-results-to-recent-matches-and-fix/) |
 
 ## Session Continuity
 
-Last session: 2026-02-11
-Stopped at: Completed 20-01-PLAN.md (Phase 20 complete -- all v1.3 phases done)
+Last session: 2026-02-12
+Stopped at: Completed quick task 11 (rename Results/Fixtures to Recent Matches/Upcoming Matches)
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app

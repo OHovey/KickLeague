@@ -84,3 +84,26 @@
 
 ---
 
+## v1.3 Production Launch (Shipped: 2026-02-12)
+
+**Delivered:** Production deployment on Vercel with Neon database, Sentry error tracking, Vercel Analytics, rate limiting, security headers, QStash cron pipeline, and complete setup documentation for AdSense, affiliates, and DNS.
+
+**Phases completed:** 16-20 (9 plans total)
+
+**Key accomplishments:**
+- Rate limiting on public API endpoints (in-memory token bucket) and security headers (CSP report-only, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+- Sentry error tracking with source maps, Vercel Analytics + Speed Insights, API budget threshold alerting, cron failure capture
+- Production Vercel + Neon deployment with all migrations applied and current-season data seeded across all 5 leagues
+- QStash cron schedules configured with 3-minute live match polling and daily resync at 04:00 UTC
+- Complete setup checklists for AdSense, affiliate programs, and DNS/domain configuration
+
+**Stats:**
+- 5 phases, 9 plans
+- 3 days (2026-02-10 to 2026-02-12)
+
+**Git range:** `feat(16-01)` → `docs(phase-20)`
+
+**What's next:** Programmatic SEO — league landing pages, stat leaderboards, player pages, H2H pages
+
+---
+

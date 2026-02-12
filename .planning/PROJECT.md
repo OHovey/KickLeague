@@ -31,16 +31,19 @@ Football fans can see league standings with rich visual context — sparklines, 
 - ✓ Tech debt resolved: getTeamName wiring, hardcoded season '2025', hardcoded English strings — v1.2
 - ✓ Full SEO: meta tags, Open Graph images, sitemap.xml, robots.txt, JSON-LD structured data, hreflang alternates — v1.2
 - ✓ Google AdSense integration with responsive ad units on 4 page types, betting content separation — v1.2
+- ✓ Production Vercel + Neon deployment with security hardening, monitoring, and verified data pipeline — v1.3
+- ✓ Sentry error tracking, Vercel Analytics, API budget alerts, cron failure capture — v1.3
+- ✓ Rate limiting, CSP headers, security response headers on all endpoints — v1.3
+- ✓ Complete setup documentation for AdSense, affiliates, and DNS — v1.3
 
 ### Active
 
-<!-- v1.3 Production Launch -->
-- [ ] Production deployment on Vercel with Neon production database
-- [ ] Error tracking and performance monitoring (Sentry + Vercel Analytics)
-- [ ] Complete environment documentation and production README
-- [ ] Verified data pipeline with cron jobs running and database current
-- [ ] Security hardening (rate limiting, CSP headers)
-- [ ] Manual setup steps documented (AdSense, affiliate programs, DNS)
+<!-- v1.4 Programmatic SEO -->
+- [ ] League landing pages with dedicated per-league content
+- [ ] Statistical leaderboard pages (top scorers, assists, cards)
+- [ ] Player pages with season stats and match involvement
+- [ ] Head-to-head pages for teams with actual meeting history
+- [ ] SEO infrastructure for programmatic pages (sitemap, metadata, structured data)
 
 ### Out of Scope
 
@@ -115,17 +118,16 @@ Football fans can see league standings with rich visual context — sparklines, 
 | IntersectionObserver for ad lazy loading | Ads load when 200px from viewport; module-level singleton prevents duplicate script loads | ✓ Good — minimal performance impact |
 | Betting content separation for ads | At least one full content section between any ad unit and odds/bookmaker content | ✓ Good — compliance maintained |
 
-## Current Milestone: v1.3 Production Launch
+## Current Milestone: v1.4 Programmatic SEO
 
-**Goal:** Deploy KickLeague to production with monitoring, verified data pipeline, security hardening, and documentation — everything needed to go live.
+**Goal:** Expand KickLeague's indexable page surface through programmatic SEO — dedicated league pages, stat leaderboards, player profiles, and head-to-head comparisons — each with enough substantive content to avoid thin content penalties.
 
 **Target features:**
-- Production Vercel + Neon deployment with all env vars configured
-- Sentry error tracking + Vercel Analytics
-- Production README and complete env documentation
-- QStash cron schedules running, database seeded and current
-- Rate limiting on public endpoints, CSP headers
-- Manual steps documented (AdSense units, affiliate signups, DNS)
+- League landing pages with standings, top performers, recent results, and editorial context
+- Statistical leaderboard pages (top scorers, assists, cards) with rich per-player context
+- Player pages with season stats, goal timeline, and match involvement
+- Head-to-head pages for team pairs with actual meeting history
+- SEO infrastructure: sitemap segmentation, structured data, generateStaticParams
 
 ---
-*Last updated: 2026-02-10 after v1.3 milestone started*
+*Last updated: 2026-02-12 after v1.4 milestone started*
