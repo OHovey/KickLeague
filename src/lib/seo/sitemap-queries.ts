@@ -2,6 +2,7 @@ import { getDb, isDatabaseConfigured } from '@/db/connection';
 import { teams, fixtures, leagues } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import type { SitemapEntry } from './sitemap-registry';
+import { getQualifyingPlayerSlugs } from '@/lib/players/queries';
 
 const STAT_TYPES = ['top-scorers', 'top-assists', 'disciplinary'] as const;
 
@@ -101,4 +102,21 @@ export async function getStatsSitemapEntries(): Promise<SitemapEntry[]> {
   }
 
   return entries;
+}
+
+/**
+ * Fetch qualifying player slugs (5+ appearances) as SitemapEntry objects.
+ * Reuses getQualifyingPlayerSlugs from player queries.
+ * No updatedAt column exists, so lastmod defaults to now.
+ */
+export async function getPlayerSitemapEntries(): Promise<SitemapEntry[]> {
+  if (!isDatabaseConfigured()) return [];
+  const slugs = await getQualifyingPlayerSlugs();
+  const now = new Date();
+  return slugs.map((slug) => ({
+    path: `/players/${slug}`,
+    routeKey: '/players/[slug]',
+    params: { slug },
+    lastmod: now,
+  }));
 }
