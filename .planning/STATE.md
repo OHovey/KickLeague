@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.4 Programmatic SEO -- Phase 25 in progress (1/2 plans complete)
+**Current focus:** v1.4 Programmatic SEO -- Phase 25 COMPLETE (2/2 plans)
 
 ## Current Position
 
 Phase: 25 of 25 (Head-to-Head Pages)
-Plan: 1 of 2
-Status: 25-01 complete, ready for 25-02
-Last activity: 2026-02-12 -- 25-01 H2H page data layer and UI
+Plan: 2 of 2
+Status: Phase 25 COMPLETE -- all plans executed
+Last activity: 2026-02-12 -- 25-02 H2H SEO infrastructure and cross-links
 
-Progress: [#########-] 90% (1/2 plans in Phase 25)
+Progress: [##########] 100% (2/2 plans in Phase 25)
 
 ## Performance Metrics
 
@@ -47,6 +47,7 @@ Progress: [#########-] 90% (1/2 plans in Phase 25)
 | 24    | 01   | 10min    | 2     | 14    |
 | 24    | 02   | 8min     | 2     | 5     |
 | 25    | 01   | 6min     | 2     | 9     |
+| 25    | 02   | 9min     | 2     | 13    |
 
 ## Accumulated Context
 
@@ -82,6 +83,10 @@ v1.4 decisions:
 - LEAST/GREATEST SQL for qualifying H2H pairs ensures canonical dedup regardless of home/away order
 - No path localization for /h2h/ prefix (universally understood in football)
 - Inline FormBadgesInline for H2H server-rendered form display (no client boundary)
+- English-only OG images for H2H (consistent with leagues, stats, players)
+- Weekly changefreq for H2H sitemap (meetings data rarely changes)
+- Added slug to PlayerStat for squad roster links to player pages
+- H2H section on team page limited to 5 opponents by meeting count
 
 ### Pending Todos (manual/infrastructure)
 
@@ -102,6 +107,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: Completed 25-01-PLAN.md (H2H page data layer + UI) -- ready for 25-02 (H2H sitemap)
+Stopped at: Completed 25-02-PLAN.md (H2H SEO + cross-links) -- Phase 25 COMPLETE
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
