@@ -33,6 +33,13 @@ export const routing = defineRouting({
       it: '/squadre/[slug]',
       fr: '/equipes/[slug]',
     },
+    '/leagues/[slug]': {
+      en: '/leagues/[slug]',
+      es: '/ligas/[slug]',
+      de: '/ligen/[slug]',
+      it: '/campionati/[slug]',
+      fr: '/championnats/[slug]',
+    },
   },
 });
 
