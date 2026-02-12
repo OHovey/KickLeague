@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.4 Programmatic SEO -- Phase 21 complete (2/2 plans)
+**Current focus:** v1.4 Programmatic SEO -- Phase 22 in progress (1/2 plans complete)
 
 ## Current Position
 
-Phase: 21 of 25 (Sitemap Index Refactor)
-Plan: 2 of 2
-Status: Phase 21 complete, ready for Phase 22
-Last activity: 2026-02-12 -- 21-02 sitemap migration verification
+Phase: 22 of 25 (League Landing Pages)
+Plan: 1 of 2
+Status: 22-01 complete, ready for 22-02
+Last activity: 2026-02-12 -- 22-01 league landing pages
 
-Progress: [##########] 100% (2/2 plans)
+Progress: [#####-----] 50% (1/2 plans)
 
 ## Performance Metrics
 
@@ -40,6 +40,7 @@ Progress: [##########] 100% (2/2 plans)
 |-------|------|----------|-------|-------|
 | 21    | 01   | 3min     | 2     | 5     |
 | 21    | 02   | 4min     | 2     | 1     |
+| 22    | 01   | 5min     | 2     | 9     |
 
 ## Accumulated Context
 
@@ -53,6 +54,9 @@ v1.4 decisions:
 - Registry pattern: new page types push to sitemapSegments array, no infrastructure changes
 - Dynamic imports in verification scripts to avoid ESM module evaluation order issues with dotenv
 - robots.ts confirmed unchanged -- /sitemap.xml URL preserved through migration
+- Static const map for league descriptions (editorial content, not DB-driven)
+- Server-rendered league pages only (no client components needed for data display)
+- Inline FormBadgesInline for server-side rendering (avoids unnecessary client boundary)
 
 ### Pending Todos (manual/infrastructure)
 
@@ -72,6 +76,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: Completed 21-02-PLAN.md (sitemap migration verification) -- Phase 21 complete
+Stopped at: Completed 22-01-PLAN.md (league landing pages) -- ready for 22-02
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
