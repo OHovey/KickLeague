@@ -11,7 +11,7 @@ export function Header() {
   const isMatchesActive = pathname?.startsWith('/matches');
 
   return (
-    <header className="relative bg-black/20 backdrop-blur-md">
+    <header className="relative z-50 bg-black/20 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Wordmark */}
         <Link
