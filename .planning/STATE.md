@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.4 Programmatic SEO -- Phase 24 complete (2/2 plans), ready for Phase 25
+**Current focus:** v1.4 Programmatic SEO -- Phase 25 in progress (1/2 plans complete)
 
 ## Current Position
 
-Phase: 24 of 25 (Player Pages)
-Plan: 2 of 2
-Status: Phase 24 complete, ready for Phase 25
-Last activity: 2026-02-12 -- 24-02 player SEO infrastructure
+Phase: 25 of 25 (Head-to-Head Pages)
+Plan: 1 of 2
+Status: 25-01 complete, ready for 25-02
+Last activity: 2026-02-12 -- 25-01 H2H page data layer and UI
 
-Progress: [##########] 100% (2/2 plans)
+Progress: [#########-] 90% (1/2 plans in Phase 25)
 
 ## Performance Metrics
 
@@ -46,6 +46,7 @@ Progress: [##########] 100% (2/2 plans)
 | 23    | 02   | 3min     | 2     | 10    |
 | 24    | 01   | 10min    | 2     | 14    |
 | 24    | 02   | 8min     | 2     | 5     |
+| 25    | 01   | 6min     | 2     | 9     |
 
 ## Accumulated Context
 
@@ -77,6 +78,10 @@ v1.4 decisions:
 - English-only OG images for players (consistent with leagues and stats pattern)
 - Weekly changefreq for player sitemap (stats change less frequently than standings)
 - Reuse getQualifyingPlayerSlugs for sitemap instead of duplicating query logic
+- Smart matchup slug parsing: query all team slugs from DB, find valid -vs- split (handles hyphenated names)
+- LEAST/GREATEST SQL for qualifying H2H pairs ensures canonical dedup regardless of home/away order
+- No path localization for /h2h/ prefix (universally understood in football)
+- Inline FormBadgesInline for H2H server-rendered form display (no client boundary)
 
 ### Pending Todos (manual/infrastructure)
 
@@ -97,6 +102,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: Completed 24-02-PLAN.md (player SEO) -- Phase 24 fully complete, ready for Phase 25
+Stopped at: Completed 25-01-PLAN.md (H2H page data layer + UI) -- ready for 25-02 (H2H sitemap)
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
