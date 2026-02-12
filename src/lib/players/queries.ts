@@ -226,6 +226,8 @@ export async function getPlayerRecentMatches(
   );
 
   // Step 2: get match details + player events for those fixtures
+  const idList = sql.join(fixtureIds.map((id) => sql`${id}`), sql`, `);
+
   const matchRows = await db.execute(sql`
     SELECT
       f.id AS fixture_id,
@@ -240,7 +242,7 @@ export async function getPlayerRecentMatches(
     FROM fixtures f
     INNER JOIN teams ht ON f.home_team_id = ht.id
     INNER JOIN teams at ON f.away_team_id = at.id
-    WHERE f.id = ANY(${fixtureIds})
+    WHERE f.id IN (${idList})
     ORDER BY f.kickoff DESC
   `);
 
@@ -251,7 +253,7 @@ export async function getPlayerRecentMatches(
       fe.minute,
       fe.extra_minute
     FROM fixture_events fe
-    WHERE fe.fixture_id = ANY(${fixtureIds})
+    WHERE fe.fixture_id IN (${idList})
       AND (fe.player_id = ${playerId} OR fe.assist_player_id = ${playerId})
     ORDER BY fe.fixture_id, fe.minute
   `);
@@ -300,15 +302,11 @@ export async function getQualifyingPlayerSlugs(): Promise<string[]> {
     FROM players p
     INNER JOIN teams t ON p.team_id = t.id
     INNER JOIN leagues l ON t.league_id = l.id
-    WHERE (
-      SELECT COUNT(DISTINCT fe.fixture_id)
-      FROM fixture_events fe
-      INNER JOIN fixtures f ON fe.fixture_id = f.id
-      WHERE (fe.player_id = p.id OR fe.assist_player_id = p.id)
-        AND f.league_id = l.id
-        AND f.season = l.current_season
-    ) >= 5
-    ORDER BY p.name
+    INNER JOIN fixture_events fe ON (fe.player_id = p.id OR fe.assist_player_id = p.id)
+    INNER JOIN fixtures f ON fe.fixture_id = f.id AND f.league_id = l.id AND f.season = l.current_season
+    GROUP BY p.id, p.slug
+    HAVING COUNT(DISTINCT fe.fixture_id) >= 5
+    ORDER BY p.slug
   `);
 
   return rows.rows.map((r: Record<string, unknown>) => String(r.slug));

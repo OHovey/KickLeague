@@ -61,7 +61,11 @@ export const fixtureEvents = pgTable(
     assistPlayerId: integer('assist_player_id').references(() => players.id),
     detail: varchar('detail', { length: 100 }), // e.g. "Normal Goal", "Penalty"
   },
-  (table) => [index('fixture_events_fixture').on(table.fixtureId)]
+  (table) => [
+    index('fixture_events_fixture').on(table.fixtureId),
+    index('fixture_events_player').on(table.playerId),
+    index('fixture_events_assist_player').on(table.assistPlayerId),
+  ]
 );
 
 export const fixtureStats = pgTable(

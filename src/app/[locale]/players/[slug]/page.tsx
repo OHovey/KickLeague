@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
@@ -13,6 +14,9 @@ interface PlayerPageData {
   seasonStats: PlayerSeasonStats;
   recentMatches: PlayerMatchInvolvement[];
 }
+
+// Deduplicate fetches between generateMetadata and page component
+const getCachedPlayerData = cache((slug: string) => fetchPlayerPageData(slug));
 import {
   buildBreadcrumbs,
   buildPerson,
@@ -114,7 +118,7 @@ export async function generateMetadata({
 
   let data: PlayerPageData | null;
   try {
-    data = await fetchPlayerPageData(slug);
+    data = await getCachedPlayerData(slug);
   } catch {
     return { title: 'Not Found' };
   }
@@ -184,7 +188,7 @@ export default async function PlayerPage({
 
   let data: PlayerPageData | null;
   try {
-    data = await fetchPlayerPageData(slug);
+    data = await getCachedPlayerData(slug);
   } catch {
     return notFound();
   }
