@@ -13,6 +13,7 @@ interface StatCardProps {
   accentColor?: string;
   glowColor?: string;
   isEmpty?: boolean;
+  href?: string;
 }
 
 export function StatCard({
@@ -25,24 +26,29 @@ export function StatCard({
   accentColor,
   glowColor,
   isEmpty,
+  href,
 }: StatCardProps) {
   const tCommon = useTranslations('Common');
   const effectiveGlow = glowColor ?? accentColor;
 
-  return (
-    <div
-      className="glow-card group relative overflow-hidden rounded-xl bg-white/5 p-5 backdrop-blur-sm transition-all duration-300 hover:bg-white/10"
-      style={
-        accentColor
-          ? {
-              borderLeftColor: accentColor,
-              borderLeftWidth: '3px',
-              boxShadow: effectiveGlow
-                ? `inset 3px 0 16px -6px ${effectiveGlow}35`
-                : undefined,
-            }
-          : undefined
+  const cardClassName = "glow-card group relative overflow-hidden rounded-xl bg-white/5 p-5 backdrop-blur-sm transition-all duration-300 hover:bg-white/10";
+  const cardStyle = accentColor
+    ? {
+        borderLeftColor: accentColor,
+        borderLeftWidth: '3px',
+        boxShadow: effectiveGlow
+          ? `inset 3px 0 16px -6px ${effectiveGlow}35`
+          : undefined,
       }
+    : undefined;
+
+  const Wrapper = href ? 'a' : 'div';
+
+  return (
+    <Wrapper
+      href={href}
+      className={`${cardClassName}${href ? ' block no-underline' : ''}`}
+      style={cardStyle}
     >
       {/* Accent gradient overlay */}
       {accentColor && (
@@ -106,6 +112,6 @@ export function StatCard({
           </>
         )}
       </div>
-    </div>
+    </Wrapper>
   );
 }

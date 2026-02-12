@@ -18,6 +18,7 @@ export interface TopScorerResult {
   playerName: string;
   teamId: number;
   teamName: string;
+  teamSlug: string;
   teamLogoUrl: string | null;
   goalCount: number;
 }
@@ -26,9 +27,11 @@ export interface BiggestUpsetResult {
   fixtureId: number;
   homeTeamId: number;
   homeTeamName: string;
+  homeTeamSlug: string;
   homeTeamLogoUrl: string | null;
   awayTeamId: number;
   awayTeamName: string;
+  awayTeamSlug: string;
   awayTeamLogoUrl: string | null;
   homeScore: number;
   awayScore: number;
@@ -39,6 +42,7 @@ export interface BiggestUpsetResult {
 export interface FormTeamResult {
   teamId: number;
   teamName: string;
+  teamSlug: string;
   teamLogoUrl: string | null;
   form: string;
   position: number;
@@ -64,6 +68,7 @@ export async function getTopScorer(
       playerName: players.name,
       teamId: teams.id,
       teamName: teams.name,
+      teamSlug: teams.slug,
       teamLogoUrl: teams.logoUrl,
       goalCount: count(fixtureEvents.id).as('goal_count'),
     })
@@ -84,6 +89,7 @@ export async function getTopScorer(
       players.name,
       teams.id,
       teams.name,
+      teams.slug,
       teams.logoUrl
     )
     .orderBy(desc(sql`goal_count`))
@@ -96,6 +102,7 @@ export async function getTopScorer(
     playerName: result[0].playerName,
     teamId: result[0].teamId,
     teamName: result[0].teamName,
+    teamSlug: result[0].teamSlug,
     teamLogoUrl: result[0].teamLogoUrl,
     goalCount: result[0].goalCount,
   };
@@ -128,8 +135,10 @@ export async function getBiggestUpset(
       awayScore: fixtures.awayScore,
       matchweek: fixtures.matchweek,
       homeTeamName: homeTeam.name,
+      homeTeamSlug: homeTeam.slug,
       homeTeamLogoUrl: homeTeam.logoUrl,
       awayTeamName: awayTeam.name,
+      awayTeamSlug: awayTeam.slug,
       awayTeamLogoUrl: awayTeam.logoUrl,
       positionGap: sql<number>`CASE
         WHEN ${fixtures.homeScore} > ${fixtures.awayScore}
@@ -184,9 +193,11 @@ export async function getBiggestUpset(
     fixtureId: row.fixtureId,
     homeTeamId: row.homeTeamId,
     homeTeamName: row.homeTeamName,
+    homeTeamSlug: row.homeTeamSlug,
     homeTeamLogoUrl: row.homeTeamLogoUrl,
     awayTeamId: row.awayTeamId,
     awayTeamName: row.awayTeamName,
+    awayTeamSlug: row.awayTeamSlug,
     awayTeamLogoUrl: row.awayTeamLogoUrl,
     homeScore: row.homeScore!,
     awayScore: row.awayScore!,
@@ -222,6 +233,7 @@ export async function getFormTeam(
     .select({
       teamId: standings.teamId,
       teamName: teams.name,
+      teamSlug: teams.slug,
       teamLogoUrl: teams.logoUrl,
       form: standings.form,
       position: standings.position,
@@ -250,6 +262,7 @@ export async function getFormTeam(
   return {
     teamId: result[0].teamId,
     teamName: result[0].teamName,
+    teamSlug: result[0].teamSlug,
     teamLogoUrl: result[0].teamLogoUrl,
     form: result[0].form,
     position: result[0].position,

@@ -177,6 +177,7 @@ export function StatHighlights() {
           accentColor={accentColor}
           glowColor={glowColor}
           isEmpty={!data?.topScorer}
+          href={data?.topScorer ? `/${locale}/leagues/${league}/stats/top-scorers` : undefined}
         />
 
         {/* Biggest Upset */}
@@ -200,6 +201,7 @@ export function StatHighlights() {
           accentColor={accentColor}
           glowColor={glowColor}
           isEmpty={!upset}
+          href={upset ? `/${locale}/matches/${upset.fixtureId}` : undefined}
         />
 
         {/* Best Form */}
@@ -217,6 +219,7 @@ export function StatHighlights() {
           accentColor={accentColor}
           glowColor={glowColor}
           isEmpty={!data?.formTeam}
+          href={data?.formTeam ? `/${locale}/teams/${data.formTeam.teamSlug}` : undefined}
         />
       </div>
     </section>
