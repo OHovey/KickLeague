@@ -6,7 +6,7 @@
 - **v1.1 Affiliate Monetisation** - Phases 9-10 (shipped 2026-02-06)
 - **v1.2 Polish, SEO & Launch Readiness** - Phases 11-15 (shipped 2026-02-09)
 - **v1.3 Production Launch** - Phases 16-20 (shipped 2026-02-12)
-- **v1.4 Programmatic SEO** - Phases 21-25 (shipped 2026-02-12)
+- **v1.4 Programmatic SEO** - Phases 21-26 (in progress)
 
 ## Phases
 
@@ -238,6 +238,7 @@ Plans:
 - [x] **Phase 23: Statistical Leaderboards** - Top scorers, assists, and disciplinary leaderboards for each league
 - [x] **Phase 24: Player Pages** - Individual player profiles with season stats and match involvement
 - [x] **Phase 25: Head-to-Head Pages** - Team pair comparison pages with meeting history and form context
+- [ ] **Phase 26: Internal Discovery Links** - Organic entry points across existing pages that surface new programmatic pages to users
 
 #### Phase 21: Sitemap Index Refactor
 **Goal**: The sitemap uses a segmented sitemap-index pattern so each page type has its own sitemap file, ready for new page types to register as they are built
@@ -317,10 +318,19 @@ Plans:
 - [x] 25-01-PLAN.md -- H2H data layer, routing, page UI with meetings/aggregate/form comparison, and i18n
 - [x] 25-02-PLAN.md -- SEO infrastructure (OG images, JSON-LD, sitemap segment) and cross-linking between all page types
 
+#### Phase 26: Internal Discovery Links
+**Goal**: Users browsing existing pages (homepage, league table, match pages, team pages) encounter natural entry points into the new programmatic pages (leagues, stats, players, H2H) without having to know the URLs
+**Depends on**: Phase 25
+**Plans**: 2 plans
+
+Plans:
+- [ ] 26-01-PLAN.md -- Homepage discovery links: clickable stat cards and league table "View full standings" link
+- [ ] 26-02-PLAN.md -- Match detail H2H/player links and header leagues dropdown
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on 22, not 24, so could potentially run in parallel with 23-24)
+Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 -> 26
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -349,7 +359,8 @@ Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on
 | 23. Stat Leaderboards | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 24. Player Pages | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 25. Head-to-Head | v1.4 | 2/2 | Complete | 2026-02-12 |
+| 26. Discovery Links | v1.4 | 0/2 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-12 -- Phase 25 complete*
+*Last updated: 2026-02-12 -- Phase 26 added*
