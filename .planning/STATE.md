@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.4 Programmatic SEO -- Phase 22 complete (2/2 plans), ready for Phase 23
+**Current focus:** v1.4 Programmatic SEO -- Phase 23 in progress (1/2 plans complete)
 
 ## Current Position
 
-Phase: 22 of 25 (League Landing Pages)
-Plan: 2 of 2
-Status: Phase 22 complete, ready for Phase 23
-Last activity: 2026-02-12 -- 22-02 league SEO infrastructure
+Phase: 23 of 25 (Stat Leaderboards)
+Plan: 1 of 2
+Status: 23-01 complete, ready for 23-02
+Last activity: 2026-02-12 -- 23-01 stat leaderboard data layer and pages
 
-Progress: [##########] 100% (2/2 plans)
+Progress: [#####-----] 50% (1/2 plans)
 
 ## Performance Metrics
 
@@ -42,6 +42,7 @@ Progress: [##########] 100% (2/2 plans)
 | 21    | 02   | 4min     | 2     | 1     |
 | 22    | 01   | 5min     | 2     | 9     |
 | 22    | 02   | 3min     | 2     | 5     |
+| 23    | 01   | 4min     | 2     | 9     |
 
 ## Accumulated Context
 
@@ -60,6 +61,9 @@ v1.4 decisions:
 - Inline FormBadgesInline for server-side rendering (avoids unnecessary client boundary)
 - Text-only OG images for leagues (SVG logos are relative paths, not usable in ImageResponse)
 - Daily changefreq for leagues sitemap segment (standings update daily during season)
+- Raw SQL via db.execute for leaderboard queries (complex aggregations with correlated subqueries)
+- Appearances approximated as distinct fixtures with events (no lineup table available)
+- Tab navigation between stat types using simple anchor links (server-rendered)
 
 ### Pending Todos (manual/infrastructure)
 
@@ -79,6 +83,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: Completed 22-02-PLAN.md (league SEO infrastructure) -- Phase 22 complete, ready for Phase 23
+Stopped at: Completed 23-01-PLAN.md (stat leaderboard data layer and pages) -- ready for 23-02
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
