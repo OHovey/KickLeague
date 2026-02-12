@@ -75,6 +75,7 @@ v1.4 decisions:
 - Collect affiliate IDs/btags from each dashboard after approval
 - Set up Google AdSense account and create 8 ad unit slots
 - Update public/ads.txt with real publisher ID
+- Discuss how to make v1.4 pages more discoverable through homepage links
 
 ### Tech Debt
 
