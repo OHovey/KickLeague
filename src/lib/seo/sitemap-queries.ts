@@ -3,6 +3,8 @@ import { teams, fixtures, leagues } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import type { SitemapEntry } from './sitemap-registry';
 
+const STAT_TYPES = ['top-scorers', 'top-assists', 'disciplinary'] as const;
+
 export async function getAllTeamSlugs(): Promise<string[]> {
   if (!isDatabaseConfigured()) return [];
   const rows = await getDb()
@@ -72,4 +74,31 @@ export async function getLeagueSitemapEntries(): Promise<SitemapEntry[]> {
     params: { slug: r.slug },
     lastmod: now,
   }));
+}
+
+/**
+ * Enumerate all stat leaderboard pages as SitemapEntry objects.
+ * Static combinations of leagues x stat types (no complex DB query needed).
+ */
+export async function getStatsSitemapEntries(): Promise<SitemapEntry[]> {
+  if (!isDatabaseConfigured()) return [];
+  const leagueRows = await getDb()
+    .select({ slug: leagues.slug })
+    .from(leagues);
+
+  const now = new Date();
+  const entries: SitemapEntry[] = [];
+
+  for (const league of leagueRows) {
+    for (const stat of STAT_TYPES) {
+      entries.push({
+        path: `/leagues/${league.slug}/stats/${stat}`,
+        routeKey: '/leagues/[slug]/stats/[stat]',
+        params: { slug: league.slug, stat },
+        lastmod: now,
+      });
+    }
+  }
+
+  return entries;
 }

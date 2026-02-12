@@ -1,4 +1,4 @@
-import { getTeamSitemapEntries, getMatchSitemapEntries, getLeagueSitemapEntries } from './sitemap-queries';
+import { getTeamSitemapEntries, getMatchSitemapEntries, getLeagueSitemapEntries, getStatsSitemapEntries } from './sitemap-queries';
 
 export interface SitemapEntry {
   /** Canonical path WITHOUT locale prefix (e.g., '/teams/arsenal') */
@@ -57,5 +57,10 @@ export const sitemapSegments: SitemapSegment[] = [
     name: 'leagues',
     changefreq: 'daily',
     fetchEntries: getLeagueSitemapEntries,
+  },
+  {
+    name: 'stats',
+    changefreq: 'daily',
+    fetchEntries: getStatsSitemapEntries,
   },
 ];
