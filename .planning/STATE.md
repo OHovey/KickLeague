@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.4 Programmatic SEO -- Phase 21 ready to plan
+**Current focus:** v1.4 Programmatic SEO -- Phase 21 Plan 01 complete
 
 ## Current Position
 
 Phase: 21 of 25 (Sitemap Index Refactor)
-Plan: -
-Status: Ready to plan
-Last activity: 2026-02-12 -- v1.4 roadmap created
+Plan: 1 of 2
+Status: Plan 01 complete, Plan 02 next
+Last activity: 2026-02-12 -- 21-01 sitemap-index infrastructure
 
-Progress: [░░░░░░░░░░] 0% (0/~TBD plans)
+Progress: [#####░░░░░] 50% (1/2 plans)
 
 ## Performance Metrics
 
@@ -35,13 +35,21 @@ Progress: [░░░░░░░░░░] 0% (0/~TBD plans)
 - Total plans completed: 9
 - Timeline: 3 days (2026-02-10 to 2026-02-12)
 
+**v1.4 Velocity:**
+| Phase | Plan | Duration | Tasks | Files |
+|-------|------|----------|-------|-------|
+| 21    | 01   | 3min     | 2     | 5     |
+
 ## Accumulated Context
 
 ### Decisions
 
 All decisions logged in PROJECT.md Key Decisions table (20 decisions, all marked Good).
 
-No new decisions for v1.4 yet.
+v1.4 decisions:
+- Used src/app/sitemap.xml/ directory-based route for /sitemap.xml path (Next.js 16 supports dots in route dirs)
+- Used kickoff timestamp as lastmod for match sitemap entries (no updatedAt column)
+- Registry pattern: new page types push to sitemapSegments array, no infrastructure changes
 
 ### Pending Todos (manual/infrastructure)
 
@@ -61,6 +69,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: v1.4 roadmap created, Phase 21 ready to plan
+Stopped at: Completed 21-01-PLAN.md (sitemap-index infrastructure)
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
