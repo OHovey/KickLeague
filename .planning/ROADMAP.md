@@ -278,7 +278,11 @@ Plans:
   2. User can view a top assists leaderboard for each league showing the top 20 players with assists, appearances, assists-per-90, and team
   3. User can view a disciplinary leaderboard for each league showing the top 20 players with yellow cards, red cards, appearances, and team
   4. Each leaderboard page has unique SEO metadata, JSON-LD, OG image, hreflang alternates, and appears in the stats sitemap segment
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 23-01-PLAN.md -- Leaderboard data layer, routing, page UI, and i18n for all 3 stat types
+- [ ] 23-02-PLAN.md -- SEO infrastructure: metadata, OG images, JSON-LD, hreflang, stats sitemap segment
 
 #### Phase 24: Player Pages
 **Goal**: Users can view individual player profiles with season stats and recent match involvement, limited to players with sufficient data to avoid thin content
