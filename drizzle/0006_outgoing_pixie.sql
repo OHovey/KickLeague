@@ -1,0 +1,2 @@
+CREATE INDEX "fixture_events_player" ON "fixture_events" USING btree ("player_id");--> statement-breakpoint
+CREATE INDEX "fixture_events_assist_player" ON "fixture_events" USING btree ("assist_player_id");
