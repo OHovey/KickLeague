@@ -233,7 +233,7 @@ Plans:
 
 **Milestone Goal:** Expand KickLeague's indexable page surface through programmatic SEO -- dedicated league pages, stat leaderboards, player profiles, and head-to-head comparisons -- each with enough substantive content to avoid thin content penalties.
 
-- [ ] **Phase 21: Sitemap Index Refactor** - Segmented sitemap-index foundation for all current and upcoming page types
+- [x] **Phase 21: Sitemap Index Refactor** - Segmented sitemap-index foundation for all current and upcoming page types
 - [ ] **Phase 22: League Landing Pages** - Dedicated per-league pages with standings, top performers, and recent results
 - [ ] **Phase 23: Statistical Leaderboards** - Top scorers, assists, and disciplinary leaderboards for each league
 - [ ] **Phase 24: Player Pages** - Individual player profiles with season stats and match involvement
@@ -328,7 +328,7 @@ Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on
 | 18. Deployment | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 19. Pipeline | v1.3 | 2/2 | Complete | 2026-02-11 |
 | 20. Launch Docs | v1.3 | 1/1 | Complete | 2026-02-11 |
-| 21. Sitemap Index | v1.4 | 0/2 | Planned | - |
+| 21. Sitemap Index | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 22. League Landing | v1.4 | 0/TBD | Not started | - |
 | 23. Stat Leaderboards | v1.4 | 0/TBD | Not started | - |
 | 24. Player Pages | v1.4 | 0/TBD | Not started | - |
@@ -336,4 +336,4 @@ Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 (Phase 25 depends on
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-12 -- v1.4 Programmatic SEO roadmap added*
+*Last updated: 2026-02-12 -- Phase 21 complete*
