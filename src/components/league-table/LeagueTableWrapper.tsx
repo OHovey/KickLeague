@@ -13,8 +13,9 @@ import { LeagueTableClient } from './LeagueTableClient';
 import { fetchMatchweekList } from './actions';
 
 interface MatchweekInfo {
-  matchweeks: Array<{ number: number; completed: boolean }>;
+  matchweeks: Array<{ number: number; completed: boolean; inProgress: boolean }>;
   latestCompleted: number;
+  inProgress: number | null;
   season: string;
 }
 
@@ -28,10 +29,14 @@ export function LeagueTableWrapper() {
   const { week, setWeek } = useMatchweek();
 
   const latestCompleted = matchweekInfo?.latestCompleted ?? 0;
+  const inProgress = matchweekInfo?.inProgress ?? null;
 
-  // The effective selected week for display (null means latest)
-  const selectedWeek = week ?? latestCompleted;
-  const isHistorical = week !== null && latestCompleted > 0 && week !== latestCompleted;
+  // Default week: prefer in-progress, fall back to latest completed
+  const defaultWeek = inProgress ?? latestCompleted;
+
+  // The effective selected week for display (null means default)
+  const selectedWeek = week ?? defaultWeek;
+  const isHistorical = week !== null && defaultWeek > 0 && week !== defaultWeek;
 
   // Polling for live data updates (season derived from league config)
   const [refreshKey, setRefreshKey] = useState(0);
@@ -53,6 +58,7 @@ export function LeagueTableWrapper() {
       setMatchweekInfo({
         matchweeks: result.matchweeks,
         latestCompleted: result.latestCompleted,
+        inProgress: result.inProgress,
         season: result.season,
       });
       setIsLoadingMatchweeks(false);
@@ -73,14 +79,14 @@ export function LeagueTableWrapper() {
 
   const handleWeekChange = useCallback(
     (newWeek: number) => {
-      // If selecting the latest matchweek, clear the URL param (null = current)
-      if (newWeek === latestCompleted) {
+      // If selecting the default week (in-progress or latest completed), clear the URL param
+      if (newWeek === defaultWeek) {
         setWeek(null);
       } else {
         setWeek(newWeek);
       }
     },
-    [setWeek, latestCompleted]
+    [setWeek, defaultWeek]
   );
 
   const handleReturnToCurrent = useCallback(() => {
@@ -116,7 +122,7 @@ export function LeagueTableWrapper() {
       <LeagueTableClient
         key={`${league}-${refreshKey}`}
         league={league}
-        matchweek={isHistorical ? selectedWeek : undefined}
+        matchweek={selectedWeek || undefined}
       />
 
       {/* Data Freshness Indicator */}

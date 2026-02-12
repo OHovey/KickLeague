@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 interface TimelineCircleProps {
   weekNumber: number;
   completed: boolean;
+  inProgress: boolean;
   isSelected: boolean;
   leagueColor: string;
   totalWeeks: number;
@@ -17,6 +18,7 @@ export const TimelineCircle = forwardRef<HTMLButtonElement, TimelineCircleProps>
     {
       weekNumber,
       completed,
+      inProgress,
       isSelected,
       leagueColor,
       totalWeeks,
@@ -34,8 +36,25 @@ export const TimelineCircle = forwardRef<HTMLButtonElement, TimelineCircleProps>
     let bgStyle: React.CSSProperties = {};
     let textClass = '';
     let ringClass = '';
+    const isClickable = completed || inProgress;
 
-    if (!completed) {
+    if (inProgress && isSelected) {
+      // In-progress + selected: dashed border, half-filled with glow
+      bgStyle = {
+        border: `1.5px dashed ${leagueColor}`,
+        background: `linear-gradient(to top, ${leagueColor}90 50%, transparent 50%)`,
+        boxShadow: `0 0 8px ${leagueColor}80`,
+      };
+      textClass = 'text-white font-semibold';
+      ringClass = 'ring-2 ring-white/30';
+    } else if (inProgress) {
+      // In-progress + not selected: dashed border, half-filled subtle
+      bgStyle = {
+        border: `1.5px dashed ${leagueColor}80`,
+        background: `linear-gradient(to top, ${leagueColor}60 50%, transparent 50%)`,
+      };
+      textClass = 'text-white/70';
+    } else if (!completed) {
       // Upcoming: hollow circle with subtle dashed border
       bgStyle = {
         border: `1.5px dashed rgba(255,255,255,0.2)`,
@@ -59,6 +78,14 @@ export const TimelineCircle = forwardRef<HTMLButtonElement, TimelineCircleProps>
       textClass = 'text-white/90';
     }
 
+    // Build aria-label
+    let stateLabel = '';
+    if (inProgress) {
+      stateLabel = ' (in progress)';
+    } else if (!completed) {
+      stateLabel = ` (${t('upcoming')})`;
+    }
+
     return (
       <div className="flex flex-col items-center" style={{ scrollSnapAlign: 'center' }}>
         <button
@@ -66,15 +93,15 @@ export const TimelineCircle = forwardRef<HTMLButtonElement, TimelineCircleProps>
           type="button"
           role="option"
           aria-selected={isSelected}
-          aria-label={t('matchweek', { week: weekNumber }) + (completed ? '' : ` (${t('upcoming')})`)}
-          disabled={!completed}
+          aria-label={t('matchweek', { week: weekNumber }) + stateLabel}
+          disabled={!isClickable}
           onClick={onClick}
           className={`
             flex min-h-[32px] min-w-[32px] items-center justify-center
             rounded-full text-xs leading-none
             transition-all duration-150
             ${isSelected ? 'scale-110' : ''}
-            ${completed ? 'cursor-pointer hover:scale-105 hover:brightness-110' : 'cursor-default'}
+            ${isClickable ? 'cursor-pointer hover:scale-105 hover:brightness-110' : 'cursor-default'}
             ${textClass}
             ${ringClass}
           `}

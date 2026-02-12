@@ -10,7 +10,7 @@ import { useAutoPlay } from './useAutoPlay';
 interface SeasonTimelineProps {
   league: string;
   latestMatchweek: number;
-  matchweeks: Array<{ number: number; completed: boolean }>;
+  matchweeks: Array<{ number: number; completed: boolean; inProgress: boolean }>;
   leagueColor: string;
   selectedWeek: number;
   onWeekChange: (week: number) => void;
@@ -30,6 +30,12 @@ export function SeasonTimeline({
     .filter((m) => m.completed)
     .reduce((max, m) => Math.max(max, m.number), 0);
 
+  // Find in-progress matchweek if any
+  const inProgressWeek = matchweeks.find((m) => m.inProgress)?.number ?? null;
+
+  // The furthest navigable week: in-progress if it exists, otherwise latestCompleted
+  const furthestWeek = inProgressWeek ?? latestCompleted;
+
   const handleAdvance = useCallback(
     (week: number) => {
       onWeekChange(week);
@@ -37,13 +43,14 @@ export function SeasonTimeline({
     [onWeekChange]
   );
 
+  // Auto-play only advances through completed weeks (not into in-progress)
   const { isPlaying, toggle, pause } = useAutoPlay(
     selectedWeek,
     latestCompleted,
     handleAdvance
   );
 
-  const isAtEnd = selectedWeek >= latestCompleted;
+  const isAtEnd = selectedWeek >= furthestWeek;
 
   const handleWeekSelect = useCallback(
     (week: number) => {

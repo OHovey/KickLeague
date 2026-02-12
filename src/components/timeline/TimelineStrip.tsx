@@ -9,7 +9,7 @@ export interface TimelineStripHandle {
 }
 
 interface TimelineStripProps {
-  matchweeks: Array<{ number: number; completed: boolean }>;
+  matchweeks: Array<{ number: number; completed: boolean; inProgress: boolean }>;
   selectedWeek: number;
   latestCompleted: number;
   leagueColor: string;
@@ -112,14 +112,14 @@ export const TimelineStrip = forwardRef<TimelineStripHandle, TimelineStripProps>
         if (e.key === 'ArrowRight') {
           e.preventDefault();
           const next = matchweeks.find(
-            (m) => m.number > selectedWeek && m.completed
+            (m) => m.number > selectedWeek && (m.completed || m.inProgress)
           );
           if (next) onSelectWeek(next.number);
         } else if (e.key === 'ArrowLeft') {
           e.preventDefault();
           const prev = [...matchweeks]
             .reverse()
-            .find((m) => m.number < selectedWeek && m.completed);
+            .find((m) => m.number < selectedWeek && (m.completed || m.inProgress));
           if (prev) onSelectWeek(prev.number);
         }
       },
@@ -157,11 +157,12 @@ export const TimelineStrip = forwardRef<TimelineStripHandle, TimelineStripProps>
             ref={setCircleRef(mw.number)}
             weekNumber={mw.number}
             completed={mw.completed}
+            inProgress={mw.inProgress}
             isSelected={mw.number === selectedWeek}
             leagueColor={leagueColor}
             totalWeeks={matchweeks.length}
             onClick={() => {
-              if (mw.completed) {
+              if (mw.completed || mw.inProgress) {
                 onSelectWeek(mw.number);
               }
             }}
