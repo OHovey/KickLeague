@@ -178,7 +178,9 @@
     "statTopAssists": "Top Assists",
     "statDisciplinary": "Disciplinary",
     "playerTitle": "{player} - {team} Season Stats",
-    "playerDescription": "{player} ({position}) plays for {team} in the {league}. Season stats: {goals} goals, {assists} assists in {appearances} appearances."
+    "playerDescription": "{player} ({position}) plays for {team} in the {league}. Season stats: {goals} goals, {assists} assists in {appearances} appearances.",
+    "h2hTitle": "{team1} vs {team2} - Head-to-Head | KickLeague",
+    "h2hDescription": "Head-to-head comparison between {team1} and {team2}. {meetings} meetings, form comparison, and league standings."
   },
   "Navigation": {
     "home": "Home",
@@ -337,6 +339,23 @@
     "redCard": "Red Card",
     "penaltyScored": "Penalty",
     "minuteLabel": "{minute}'"
+  },
+  "H2HPage": {
+    "title": "Head-to-Head",
+    "aggregateRecord": "Aggregate Record",
+    "wins": "Wins",
+    "draws": "Draws",
+    "meetings": "{count, plural, one {# meeting} other {# meetings}}",
+    "totalGoals": "Goals",
+    "mostRecentMeeting": "Most Recent Meeting",
+    "formComparison": "Form Comparison",
+    "allMeetings": "All Meetings",
+    "noMeetings": "No meetings found",
+    "noFormData": "No form data available",
+    "position": "{position}",
+    "points": "{count, plural, one {# pt} other {# pts}}",
+    "backToTeam": "Back to {team}",
+    "vsLabel": "vs"
   },
   "Timeline": {
     "autoPlay": "Auto-play",

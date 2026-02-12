@@ -178,7 +178,9 @@
     "statTopAssists": "Vorlagen",
     "statDisciplinary": "Disziplinarisches",
     "playerTitle": "{player} - {team} Saisonstatistiken",
-    "playerDescription": "{player} ({position}) spielt fuer {team} in der {league}. Saisonstatistiken: {goals} Tore, {assists} Vorlagen in {appearances} Spielen."
+    "playerDescription": "{player} ({position}) spielt fuer {team} in der {league}. Saisonstatistiken: {goals} Tore, {assists} Vorlagen in {appearances} Spielen.",
+    "h2hTitle": "{team1} vs {team2} - Direktvergleich | KickLeague",
+    "h2hDescription": "Direktvergleich zwischen {team1} und {team2}. {meetings} Begegnungen, Formvergleich und Tabellenposition."
   },
   "Navigation": {
     "home": "Startseite",
@@ -337,6 +339,23 @@
     "redCard": "Rote Karte",
     "penaltyScored": "Elfmeter",
     "minuteLabel": "{minute}'"
+  },
+  "H2HPage": {
+    "title": "Direktvergleich",
+    "aggregateRecord": "Gesamtbilanz",
+    "wins": "Siege",
+    "draws": "Unentschieden",
+    "meetings": "{count, plural, one {# Begegnung} other {# Begegnungen}}",
+    "totalGoals": "Tore",
+    "mostRecentMeeting": "Letzte Begegnung",
+    "formComparison": "Formvergleich",
+    "allMeetings": "Alle Begegnungen",
+    "noMeetings": "Keine Begegnungen gefunden",
+    "noFormData": "Keine Formdaten verfuegbar",
+    "position": "{position}",
+    "points": "{count, plural, one {# Pkt} other {# Pkt}}",
+    "backToTeam": "Zurueck zu {team}",
+    "vsLabel": "vs"
   },
   "Timeline": {
     "autoPlay": "Automatische Wiedergabe",

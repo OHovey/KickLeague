@@ -178,7 +178,9 @@
     "statTopAssists": "Meilleures passes",
     "statDisciplinary": "Disciplinaire",
     "playerTitle": "{player} - Statistiques de saison de {team}",
-    "playerDescription": "{player} ({position}) joue pour {team} en {league}. Statistiques de saison : {goals} buts, {assists} passes decisives en {appearances} matchs."
+    "playerDescription": "{player} ({position}) joue pour {team} en {league}. Statistiques de saison : {goals} buts, {assists} passes decisives en {appearances} matchs.",
+    "h2hTitle": "{team1} vs {team2} - Confrontations directes | KickLeague",
+    "h2hDescription": "Confrontation directe entre {team1} et {team2}. {meetings} rencontres, comparaison de forme et classement."
   },
   "Navigation": {
     "home": "Accueil",
@@ -337,6 +339,23 @@
     "redCard": "Carton rouge",
     "penaltyScored": "Penalty",
     "minuteLabel": "{minute}'"
+  },
+  "H2HPage": {
+    "title": "Confrontations directes",
+    "aggregateRecord": "Bilan des confrontations",
+    "wins": "Victoires",
+    "draws": "Nuls",
+    "meetings": "{count, plural, one {# rencontre} other {# rencontres}}",
+    "totalGoals": "Buts",
+    "mostRecentMeeting": "Derniere rencontre",
+    "formComparison": "Comparaison de forme",
+    "allMeetings": "Toutes les rencontres",
+    "noMeetings": "Aucune rencontre trouvee",
+    "noFormData": "Aucune donnee de forme disponible",
+    "position": "{position}",
+    "points": "{count, plural, one {# pt} other {# pts}}",
+    "backToTeam": "Retour a {team}",
+    "vsLabel": "vs"
   },
   "Timeline": {
     "autoPlay": "Lecture automatique",

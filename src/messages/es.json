@@ -178,7 +178,9 @@
     "statTopAssists": "Asistencias",
     "statDisciplinary": "Disciplina",
     "playerTitle": "{player} - Estadisticas de {team}",
-    "playerDescription": "{player} ({position}) juega en {team} en {league}. Estadisticas de temporada: {goals} goles, {assists} asistencias en {appearances} partidos."
+    "playerDescription": "{player} ({position}) juega en {team} en {league}. Estadisticas de temporada: {goals} goles, {assists} asistencias en {appearances} partidos.",
+    "h2hTitle": "{team1} vs {team2} - Cara a cara | KickLeague",
+    "h2hDescription": "Comparativa cara a cara entre {team1} y {team2}. {meetings} enfrentamientos, comparativa de forma y clasificacion."
   },
   "Navigation": {
     "home": "Inicio",
@@ -337,6 +339,23 @@
     "redCard": "Tarjeta roja",
     "penaltyScored": "Penalti",
     "minuteLabel": "{minute}'"
+  },
+  "H2HPage": {
+    "title": "Cara a cara",
+    "aggregateRecord": "Historial de enfrentamientos",
+    "wins": "Victorias",
+    "draws": "Empates",
+    "meetings": "{count, plural, one {# enfrentamiento} other {# enfrentamientos}}",
+    "totalGoals": "Goles",
+    "mostRecentMeeting": "Ultimo enfrentamiento",
+    "formComparison": "Comparativa de forma",
+    "allMeetings": "Todos los enfrentamientos",
+    "noMeetings": "No se encontraron enfrentamientos",
+    "noFormData": "Sin datos de forma disponibles",
+    "position": "{position}",
+    "points": "{count, plural, one {# pt} other {# pts}}",
+    "backToTeam": "Volver a {team}",
+    "vsLabel": "vs"
   },
   "Timeline": {
     "autoPlay": "Reproducci\u00f3n autom\u00e1tica",

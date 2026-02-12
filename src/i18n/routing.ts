@@ -54,6 +54,13 @@ export const routing = defineRouting({
       it: '/giocatori/[slug]',
       fr: '/joueurs/[slug]',
     },
+    '/h2h/[matchup]': {
+      en: '/h2h/[matchup]',
+      es: '/h2h/[matchup]',
+      de: '/h2h/[matchup]',
+      it: '/h2h/[matchup]',
+      fr: '/h2h/[matchup]',
+    },
   },
 });
 

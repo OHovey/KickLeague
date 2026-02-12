@@ -178,7 +178,9 @@
     "statTopAssists": "Migliori Assist",
     "statDisciplinary": "Disciplinare",
     "playerTitle": "{player} - Statistiche stagionali di {team}",
-    "playerDescription": "{player} ({position}) gioca nel {team} in {league}. Statistiche stagionali: {goals} gol, {assists} assist in {appearances} presenze."
+    "playerDescription": "{player} ({position}) gioca nel {team} in {league}. Statistiche stagionali: {goals} gol, {assists} assist in {appearances} presenze.",
+    "h2hTitle": "{team1} vs {team2} - Scontri diretti | KickLeague",
+    "h2hDescription": "Confronto diretto tra {team1} e {team2}. {meetings} incontri, confronto forma e posizione in classifica."
   },
   "Navigation": {
     "home": "Home",
@@ -337,6 +339,23 @@
     "redCard": "Cartellino rosso",
     "penaltyScored": "Rigore",
     "minuteLabel": "{minute}'"
+  },
+  "H2HPage": {
+    "title": "Scontri diretti",
+    "aggregateRecord": "Bilancio complessivo",
+    "wins": "Vittorie",
+    "draws": "Pareggi",
+    "meetings": "{count, plural, one {# incontro} other {# incontri}}",
+    "totalGoals": "Gol",
+    "mostRecentMeeting": "Ultimo incontro",
+    "formComparison": "Confronto forma",
+    "allMeetings": "Tutti gli incontri",
+    "noMeetings": "Nessun incontro trovato",
+    "noFormData": "Nessun dato sulla forma disponibile",
+    "position": "{position}",
+    "points": "{count, plural, one {# pt} other {# pti}}",
+    "backToTeam": "Torna a {team}",
+    "vsLabel": "vs"
   },
   "Timeline": {
     "autoPlay": "Riproduzione automatica",
