@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-12)
 ## Current Position
 
 Phase: 26 of 26 (Internal Discovery Links)
-Plan: 1 of 2
-Status: Executing Phase 26 -- plan 01 complete
-Last activity: 2026-02-12 -- 26-01 Homepage discovery links (stat cards + league table)
+Plan: 2 of 2
+Status: Phase 26 COMPLETE -- all plans executed
+Last activity: 2026-02-12 -- 26-02 Match detail & header discovery links
 
-Progress: [#####-----] 50% (1/2 plans in Phase 26)
+Progress: [##########] 100% (2/2 plans in Phase 26)
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Progress: [#####-----] 50% (1/2 plans in Phase 26)
 | 25    | 01   | 6min     | 2     | 9     |
 | 25    | 02   | 9min     | 2     | 13    |
 | 26    | 01   | 3min     | 2     | 9     |
+| 26    | 02   | 6min     | 2     | 10    |
 
 ## Accumulated Context
 
@@ -91,6 +92,9 @@ v1.4 decisions:
 - Native anchor with conditional Wrapper pattern for stat card links (client-rendered with locale prefix)
 - next-intl Link for league table standings link (consistent with existing navigation)
 - Skipped aria-label i18n for stat card links (card content serves as accessible text)
+- Extended MatchEventRow with playerSlug/assistPlayerSlug for efficiency (no extra DB query)
+- Used existing MatchDetailTeam slugs (getTeamSlugsById unnecessary)
+- Hover dropdown for leagues nav (immediate access from any page)
 
 ### Pending Todos (manual/infrastructure)
 
@@ -115,6 +119,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: Completed 26-01-PLAN.md (Homepage discovery links) -- Phase 26 in progress
+Stopped at: Completed 26-02-PLAN.md (Match detail & header discovery links) -- Phase 26 COMPLETE
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app

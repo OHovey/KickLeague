@@ -238,7 +238,7 @@ Plans:
 - [x] **Phase 23: Statistical Leaderboards** - Top scorers, assists, and disciplinary leaderboards for each league
 - [x] **Phase 24: Player Pages** - Individual player profiles with season stats and match involvement
 - [x] **Phase 25: Head-to-Head Pages** - Team pair comparison pages with meeting history and form context
-- [ ] **Phase 26: Internal Discovery Links** - Organic entry points across existing pages that surface new programmatic pages to users
+- [x] **Phase 26: Internal Discovery Links** - Organic entry points across existing pages that surface new programmatic pages to users
 
 #### Phase 21: Sitemap Index Refactor
 **Goal**: The sitemap uses a segmented sitemap-index pattern so each page type has its own sitemap file, ready for new page types to register as they are built
@@ -324,8 +324,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 26-01-PLAN.md -- Homepage discovery links: clickable stat cards and league table "View full standings" link
-- [ ] 26-02-PLAN.md -- Match detail H2H/player links and header leagues dropdown
+- [x] 26-01-PLAN.md -- Homepage discovery links: clickable stat cards and league table "View full standings" link
+- [x] 26-02-PLAN.md -- Match detail H2H/player links and header leagues dropdown
 
 ## Progress
 
@@ -359,8 +359,8 @@ Phases execute in numeric order: 21 -> 22 -> 23 -> 24 -> 25 -> 26
 | 23. Stat Leaderboards | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 24. Player Pages | v1.4 | 2/2 | Complete | 2026-02-12 |
 | 25. Head-to-Head | v1.4 | 2/2 | Complete | 2026-02-12 |
-| 26. Discovery Links | v1.4 | 0/2 | Not started | - |
+| 26. Discovery Links | v1.4 | 2/2 | Complete | 2026-02-12 |
 
 ---
 *Roadmap created: 2026-02-06*
-*Last updated: 2026-02-12 -- Phase 26 added*
+*Last updated: 2026-02-12 -- Phase 26 complete*
