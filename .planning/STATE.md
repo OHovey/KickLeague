@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.4 Programmatic SEO -- Phase 23 in progress (1/2 plans complete)
+**Current focus:** v1.4 Programmatic SEO -- Phase 23 complete (2/2 plans), ready for Phase 24
 
 ## Current Position
 
 Phase: 23 of 25 (Stat Leaderboards)
-Plan: 1 of 2
-Status: 23-01 complete, ready for 23-02
-Last activity: 2026-02-12 -- 23-01 stat leaderboard data layer and pages
+Plan: 2 of 2
+Status: Phase 23 complete, ready for Phase 24
+Last activity: 2026-02-12 -- 23-02 stat leaderboard SEO infrastructure
 
-Progress: [#####-----] 50% (1/2 plans)
+Progress: [##########] 100% (2/2 plans)
 
 ## Performance Metrics
 
@@ -43,6 +43,7 @@ Progress: [#####-----] 50% (1/2 plans)
 | 22    | 01   | 5min     | 2     | 9     |
 | 22    | 02   | 3min     | 2     | 5     |
 | 23    | 01   | 4min     | 2     | 9     |
+| 23    | 02   | 3min     | 2     | 10    |
 
 ## Accumulated Context
 
@@ -64,6 +65,9 @@ v1.4 decisions:
 - Raw SQL via db.execute for leaderboard queries (complex aggregations with correlated subqueries)
 - Appearances approximated as distinct fixtures with events (no lineup table available)
 - Tab navigation between stat types using simple anchor links (server-rendered)
+- English-only OG images for stats (language-neutral for social shares)
+- Daily changefreq for stats sitemap (leaderboard data changes with each match)
+- Metadata namespace for stats SEO keys (consistent with league/team metadata pattern)
 
 ### Pending Todos (manual/infrastructure)
 
@@ -83,6 +87,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: Completed 23-01-PLAN.md (stat leaderboard data layer and pages) -- ready for 23-02
+Stopped at: Completed 23-02-PLAN.md (stat leaderboard SEO infrastructure) -- Phase 23 complete, ready for Phase 24
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
