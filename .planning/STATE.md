@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.4 Programmatic SEO -- Phase 25 COMPLETE (2/2 plans)
+**Current focus:** v1.4 Programmatic SEO -- Phase 26 added (Internal Discovery Links)
 
 ## Current Position
 
-Phase: 25 of 25 (Head-to-Head Pages)
-Plan: 2 of 2
-Status: Phase 25 COMPLETE -- all plans executed
-Last activity: 2026-02-12 -- 25-02 H2H SEO infrastructure and cross-links
+Phase: 26 of 26 (Internal Discovery Links)
+Plan: 1 of 2
+Status: Executing Phase 26 -- plan 01 complete
+Last activity: 2026-02-12 -- 26-01 Homepage discovery links (stat cards + league table)
 
-Progress: [##########] 100% (2/2 plans in Phase 25)
+Progress: [#####-----] 50% (1/2 plans in Phase 26)
 
 ## Performance Metrics
 
@@ -48,6 +48,7 @@ Progress: [##########] 100% (2/2 plans in Phase 25)
 | 24    | 02   | 8min     | 2     | 5     |
 | 25    | 01   | 6min     | 2     | 9     |
 | 25    | 02   | 9min     | 2     | 13    |
+| 26    | 01   | 3min     | 2     | 9     |
 
 ## Accumulated Context
 
@@ -87,6 +88,9 @@ v1.4 decisions:
 - Weekly changefreq for H2H sitemap (meetings data rarely changes)
 - Added slug to PlayerStat for squad roster links to player pages
 - H2H section on team page limited to 5 opponents by meeting count
+- Native anchor with conditional Wrapper pattern for stat card links (client-rendered with locale prefix)
+- next-intl Link for league table standings link (consistent with existing navigation)
+- Skipped aria-label i18n for stat card links (card content serves as accessible text)
 
 ### Pending Todos (manual/infrastructure)
 
@@ -95,6 +99,10 @@ v1.4 decisions:
 - Set up Google AdSense account and create 8 ad unit slots
 - Update public/ads.txt with real publisher ID
 - Discuss how to make v1.4 pages more discoverable through homepage links
+
+### Roadmap Evolution
+
+- Phase 26 added: Internal Discovery Links — organic entry points across existing pages that surface new programmatic pages
 
 ### Tech Debt
 
@@ -107,6 +115,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: Completed 25-02-PLAN.md (H2H SEO + cross-links) -- Phase 25 COMPLETE
+Stopped at: Completed 26-01-PLAN.md (Homepage discovery links) -- Phase 26 in progress
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
