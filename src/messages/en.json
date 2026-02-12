@@ -57,7 +57,11 @@
     "noScorers": "No scorers yet this season",
     "noFormData": "No form data available",
     "noRecentMatches": "No recent matches",
-    "noUpcomingMatches": "No upcoming matches"
+    "noUpcomingMatches": "No upcoming matches",
+    "statistics": "Statistics",
+    "stat_top_scorers": "Top Scorers",
+    "stat_top_assists": "Top Assists",
+    "stat_disciplinary": "Disciplinary"
   },
   "LeagueTable": {
     "championsLeagueQualifying": "Champions League Qualifying",
@@ -299,7 +303,9 @@
     "squad": "Squad",
     "stadium": "Stadium",
     "teamNotFound": "Team Not Found",
-    "unableToLoadTeam": "Unable to Load Team"
+    "unableToLoadTeam": "Unable to Load Team",
+    "headToHead": "Head-to-Head Matchups",
+    "meetingsLabel": "meetings"
   },
   "StatsPage": {
     "topScorers": "Top Scorers",

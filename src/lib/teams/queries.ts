@@ -598,6 +598,7 @@ export async function getScoringFirstRecord(
 export interface PlayerStat {
   playerId: number;
   name: string;
+  slug: string;
   position: string | null;
   photoUrl: string | null;
   number: number | null;
@@ -663,6 +664,7 @@ export async function getPlayerStats(
     .select({
       id: players.id,
       name: players.name,
+      slug: players.slug,
       position: players.position,
       photoUrl: players.photoUrl,
       number: players.number,
@@ -745,6 +747,7 @@ export async function getPlayerStats(
     return {
       playerId: p.id,
       name: p.name,
+      slug: p.slug,
       position: p.position,
       photoUrl: p.photoUrl,
       number: p.number,

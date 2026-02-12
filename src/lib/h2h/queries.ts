@@ -53,6 +53,14 @@ export interface H2HTeamPair {
   team2Slug: string;
 }
 
+export interface H2HOpponentLink {
+  opponentName: string;
+  opponentSlug: string;
+  opponentLogoUrl: string | null;
+  matchupSlug: string;
+  meetingCount: number;
+}
+
 // -- Queries -----------------------------------------------------------------
 
 /**
@@ -240,5 +248,54 @@ export async function getQualifyingH2HPairs(): Promise<H2HTeamPair[]> {
     return slug1 < slug2
       ? { team1Slug: slug1, team2Slug: slug2 }
       : { team1Slug: slug2, team2Slug: slug1 };
+  });
+}
+
+/**
+ * Get qualifying H2H opponents for a specific team (3+ meetings).
+ * Returns up to `limit` opponents sorted by meeting count descending.
+ * Used for team page cross-links to H2H pages.
+ */
+export async function getH2HPairsForTeam(
+  teamSlug: string,
+  limit = 5
+): Promise<H2HOpponentLink[]> {
+  const db = getDb();
+
+  const rows = await db.execute(sql`
+    SELECT
+      opp.name AS opponent_name,
+      opp.slug AS opponent_slug,
+      opp.logo_url AS opponent_logo_url,
+      COUNT(*) AS meeting_count
+    FROM fixtures f
+    INNER JOIN teams t ON (t.id = f.home_team_id OR t.id = f.away_team_id)
+    INNER JOIN teams opp ON (
+      (opp.id = f.home_team_id OR opp.id = f.away_team_id) AND opp.id != t.id
+    )
+    WHERE f.status = 'finished'
+      AND t.slug = ${teamSlug}
+    GROUP BY opp.id, opp.name, opp.slug, opp.logo_url
+    HAVING COUNT(*) >= 3
+    ORDER BY COUNT(*) DESC
+    LIMIT ${limit}
+  `);
+
+  return (rows.rows as Record<string, unknown>[]).map((row) => {
+    const oppSlug = String(row.opponent_slug);
+    // Build canonical matchup slug (alphabetical order)
+    const matchupSlug = teamSlug < oppSlug
+      ? `${teamSlug}-vs-${oppSlug}`
+      : `${oppSlug}-vs-${teamSlug}`;
+
+    return {
+      opponentName: String(row.opponent_name),
+      opponentSlug: oppSlug,
+      opponentLogoUrl: row.opponent_logo_url
+        ? String(row.opponent_logo_url)
+        : null,
+      matchupSlug,
+      meetingCount: Number(row.meeting_count),
+    };
   });
 }

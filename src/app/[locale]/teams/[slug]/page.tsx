@@ -10,6 +10,7 @@ import { fetchTeamBySlug } from '@/components/team-detail/actions';
 import { buildSportsTeam, buildBreadcrumbs, serializeJsonLd } from '@/lib/seo/structured-data';
 import { AdUnit } from '@/components/ads/AdUnit';
 import { AD_SLOTS } from '@/components/ads/ad-config';
+import { getH2HPairsForTeam } from '@/lib/h2h/queries';
 
 // ISR: revalidate every 30 minutes (matches poll frequency)
 export const revalidate = 1800;
@@ -103,6 +104,14 @@ export default async function TeamDetailPage({
 
   if (!teamData) return notFound();
 
+  // Fetch H2H opponents for cross-linking (non-blocking -- graceful fallback)
+  let h2hOpponents: Awaited<ReturnType<typeof getH2HPairsForTeam>> = [];
+  try {
+    h2hOpponents = await getH2HPairsForTeam(slug, 5);
+  } catch {
+    // H2H links omitted on error
+  }
+
   const sportsTeamJsonLd = buildSportsTeam({
     name: teamData.name,
     logoUrl: teamData.logoUrl,
@@ -138,6 +147,53 @@ export default async function TeamDetailPage({
             hasXg={teamData.hasXg}
           />
           <AdUnit slotId={AD_SLOTS.TEAM_DETAIL_2.slotId} className="mt-6" />
+
+          {/* Head-to-Head Matchups */}
+          {h2hOpponents.length > 0 && (
+            <section className="mt-8">
+              <h2 className="mb-4 text-lg font-semibold text-white/90">
+                {tTeams('headToHead')}
+              </h2>
+              <div className="space-y-2">
+                {h2hOpponents.map((opp) => (
+                  <a
+                    key={opp.opponentSlug}
+                    href={`/${locale}/h2h/${opp.matchupSlug}`}
+                    className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm transition-colors hover:bg-white/10"
+                  >
+                    {opp.opponentLogoUrl && (
+                      <img
+                        src={opp.opponentLogoUrl}
+                        width={24}
+                        height={24}
+                        alt=""
+                        className="h-6 w-6 object-contain"
+                      />
+                    )}
+                    <span className="flex-1 text-sm font-medium text-white/90">
+                      {teamData.name} vs {opp.opponentName}
+                    </span>
+                    <span className="text-xs text-white/40">
+                      {opp.meetingCount} {tTeams('meetingsLabel')}
+                    </span>
+                    <svg
+                      className="h-4 w-4 text-white/30"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </>

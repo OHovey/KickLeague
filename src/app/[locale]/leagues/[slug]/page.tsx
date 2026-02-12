@@ -364,6 +364,41 @@ export default async function LeaguePage({
             </section>
           </div>
 
+          {/* Statistics Links */}
+          <section className="mt-8">
+            <h2 className="mb-4 text-lg font-semibold text-white">
+              {t('statistics')}
+            </h2>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {(['top-scorers', 'top-assists', 'disciplinary'] as const).map(
+                (stat) => (
+                  <a
+                    key={stat}
+                    href={`/${locale}/leagues/${slug}/stats/${stat}`}
+                    className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm transition-colors hover:bg-white/10"
+                  >
+                    <span className="text-sm font-medium text-white/90">
+                      {t(`stat_${stat.replace('-', '_')}` as 'stat_top_scorers')}
+                    </span>
+                    <svg
+                      className="h-4 w-4 text-white/30"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </a>
+                )
+              )}
+            </div>
+          </section>
+
           {/* Two-column grid: Recent Matches + Upcoming Matches */}
           <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
             {/* Recent Matches */}

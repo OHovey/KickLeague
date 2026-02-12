@@ -57,7 +57,11 @@
     "noScorers": "Noch keine Torschutzen in dieser Saison",
     "noFormData": "Keine Formdaten verfugbar",
     "noRecentMatches": "Keine letzten Spiele",
-    "noUpcomingMatches": "Keine nachsten Spiele"
+    "noUpcomingMatches": "Keine nachsten Spiele",
+    "statistics": "Statistiken",
+    "stat_top_scorers": "Torjager",
+    "stat_top_assists": "Vorlagengeber",
+    "stat_disciplinary": "Disziplinarisches"
   },
   "LeagueTable": {
     "championsLeagueQualifying": "Champions-League-Qualifikation",
@@ -299,7 +303,9 @@
     "squad": "Kader",
     "stadium": "Stadion",
     "teamNotFound": "Mannschaft nicht gefunden",
-    "unableToLoadTeam": "Mannschaft konnte nicht geladen werden"
+    "unableToLoadTeam": "Mannschaft konnte nicht geladen werden",
+    "headToHead": "Direktvergleiche",
+    "meetingsLabel": "Begegnungen"
   },
   "StatsPage": {
     "topScorers": "Torjager",

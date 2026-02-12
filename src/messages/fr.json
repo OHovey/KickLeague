@@ -57,7 +57,11 @@
     "noScorers": "Pas encore de buteurs cette saison",
     "noFormData": "Aucune donnee de forme disponible",
     "noRecentMatches": "Aucun match recent",
-    "noUpcomingMatches": "Aucun prochain match"
+    "noUpcomingMatches": "Aucun prochain match",
+    "statistics": "Statistiques",
+    "stat_top_scorers": "Meilleurs buteurs",
+    "stat_top_assists": "Meilleurs passeurs",
+    "stat_disciplinary": "Disciplinaire"
   },
   "LeagueTable": {
     "championsLeagueQualifying": "Qualification Ligue des Champions",
@@ -299,7 +303,9 @@
     "squad": "Effectif",
     "stadium": "Stade",
     "teamNotFound": "\u00c9quipe non trouv\u00e9e",
-    "unableToLoadTeam": "Impossible de charger l'\u00e9quipe"
+    "unableToLoadTeam": "Impossible de charger l'\u00e9quipe",
+    "headToHead": "Confrontations directes",
+    "meetingsLabel": "rencontres"
   },
   "StatsPage": {
     "topScorers": "Meilleurs buteurs",

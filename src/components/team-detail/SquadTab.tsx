@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { fetchSquadData, type SquadData } from './actions';
 import type { PlayerStat } from '@/lib/teams/queries';
 
@@ -42,14 +42,19 @@ function TopPerformerCard({
   player,
   stat,
   statLabel,
+  href,
 }: {
   label: string;
   player: PlayerStat;
   stat: number;
   statLabel: string;
+  href: string;
 }) {
   return (
-    <div className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+    <a
+      href={href}
+      className="flex flex-col items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm transition-colors hover:bg-white/10"
+    >
       <span className="text-[11px] font-medium uppercase tracking-wider text-white/40">
         {label}
       </span>
@@ -70,7 +75,7 @@ function TopPerformerCard({
       <span className="text-sm font-medium text-white/90">{player.name}</span>
       <span className="text-xl font-bold text-white">{stat}</span>
       <span className="text-[11px] text-white/40">{statLabel}</span>
-    </div>
+    </a>
   );
 }
 
@@ -114,6 +119,7 @@ interface SquadTabProps {
 
 export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
   const t = useTranslations('TeamSquad');
+  const locale = useLocale();
   const [data, setData] = useState<SquadData | null>(null);
   const [isPending, startTransition] = useTransition();
   const [loaded, setLoaded] = useState(false);
@@ -175,6 +181,7 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
               player={topScorer}
               stat={topScorer.goals}
               statLabel={t('goals')}
+              href={`/${locale}/players/${topScorer.slug}`}
             />
           )}
           {topAssister && topAssister.assists > 0 && (
@@ -183,6 +190,7 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
               player={topAssister}
               stat={topAssister.assists}
               statLabel={t('assists')}
+              href={`/${locale}/players/${topAssister.slug}`}
             />
           )}
           {mostBooked &&
@@ -192,6 +200,7 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
                 player={mostBooked}
                 stat={mostBooked.yellowCards + mostBooked.redCards}
                 statLabel={t('cards')}
+                href={`/${locale}/players/${mostBooked.slug}`}
               />
             )}
         </div>
@@ -239,7 +248,12 @@ export function SquadTab({ teamId, leagueId, season }: SquadTabProps) {
                           {p.number ?? '-'}
                         </td>
                         <td className="py-2.5 px-2 font-medium text-white/90">
-                          {p.name}
+                          <a
+                            href={`/${locale}/players/${p.slug}`}
+                            className="hover:text-white transition-colors"
+                          >
+                            {p.name}
+                          </a>
                         </td>
                         {hasDetailedStats && (
                           <>

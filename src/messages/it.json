@@ -57,7 +57,11 @@
     "noScorers": "Ancora nessun marcatore questa stagione",
     "noFormData": "Nessun dato sulla forma disponibile",
     "noRecentMatches": "Nessuna partita recente",
-    "noUpcomingMatches": "Nessuna prossima partita"
+    "noUpcomingMatches": "Nessuna prossima partita",
+    "statistics": "Statistiche",
+    "stat_top_scorers": "Capocannonieri",
+    "stat_top_assists": "Migliori assist",
+    "stat_disciplinary": "Disciplinare"
   },
   "LeagueTable": {
     "championsLeagueQualifying": "Qualificazione Champions League",
@@ -299,7 +303,9 @@
     "squad": "Rosa",
     "stadium": "Stadio",
     "teamNotFound": "Squadra non trovata",
-    "unableToLoadTeam": "Impossibile caricare la squadra"
+    "unableToLoadTeam": "Impossibile caricare la squadra",
+    "headToHead": "Scontri diretti",
+    "meetingsLabel": "incontri"
   },
   "StatsPage": {
     "topScorers": "Capocannonieri",
