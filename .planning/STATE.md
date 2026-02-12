@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Football fans can see league standings with rich visual context -- sparklines, trend indicators, form runs, position history -- presented with the information density of a financial dashboard.
-**Current focus:** v1.4 Programmatic SEO -- Phase 23 complete (2/2 plans), ready for Phase 24
+**Current focus:** v1.4 Programmatic SEO -- Phase 24 in progress (1/2 plans complete)
 
 ## Current Position
 
-Phase: 23 of 25 (Stat Leaderboards)
-Plan: 2 of 2
-Status: Phase 23 complete, ready for Phase 24
-Last activity: 2026-02-12 -- 23-02 stat leaderboard SEO infrastructure
+Phase: 24 of 25 (Player Pages)
+Plan: 1 of 2
+Status: 24-01 complete, ready for 24-02
+Last activity: 2026-02-12 -- 24-01 player profile pages
 
-Progress: [##########] 100% (2/2 plans)
+Progress: [#####-----] 50% (1/2 plans)
 
 ## Performance Metrics
 
@@ -44,6 +44,7 @@ Progress: [##########] 100% (2/2 plans)
 | 22    | 02   | 3min     | 2     | 5     |
 | 23    | 01   | 4min     | 2     | 9     |
 | 23    | 02   | 3min     | 2     | 10    |
+| 24    | 01   | 10min    | 2     | 14    |
 
 ## Accumulated Context
 
@@ -68,6 +69,10 @@ v1.4 decisions:
 - English-only OG images for stats (language-neutral for social shares)
 - Daily changefreq for stats sitemap (leaderboard data changes with each match)
 - Metadata namespace for stats SEO keys (consistent with league/team metadata pattern)
+- Slug includes api_id suffix in seed for guaranteed uniqueness
+- Types not re-exported from 'use server' modules (Next.js 16 Turbopack limitation)
+- Local PlayerPageData interface in page.tsx rather than importing from server action
+- Migration backfill uses LOWER-first ordering to preserve letters correctly
 
 ### Pending Todos (manual/infrastructure)
 
@@ -88,6 +93,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: Completed 23-02-PLAN.md (stat leaderboard SEO infrastructure) -- Phase 23 complete, ready for Phase 24
+Stopped at: Completed 24-01-PLAN.md (player profile pages) -- ready for 24-02 (player sitemap)
 Resume file: None
 Production URL: https://kick-league-gray.vercel.app
