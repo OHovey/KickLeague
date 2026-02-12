@@ -47,6 +47,20 @@ function splitName(name: string): { first: string | null; last: string } {
 }
 
 /**
+ * Generate a URL-safe slug from a player name.
+ * "Mohamed Salah" -> "mohamed-salah"
+ * Diacritics and special characters are stripped.
+ */
+function generateSlug(name: string, apiId: number): string {
+  const base = name
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+  // Include apiId suffix to guarantee uniqueness
+  return `${base}-${apiId}`;
+}
+
+/**
  * Seed players for all teams in a league-season.
  *
  * @param teamApiIdToDbId - Map from team API ID to database ID (from seedTeams)
@@ -101,6 +115,7 @@ export async function seedPlayers(
           apiId: player.id,
           teamId: teamDbId,
           name: player.name,
+          slug: generateSlug(player.name, player.id),
           firstName: first,
           lastName: last,
           position: mapPosition(player.position),
@@ -114,6 +129,7 @@ export async function seedPlayers(
           set: buildConflictUpdateColumns(players, [
             "teamId",
             "name",
+            "slug",
             "firstName",
             "lastName",
             "position",

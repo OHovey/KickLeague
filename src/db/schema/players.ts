@@ -1,4 +1,10 @@
-import { pgTable, integer, varchar, index } from 'drizzle-orm/pg-core';
+import {
+  pgTable,
+  integer,
+  varchar,
+  index,
+  uniqueIndex,
+} from 'drizzle-orm/pg-core';
 import { teams } from './teams';
 
 export const players = pgTable(
@@ -10,6 +16,7 @@ export const players = pgTable(
       .notNull()
       .references(() => teams.id),
     name: varchar('name', { length: 100 }).notNull(),
+    slug: varchar('slug', { length: 150 }).notNull(),
     firstName: varchar('first_name', { length: 50 }),
     lastName: varchar('last_name', { length: 50 }),
     position: varchar('position', { length: 10 }), // GK, DEF, MID, FWD
@@ -20,5 +27,8 @@ export const players = pgTable(
     height: varchar('height', { length: 10 }), // e.g. "183 cm"
     weight: varchar('weight', { length: 10 }), // e.g. "76 kg"
   },
-  (table) => [index('players_team_idx').on(table.teamId)]
+  (table) => [
+    index('players_team_idx').on(table.teamId),
+    uniqueIndex('players_slug_idx').on(table.slug),
+  ]
 );
