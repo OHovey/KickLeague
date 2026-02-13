@@ -6,7 +6,6 @@ import { routing } from '@/i18n/routing';
 import { ThemeBackground } from '@/components/ThemeBackground';
 import { fetchPlayerPageData } from '@/components/player-page/actions';
 import type { PlayerProfile, PlayerSeasonStats, PlayerMatchInvolvement } from '@/lib/players/queries';
-import { getQualifyingPlayerSlugs } from '@/lib/players/queries';
 
 // Local type matching the server action return shape
 interface PlayerPageData {
@@ -99,12 +98,9 @@ function EventBadge({
 // -- Static Params -----------------------------------------------------------
 
 export async function generateStaticParams() {
-  try {
-    const slugs = await getQualifyingPlayerSlugs();
-    return slugs.map((slug) => ({ slug }));
-  } catch {
-    return [];
-  }
+  // Skip pre-rendering player pages at build time to stay under Vercel's
+  // 75 MB deployment size limit. Pages are generated on-demand via ISR.
+  return [];
 }
 
 // -- Metadata ----------------------------------------------------------------

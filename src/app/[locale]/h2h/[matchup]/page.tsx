@@ -6,7 +6,6 @@ import { routing } from '@/i18n/routing';
 import { ThemeBackground } from '@/components/ThemeBackground';
 import { fetchH2HPageData } from '@/components/h2h-page/actions';
 import {
-  getQualifyingH2HPairs,
   type H2HMeeting,
   type H2HAggregateRecord,
   type TeamFormAndPosition,
@@ -70,14 +69,9 @@ function getOrdinalSuffix(n: number): string {
 // -- Static Params -----------------------------------------------------------
 
 export async function generateStaticParams() {
-  try {
-    const pairs = await getQualifyingH2HPairs();
-    return pairs.map((pair) => ({
-      matchup: `${pair.team1Slug}-vs-${pair.team2Slug}`,
-    }));
-  } catch {
-    return [];
-  }
+  // Skip pre-rendering h2h pages at build time to stay under Vercel's
+  // 75 MB deployment size limit. Pages are generated on-demand via ISR.
+  return [];
 }
 
 // -- Metadata ----------------------------------------------------------------
