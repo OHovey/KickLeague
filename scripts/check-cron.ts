@@ -103,29 +103,55 @@ async function main() {
     }
   }
 
-  // 5. Cron invocation log (diagnostic entries)
-  console.log("\n=== Cron Invocation Log (endpoint = '/cron/daily-resync') ===\n");
+  // 5. Cron invocation log (all cron endpoints)
+  console.log("\n=== Cron Invocation Log (last 30) ===\n");
   const cronLogs = await db.execute(sql.raw(`
     SELECT
       called_at AT TIME ZONE 'UTC' AS called_at_utc,
+      endpoint,
       success,
       http_status,
       error_message,
       params
     FROM api_call_log
-    WHERE endpoint = '/cron/daily-resync'
+    WHERE endpoint LIKE '/cron/%'
     ORDER BY called_at DESC
-    LIMIT 20
+    LIMIT 30
   `));
   if ((cronLogs as any).rows.length === 0) {
-    console.log("  No cron invocation logs yet. Deploy the updated route and wait for the next cron trigger.");
+    console.log("  No cron invocation logs yet. Deploy the updated routes and wait for the next cron trigger.");
   }
   for (const r of (cronLogs as any).rows) {
     const ts = new Date(r.called_at_utc).toISOString().slice(0, 19).replace("T", " ");
     const status = r.success ? "OK" : `FAIL(${r.http_status})`;
     const err = r.error_message ? ` | error: ${r.error_message}` : "";
     const params = r.params ? ` | result: ${r.params.slice(0, 80)}` : "";
-    console.log(`  ${ts} UTC | ${status}${err}${params}`);
+    console.log(`  ${ts} UTC | ${r.endpoint} | ${status}${err}${params}`);
+  }
+
+  // 6. Cron invocations per endpoint (last 24h summary)
+  console.log("\n=== Cron Summary (Last 24 Hours) ===\n");
+  const cronSummary = await db.execute(sql.raw(`
+    SELECT
+      endpoint,
+      COUNT(*) AS total,
+      SUM(CASE WHEN success THEN 1 ELSE 0 END) AS successful,
+      SUM(CASE WHEN NOT success THEN 1 ELSE 0 END) AS failed,
+      MIN(called_at AT TIME ZONE 'UTC') AS first_call,
+      MAX(called_at AT TIME ZONE 'UTC') AS last_call
+    FROM api_call_log
+    WHERE endpoint LIKE '/cron/%'
+      AND called_at >= NOW() - interval '24 hours'
+    GROUP BY endpoint
+    ORDER BY endpoint
+  `));
+  if ((cronSummary as any).rows.length === 0) {
+    console.log("  No cron invocations in the last 24 hours.");
+  }
+  for (const r of (cronSummary as any).rows) {
+    const first = new Date(r.first_call).toISOString().slice(11, 19);
+    const last = new Date(r.last_call).toISOString().slice(11, 19);
+    console.log(`  ${r.endpoint}: ${r.total} calls (${r.successful} ok, ${r.failed} fail) | ${first} - ${last} UTC`);
   }
 }
 

@@ -79,6 +79,36 @@ export async function canMakePipelineCall(
   return dailyCount < dailyLimit;
 }
 
+// ---------------------------------------------------------------------------
+// Cron invocation logging
+// ---------------------------------------------------------------------------
+
+interface LogCronInvocationParams {
+  endpoint: string;
+  success: boolean;
+  httpStatus: number;
+  result?: string | null;
+  error?: string | null;
+}
+
+/**
+ * Log every cron invocation to api_call_log for diagnostics.
+ * Best-effort: swallows DB errors so cron routes never fail due to logging.
+ */
+export async function logCronInvocation(params: LogCronInvocationParams): Promise<void> {
+  try {
+    await getDb().insert(apiCallLog).values({
+      endpoint: params.endpoint,
+      success: params.success,
+      httpStatus: params.httpStatus,
+      errorMessage: params.error?.slice(0, 500) ?? null,
+      params: params.result?.slice(0, 500) ?? null,
+    });
+  } catch {
+    /* best-effort logging */
+  }
+}
+
 /**
  * Check daily API-Football usage against budget thresholds and alert via Sentry.
  *

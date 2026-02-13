@@ -11,15 +11,18 @@
 import * as Sentry from '@sentry/nextjs';
 import { Receiver } from '@upstash/qstash';
 import { pollActiveMatches } from '@/lib/pipeline/poll-active-matches';
-import { checkBudgetThresholds } from '@/lib/pipeline/api-budget';
+import { checkBudgetThresholds, logCronInvocation } from '@/lib/pipeline/api-budget';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
+
+const ENDPOINT = '/cron/poll-matches';
 
 export async function POST(req: Request) {
   // --- QStash signature verification ---
   const signature = req.headers.get('upstash-signature');
   if (!signature) {
+    await logCronInvocation({ endpoint: ENDPOINT, success: false, httpStatus: 401, error: 'missing_signature' });
     return new Response('`Upstash-Signature` header is missing', { status: 401 });
   }
 
@@ -33,6 +36,7 @@ export async function POST(req: Request) {
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error('[poll-matches] QStash signature verification failed:', message);
+    await logCronInvocation({ endpoint: ENDPOINT, success: false, httpStatus: 401, error: `sig_failed: ${message}` });
     return Response.json({ error: `Signature verification failed: ${message}` }, { status: 401 });
   }
 
@@ -42,6 +46,7 @@ export async function POST(req: Request) {
 
     try { await checkBudgetThresholds(); } catch { /* budget check is best-effort */ }
 
+    await logCronInvocation({ endpoint: ENDPOINT, success: true, httpStatus: 200, result: JSON.stringify(result) });
     return Response.json(result);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -50,6 +55,7 @@ export async function POST(req: Request) {
       extra: { route: '/api/cron/poll-matches' },
     });
     console.error('[poll-matches] Error:', message);
+    await logCronInvocation({ endpoint: ENDPOINT, success: false, httpStatus: 500, error: message });
     return Response.json({ error: message }, { status: 500 });
   }
 }
