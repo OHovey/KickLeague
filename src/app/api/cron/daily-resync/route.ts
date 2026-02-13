@@ -20,8 +20,8 @@ export const maxDuration = 60;
 /** Log every cron invocation to the database for diagnostics. */
 async function logCronInvocation(
   authPassed: boolean,
-  result?: string,
-  error?: string,
+  result?: string | null,
+  error?: string | null,
 ) {
   try {
     const db = getDb();
