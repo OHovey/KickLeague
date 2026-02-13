@@ -10,14 +10,40 @@
 
 import * as Sentry from '@sentry/nextjs';
 import type { NextRequest } from 'next/server';
+import { sql } from 'drizzle-orm';
 import { dailyResync } from '@/lib/pipeline/daily-resync';
 import { checkBudgetThresholds } from '@/lib/pipeline/api-budget';
+import { getDb } from '@/db/connection';
 
 export const maxDuration = 60;
+
+/** Log every cron invocation to the database for diagnostics. */
+async function logCronInvocation(
+  authPassed: boolean,
+  result?: string,
+  error?: string,
+) {
+  try {
+    const db = getDb();
+    await db.execute(sql`
+      INSERT INTO api_call_log (endpoint, success, http_status, error_message, params)
+      VALUES (
+        '/cron/daily-resync',
+        ${authPassed && !error},
+        ${authPassed ? (error ? 500 : 200) : 401},
+        ${error ?? null},
+        ${result ?? null}
+      )
+    `);
+  } catch {
+    /* best-effort logging */
+  }
+}
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization');
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    await logCronInvocation(false, null, 'auth_failed');
     return new Response('Unauthorized', { status: 401 });
   }
 
@@ -26,6 +52,7 @@ export async function GET(request: NextRequest) {
 
     try { await checkBudgetThresholds(); } catch { /* budget check is best-effort */ }
 
+    await logCronInvocation(true, JSON.stringify(result));
     return Response.json(result);
   } catch (error) {
     const message =
@@ -40,6 +67,7 @@ export async function GET(request: NextRequest) {
         error: message,
       }),
     );
+    await logCronInvocation(true, null, message);
     return Response.json(
       { error: message },
       { status: 500 },
