@@ -37,18 +37,7 @@ function groupByMatchweek(
     .sort((a, b) => {
       if (a[0] === null) return 1;
       if (b[0] === null) return -1;
-      // Sort groups by kickoff date (not matchweek number) so rescheduled
-      // games don't break chronological order.
-      // Upcoming (asc): earliest kickoff first. Recent (desc): latest kickoff first.
-      const aTime =
-        sort === 'asc'
-          ? Math.min(...a[1].map((m) => m.kickoff.getTime()))
-          : Math.max(...a[1].map((m) => m.kickoff.getTime()));
-      const bTime =
-        sort === 'asc'
-          ? Math.min(...b[1].map((m) => m.kickoff.getTime()))
-          : Math.max(...b[1].map((m) => m.kickoff.getTime()));
-      return sort === 'asc' ? aTime - bTime : bTime - aTime;
+      return sort === 'asc' ? a[0] - b[0] : b[0] - a[0];
     })
     .map(([matchweek, matches]) => ({
       matchweek,
