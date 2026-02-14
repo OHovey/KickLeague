@@ -144,7 +144,7 @@ async function buildH2HMatrix(leagueId: number, season: string): Promise<H2HMatr
 /**
  * Get the latest matchweek for a league and season
  */
-async function getLatestMatchweek(leagueId: number, season: string): Promise<number | null> {
+export async function getLatestMatchweek(leagueId: number, season: string): Promise<number | null> {
   const result = await getDb()
     .select({ maxWeek: max(standings.matchweek) })
     .from(standings)

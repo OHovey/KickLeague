@@ -1,10 +1,10 @@
 // Match database queries for recent results, upcoming fixtures, and key events
 
-import { eq, and, desc, asc, inArray, max, isNotNull } from 'drizzle-orm';
+import { eq, and, desc, asc, inArray, max, isNotNull, gte, lte } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/pg-core';
 import { getDb, isDatabaseConfigured } from '@/db/connection';
 import { fixtures, fixtureEvents, teams, standings, players } from '@/db/schema';
-import { getLeagueBySlug } from '@/lib/standings/queries';
+import { getLeagueBySlug, getLatestMatchweek } from '@/lib/standings/queries';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -82,6 +82,10 @@ export async function getRecentMatches(
   let rows;
 
   if (byMatchweek) {
+    // Get the latest completed matchweek from standings to set a boundary
+    // This excludes straggler rescheduled matches from old matchweeks
+    const latestCompleted = await getLatestMatchweek(league.id, league.currentSeason);
+
     // Step 1: find the N most recent distinct matchweeks with finished matches
     const recentMws = await getDb()
       .selectDistinct({ matchweek: fixtures.matchweek })
@@ -92,6 +96,7 @@ export async function getRecentMatches(
           eq(fixtures.season, league.currentSeason),
           eq(fixtures.status, 'finished'),
           isNotNull(fixtures.matchweek),
+          ...(latestCompleted !== null ? [lte(fixtures.matchweek, latestCompleted)] : []),
         ),
       )
       .orderBy(desc(fixtures.matchweek))
@@ -198,6 +203,10 @@ export async function getUpcomingFixtures(
   let rows;
 
   if (byMatchweek) {
+    // Get the latest completed matchweek from standings to set a boundary
+    // This excludes straggler rescheduled matches from old matchweeks (e.g. MW16 showing before MW24)
+    const latestCompleted = await getLatestMatchweek(league.id, league.currentSeason);
+
     // Find the N soonest distinct matchweeks with scheduled matches
     const upcomingMws = await getDb()
       .selectDistinct({ matchweek: fixtures.matchweek })
@@ -208,6 +217,7 @@ export async function getUpcomingFixtures(
           eq(fixtures.season, league.currentSeason),
           eq(fixtures.status, 'scheduled'),
           isNotNull(fixtures.matchweek),
+          ...(latestCompleted !== null ? [gte(fixtures.matchweek, latestCompleted + 1)] : []),
         ),
       )
       .orderBy(asc(fixtures.matchweek))
