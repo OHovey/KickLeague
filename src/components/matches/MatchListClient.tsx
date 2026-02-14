@@ -53,6 +53,10 @@ interface MatchData {
 
 // ─── Component ──────────────────────────────────────────────────────────────
 
+// Number of distinct matchweeks to fetch initially / on "show more"
+const INITIAL_MW_LIMIT = 3;
+const EXPANDED_MW_LIMIT = 15;
+
 export function MatchListClient({ league, tab }: MatchListClientProps) {
   const t = useTranslations('Common');
   const [data, setData] = useState<MatchData | null>(null);
@@ -67,11 +71,11 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
   }>({ showBetting: false, countryCode: null, isMapped: false });
 
   const fetchData = useCallback(
-    (limit: number) => {
+    (matchweekLimit: number) => {
       startTransition(async () => {
         try {
           if (tab === 'results') {
-            const result = await fetchRecentMatches(league, limit);
+            const result = await fetchRecentMatches(league, matchweekLimit, true);
             if (result.error === 'database_not_configured') {
               setDbError('database_not_configured');
               setData({ matches: [], events: {}, teamForms: {}, oddsMap: {} });
@@ -85,7 +89,7 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
               oddsMap: {},
             });
           } else {
-            const result = await fetchUpcomingFixtures(league, limit);
+            const result = await fetchUpcomingFixtures(league, matchweekLimit, true);
             if (result.error === 'database_not_configured') {
               setDbError('database_not_configured');
               setData({ matches: [], events: {}, teamForms: {}, oddsMap: {} });
@@ -124,12 +128,12 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
   // Fetch on mount and when league/tab changes
   useEffect(() => {
     setShowAll(false);
-    fetchData(10);
+    fetchData(INITIAL_MW_LIMIT);
   }, [fetchData]);
 
   const handleShowMore = useCallback(() => {
     setShowAll(true);
-    fetchData(100);
+    fetchData(EXPANDED_MW_LIMIT);
   }, [fetchData]);
 
   // Show skeleton during loading
@@ -178,7 +182,7 @@ export function MatchListClient({ league, tab }: MatchListClientProps) {
         type={tab}
         showBetting={geoContext.showBetting}
         onShowMore={!showAll ? handleShowMore : undefined}
-        hasMore={!showAll && data.matches.length >= 10}
+        hasMore={!showAll && new Set(data.matches.map((m) => m.matchweek)).size >= INITIAL_MW_LIMIT}
       />
     </div>
   );

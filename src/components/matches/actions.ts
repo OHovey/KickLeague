@@ -35,7 +35,8 @@ export interface UpcomingFixturesResult {
  */
 export async function fetchRecentMatches(
   league: string,
-  limit: number = 10
+  limit: number = 10,
+  byMatchweek: boolean = false,
 ): Promise<RecentMatchesResult> {
   if (!isDatabaseConfigured()) {
     return { matches: [], events: {}, teamForms: {}, error: 'database_not_configured' };
@@ -46,7 +47,7 @@ export async function fetchRecentMatches(
     return { matches: [], events: {}, teamForms: {}, error: 'league_not_found' };
   }
 
-  const matches = await getRecentMatches(league, limit);
+  const matches = await getRecentMatches(league, limit, byMatchweek);
 
   // Batch fetch key events for all returned fixtures
   const fixtureIds = matches.map((m) => m.id);
@@ -91,7 +92,8 @@ export async function fetchRecentMatches(
  */
 export async function fetchUpcomingFixtures(
   league: string,
-  limit: number = 10
+  limit: number = 10,
+  byMatchweek: boolean = false,
 ): Promise<UpcomingFixturesResult> {
   if (!isDatabaseConfigured()) {
     return { matches: [], teamForms: {}, error: 'database_not_configured' };
@@ -102,7 +104,7 @@ export async function fetchUpcomingFixtures(
     return { matches: [], teamForms: {}, error: 'league_not_found' };
   }
 
-  const matches = await getUpcomingFixtures(league, limit);
+  const matches = await getUpcomingFixtures(league, limit, byMatchweek);
 
   // Batch fetch form for all team IDs
   const teamIds = [...new Set(matches.flatMap((m) => [m.homeTeam.id, m.awayTeam.id]))];

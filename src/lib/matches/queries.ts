@@ -1,6 +1,6 @@
 // Match database queries for recent results, upcoming fixtures, and key events
 
-import { eq, and, desc, asc, inArray, max } from 'drizzle-orm';
+import { eq, and, desc, asc, inArray, max, isNotNull } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/pg-core';
 import { getDb, isDatabaseConfigured } from '@/db/connection';
 import { fixtures, fixtureEvents, teams, standings, players } from '@/db/schema';
@@ -43,10 +43,13 @@ export interface MatchEvent {
 
 /**
  * Fetch recent finished matches for a league, ordered by kickoff descending.
+ * When byMatchweek is true, limit means "number of distinct matchweeks" and
+ * returns all matches from those matchweeks (avoids gaps from rescheduled games).
  */
 export async function getRecentMatches(
   leagueSlug: string,
-  limit: number = 10
+  limit: number = 10,
+  byMatchweek: boolean = false,
 ): Promise<MatchWithTeams[]> {
   if (!isDatabaseConfigured()) return [];
 
@@ -56,38 +59,78 @@ export async function getRecentMatches(
   const homeTeam = alias(teams, 'homeTeam');
   const awayTeam = alias(teams, 'awayTeam');
 
-  const rows = await getDb()
-    .select({
-      id: fixtures.id,
-      matchweek: fixtures.matchweek,
-      kickoff: fixtures.kickoff,
-      status: fixtures.status,
-      homeScore: fixtures.homeScore,
-      awayScore: fixtures.awayScore,
-      venue: fixtures.venue,
-      homeTeamId: homeTeam.id,
-      homeTeamName: homeTeam.name,
-      homeTeamShortName: homeTeam.shortName,
-      homeTeamLogoUrl: homeTeam.logoUrl,
-      homeTeamSlug: homeTeam.slug,
-      awayTeamId: awayTeam.id,
-      awayTeamName: awayTeam.name,
-      awayTeamShortName: awayTeam.shortName,
-      awayTeamLogoUrl: awayTeam.logoUrl,
-      awayTeamSlug: awayTeam.slug,
-    })
-    .from(fixtures)
-    .innerJoin(homeTeam, eq(fixtures.homeTeamId, homeTeam.id))
-    .innerJoin(awayTeam, eq(fixtures.awayTeamId, awayTeam.id))
-    .where(
-      and(
-        eq(fixtures.leagueId, league.id),
-        eq(fixtures.season, league.currentSeason),
-        eq(fixtures.status, 'finished')
+  const selectFields = {
+    id: fixtures.id,
+    matchweek: fixtures.matchweek,
+    kickoff: fixtures.kickoff,
+    status: fixtures.status,
+    homeScore: fixtures.homeScore,
+    awayScore: fixtures.awayScore,
+    venue: fixtures.venue,
+    homeTeamId: homeTeam.id,
+    homeTeamName: homeTeam.name,
+    homeTeamShortName: homeTeam.shortName,
+    homeTeamLogoUrl: homeTeam.logoUrl,
+    homeTeamSlug: homeTeam.slug,
+    awayTeamId: awayTeam.id,
+    awayTeamName: awayTeam.name,
+    awayTeamShortName: awayTeam.shortName,
+    awayTeamLogoUrl: awayTeam.logoUrl,
+    awayTeamSlug: awayTeam.slug,
+  };
+
+  let rows;
+
+  if (byMatchweek) {
+    // Step 1: find the N most recent distinct matchweeks with finished matches
+    const recentMws = await getDb()
+      .selectDistinct({ matchweek: fixtures.matchweek })
+      .from(fixtures)
+      .where(
+        and(
+          eq(fixtures.leagueId, league.id),
+          eq(fixtures.season, league.currentSeason),
+          eq(fixtures.status, 'finished'),
+          isNotNull(fixtures.matchweek),
+        ),
       )
-    )
-    .orderBy(desc(fixtures.kickoff))
-    .limit(limit);
+      .orderBy(desc(fixtures.matchweek))
+      .limit(limit);
+
+    const mwValues = recentMws.map((r) => r.matchweek!);
+    if (mwValues.length === 0) return [];
+
+    // Step 2: fetch all matches from those matchweeks
+    rows = await getDb()
+      .select(selectFields)
+      .from(fixtures)
+      .innerJoin(homeTeam, eq(fixtures.homeTeamId, homeTeam.id))
+      .innerJoin(awayTeam, eq(fixtures.awayTeamId, awayTeam.id))
+      .where(
+        and(
+          eq(fixtures.leagueId, league.id),
+          eq(fixtures.season, league.currentSeason),
+          eq(fixtures.status, 'finished'),
+          inArray(fixtures.matchweek, mwValues),
+        ),
+      )
+      .orderBy(desc(fixtures.kickoff));
+  } else {
+    rows = await getDb()
+      .select(selectFields)
+      .from(fixtures)
+      .innerJoin(homeTeam, eq(fixtures.homeTeamId, homeTeam.id))
+      .innerJoin(awayTeam, eq(fixtures.awayTeamId, awayTeam.id))
+      .where(
+        and(
+          eq(fixtures.leagueId, league.id),
+          eq(fixtures.season, league.currentSeason),
+          eq(fixtures.status, 'finished'),
+        ),
+      )
+      .orderBy(desc(fixtures.kickoff))
+      .limit(limit);
+  }
 
   return rows.map((row) => ({
     id: row.id,
@@ -116,10 +159,13 @@ export async function getRecentMatches(
 
 /**
  * Fetch upcoming scheduled matches for a league, ordered by kickoff ascending (soonest first).
+ * When byMatchweek is true, limit means "number of distinct matchweeks" and
+ * returns all matches from those matchweeks (avoids gaps from rescheduled games).
  */
 export async function getUpcomingFixtures(
   leagueSlug: string,
-  limit: number = 10
+  limit: number = 10,
+  byMatchweek: boolean = false,
 ): Promise<MatchWithTeams[]> {
   if (!isDatabaseConfigured()) return [];
 
@@ -129,38 +175,76 @@ export async function getUpcomingFixtures(
   const homeTeam = alias(teams, 'homeTeam');
   const awayTeam = alias(teams, 'awayTeam');
 
-  const rows = await getDb()
-    .select({
-      id: fixtures.id,
-      matchweek: fixtures.matchweek,
-      kickoff: fixtures.kickoff,
-      status: fixtures.status,
-      homeScore: fixtures.homeScore,
-      awayScore: fixtures.awayScore,
-      venue: fixtures.venue,
-      homeTeamId: homeTeam.id,
-      homeTeamName: homeTeam.name,
-      homeTeamShortName: homeTeam.shortName,
-      homeTeamLogoUrl: homeTeam.logoUrl,
-      homeTeamSlug: homeTeam.slug,
-      awayTeamId: awayTeam.id,
-      awayTeamName: awayTeam.name,
-      awayTeamShortName: awayTeam.shortName,
-      awayTeamLogoUrl: awayTeam.logoUrl,
-      awayTeamSlug: awayTeam.slug,
-    })
-    .from(fixtures)
-    .innerJoin(homeTeam, eq(fixtures.homeTeamId, homeTeam.id))
-    .innerJoin(awayTeam, eq(fixtures.awayTeamId, awayTeam.id))
-    .where(
-      and(
-        eq(fixtures.leagueId, league.id),
-        eq(fixtures.season, league.currentSeason),
-        eq(fixtures.status, 'scheduled')
+  const selectFields = {
+    id: fixtures.id,
+    matchweek: fixtures.matchweek,
+    kickoff: fixtures.kickoff,
+    status: fixtures.status,
+    homeScore: fixtures.homeScore,
+    awayScore: fixtures.awayScore,
+    venue: fixtures.venue,
+    homeTeamId: homeTeam.id,
+    homeTeamName: homeTeam.name,
+    homeTeamShortName: homeTeam.shortName,
+    homeTeamLogoUrl: homeTeam.logoUrl,
+    homeTeamSlug: homeTeam.slug,
+    awayTeamId: awayTeam.id,
+    awayTeamName: awayTeam.name,
+    awayTeamShortName: awayTeam.shortName,
+    awayTeamLogoUrl: awayTeam.logoUrl,
+    awayTeamSlug: awayTeam.slug,
+  };
+
+  let rows;
+
+  if (byMatchweek) {
+    const upcomingMws = await getDb()
+      .selectDistinct({ matchweek: fixtures.matchweek })
+      .from(fixtures)
+      .where(
+        and(
+          eq(fixtures.leagueId, league.id),
+          eq(fixtures.season, league.currentSeason),
+          eq(fixtures.status, 'scheduled'),
+          isNotNull(fixtures.matchweek),
+        ),
       )
-    )
-    .orderBy(asc(fixtures.kickoff))
-    .limit(limit);
+      .orderBy(asc(fixtures.matchweek))
+      .limit(limit);
+
+    const mwValues = upcomingMws.map((r) => r.matchweek!);
+    if (mwValues.length === 0) return [];
+
+    rows = await getDb()
+      .select(selectFields)
+      .from(fixtures)
+      .innerJoin(homeTeam, eq(fixtures.homeTeamId, homeTeam.id))
+      .innerJoin(awayTeam, eq(fixtures.awayTeamId, awayTeam.id))
+      .where(
+        and(
+          eq(fixtures.leagueId, league.id),
+          eq(fixtures.season, league.currentSeason),
+          eq(fixtures.status, 'scheduled'),
+          inArray(fixtures.matchweek, mwValues),
+        ),
+      )
+      .orderBy(asc(fixtures.kickoff));
+  } else {
+    rows = await getDb()
+      .select(selectFields)
+      .from(fixtures)
+      .innerJoin(homeTeam, eq(fixtures.homeTeamId, homeTeam.id))
+      .innerJoin(awayTeam, eq(fixtures.awayTeamId, awayTeam.id))
+      .where(
+        and(
+          eq(fixtures.leagueId, league.id),
+          eq(fixtures.season, league.currentSeason),
+          eq(fixtures.status, 'scheduled'),
+        ),
+      )
+      .orderBy(asc(fixtures.kickoff))
+      .limit(limit);
+  }
 
   return rows.map((row) => ({
     id: row.id,
