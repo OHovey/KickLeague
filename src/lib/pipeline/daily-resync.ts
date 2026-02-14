@@ -12,7 +12,7 @@
 
 import { getDb } from '@/db/connection';
 import { fixtures, standings, leagues, teams } from '@/db/schema';
-import { eq, and, asc, lte, sql } from 'drizzle-orm';
+import { eq, and, asc, lte, notInArray, sql } from 'drizzle-orm';
 import { ApiFootballClient } from '@/lib/api-football/client';
 import { ENDPOINTS } from '@/lib/api-football/endpoints';
 import { fixtureBasicResponseSchema } from '@/lib/api-football/types';
@@ -30,6 +30,7 @@ import { revalidatePath } from 'next/cache';
 export interface ResyncResult {
   leaguesResynced: number;
   fixturesUpdated: number;
+  orphansRemoved: number;
   standingsCorrected: number;
   matchweeksCompleted: number;
   apiCallsUsed: number;
@@ -79,6 +80,7 @@ export async function dailyResync(): Promise<ResyncResult> {
   const result: ResyncResult = {
     leaguesResynced: 0,
     fixturesUpdated: 0,
+    orphansRemoved: 0,
     standingsCorrected: 0,
     matchweeksCompleted: 0,
     apiCallsUsed: 0,
@@ -137,12 +139,13 @@ export async function dailyResync(): Promise<ResyncResult> {
       );
 
       result.fixturesUpdated += leagueResult.fixturesUpdated;
+      result.orphansRemoved += leagueResult.orphansRemoved;
       result.standingsCorrected += leagueResult.standingsCorrected;
       result.apiCallsUsed += leagueResult.apiCallsUsed;
       result.leaguesResynced++;
       allCompletedMatches.push(...leagueResult.completedMatches);
 
-      if (leagueResult.fixturesUpdated > 0 || leagueResult.standingsCorrected > 0) {
+      if (leagueResult.fixturesUpdated > 0 || leagueResult.orphansRemoved > 0 || leagueResult.standingsCorrected > 0) {
         dataChanged = true;
       }
     } catch (error) {
@@ -198,6 +201,7 @@ export async function dailyResync(): Promise<ResyncResult> {
       event: 'daily_resync_complete',
       leaguesResynced: result.leaguesResynced,
       fixturesUpdated: result.fixturesUpdated,
+      orphansRemoved: result.orphansRemoved,
       standingsCorrected: result.standingsCorrected,
       matchweeksCompleted: result.matchweeksCompleted,
       apiCallsUsed: result.apiCallsUsed,
@@ -221,6 +225,7 @@ interface CompletedMatchweek {
 
 interface LeagueResyncResult {
   fixturesUpdated: number;
+  orphansRemoved: number;
   standingsCorrected: number;
   apiCallsUsed: number;
   completedMatches: CompletedMatchweek[];
@@ -236,6 +241,7 @@ async function resyncLeague(
 ): Promise<LeagueResyncResult> {
   const result: LeagueResyncResult = {
     fixturesUpdated: 0,
+    orphansRemoved: 0,
     standingsCorrected: 0,
     apiCallsUsed: 0,
     completedMatches: [],
@@ -360,6 +366,36 @@ async function resyncLeague(
           fixtureDbId: existing.id,
         });
       }
+    }
+  }
+
+  // Orphan cleanup: remove DB fixtures not present in the API response.
+  // These are phantom entries (e.g. from bad seeds or duplicate API IDs) that
+  // the API no longer returns, causing stale "scheduled" matches to persist.
+  const apiFixtureIds = apiResponse.response.map((item) => item.fixture.id);
+  if (apiFixtureIds.length > 0) {
+    const deleted = await db
+      .delete(fixtures)
+      .where(
+        and(
+          eq(fixtures.leagueId, leagueDbId),
+          eq(fixtures.season, season),
+          notInArray(fixtures.apiId, apiFixtureIds),
+        ),
+      )
+      .returning({ id: fixtures.id, apiId: fixtures.apiId });
+
+    if (deleted.length > 0) {
+      result.orphansRemoved = deleted.length;
+      console.log(
+        JSON.stringify({
+          event: 'orphan_fixtures_removed',
+          leagueId: leagueDbId,
+          season,
+          count: deleted.length,
+          apiIds: deleted.map((d) => d.apiId),
+        }),
+      );
     }
   }
 
