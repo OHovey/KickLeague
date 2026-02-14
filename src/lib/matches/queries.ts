@@ -1,6 +1,6 @@
 // Match database queries for recent results, upcoming fixtures, and key events
 
-import { eq, and, desc, asc, inArray, max, isNotNull, gte, lte } from 'drizzle-orm';
+import { eq, and, desc, asc, inArray, notInArray, max, isNotNull, gte, lte } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/pg-core';
 import { getDb, isDatabaseConfigured } from '@/db/connection';
 import { fixtures, fixtureEvents, teams, standings, players } from '@/db/schema';
@@ -201,13 +201,67 @@ export async function getUpcomingFixtures(
   };
 
   let rows;
+  // Tracks rescheduled matches whose matchweek is overridden for display
+  const matchweekOverrides = new Map<number, number>();
 
   if (byMatchweek) {
-    // Get the latest completed matchweek from standings to set a boundary
+    // Get the latest matchweek from standings to set a boundary
     // This excludes straggler rescheduled matches from old matchweeks (e.g. MW16 showing before MW24)
-    const latestCompleted = await getLatestMatchweek(league.id, league.currentSeason);
+    const latestFromStandings = await getLatestMatchweek(league.id, league.currentSeason);
 
-    // Find the N soonest distinct matchweeks with scheduled matches
+    // Determine the boundary matchweek for upcoming matches.
+    // Default: latestFromStandings + 1 (exclude completed matchweeks).
+    // Exception: if the latest standings MW still has scheduled fixtures that
+    // play BEFORE the next MW starts, it's genuinely in-progress — include it.
+    // (Rescheduled stragglers that play AFTER the next MW starts don't count.)
+    let boundary: number | null = null;
+    if (latestFromStandings !== null) {
+      boundary = latestFromStandings + 1;
+
+      const stillScheduled = await getDb()
+        .select({ kickoff: fixtures.kickoff })
+        .from(fixtures)
+        .where(
+          and(
+            eq(fixtures.leagueId, league.id),
+            eq(fixtures.season, league.currentSeason),
+            eq(fixtures.matchweek, latestFromStandings),
+            eq(fixtures.status, 'scheduled'),
+          ),
+        );
+
+      if (stillScheduled.length > 0) {
+        // Compare against the next matchweek's earliest kickoff
+        const nextMwFirst = await getDb()
+          .select({ kickoff: fixtures.kickoff })
+          .from(fixtures)
+          .where(
+            and(
+              eq(fixtures.leagueId, league.id),
+              eq(fixtures.season, league.currentSeason),
+              eq(fixtures.matchweek, latestFromStandings + 1),
+            ),
+          )
+          .orderBy(asc(fixtures.kickoff))
+          .limit(1);
+
+        if (nextMwFirst.length > 0) {
+          // If any scheduled match plays before the next MW starts,
+          // the matchweek is genuinely in-progress
+          const anyBeforeNext = stillScheduled.some(
+            (m) => m.kickoff.getTime() <= nextMwFirst[0].kickoff.getTime(),
+          );
+          if (anyBeforeNext) {
+            boundary = latestFromStandings;
+          }
+        } else {
+          // No next matchweek — this is the last one, include it
+          boundary = latestFromStandings;
+        }
+      }
+    }
+
+    // Find the N soonest distinct matchweeks by matchweek number
     const upcomingMws = await getDb()
       .selectDistinct({ matchweek: fixtures.matchweek })
       .from(fixtures)
@@ -217,7 +271,7 @@ export async function getUpcomingFixtures(
           eq(fixtures.season, league.currentSeason),
           eq(fixtures.status, 'scheduled'),
           isNotNull(fixtures.matchweek),
-          ...(latestCompleted !== null ? [gte(fixtures.matchweek, latestCompleted + 1)] : []),
+          ...(boundary !== null ? [gte(fixtures.matchweek, boundary)] : []),
         ),
       )
       .orderBy(asc(fixtures.matchweek))
@@ -240,6 +294,60 @@ export async function getUpcomingFixtures(
         ),
       )
       .orderBy(asc(fixtures.kickoff));
+
+    // Find rescheduled matches from other matchweeks that play within our
+    // date window (e.g. MW31 match on Feb 18 when we fetched MW27-29,
+    // or MW24 match on Feb 18 when boundary pushed us to MW25+)
+    if (rows.length > 0) {
+      const latestKickoff = rows[rows.length - 1].kickoff;
+
+      const rescheduled = await getDb()
+        .select(selectFields)
+        .from(fixtures)
+        .innerJoin(homeTeam, eq(fixtures.homeTeamId, homeTeam.id))
+        .innerJoin(awayTeam, eq(fixtures.awayTeamId, awayTeam.id))
+        .where(
+          and(
+            eq(fixtures.leagueId, league.id),
+            eq(fixtures.season, league.currentSeason),
+            eq(fixtures.status, 'scheduled'),
+            notInArray(fixtures.matchweek, mwValues),
+            lte(fixtures.kickoff, latestKickoff),
+          ),
+        )
+        .orderBy(asc(fixtures.kickoff));
+
+      if (rescheduled.length > 0) {
+        // Compute median kickoff per fetched matchweek for nearest-match assignment
+        const mwMedians = new Map<number, number>();
+        for (const mw of mwValues) {
+          const times = rows
+            .filter((r) => r.matchweek === mw)
+            .map((r) => r.kickoff.getTime())
+            .sort((a, b) => a - b);
+          if (times.length > 0) {
+            mwMedians.set(mw, times[Math.floor(times.length / 2)]);
+          }
+        }
+
+        // Assign each rescheduled match to the nearest matchweek by date
+        for (const match of rescheduled) {
+          let closestMw = mwValues[0];
+          let closestDist = Infinity;
+          for (const [mw, median] of mwMedians) {
+            const dist = Math.abs(match.kickoff.getTime() - median);
+            if (dist < closestDist) {
+              closestDist = dist;
+              closestMw = mw;
+            }
+          }
+          matchweekOverrides.set(match.id, closestMw);
+        }
+
+        rows = [...rows, ...rescheduled];
+        rows.sort((a, b) => a.kickoff.getTime() - b.kickoff.getTime());
+      }
+    }
   } else {
     rows = await getDb()
       .select(selectFields)
@@ -259,7 +367,7 @@ export async function getUpcomingFixtures(
 
   return rows.map((row) => ({
     id: row.id,
-    matchweek: row.matchweek,
+    matchweek: matchweekOverrides.get(row.id) ?? row.matchweek,
     kickoff: row.kickoff,
     status: row.status,
     homeScore: row.homeScore,
