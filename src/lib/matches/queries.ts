@@ -1,6 +1,6 @@
 // Match database queries for recent results, upcoming fixtures, and key events
 
-import { eq, and, desc, asc, inArray, max, isNotNull } from 'drizzle-orm';
+import { eq, and, desc, asc, inArray, max, min, isNotNull } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/pg-core';
 import { getDb, isDatabaseConfigured } from '@/db/connection';
 import { fixtures, fixtureEvents, teams, standings, players } from '@/db/schema';
@@ -82,9 +82,13 @@ export async function getRecentMatches(
   let rows;
 
   if (byMatchweek) {
-    // Step 1: find the N most recent distinct matchweeks with finished matches
+    // Step 1: find the N most recent matchweeks by kickoff date (not number,
+    // since rescheduled games mean lower-numbered matchweeks can be played later)
     const recentMws = await getDb()
-      .selectDistinct({ matchweek: fixtures.matchweek })
+      .select({
+        matchweek: fixtures.matchweek,
+        latestKickoff: max(fixtures.kickoff),
+      })
       .from(fixtures)
       .where(
         and(
@@ -94,7 +98,8 @@ export async function getRecentMatches(
           isNotNull(fixtures.matchweek),
         ),
       )
-      .orderBy(desc(fixtures.matchweek))
+      .groupBy(fixtures.matchweek)
+      .orderBy(desc(max(fixtures.kickoff)))
       .limit(limit);
 
     const mwValues = recentMws.map((r) => r.matchweek!);
@@ -198,8 +203,13 @@ export async function getUpcomingFixtures(
   let rows;
 
   if (byMatchweek) {
+    // Find the N soonest matchweeks by earliest kickoff date (not number,
+    // since rescheduled games mean lower-numbered matchweeks can be later)
     const upcomingMws = await getDb()
-      .selectDistinct({ matchweek: fixtures.matchweek })
+      .select({
+        matchweek: fixtures.matchweek,
+        earliestKickoff: min(fixtures.kickoff),
+      })
       .from(fixtures)
       .where(
         and(
@@ -209,7 +219,8 @@ export async function getUpcomingFixtures(
           isNotNull(fixtures.matchweek),
         ),
       )
-      .orderBy(asc(fixtures.matchweek))
+      .groupBy(fixtures.matchweek)
+      .orderBy(asc(min(fixtures.kickoff)))
       .limit(limit);
 
     const mwValues = upcomingMws.map((r) => r.matchweek!);
