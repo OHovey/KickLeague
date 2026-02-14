@@ -21,7 +21,8 @@ interface MatchListProps {
 // ─── Group by Matchweek ─────────────────────────────────────────────────────
 
 function groupByMatchweek(
-  matches: MatchWithTeams[]
+  matches: MatchWithTeams[],
+  sort: 'asc' | 'desc' = 'asc',
 ): { matchweek: number | null; matches: MatchWithTeams[] }[] {
   const groups = new Map<number | null, MatchWithTeams[]>();
 
@@ -32,10 +33,16 @@ function groupByMatchweek(
     groups.set(key, group);
   }
 
-  return Array.from(groups.entries()).map(([matchweek, matches]) => ({
-    matchweek,
-    matches,
-  }));
+  return Array.from(groups.entries())
+    .sort((a, b) => {
+      if (a[0] === null) return 1;
+      if (b[0] === null) return -1;
+      return sort === 'asc' ? a[0] - b[0] : b[0] - a[0];
+    })
+    .map(([matchweek, matches]) => ({
+      matchweek,
+      matches,
+    }));
 }
 
 // ─── Component ──────────────────────────────────────────────────────────────
@@ -62,7 +69,7 @@ export function MatchList({
     );
   }
 
-  const groups = groupByMatchweek(matches);
+  const groups = groupByMatchweek(matches, type === 'results' ? 'desc' : 'asc');
 
   return (
     <div className="space-y-6">
