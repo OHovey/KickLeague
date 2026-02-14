@@ -1,8 +1,1 @@
-{
-  "crons": [
-    {
-      "path": "/api/cron/daily-resync",
-      "schedule": "0 4 * * *"
-    }
-  ]
-}
+{}

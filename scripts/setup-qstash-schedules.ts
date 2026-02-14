@@ -2,6 +2,7 @@
  * One-time setup script for QStash scheduled polling.
  *
  * Creates QStash schedules that trigger the cron routes:
+ *   - daily-resync: once daily at 04:00 UTC
  *   - poll-matches: every 3 minutes (Pro tier)
  *   - refresh-odds: every 6 hours
  *
@@ -43,9 +44,23 @@ const baseUrl =
     : 'http://localhost:3000');
 
 async function main() {
-  // 1. Poll-matches schedule (every 3 minutes)
   console.log(`Creating QStash schedules...`);
-  console.log(`\n1. Poll Matches`);
+
+  // 1. Daily-resync schedule (once daily at 04:00 UTC)
+  console.log(`\n1. Daily Resync`);
+  console.log(`  Destination: ${baseUrl}/api/cron/daily-resync`);
+  console.log(`  Schedule: daily at 04:00 UTC`);
+
+  const resyncSchedule = await client.schedules.create({
+    destination: `${baseUrl}/api/cron/daily-resync`,
+    cron: '0 4 * * *',
+    retries: 2,
+  });
+
+  console.log(`  Schedule ID: ${resyncSchedule.scheduleId}`);
+
+  // 2. Poll-matches schedule (every 3 minutes)
+  console.log(`\n2. Poll Matches`);
   console.log(`  Destination: ${baseUrl}/api/cron/poll-matches`);
   console.log(`  Schedule: every 3 minutes`);
 
@@ -57,8 +72,8 @@ async function main() {
 
   console.log(`  Schedule ID: ${pollSchedule.scheduleId}`);
 
-  // 2. Refresh-odds schedule (every 6 hours)
-  console.log(`\n2. Refresh Odds`);
+  // 3. Refresh-odds schedule (every 6 hours)
+  console.log(`\n3. Refresh Odds`);
   console.log(`  Destination: ${baseUrl}/api/cron/refresh-odds`);
   console.log(`  Schedule: every 6 hours`);
 
