@@ -46,7 +46,13 @@ export async function POST(req: Request) {
 
     try { await checkBudgetThresholds(); } catch { /* budget check is best-effort */ }
 
-    await logCronInvocation({ endpoint: ENDPOINT, success: true, httpStatus: 200, result: JSON.stringify(result) });
+    await logCronInvocation({
+      endpoint: ENDPOINT,
+      success: true,
+      httpStatus: 200,
+      result: JSON.stringify(result),
+      error: result.polled === false ? result.reason : undefined,
+    });
     return Response.json(result);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

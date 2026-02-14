@@ -20,6 +20,7 @@ import { mapStatus, extractMatchweek } from '@/lib/api-football/status-map';
 import { buildConflictUpdateColumns } from '@/lib/seed/utils';
 import { canMakePipelineCall, logApiCall } from './api-budget';
 import { withRetry } from './retry';
+import { handleMatchCompletion } from './match-completion';
 import { revalidatePath } from 'next/cache';
 
 // ---------------------------------------------------------------------------
@@ -30,6 +31,7 @@ export interface ResyncResult {
   leaguesResynced: number;
   fixturesUpdated: number;
   standingsCorrected: number;
+  matchweeksCompleted: number;
   apiCallsUsed: number;
   errors: string[];
 }
@@ -78,6 +80,7 @@ export async function dailyResync(): Promise<ResyncResult> {
     leaguesResynced: 0,
     fixturesUpdated: 0,
     standingsCorrected: 0,
+    matchweeksCompleted: 0,
     apiCallsUsed: 0,
     errors: [],
   };
@@ -110,6 +113,7 @@ export async function dailyResync(): Promise<ResyncResult> {
     .from(leagues);
 
   let dataChanged = false;
+  const allCompletedMatches: CompletedMatchweek[] = [];
 
   // Process each league sequentially
   for (const league of allLeagues) {
@@ -136,6 +140,7 @@ export async function dailyResync(): Promise<ResyncResult> {
       result.standingsCorrected += leagueResult.standingsCorrected;
       result.apiCallsUsed += leagueResult.apiCallsUsed;
       result.leaguesResynced++;
+      allCompletedMatches.push(...leagueResult.completedMatches);
 
       if (leagueResult.fixturesUpdated > 0 || leagueResult.standingsCorrected > 0) {
         dataChanged = true;
@@ -143,6 +148,38 @@ export async function dailyResync(): Promise<ResyncResult> {
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);
       result.errors.push(`Failed to resync league ${league.slug}: ${msg}`);
+    }
+  }
+
+  // Handle match completions: recompute standings for newly-finished matchweeks
+  if (allCompletedMatches.length > 0) {
+    // Deduplicate by league+season+matchweek (only need one call per combo)
+    const seen = new Set<string>();
+    const uniqueMatchweeks: CompletedMatchweek[] = [];
+    for (const m of allCompletedMatches) {
+      const key = `${m.leagueDbId}:${m.season}:${m.matchweek}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        uniqueMatchweeks.push(m);
+      }
+    }
+
+    for (const mw of uniqueMatchweeks) {
+      try {
+        await handleMatchCompletion(
+          mw.fixtureDbId,
+          mw.leagueDbId,
+          mw.season,
+          mw.matchweek,
+        );
+        result.matchweeksCompleted++;
+        dataChanged = true;
+      } catch (error) {
+        const msg = error instanceof Error ? error.message : String(error);
+        result.errors.push(
+          `Failed to complete matchweek ${mw.matchweek} for league ${mw.leagueDbId}: ${msg}`,
+        );
+      }
     }
   }
 
@@ -162,6 +199,7 @@ export async function dailyResync(): Promise<ResyncResult> {
       leaguesResynced: result.leaguesResynced,
       fixturesUpdated: result.fixturesUpdated,
       standingsCorrected: result.standingsCorrected,
+      matchweeksCompleted: result.matchweeksCompleted,
       apiCallsUsed: result.apiCallsUsed,
       errors: result.errors.length,
     }),
@@ -174,10 +212,18 @@ export async function dailyResync(): Promise<ResyncResult> {
 // Per-league resync
 // ---------------------------------------------------------------------------
 
+interface CompletedMatchweek {
+  leagueDbId: number;
+  season: string;
+  matchweek: number;
+  fixtureDbId: number;
+}
+
 interface LeagueResyncResult {
   fixturesUpdated: number;
   standingsCorrected: number;
   apiCallsUsed: number;
+  completedMatches: CompletedMatchweek[];
 }
 
 async function resyncLeague(
@@ -192,6 +238,7 @@ async function resyncLeague(
     fixturesUpdated: 0,
     standingsCorrected: 0,
     apiCallsUsed: 0,
+    completedMatches: [],
   };
 
   // Build team apiId -> dbId map
@@ -302,6 +349,17 @@ async function resyncLeague(
 
     if (statusChanged) {
       result.fixturesUpdated++;
+
+      // Track fixtures that transitioned to finished for match completion
+      const wasFinished = existing?.status === 'finished';
+      if (newStatus === 'finished' && !wasFinished && matchweek !== null && existing) {
+        result.completedMatches.push({
+          leagueDbId,
+          season,
+          matchweek,
+          fixtureDbId: existing.id,
+        });
+      }
     }
   }
 

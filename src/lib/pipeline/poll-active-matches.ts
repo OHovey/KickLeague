@@ -66,6 +66,13 @@ export async function pollActiveMatches(): Promise<PollResult> {
   // 2. Check for active match windows
   const activeLeagues = await getActiveLeagues();
   if (activeLeagues.length === 0) {
+    console.log(
+      JSON.stringify({
+        event: 'poll_skipped',
+        reason: 'no_active_matches',
+        timestamp,
+      }),
+    );
     return {
       polled: false,
       reason: 'no_active_matches',

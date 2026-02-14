@@ -2,8 +2,13 @@
  * Fixture-window detection for the live data pipeline.
  *
  * Determines which leagues have active or upcoming matches by querying
- * the fixtures table for kickoffs within a 6-hour window (3 hours ago
+ * the fixtures table for kickoffs within a 27-hour window (24 hours ago
  * to 3 hours from now) that are NOT in terminal states.
+ *
+ * The 24h lookback catches stale fixtures that left the normal polling
+ * window without reaching a terminal state (e.g. if poll-matches missed
+ * their live window). The 24h limit prevents endlessly re-polling
+ * genuinely postponed fixtures.
  *
  * This prevents wasting API calls on quiet days when no matches are
  * happening. The polling handler calls getActiveLeagues() before
@@ -25,14 +30,14 @@ export interface ActiveLeague {
 /**
  * Find leagues with fixtures in the active window.
  *
- * Active window: kickoff between 3 hours ago and 3 hours from now,
+ * Active window: kickoff between 24 hours ago and 3 hours from now,
  * AND fixture status is NOT terminal (finished, cancelled, postponed).
  *
  * Results are grouped by league with their fixture API IDs.
  */
 export async function getActiveLeagues(): Promise<ActiveLeague[]> {
   const now = new Date();
-  const threeHoursAgo = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+  const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
   const threeHoursFromNow = new Date(now.getTime() + 3 * 60 * 60 * 1000);
 
   const TERMINAL_STATUSES = ['finished', 'cancelled', 'postponed'] as const;
@@ -46,7 +51,7 @@ export async function getActiveLeagues(): Promise<ActiveLeague[]> {
     .from(fixtures)
     .where(
       and(
-        gte(fixtures.kickoff, threeHoursAgo),
+        gte(fixtures.kickoff, twentyFourHoursAgo),
         lte(fixtures.kickoff, threeHoursFromNow),
         notInArray(fixtures.status, [...TERMINAL_STATUSES]),
       ),
