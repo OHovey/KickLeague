@@ -37,7 +37,16 @@
     "tooLong": "L'avis doit faire moins de 2000 caractères"
   },
   "Footer": {
-    "responsibleGambling": "Jouez de manière responsable. 18+ uniquement."
+    "copyright": "\u00a9 {year} KickLeague. Tous droits r\u00e9serv\u00e9s.",
+    "privacyPolicy": "Politique de Confidentialit\u00e9",
+    "responsibleGambling": "Jouez de mani\u00e8re responsable. 18+ uniquement."
+  },
+  "CookieConsent": {
+    "title": "Avis sur les Cookies",
+    "description": "Nous utilisons des cookies pour afficher des publicit\u00e9s personnalis\u00e9es et analyser le trafic. Les cookies non essentiels n\u00e9cessitent votre consentement.",
+    "acceptAll": "Tout accepter",
+    "rejectNonEssential": "Refuser les non essentiels",
+    "privacyLink": "En savoir plus dans notre Politique de Confidentialit\u00e9."
   },
   "Formats": {
     "american": "Am\u00e9ricain",
@@ -365,6 +374,23 @@
     "points": "{count, plural, one {# pt} other {# pts}}",
     "backToTeam": "Retour a {team}",
     "vsLabel": "vs"
+  },
+  "Privacy": {
+    "title": "Politique de Confidentialit\u00e9",
+    "metaDescription": "Politique de confidentialit\u00e9 de KickLeague \u2014 comment nous collectons, utilisons et prot\u00e9geons vos donn\u00e9es.",
+    "lastUpdated": "Derni\u00e8re mise \u00e0 jour : f\u00e9vrier 2026",
+    "dataCollectionTitle": "Donn\u00e9es que nous collectons",
+    "dataCollectionBody": "Nous collectons des donn\u00e9es anonymes de consultation de pages, des diagnostics d'erreurs et des \u00e9v\u00e9nements de clics sur les liens d'affiliation. Nous ne collectons pas d'informations personnelles sauf si vous les fournissez volontairement (par exemple via des formulaires de commentaires). La diffusion de contenu g\u00e9ographique est bas\u00e9e sur la pr\u00e9f\u00e9rence linguistique de votre navigateur, et non sur la g\u00e9olocalisation par IP.",
+    "cookiesTitle": "Cookies que nous utilisons",
+    "cookiesBody": "Cookies essentiels : pr\u00e9f\u00e9rence linguistique (NEXT_LOCALE), choix de consentement aux cookies (cookie-consent). Cookies non essentiels : Google AdSense peut d\u00e9finir des cookies publicitaires lorsque vous acceptez les cookies non essentiels. Nous utilisons \u00e9galement le localStorage pour les pr\u00e9f\u00e9rences d'interface comme la s\u00e9lection de championnat et le format des cotes.",
+    "thirdPartyTitle": "Services tiers",
+    "thirdPartyBody": "Vercel Analytics : m\u00e9triques anonymes de consultation et de performance (int\u00e9r\u00eat l\u00e9gitime). Sentry : surveillance des erreurs et diagnostics (int\u00e9r\u00eat l\u00e9gitime). Google AdSense : publicit\u00e9 personnalis\u00e9e (n\u00e9cessite le consentement). API-Football : donn\u00e9es de football et logos d'\u00e9quipes/championnats charg\u00e9s depuis des serveurs externes.",
+    "yourRightsTitle": "Vos droits",
+    "yourRightsBody": "En vertu du RGPD, vous avez le droit d'acc\u00e9der, de corriger ou de supprimer vos donn\u00e9es personnelles. Vous pouvez vous opposer au traitement des donn\u00e9es ou demander la portabilit\u00e9 de celles-ci. Pour exercer ces droits, contactez-nous en utilisant les coordonn\u00e9es ci-dessous.",
+    "manageConsentTitle": "G\u00e9rer votre consentement",
+    "manageConsentBody": "Vous pouvez modifier vos pr\u00e9f\u00e9rences de cookies \u00e0 tout moment en supprimant les cookies de votre navigateur \u2014 la banni\u00e8re de consentement r\u00e9appara\u00eetra lors de votre prochaine visite. Pour supprimer un cookie sp\u00e9cifique, ouvrez les outils de d\u00e9veloppement de votre navigateur, acc\u00e9dez \u00e0 l'onglet Application/Stockage et supprimez le cookie 'cookie-consent'.",
+    "contactTitle": "Contact",
+    "contactBody": "Pour les questions relatives \u00e0 la confidentialit\u00e9, veuillez nous contacter via le formulaire de commentaires disponible sur chaque page du site."
   },
   "Timeline": {
     "autoPlay": "Lecture automatique",

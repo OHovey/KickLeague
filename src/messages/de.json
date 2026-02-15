@@ -37,7 +37,16 @@
     "tooLong": "Feedback muss unter 2000 Zeichen liegen"
   },
   "Footer": {
+    "copyright": "\u00a9 {year} KickLeague. Alle Rechte vorbehalten.",
+    "privacyPolicy": "Datenschutzerkl\u00e4rung",
     "responsibleGambling": "Bitte spielen Sie verantwortungsvoll. Nur ab 18 Jahren."
+  },
+  "CookieConsent": {
+    "title": "Cookie-Hinweis",
+    "description": "Wir verwenden Cookies f\u00fcr personalisierte Werbung und Verkehrsanalyse. Nicht-essentielle Cookies erfordern Ihre Zustimmung.",
+    "acceptAll": "Alle akzeptieren",
+    "rejectNonEssential": "Nicht-essentielle ablehnen",
+    "privacyLink": "Mehr erfahren Sie in unserer Datenschutzerkl\u00e4rung."
   },
   "Formats": {
     "american": "Amerikanisch",
@@ -365,6 +374,23 @@
     "points": "{count, plural, one {# Pkt} other {# Pkt}}",
     "backToTeam": "Zurueck zu {team}",
     "vsLabel": "vs"
+  },
+  "Privacy": {
+    "title": "Datenschutzerkl\u00e4rung",
+    "metaDescription": "KickLeague Datenschutzerkl\u00e4rung \u2014 wie wir Ihre Daten erheben, verwenden und sch\u00fctzen.",
+    "lastUpdated": "Zuletzt aktualisiert: Februar 2026",
+    "dataCollectionTitle": "Welche Daten wir erheben",
+    "dataCollectionBody": "Wir erheben anonyme Seitenaufrufdaten, Fehlerdiagnosen und Affiliate-Link-Klickereignisse. Wir erheben keine personenbezogenen Daten, es sei denn, Sie stellen diese freiwillig zur Verf\u00fcgung (z.\u00a0B. \u00fcber Feedback-Formulare). Die geografische Inhaltsbereitstellung basiert auf Ihrer Browser-Spracheinstellung, nicht auf IP-basierter Geolokalisierung.",
+    "cookiesTitle": "Cookies, die wir verwenden",
+    "cookiesBody": "Essentielle Cookies: Spracheinstellung (NEXT_LOCALE), Cookie-Einwilligungswahl (cookie-consent). Nicht-essentielle Cookies: Google AdSense kann Werbe-Cookies setzen, wenn Sie nicht-essentielle Cookies akzeptieren. Wir verwenden auch localStorage f\u00fcr UI-Einstellungen wie Liga-Auswahl und Quotenformat.",
+    "thirdPartyTitle": "Drittanbieter-Dienste",
+    "thirdPartyBody": "Vercel Analytics: anonyme Seitenaufruf- und Leistungsmetriken (berechtigtes Interesse). Sentry: Fehler\u00fcberwachung und Diagnose (berechtigtes Interesse). Google AdSense: personalisierte Werbung (erfordert Einwilligung). API-Football: Fu\u00dfballdaten und Team-/Liga-Logos von externen Servern.",
+    "yourRightsTitle": "Ihre Rechte",
+    "yourRightsBody": "Gem\u00e4\u00df der DSGVO haben Sie das Recht auf Zugang, Berichtigung oder L\u00f6schung Ihrer personenbezogenen Daten. Sie k\u00f6nnen der Datenverarbeitung widersprechen oder Daten\u00fcbertragbarkeit verlangen. Um diese Rechte auszu\u00fcben, kontaktieren Sie uns \u00fcber die unten angegebenen Details.",
+    "manageConsentTitle": "Einwilligung verwalten",
+    "manageConsentBody": "Sie k\u00f6nnen Ihre Cookie-Einstellungen jederzeit \u00e4ndern, indem Sie Ihre Browser-Cookies l\u00f6schen \u2014 das Einwilligungsbanner erscheint bei Ihrem n\u00e4chsten Besuch erneut. Um ein bestimmtes Cookie zu l\u00f6schen, \u00f6ffnen Sie die Entwicklertools Ihres Browsers, navigieren Sie zur Registerkarte Anwendung/Speicher und l\u00f6schen Sie das Cookie 'cookie-consent'.",
+    "contactTitle": "Kontakt",
+    "contactBody": "F\u00fcr datenschutzbezogene Anfragen kontaktieren Sie uns bitte \u00fcber das Feedback-Formular, das auf jeder Seite der Website verf\u00fcgbar ist."
   },
   "Timeline": {
     "autoPlay": "Automatische Wiedergabe",

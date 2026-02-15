@@ -37,7 +37,16 @@
     "tooLong": "Feedback must be under 2000 characters"
   },
   "Footer": {
+    "copyright": "\u00a9 {year} KickLeague. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
     "responsibleGambling": "Please gamble responsibly. 18+ only."
+  },
+  "CookieConsent": {
+    "title": "Cookie Notice",
+    "description": "We use cookies to serve personalized ads and analyze traffic. Non-essential cookies require your consent.",
+    "acceptAll": "Accept All",
+    "rejectNonEssential": "Reject Non-Essential",
+    "privacyLink": "Learn more in our Privacy Policy."
   },
   "Formats": {
     "american": "American",
@@ -365,6 +374,23 @@
     "points": "{count, plural, one {# pt} other {# pts}}",
     "backToTeam": "Back to {team}",
     "vsLabel": "vs"
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "metaDescription": "KickLeague privacy policy — how we collect, use, and protect your data.",
+    "lastUpdated": "Last updated: February 2026",
+    "dataCollectionTitle": "What Data We Collect",
+    "dataCollectionBody": "We collect anonymous page view data, error diagnostics, and affiliate link click events. We do not collect personal information unless you voluntarily provide it (e.g., via feedback forms). Geographic content delivery is based on your browser locale preference, not IP-based geolocation.",
+    "cookiesTitle": "Cookies We Use",
+    "cookiesBody": "Essential cookies: locale preference (NEXT_LOCALE), cookie consent choice (cookie-consent). Non-essential cookies: Google AdSense may set advertising cookies when you accept non-essential cookies. We also use localStorage for UI preferences like league selection and odds format.",
+    "thirdPartyTitle": "Third-Party Services",
+    "thirdPartyBody": "Vercel Analytics: anonymous page view and performance metrics (legitimate interest). Sentry: error monitoring and diagnostics (legitimate interest). Google AdSense: personalized advertising (requires consent). API-Football: football data and team/league logos loaded from external servers.",
+    "yourRightsTitle": "Your Rights",
+    "yourRightsBody": "Under GDPR, you have the right to access, correct, or delete your personal data. You can object to data processing or request data portability. To exercise these rights, contact us using the details below.",
+    "manageConsentTitle": "Managing Your Consent",
+    "manageConsentBody": "You can change your cookie preferences at any time by clearing your browser cookies — the consent banner will reappear on your next visit. To clear a specific cookie, open your browser's developer tools, navigate to the Application/Storage tab, and delete the 'cookie-consent' cookie.",
+    "contactTitle": "Contact",
+    "contactBody": "For privacy-related inquiries, please reach out via our feedback form available on every page of the site."
   },
   "Timeline": {
     "autoPlay": "Auto-play",

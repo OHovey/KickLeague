@@ -37,7 +37,16 @@
     "tooLong": "Il feedback deve essere inferiore a 2000 caratteri"
   },
   "Footer": {
+    "copyright": "\u00a9 {year} KickLeague. Tutti i diritti riservati.",
+    "privacyPolicy": "Informativa sulla Privacy",
     "responsibleGambling": "Gioca responsabilmente. Solo per maggiorenni."
+  },
+  "CookieConsent": {
+    "title": "Avviso sui Cookie",
+    "description": "Utilizziamo cookie per mostrare annunci personalizzati e analizzare il traffico. I cookie non essenziali richiedono il tuo consenso.",
+    "acceptAll": "Accetta tutto",
+    "rejectNonEssential": "Rifiuta non essenziali",
+    "privacyLink": "Scopri di pi\u00f9 nella nostra Informativa sulla Privacy."
   },
   "Formats": {
     "american": "Americano",
@@ -365,6 +374,23 @@
     "points": "{count, plural, one {# pt} other {# pti}}",
     "backToTeam": "Torna a {team}",
     "vsLabel": "vs"
+  },
+  "Privacy": {
+    "title": "Informativa sulla Privacy",
+    "metaDescription": "Informativa sulla privacy di KickLeague \u2014 come raccogliamo, utilizziamo e proteggiamo i tuoi dati.",
+    "lastUpdated": "Ultimo aggiornamento: febbraio 2026",
+    "dataCollectionTitle": "Dati che raccogliamo",
+    "dataCollectionBody": "Raccogliamo dati anonimi sulle visualizzazioni delle pagine, diagnostica degli errori ed eventi di clic sui link di affiliazione. Non raccogliamo informazioni personali a meno che tu non le fornisca volontariamente (ad esempio tramite moduli di feedback). La distribuzione di contenuti geografici si basa sulla preferenza linguistica del tuo browser, non sulla geolocalizzazione basata su IP.",
+    "cookiesTitle": "Cookie che utilizziamo",
+    "cookiesBody": "Cookie essenziali: preferenza linguistica (NEXT_LOCALE), scelta del consenso ai cookie (cookie-consent). Cookie non essenziali: Google AdSense pu\u00f2 impostare cookie pubblicitari quando accetti i cookie non essenziali. Utilizziamo anche localStorage per le preferenze dell'interfaccia come la selezione del campionato e il formato delle quote.",
+    "thirdPartyTitle": "Servizi di terze parti",
+    "thirdPartyBody": "Vercel Analytics: metriche anonime di visualizzazione e prestazioni (interesse legittimo). Sentry: monitoraggio degli errori e diagnostica (interesse legittimo). Google AdSense: pubblicit\u00e0 personalizzata (richiede il consenso). API-Football: dati calcistici e loghi di squadre/campionati caricati da server esterni.",
+    "yourRightsTitle": "I tuoi diritti",
+    "yourRightsBody": "Ai sensi del GDPR, hai il diritto di accedere, correggere o cancellare i tuoi dati personali. Puoi opporti al trattamento dei dati o richiedere la portabilit\u00e0 dei dati. Per esercitare questi diritti, contattaci utilizzando i dettagli qui sotto.",
+    "manageConsentTitle": "Gestione del consenso",
+    "manageConsentBody": "Puoi modificare le tue preferenze sui cookie in qualsiasi momento cancellando i cookie del browser: il banner di consenso riapparir\u00e0 alla tua prossima visita. Per cancellare un cookie specifico, apri gli strumenti per sviluppatori del tuo browser, vai alla scheda Applicazione/Archiviazione ed elimina il cookie 'cookie-consent'.",
+    "contactTitle": "Contatti",
+    "contactBody": "Per domande relative alla privacy, contattaci tramite il modulo di feedback disponibile su ogni pagina del sito."
   },
   "Timeline": {
     "autoPlay": "Riproduzione automatica",

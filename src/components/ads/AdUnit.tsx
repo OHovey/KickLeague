@@ -54,12 +54,18 @@ interface AdUnitProps {
   className?: string;
 }
 
+function hasConsentCookie(): boolean {
+  const match = document.cookie.match(/(?:^|; )cookie-consent=([^;]*)/);
+  return match ? decodeURIComponent(match[1]) === 'accepted' : false;
+}
+
 export function AdUnit({
   slotId,
   format = "auto",
   className,
 }: AdUnitProps) {
   const [adStatus, setAdStatus] = useState<AdStatus>("loading");
+  const [consented, setConsented] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const pushedRef = useRef(false);
   const pathname = usePathname();
@@ -87,9 +93,15 @@ export function AdUnit({
   }, []);
 
   useEffect(() => {
+    setConsented(hasConsentCookie());
+  }, [pathname]);
+
+  useEffect(() => {
     // Reset on route change
     pushedRef.current = false;
     setAdStatus("loading");
+
+    if (!consented) return;
 
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
@@ -120,11 +132,12 @@ export function AdUnit({
     return () => {
       observer?.disconnect();
     };
-  }, [pathname, triggerAd]);
+  }, [pathname, triggerAd, consented]);
 
-  /* ----- Early return when not configured ------------------------- */
+  /* ----- Early return when not configured or no consent ----------- */
 
   if (!ADSENSE_PUBLISHER_ID || !slotId) return null;
+  if (!consented) return null;
 
   /* ----- Graceful collapse when blocked / unfilled ---------------- */
 

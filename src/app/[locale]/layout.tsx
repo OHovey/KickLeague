@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Header } from '@/components/header/Header';
+import { Footer } from '@/components/footer/Footer';
+import { CookieConsent } from '@/components/consent/CookieConsent';
 import { routing } from '@/i18n/routing';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -78,7 +80,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           <NuqsAdapter>
             <Header />
             {children}
+            <Footer />
           </NuqsAdapter>
+          <CookieConsent />
         </NextIntlClientProvider>
         <Analytics />
         <SpeedInsights />
